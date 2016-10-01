@@ -14,6 +14,7 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content">
     <Button
+        android:id="@+id/btn_juan"
        android:text="捐"
         android:textSize="22sp"
         android:textColor="#fff"
@@ -27,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <Button
+                android:id="@+id/btn_zeng"
                 android:text="赠"
                 android:textSize="22sp"
                 android:textColor="#fff"
@@ -41,6 +43,7 @@
             android:layout_height="wrap_content">
             <Button
                 android:text="换"
+                android:id="@+id/btn_huan"
                 android:textSize="22sp"
                 android:textColor="#fff"
                 android:background="@drawable/button_circle"
@@ -54,6 +57,7 @@
             android:layout_height="wrap_content">
             <Button
                 android:text="卖"
+                android:id="@+id/btn_mai"
                 android:textSize="22sp"
                 android:textColor="#fff"
                 android:background="@drawable/button_circle"

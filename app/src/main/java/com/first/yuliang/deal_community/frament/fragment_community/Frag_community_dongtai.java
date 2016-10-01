@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.frament.Community_Activity.ContentAdapter;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -28,11 +29,13 @@ public class Frag_community_dongtai extends Fragment{
     private ListView lv_community_dongtai;
     private BaseAdapter mAdapter;
     private LinkedList<String> mListItems;
+
     private String []eg=new String[]{"","","","","","","","","","",""};
+
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
     View view=inflater.inflate(R.layout.frag_community_dontai,null);
 //         final int []imgs={R.drawable.dongtai1,R.drawable.dongtai2,R.drawable.dongtai3,R.drawable.dongtai4,R.drawable.dongtai5,};
         pull_to_refresh_listview = ((PullToRefreshListView) view.findViewById(R.id.pull_to_refresh_listview));
@@ -72,8 +75,26 @@ public class Frag_community_dongtai extends Fragment{
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view =View.inflate(getActivity().getApplicationContext(),R.layout.item_dongtai,null );
-                ((TextView) view.findViewById(R.id.tv_dongtai_content)).setText(mListItems.get(position));
+              /*  myViewHolder   holder=new myViewHolder();
+
+
+               if (convertView==null){
+                holder.iv_dongtai_dongtaiphoto=(ImageView) convertView.findViewById(R.id.iv_dongtai_dongtaiphoto);
+                holder.iv_dongtai_userphoto=(ImageView)convertView.findViewById(R.id.iv_dongtai_userphoto);
+                holder.textView=(TextView)convertView.findViewById(R.id.textView);
+                holder.tv_dongtai_usename=(TextView)convertView.findViewById(R.id.tv_dongtai_usename);
+                holder.tv_dongtai_content=(TextView)convertView.findViewById(R.id.tv_dongtai_content);
+                convertView.setTag(holder);}
+            else {
+                   holder = (myViewHolder) convertView.getTag();
+                }
+
+*/
+
+
                 return view;
+
+
             }
         };
 
@@ -105,6 +126,13 @@ public class Frag_community_dongtai extends Fragment{
             super.onPostExecute(result);
         }
     }
+public static class myViewHolder{
+    TextView    tv_dongtai_usename;
+    TextView     tv_dongtai_content;
+    TextView     textView;
+    ImageView   iv_dongtai_userphoto;
+    ImageView     iv_dongtai_dongtaiphoto;
 
+}
 
 }

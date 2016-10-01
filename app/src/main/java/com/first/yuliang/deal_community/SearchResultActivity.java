@@ -1,15 +1,22 @@
 package com.first.yuliang.deal_community;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -20,19 +27,27 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.first.yuliang.deal_community.MyCenter.modify.ModifyDetail.addAddressDetailActivity;
+import com.first.yuliang.deal_community.address.City;
+import com.first.yuliang.deal_community.address.County;
+import com.first.yuliang.deal_community.address.Province;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.google.gson.Gson;
 
+import org.apache.http.util.EncodingUtils;
+import org.json.JSONArray;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchResultActivity extends AppCompatActivity {
+public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener{
 
     int llHeight;
     private ImageButton ib_return_search;
@@ -50,6 +65,9 @@ public class SearchResultActivity extends AppCompatActivity {
     private ImageButton ib_search3;
     private TextView tv_total;
     private LinearLayout ll_total;
+    private List<Province> provinces = new ArrayList<Province>();
+    private Button btn_quyu;
+    private LinearLayout ll_select;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +76,18 @@ public class SearchResultActivity extends AppCompatActivity {
 
         intent = getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
-        String search=bundle.getString("search");
+        final String search=bundle.getString("search");
         Log.e("看看是不是传值过来==========",search);
 
+//        ll_ss = findViewById(R.id.ll_ss);
+//
+//        btn_ss = ((Button) findViewById(R.id.btn_ss));
+//        btn_ss.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(SearchResultActivity.this,"试试",Toast.LENGTH_SHORT);
+//            }
+//        });
 
         tv_total = ((TextView) findViewById(R.id.tv_total));
         pb_load_commodity = ((ProgressBar) findViewById(R.id.pb_load_commodity));
@@ -126,7 +153,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 tv_local = ((TextView) view.findViewById(R.id.tv_local));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg, "http://10.40.5.62:8080"+commodity.commodityImg);
+                x.image().bind(iv_cg, "http://192.168.191.1:8080"+(commodity.commodityImg.split(","))[0]);
                 tv_cg.setText(commodity.commodityTitle);
                 tv_price.setText(commodity.price+"");
                 tv_local.setText(commodity.location);
@@ -136,6 +163,17 @@ public class SearchResultActivity extends AppCompatActivity {
         };
         gv_commodity_list.setAdapter(adapter_g);
 
+        gv_commodity_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(SearchResultActivity.this, CommodityActivity.class);
+                CommodityBean.Commodity temp = commodityList.get(position);
+                intent.putExtra("search",search);
+                intent.putExtra("bundle", temp);
+                startActivity(intent);
+            }
+        });
 
         lv_commodity_list = ((ListView) findViewById(R.id.lv_commodity_list));
         adapter_l = new BaseAdapter() {
@@ -169,7 +207,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 tv_local_l = ((TextView) view.findViewById(R.id.tv_local_l));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg_l, "http://10.40.5.62:8080" + (commodity.commodityImg.split(","))[0]);
+                x.image().bind(iv_cg_l, "http://192.168.191.1:8080" + (commodity.commodityImg.split(","))[0]);
                 tv_cg_l.setText(commodity.commodityTitle);
                 tv_price_l.setText(commodity.price + "");
                 tv_local_l.setText(commodity.location);
@@ -178,6 +216,18 @@ public class SearchResultActivity extends AppCompatActivity {
             }
         };
         lv_commodity_list.setAdapter(adapter_l);
+
+        lv_commodity_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(SearchResultActivity.this, CommodityActivity.class);
+                CommodityBean.Commodity temp = commodityList.get(position);
+                intent.putExtra("search",search);
+                intent.putExtra("bundle", temp);
+                startActivity(intent);
+            }
+        });
 
         ll_total = ((LinearLayout) findViewById(R.id.ll_total));
         ll_total.measure(0,0);
@@ -263,6 +313,10 @@ public class SearchResultActivity extends AppCompatActivity {
                 }
             }
         });
+        ll_select = ((LinearLayout) findViewById(R.id.ll_select));
+        btn_quyu = ((Button) findViewById(R.id.btn_quyu));
+        btn_quyu.setOnClickListener(this);
+
     }
     @Override
     public void onBackPressed() {
@@ -279,7 +333,7 @@ public class SearchResultActivity extends AppCompatActivity {
         search = search.replace(" ","%");
         RequestParams params = null;
         try {
-            params = new RequestParams("http://10.40.5.62:8080/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
+            params = new RequestParams("http://192.168.191.1:8080/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -328,6 +382,127 @@ public class SearchResultActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("commodity_show_config",
                 MODE_PRIVATE);
         isGrid = preferences.getBoolean("isGrid", true);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showAddressDialog() {
+
+        new MyCity(SearchResultActivity.this, provinces, null, null, null,
+                new CityPickerDialog.onCityPickedListener() {
+
+                    @Override
+                    public void onPicked(com.first.yuliang.deal_community.address.Province selectProvince, City selectCity, County selectCounty) {
+
+                        StringBuilder address = new StringBuilder();
+                        address.append(
+                                selectProvince != null ? selectProvince
+                                        .getAreaName() : "")
+                                .append(selectCity != null ? selectCity
+                                        .getAreaName() : "")
+                                .append(selectCounty != null ? selectCounty
+                                        .getAreaName() : "");
+                        String text = selectCounty != null ? selectCounty
+                                .getAreaName() : "";
+                        Log.e("地址=============",address+"");
+                    }
+                },261).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_quyu:
+//                Log.e("看看筛选======",ll_select.getBottom()+"");
+                if (provinces.size() > 0) {
+                    showAddressDialog();
+                } else {
+                    new InitAreaTask(SearchResultActivity.this).execute(0);
+                }
+                break;
+        }
+    }
+
+    private class InitAreaTask  extends AsyncTask<Integer, Integer, Boolean> {
+
+
+        Context mContext;
+
+        Dialog progressDialog;
+
+
+
+        public InitAreaTask(Context context) {
+            mContext = context;
+            progressDialog = ToolsClass.createLoadingDialog(mContext, "请稍等...", true,
+                    0);
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            progressDialog.dismiss();
+            if (provinces.size() > 0) {
+                showAddressDialog();
+            } else {
+                Toast.makeText(mContext, "数据初始化失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        protected Boolean doInBackground(Integer... params) {
+            String address = null;
+            InputStream in = null;
+            try {
+                in = mContext.getResources().getAssets().open("address.txt");
+                byte[] arrayOfByte = new byte[in.available()];
+                in.read(arrayOfByte);
+                address = EncodingUtils.getString(arrayOfByte, "UTF-8");
+                JSONArray jsonList = new JSONArray(address);
+                Gson gson = new Gson();
+                for (int i = 0; i < jsonList.length(); i++) {
+                    try {
+                        provinces.add(gson.fromJson(jsonList.getString(i),
+                                Province.class));
+                    } catch (Exception e) {
+                    }
+                }
+                return true;
+            } catch (Exception e) {
+            } finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                    }
+                }
+            }
+            return false;
+        }
+
     }
 }
 

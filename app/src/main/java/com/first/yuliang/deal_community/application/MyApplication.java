@@ -2,8 +2,6 @@ package com.first.yuliang.deal_community.application;
 
 import android.app.Application;
 
-import com.first.yuliang.deal_community.pojo.User;
-
 import org.xutils.BuildConfig;
 import org.xutils.x;
 

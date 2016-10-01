@@ -105,51 +105,51 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
         if (!community.getComImg().equals("0")) {
             String[] imgs = community.getComImg().split(";");
 
-            ImageOptions imageOptions = new ImageOptions.Builder()
-                    .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-                    .build();
-            //设置加载图片
+    ImageOptions imageOptions = new ImageOptions.Builder()
+            .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+            .build();
+    //设置加载图片
 
-            x.image().bind(comImg, HttpUtile.host + imgs[0], imageOptions);
+    x.image().bind(comImg, HttpUtile.host + imgs[0], imageOptions);
 
-            x.image().bind(logo, HttpUtile.host + imgs[1], imageOptions);
+    x.image().bind(logo, HttpUtile.host + imgs[1], imageOptions);
+}
+// 赋值
+communityName.setText(community.getCommunityName());
+        namecom.setText(community.getCommunityName());
+        comdesc.setText(community.getCommunityInfo());
+
+
         }
-           // 赋值
-            communityName.setText(community.getCommunityName());
-            namecom.setText(community.getCommunityName());
-            comdesc.setText(community.getCommunityInfo());
 
-
-    }
-
-    private void initview() {
+private void initview() {
         backToSearch = ((ImageView) findViewById(R.id.backToSearch));
         communityName = ((TextView) findViewById(R.id.tv_communityname1));
         tiezilisst = ((ListView) findViewById(R.id.lv_tiezi));
-    }
+        }
 
-    //设置信息栏颜色
-    private void setColor() {
+//设置信息栏颜色
+private void setColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window win = getWindow();
-            WindowManager.LayoutParams winParams = win.getAttributes();
-            final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-            winParams.flags |= bits;
-            win.setAttributes(winParams);
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintResource(R.color.xinxilan);
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        winParams.flags |= bits;
+        win.setAttributes(winParams);
+        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setStatusBarTintResource(R.color.xinxilan);
 
         }
-    }
+        }
 
 
-    @Override
-    public void onClick(View v) {
+@Override
+public void onClick(View v) {
         switch (v.getId()){
-            case R.id.backToSearch:
-                finish();
-                break;
+        case R.id.backToSearch:
+        finish();
+        break;
         }
-    }
+        }
 }
