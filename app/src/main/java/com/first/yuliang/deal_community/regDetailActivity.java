@@ -30,6 +30,7 @@ import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
@@ -58,7 +59,7 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
     private RadioButton btn_male;
     private EditText et_oftenplace;
 
-    private EditText et_birthday;
+    private TextView tv_birthday;
     private ImageView iv_tx;
     private RelativeLayout rl_reg_birthday;
     private static final int PHOTO_REQUEST = 1;
@@ -90,7 +91,7 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
         btn_male = ((RadioButton) findViewById(R.id.rb_male));
         et_oftenplace = ((EditText) findViewById(R.id.et_oftenplace));
 
-        et_birthday = ((EditText) findViewById(R.id.et_birthday));
+        tv_birthday = ((TextView) findViewById(R.id.tv_birthday));
         iv_tx = ((ImageView) findViewById(R.id.iv_tx));
 
         rl_reg_birthday = ((RelativeLayout) findViewById(R.id.rl_reg_birthday));
@@ -205,7 +206,7 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
             case 5:
 
                 String date=data.getStringExtra("date");
-                et_birthday.setText(date);
+                tv_birthday.setText(date);
                 break;
             default:
                 break;
@@ -342,7 +343,7 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
             params.addBodyParameter("regusername", URLEncoder.encode(et_reguser.getText().toString().trim(),"utf-8"));
             params.addBodyParameter("reguserpsd",et_regpsd.getText().toString().trim());
             params.addBodyParameter("userSex",rb_female.isChecked()?"false":"true");
-            params.addBodyParameter("birthday",et_birthday.getText().toString().trim());
+            params.addBodyParameter("birthday",tv_birthday.getText().toString().trim());
             params.addBodyParameter("userAddress_s", URLEncoder.encode(et_oftenplace.getText().toString().trim(),"utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
