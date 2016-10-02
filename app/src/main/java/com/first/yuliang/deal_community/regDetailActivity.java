@@ -371,7 +371,13 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
                     regDetailActivity.this.finish();
                 }else
                 {
+
+                    edit.putInt("intoflag",1);
+                    edit.commit();
+
                     Toast.makeText(regDetailActivity.this,"注册失败",Toast.LENGTH_SHORT).show();
+
+
                 }
             }
 
@@ -419,6 +425,19 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=preference.edit();
+
+
+            edit.putInt("intoflag",1);
+            edit.commit();
+
+
+        regDetailActivity.this.finish();
     }
 
 

@@ -37,4 +37,5 @@ dependencies {
 
 dependencies {
     compile project(':library')
+    compile project(':IMkit')
 }

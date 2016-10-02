@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -129,6 +130,9 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                 0);
         progressDialog.show();
 
+
+
+
         RequestParams params=new RequestParams(HttpUtile.zy+"servlet/loginApp");
 //        params.addBodyParameter("username",et_username.getText().toString().trim());
 //        params.addBodyParameter("psd",et_psd.getText().toString().trim());
@@ -137,6 +141,8 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onSuccess(String result) {
+
+                Log.e("dddddddd","++++++++++" );
                 Gson gson=new Gson();
                 UserBean ub= gson.fromJson(result,UserBean.class);
                 users.addAll(ub.userList);
@@ -163,15 +169,13 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                             edit.putBoolean("cb_remeberuser",false);
                         }
 
-//                       edit.putInt("loginCount", 1);
-//                       edit.putInt("loginUserId",users.get(i).userId);
 
                         edit.putInt("count", 1);
                         edit.putInt("id",users.get(i).userId);
 
                         User user=new MyApplication().user;
                         user.setUserId(users.get(i).userId);
-                        //edit.put
+
                         edit.commit();
 
                         progressDialog.hide();

@@ -19,11 +19,12 @@ public class User implements Parcelable {
     private String userAddress_s;
 
     private int LabelId;
+    private String token;
 
 
     public User(){}
 
-    public User(int userId, String userName, String userPsd, String userImg, boolean userSex, Date birthday, String userAddress_s, int labelId) {
+    public User(int userId, String userName, String userPsd, String userImg, boolean userSex, Date birthday, String userAddress_s, int labelId,String token) {
         this.userId = userId;
         this.userName = userName;
         this.userPsd = userPsd;
@@ -33,6 +34,7 @@ public class User implements Parcelable {
         this.userAddress_s = userAddress_s;
 
         LabelId = labelId;
+        this.token=token;
     }
 
     public int getUserId() {
@@ -99,6 +101,14 @@ public class User implements Parcelable {
         LabelId = labelId;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -114,6 +124,7 @@ public class User implements Parcelable {
         dest.writeLong(this.birthday != null ? this.birthday.getTime() : -1);
         dest.writeString(this.userAddress_s);
         dest.writeInt(this.LabelId);
+        dest.writeString(this.token);
     }
 
     protected User(Parcel in) {
@@ -126,6 +137,7 @@ public class User implements Parcelable {
         this.birthday = tmpUserBirthday == -1 ? null : new Date(tmpUserBirthday);
         this.userAddress_s = in.readString();
         this.LabelId = in.readInt();
+        this.token=in.readString();
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
