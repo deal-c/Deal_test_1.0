@@ -217,8 +217,11 @@ public class Fragment_home extends Fragment {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(getActivity(),"访问出错",Toast.LENGTH_LONG).show();
-                getActivity().findViewById(R.id.pb_load).setVisibility(View.GONE);
+                if(getActivity()!=null) {
+                    Toast.makeText(getActivity().getApplication(), "访问出错", Toast.LENGTH_LONG).show();
+                    getActivity().findViewById(R.id.pb_load).setVisibility(View.GONE);
+                }
+//                getActivity().findViewById(R.id.pb_load).setVisibility(View.GONE);
             }
 
             @Override
