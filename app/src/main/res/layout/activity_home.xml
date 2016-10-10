@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+   <android.support.v7.widget.Toolbar
+       android:id="@+id/tl_home"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:background="@color/bgcolor">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="首页"
+          android:textSize="30sp"
+          android:textColor="#fff"/>
+
+   </android.support.v7.widget.Toolbar>
+  <android.support.v4.view.ViewPager
+      android:id="@+id/vp_ad"
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      android:layout_below="@+id/tl_home">
+
+  </android.support.v4.view.ViewPager>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/vp_ad"
+        android:background="#ccc"/>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_gravity="bottom"
+       android:layout_marginTop="240dp"
+       android:gravity="center"
+       android:id="@+id/linearLayout">
+
+
+      <ImageView
+          android:id="@+id/iv_iv1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/red"
+          android:visibility="gone"
+          />
+      <ImageView
+          android:id="@+id/iv_iv2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/point"
+          android:visibility="gone"/>
+      <ImageView
+          android:id="@+id/iv_iv3"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/point"
+          android:visibility="gone"/>
+      <ImageView
+          android:id="@+id/iv_iv4"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/point"
+          android:visibility="gone"/>
+   </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pb_load"
+        android:layout_below="@+id/tl_home"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="73dp" />
+</RelativeLayout>

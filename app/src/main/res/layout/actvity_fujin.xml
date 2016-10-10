@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tl_fujin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/bgcolor">
+
+        <TextView
+           android:layout_centerInParent="true"
+           android:layout_gravity="center"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="附近"
+           android:textSize="30sp"
+           android:textColor="#fff"/>
+</android.support.v7.widget.Toolbar>
+<LinearLayout
+    android:background="#fff"
+    android:id="@+id/ll"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="horizontal"
+    android:layout_below="@id/tl_fujin">
+    <Button
+        android:text=" 区 域 "
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_weight="1"/>
+    <Button
+
+        android:text="附近卖家"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_weight="1"/>
+    <Button
+        android:text="附近商品"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_weight="1"/>
+</LinearLayout>
+    <com.amap.api.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll">
+    </com.amap.api.maps.MapView>
+
+</RelativeLayout>

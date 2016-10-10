@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:background="#fff">
+    <ImageView
+        android:id="@+id/iv_dongtai_userphoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/touxiang"/>
+    <TextView
+        android:textColor="#000"
+        android:layout_toRightOf="@id/iv_dongtai_userphoto"
+        android:layout_alignBottom="@id/iv_dongtai_userphoto"
+        android:id="@+id/tv_dongtai_usename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="小明"
+        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        />
+    <ImageView
+
+        android:layout_below="@id/iv_dongtai_userphoto"
+        android:id="@+id/iv_dongtai_dongtaiphoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      />
+    <TextView
+        android:id="@+id/tv_dongtai_content"
+        android:textColor="#000"
+        android:layout_below="@id/iv_dongtai_dongtaiphoto"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="                    大家好我是小明"
+        android:textSize="16sp"/>
+    <TextView
+        android:layout_below="@id/tv_dongtai_content"
+        android:layout_width="match_parent"
+        android:layout_height="19dp"
+        android:gravity="right"
+        android:textColor="#6b6666"
+        android:text="250个人浏览——40个人评论"/>
+
+</RelativeLayout>
