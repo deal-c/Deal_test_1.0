@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#cccccc">
+
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/ll_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+
+        android:layout_marginBottom="90dp">
+
+        <ImageView
+            android:id="@+id/iv_iv1"
+            android:src="@drawable/point_red"
+           android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv_iv2"
+            android:src="@drawable/point_gray"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv_iv3"
+            android:src="@drawable/point_gray"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv_iv4"
+            android:src="@drawable/point_gray"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv_iv5"
+            android:src="@drawable/point_gray"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_gravity="top|right"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"
+        android:text="跳 过"
+        android:textColor="#990000ff"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dip"
+        android:paddingBottom="7dip"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="20dp"
+
+        >
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:id="@+id/btn_intologin"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+           android:layout_marginLeft="40dp"
+            android:text="登 录"
+            android:background="#ccc"
+            android:textSize="24sp"
+
+            android:visibility="gone"/>
+
+        <Button
+
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:id="@+id/btn_into"
+
+
+            android:text="直接进入"
+            android:textSize="24sp"
+            android:layout_marginLeft="10dp"
+
+            android:layout_toRightOf="@id/btn_intologin"
+            android:layout_alignBottom="@id/btn_intologin"
+
+            android:background="#ccc"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+
+
+</FrameLayout>

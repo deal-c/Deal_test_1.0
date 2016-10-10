@@ -51,12 +51,22 @@
         <activity
             android:name=".mainActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".ViewPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <activity android:name=".RegActivity" />
+        <activity android:name=".regDetailActivity" />
+        <activity android:name=".LoginActivity" />
 
         <service android:name="com.amap.api.location.APSService" >
         </service>
