@@ -42,7 +42,7 @@ public class mainActivity extends AppCompatActivity {
 
 
 
-        switchfragment(new Fragment_community());
+        switchfragment(new Fragment_home());
         radiogroup = ((RadioGroup) findViewById(R.id.radioGroup));
 
         radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

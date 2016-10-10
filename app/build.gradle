@@ -6,7 +6,7 @@ android {
         main {
             jniLibs.srcDirs = ['libs']
         }
-
+    }
         defaultConfig {
             applicationId "com.first.yuliang.deal_community"
             minSdkVersion 15
@@ -31,7 +31,7 @@ android {
         compile files('libs/systembartint-1.0.4.jar')
         compile files('libs/AMap_3DMap_V4.0.1_20160923.jar')
     }
-}
+
 dependencies {
     compile project(':library')
 }

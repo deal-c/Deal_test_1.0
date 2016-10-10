@@ -32,7 +32,6 @@ public class ViewPagerActivity extends AppCompatActivity {
 
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//全屏
         setContentView(R.layout.activity_view_pager);
-
         vp = ((ViewPager) findViewById(R.id.vp));
 
         final int[] point=new int[]{R.id.iv_iv1,R.id.iv_iv2,R.id.iv_iv3,R.id.iv_iv4,R.id.iv_iv5};
