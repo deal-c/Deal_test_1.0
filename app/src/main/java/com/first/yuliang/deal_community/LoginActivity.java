@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         et_loginname = ((EditText) findViewById(R.id.et_loginname));
         et_loginpsd = ((EditText) findViewById(R.id.et_loginpsd));
         cb_remeber = ((CheckBox) findViewById(R.id.cb_remeber));
