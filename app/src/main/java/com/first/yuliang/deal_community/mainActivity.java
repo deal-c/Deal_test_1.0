@@ -39,10 +39,7 @@ public class mainActivity extends AppCompatActivity {
             tintManager.setStatusBarTintResource(R.color.xinxilan);
 //            tintManager.setTintColor(Color.parseColor("#009966"));
 
-             System.out.println("是是是是是是测试");
         }
-
-        System.out.print("sun测试");
 
         switchfragment(new Fragment_home());
         radiogroup = ((RadioGroup) findViewById(R.id.radioGroup));
