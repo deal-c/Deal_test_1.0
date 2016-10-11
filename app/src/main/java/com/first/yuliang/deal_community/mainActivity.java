@@ -38,6 +38,8 @@ public class mainActivity extends AppCompatActivity {
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintResource(R.color.xinxilan);
 //            tintManager.setTintColor(Color.parseColor("#009966"));
+
+             System.out.println("测试");
         }
 
 
