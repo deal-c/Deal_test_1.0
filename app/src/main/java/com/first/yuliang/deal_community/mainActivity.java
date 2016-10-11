@@ -42,7 +42,7 @@ public class mainActivity extends AppCompatActivity {
              System.out.println("测试");
         }
 
-
+        System.out.print("sun测试");
 
         switchfragment(new Fragment_home());
         radiogroup = ((RadioGroup) findViewById(R.id.radioGroup));
