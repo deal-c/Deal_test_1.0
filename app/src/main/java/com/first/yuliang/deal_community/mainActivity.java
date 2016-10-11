@@ -28,6 +28,8 @@ public class mainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //设置信息栏的颜色
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window win = getWindow();
             WindowManager.LayoutParams winParams = win.getAttributes();
