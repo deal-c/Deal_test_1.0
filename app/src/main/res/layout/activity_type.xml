@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#33d685">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip">
+
+          <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:onClick="backHome"
+            android:src="@drawable/u18"/>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分类"
+            android:textSize="30sp"
+            android:layout_centerInParent="true"
+           />
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <ListView
+        android:id="@+id/lv_type"
+        android:layout_width="100dp"
+        android:layout_below="@id/tb_type"
+        android:layout_height="match_parent"
+        android:background="#33d685"
+        android:divider="#ccc">
+
+
+    </ListView>
+    <FrameLayout
+        android:id="@+id/fl_type"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/lv_type"
+        android:layout_alignBottom="@id/lv_type"
+        android:layout_alignTop="@id/lv_type"
+        android:background="#fff"
+        >
+
+
+    </FrameLayout>
+
+</RelativeLayout>
