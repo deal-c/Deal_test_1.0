@@ -40,8 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         et_loginname.setText(loginName);
         cb_remeber.setChecked(remeberName);
 
-
-
     }
 
     private void checkLogin(View v) {
