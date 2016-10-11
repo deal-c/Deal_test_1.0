@@ -3,20 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff">
-   <android.support.v7.widget.Toolbar
-       android:id="@+id/tl_home"
-       android:layout_width="match_parent"
-       android:layout_height="50dp"
-       android:background="@color/bgcolor">
-
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="首页"
-          android:textSize="30sp"
-          android:textColor="#fff"/>
-
-   </android.support.v7.widget.Toolbar>
+    <include android:id="@+id/tl_home"
+        layout="@layout/commodity_search_bar"/>
   <android.support.v4.view.ViewPager
       android:id="@+id/vp_ad"
       android:layout_width="match_parent"
