@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.TypeActivity;
 import com.first.yuliang.deal_community.frament.pojo.Adbean;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.google.gson.Gson;
@@ -62,6 +63,7 @@ public class Fragment_home extends Fragment {
     private int previousposition=0;
     final List<Adbean.Ad> adlist=new ArrayList<Adbean.Ad>();
 
+    private ImageView iv_type;
 
     @Nullable
     @Override
@@ -69,7 +71,16 @@ public class Fragment_home extends Fragment {
         View view =inflater.inflate(R.layout.activity_home,null);
 
 
-         //相关数据
+        iv_type=((ImageView) view.findViewById(R.id.iv_type));
+
+        iv_type.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent=new Intent(getActivity(), TypeActivity.class);
+                startActivity(intent);
+            }
+        });
+        //相关数据
         final  int []imgs=new int[]{R.drawable.ad1,R.drawable.ad2,R.drawable.ad3,R.drawable.ad4};
         final int[]ivs={R.id.iv_iv1,R.id.iv_iv2,R.id.iv_iv3,R.id.iv_iv4};
 
