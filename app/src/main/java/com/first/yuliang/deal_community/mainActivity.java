@@ -40,7 +40,7 @@ public class mainActivity extends AppCompatActivity {
 //            tintManager.setTintColor(Color.parseColor("#009966"));
         }
 
-
+        System.out.print("sun测试");
 
         switchfragment(new Fragment_home());
         radiogroup = ((RadioGroup) findViewById(R.id.radioGroup));
