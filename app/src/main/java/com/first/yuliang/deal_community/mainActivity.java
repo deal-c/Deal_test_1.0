@@ -27,6 +27,8 @@ public class mainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         //设置信息栏的颜色
 
 
