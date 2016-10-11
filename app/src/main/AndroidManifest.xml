@@ -68,6 +68,11 @@
         <activity android:name=".regDetailActivity" />
         <activity android:name=".LoginActivity" />
 
+        <activity
+            android:name=".TypeActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <service android:name="com.amap.api.location.APSService" >
         </service>
     </application>
