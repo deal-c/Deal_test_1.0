@@ -3,20 +3,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="horizontal"
     android:background="@color/main">
-    <Button
-        android:id="@+id/btn_message"
-        android:layout_width="45dp"
+    <ImageView
+        android:id="@+id/iv_return_main"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="6dp"
+        android:layout_margin="12dp"
         android:layout_gravity="center_vertical"
-        android:drawableTop="@drawable/message"
-        android:text="消息"
-        android:textColor="#FFFFFF"
-        android:background="@android:color/transparent"
-        android:textSize="8sp"
-        />
+        android:layout_alignParentRight="true"
+        android:src="@drawable/return_" />
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -25,9 +23,9 @@
     android:paddingBottom="7dp"
      >
     <EditText
+        android:id="@+id/query2"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:id="@+id/query"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -53,21 +51,13 @@
         android:src="@drawable/search_clear"
         />
 </RelativeLayout>
-    <TextView
-        android:id="@+id/tv_search"
+
+    <ImageView
+        android:id="@+id/iv_search2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:text="搜索"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
-        android:layout_marginLeft="5dp"
-        />
-    <ImageView
-        android:id="@+id/iv_type"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:layout_gravity="center_vertical"
         android:layout_alignParentRight="true"
-        android:src="@drawable/type" />
+        android:src="@drawable/search" />
 </LinearLayout>
