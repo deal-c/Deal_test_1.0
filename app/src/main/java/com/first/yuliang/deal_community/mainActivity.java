@@ -28,7 +28,7 @@ public class mainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //设置信息栏的颜色
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window win = getWindow();
             WindowManager.LayoutParams winParams = win.getAttributes();
             final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
@@ -38,9 +38,8 @@ public class mainActivity extends AppCompatActivity {
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintResource(R.color.xinxilan);
 //            tintManager.setTintColor(Color.parseColor("#009966"));
+
         }
-
-
 
         switchfragment(new Fragment_home());
         radiogroup = ((RadioGroup) findViewById(R.id.radioGroup));

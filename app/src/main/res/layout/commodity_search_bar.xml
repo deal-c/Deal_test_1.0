@@ -9,7 +9,7 @@
         android:id="@+id/btn_message"
         android:layout_width="45dp"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:paddingTop="6dp"
         android:layout_gravity="center_vertical"
         android:drawableTop="@drawable/message"
         android:text="消息"
@@ -35,7 +35,7 @@
         android:drawableLeft="@drawable/search_bar_icon_normal"
         android:hint="输入搜索内容"
         android:textColorHint="#55000000"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textColor="#aa000000"
         android:singleLine="true"
          />
