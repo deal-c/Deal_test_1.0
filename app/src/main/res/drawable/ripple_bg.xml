@@ -4,6 +4,7 @@
     <item android:state_pressed="true">
         <shape>
             <solid android:color="@color/xinxilan"/>
+            <corners android:radius="360dip" />
         </shape>
     </item>
 </selector>
