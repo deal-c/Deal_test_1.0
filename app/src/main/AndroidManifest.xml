@@ -70,7 +70,9 @@
 
         <service android:name="com.amap.api.location.APSService"></service>
 
-        <activity android:name=".SearchCommodityActivity"></activity>
+        <activity android:name=".SearchCommodityActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateVisible"></activity>
         <activity
             android:name=".TypeActivity"
             android:launchMode="singleTask"

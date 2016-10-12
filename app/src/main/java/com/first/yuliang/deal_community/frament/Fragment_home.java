@@ -1,6 +1,7 @@
 package com.first.yuliang.deal_community.frament;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,11 +13,15 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.SearchCommodityActivity;
 import com.first.yuliang.deal_community.TypeActivity;
 import com.first.yuliang.deal_community.frament.pojo.Adbean;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
@@ -63,7 +68,8 @@ public class Fragment_home extends Fragment {
     private int previousposition=0;
     final List<Adbean.Ad> adlist=new ArrayList<Adbean.Ad>();
 
-    private ImageView iv_type;
+    private ImageButton ib_type;
+    private EditText query1;
 
     @Nullable
     @Override
@@ -71,15 +77,30 @@ public class Fragment_home extends Fragment {
         View view =inflater.inflate(R.layout.activity_home,null);
 
 
-        iv_type=((ImageView) view.findViewById(R.id.iv_type));
+        ib_type=((ImageButton) view.findViewById(R.id.ib_type));
 
-        iv_type.setOnClickListener(new View.OnClickListener() {
+        ib_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                Intent intent=new Intent(getActivity(), TypeActivity.class);
                 startActivity(intent);
             }
         });
+        query1 = ((EditText) view.findViewById(R.id.query1));
+        query1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+                    query1.setFocusable(false);
+                    query1.setFocusableInTouchMode(true);
+//                    InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                    Intent intent = new Intent(getActivity(), SearchCommodityActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
         //相关数据
         final  int []imgs=new int[]{R.drawable.ad1,R.drawable.ad2,R.drawable.ad3,R.drawable.ad4};
         final int[]ivs={R.id.iv_iv1,R.id.iv_iv2,R.id.iv_iv3,R.id.iv_iv4};

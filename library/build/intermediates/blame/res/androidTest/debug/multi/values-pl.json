@@ -62,7 +62,7 @@
         ]
     },
     {
-        "outputFile": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-pl\\values-pl.xml",
+        "outputFile": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-pl\\values-pl.xml",
         "map": [
             {
                 "to": {
@@ -73,7 +73,7 @@
                     "endOffset": 131
                 },
                 "from": {
-                    "file": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
+                    "file": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -92,7 +92,7 @@
                     "endOffset": 205
                 },
                 "from": {
-                    "file": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
+                    "file": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -111,7 +111,7 @@
                     "endOffset": 284
                 },
                 "from": {
-                    "file": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
+                    "file": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
