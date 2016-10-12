@@ -22,7 +22,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        System.out.print("sun测试");
         et_loginname = ((EditText) findViewById(R.id.et_loginname));
         et_loginpsd = ((EditText) findViewById(R.id.et_loginpsd));
         cb_remeber = ((CheckBox) findViewById(R.id.cb_remeber));
@@ -40,8 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         boolean remeberName = preference.getBoolean("cb_remeber",false);
         et_loginname.setText(loginName);
         cb_remeber.setChecked(remeberName);
-
-
 
     }
 

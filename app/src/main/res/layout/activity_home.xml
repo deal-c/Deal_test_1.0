@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#fff">
     <include android:id="@+id/tl_home"
-        layout="@layout/commodity_search_bar"/>
+        layout="@layout/search_bar"/>
   <android.support.v4.view.ViewPager
       android:id="@+id/vp_ad"
       android:layout_width="match_parent"

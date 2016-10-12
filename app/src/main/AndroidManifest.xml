@@ -68,6 +68,16 @@
         <activity android:name=".regDetailActivity" />
         <activity android:name=".LoginActivity" />
 
+        <service android:name="com.amap.api.location.APSService"></service>
+
+        <activity android:name=".SearchCommodityActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateVisible"></activity>
+        <activity
+            android:name=".TypeActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <service android:name="com.amap.api.location.APSService" >
         </service>
     </application>
