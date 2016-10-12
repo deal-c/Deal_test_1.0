@@ -41,7 +41,7 @@ public class ViewPagerActivity extends AppCompatActivity {
 
         btn_intologin = ((Button) findViewById(R.id.btn_intologin));
 
-        //btn_intoreg = ((Button) findViewById(R.id.btn_intoreg));
+
 
         btn_into = ((Button) findViewById(R.id.btn_into));
 
@@ -56,13 +56,6 @@ public class ViewPagerActivity extends AppCompatActivity {
             }
         });
 
-//        btn_intoreg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent=new Intent(ViewPagerActivity.this,regDetailActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
         btn_intologin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,19 +110,17 @@ public class ViewPagerActivity extends AppCompatActivity {
                 previousPage=position;
 
                 if(position==point.length-1)
-                {
+                {btn_skip.setVisibility(View.GONE);
 
+                 btn_intologin.setVisibility(View.VISIBLE);
 
-                    btn_skip.setVisibility(View.VISIBLE);
-                    //btn_intoreg.setVisibility(View.VISIBLE);
-                    btn_intologin.setVisibility(View.VISIBLE);
-                    btn_into.setVisibility(View.VISIBLE);
-
+                 btn_into.setVisibility(View.VISIBLE);
 
                 }
                 else
-                {
-                    btn_skip.setVisibility(View.GONE);
+                {   btn_intologin.setVisibility(View.GONE);
+                    btn_into.setVisibility(View.GONE);
+                    btn_skip.setVisibility(View.VISIBLE);
                 }
 
 
