@@ -6,9 +6,11 @@ import android.app.FragmentTransaction;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.first.yuliang.deal_community.frament.Fragment_community;
 import com.first.yuliang.deal_community.frament.Fragment_fujin;
@@ -20,7 +22,7 @@ public class mainActivity extends AppCompatActivity {
 
 
     private RadioGroup radiogroup;
-
+    private long mExitTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,20 @@ public class mainActivity extends AppCompatActivity {
         FragmentTransaction ft= fm.beginTransaction();
         ft.replace(R.id.fl_content,fragment).commit();
     }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
 
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                mExitTime = System.currentTimeMillis();
+
+            } else {
+                moveTaskToBack(false);
+//                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }

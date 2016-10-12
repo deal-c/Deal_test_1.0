@@ -1,6 +1,7 @@
 package com.first.yuliang.deal_community;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -24,7 +25,7 @@ public class ViewPagerActivity extends AppCompatActivity {
     private Button btn_intologin;
    // private Button btn_intoreg;
     private Button btn_into;
-
+    boolean isFirstIn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,17 @@ public class ViewPagerActivity extends AppCompatActivity {
 
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//全屏
         setContentView(R.layout.activity_view_pager);
+        SharedPreferences preferences = getSharedPreferences(
+                "first_pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("isFirstIn", false);
+        editor.commit();
+
+
         vp = ((ViewPager) findViewById(R.id.vp));
+
+
+
 
         final int[] point=new int[]{R.id.iv_iv1,R.id.iv_iv2,R.id.iv_iv3,R.id.iv_iv4,R.id.iv_iv5};
 
@@ -52,7 +63,7 @@ public class ViewPagerActivity extends AppCompatActivity {
 
                 Intent intent=new Intent(ViewPagerActivity.this,mainActivity.class);
                 startActivity(intent);
-
+                 finish();
             }
         });
 
@@ -62,6 +73,7 @@ public class ViewPagerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(ViewPagerActivity.this,RegActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -71,7 +83,7 @@ public class ViewPagerActivity extends AppCompatActivity {
 
                 Intent intent=new Intent(ViewPagerActivity.this,mainActivity.class);
                 startActivity(intent);
-
+                finish();
             }
         });
 
@@ -136,7 +148,6 @@ public class ViewPagerActivity extends AppCompatActivity {
 
 
 
-
     private class MyPagerAdapter extends PagerAdapter
     {
 
@@ -183,5 +194,6 @@ public class ViewPagerActivity extends AppCompatActivity {
             container.removeView((View)object);
         }
     }
+
 
 }
