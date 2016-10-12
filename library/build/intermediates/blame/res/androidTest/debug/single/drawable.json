@@ -4,7 +4,15 @@
         "source": "D:\\androidStudio\\androidproject\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
     },
     {
+        "merged": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
+    },
+    {
         "merged": "D:\\androidStudio\\androidproject\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
         "source": "D:\\androidStudio\\androidproject\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
+    },
+    {
+        "merged": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
     }
 ]
