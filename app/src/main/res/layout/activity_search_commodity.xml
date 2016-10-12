@@ -5,4 +5,5 @@
     android:background="#fff">
     <include android:id="@+id/tl_home"
         layout="@layout/commodity_search_bar"/>
+
 </RelativeLayout>

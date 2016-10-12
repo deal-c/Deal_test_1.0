@@ -7,13 +7,15 @@
     android:focusableInTouchMode="true"
     android:orientation="horizontal"
     android:background="@color/main">
-    <ImageView
-        android:id="@+id/iv_return_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
+    <ImageButton
+        android:id="@+id/ib_return"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:layout_gravity="center_vertical"
-        android:layout_alignParentRight="true"
+        android:paddingBottom="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/ripple_bg"
         android:src="@drawable/return_" />
 <RelativeLayout
     android:layout_width="wrap_content"
@@ -38,9 +40,9 @@
         android:singleLine="true"
          />
 
-    <!--  android:visibility="invisible" -->
     <ImageButton
         android:id="@+id/search_clear"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -51,13 +53,14 @@
         android:src="@drawable/search_clear"
         />
 </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/iv_search2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
+    <ImageButton
+        android:id="@+id/ib_search2"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:layout_gravity="center_vertical"
-        android:layout_alignParentRight="true"
+        android:paddingBottom="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/ripple_bg"
         android:src="@drawable/search" />
 </LinearLayout>
