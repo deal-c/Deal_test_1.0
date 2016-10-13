@@ -3,6 +3,9 @@ package com.first.yuliang.deal_community;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -24,17 +27,47 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
         query2 = ((EditText) findViewById(R.id.query2));
         query2.requestFocus();
 
-
-
         ib_search2 = ((ImageButton) findViewById(R.id.ib_search2));
         ib_search2.setOnClickListener(this);
         ib_return = ((ImageButton) findViewById(R.id.ib_return));
         ib_return.setOnClickListener(this);
         clear = ((ImageButton) findViewById(R.id.search_clear));
         clear.setOnClickListener(this);
-        if(!query2.getText().toString().equals("") && query2.getText().toString()!=null){
-            clear.setVisibility(View.VISIBLE);
-        }
+
+//        添加EditText监听事件
+        query2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+//         当EditText内容改变时，显隐藏清空按钮
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(s)) {
+                    if (clear != null) {
+                        clear.setVisibility(View.VISIBLE);
+                        clear.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (query2 != null) {
+                                    query2.getText().clear();
+                                    clear.setVisibility(View.GONE);
+                                }
+                            }
+                        });
+                    }
+                } else {
+                    if (clear != null) {
+                        clear.setVisibility(View.GONE);
+                    }
+                }
+            }
+//         得到EditText的输入内容，并实时搜索
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -86,9 +119,6 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.ib_return:
                 this.finish();
-                break;
-            case R.id.search_clear:
-                query2.setText("");
                 break;
         }
     }
