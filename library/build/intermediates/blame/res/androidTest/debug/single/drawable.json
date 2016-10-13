@@ -1,25 +1,10 @@
 [
     {
-        "merged": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
-        "source": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
-    },
-    {
         "merged": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
         "source": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
     },
     {
-        "merged": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
-        "source": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
-<<<<<<< HEAD
-=======
-    },
-    {
-        "merged": "D:\\androidStudio\\androidproject\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
-        "source": "D:\\androidStudio\\androidproject\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
-    },
-    {
         "merged": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
         "source": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
->>>>>>> 8f8f1513bf8664fafd395bbde1a3967be026297e
     }
 ]
