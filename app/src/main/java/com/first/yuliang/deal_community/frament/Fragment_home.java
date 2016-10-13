@@ -1,7 +1,6 @@
 package com.first.yuliang.deal_community.frament;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,8 +12,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,7 +66,7 @@ public class Fragment_home extends Fragment {
     private int previousposition=0;
     final List<Adbean.Ad> adlist=new ArrayList<Adbean.Ad>();
 
-    private ImageView iv_type;
+    private ImageButton ib_type;
     private EditText query1;
 
     @Nullable
@@ -76,9 +75,9 @@ public class Fragment_home extends Fragment {
         View view =inflater.inflate(R.layout.activity_home,null);
 
 
-        iv_type=((ImageView) view.findViewById(R.id.iv_type));
+        ib_type=((ImageButton) view.findViewById(R.id.ib_type));
 
-        iv_type.setOnClickListener(new View.OnClickListener() {
+        ib_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                Intent intent=new Intent(getActivity(), TypeActivity.class);

@@ -8,7 +8,26 @@
         "source": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_flip.png"
     },
     {
+<<<<<<< HEAD
+=======
+        "merged": "D:\\androidStudio\\androidproject\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\default_ptr_flip.png",
+        "source": "D:\\androidStudio\\androidproject\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_flip.png"
+    },
+    {
+        "merged": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\default_ptr_flip.png",
+        "source": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_flip.png"
+    },
+    {
+        "merged": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\default_ptr_rotate.png",
+        "source": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_rotate.png"
+    },
+    {
+>>>>>>> 8f8f1513bf8664fafd395bbde1a3967be026297e
         "merged": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\default_ptr_rotate.png",
         "source": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_rotate.png"
+    },
+    {
+        "merged": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\indicator_arrow.png",
+        "source": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\indicator_arrow.png"
     }
 ]

@@ -8,7 +8,7 @@
         android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#cccccc">
+        android:background="#00cccccc">
 
     </android.support.v4.view.ViewPager>
 
@@ -27,32 +27,32 @@
             android:id="@+id/iv_iv1"
             android:src="@drawable/point_red"
            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="6dp"
+            android:layout_height="6dp" />
         <ImageView
             android:id="@+id/iv_iv2"
             android:src="@drawable/point_gray"
-            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
+            android:layout_margin="6dp"
+            android:layout_width="6dp"
             android:layout_height="wrap_content" />
         <ImageView
             android:id="@+id/iv_iv3"
             android:src="@drawable/point_gray"
             android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="6dp"
+            android:layout_height="6dp" />
         <ImageView
             android:id="@+id/iv_iv4"
             android:src="@drawable/point_gray"
             android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="6dp"
+            android:layout_height="6dp" />
         <ImageView
             android:id="@+id/iv_iv5"
             android:src="@drawable/point_gray"
             android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="6dp"
+            android:layout_height="6dp" />
 
     </LinearLayout>
 
@@ -63,7 +63,7 @@
         android:background="@android:color/transparent"
         android:layout_gravity="top|right"
         android:layout_marginRight="10dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:text="跳 过"
         android:textColor="#990000ff"/>
 
@@ -76,38 +76,41 @@
         android:paddingBottom="7dip"
         android:layout_gravity="bottom"
         android:layout_marginBottom="20dp"
-
+        android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:paddingLeft="23dp"
+        android:paddingRight="23dp"
+        android:layout_centerHorizontal="true"
         >
-
         <Button
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:id="@+id/btn_intologin"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-           android:layout_marginLeft="40dp"
             android:text="登 录"
-            android:background="#ccc"
-            android:textSize="24sp"
+            android:background="#ff8680"
+            android:textColor="#fff"
+            android:textSize="20sp"
 
             android:visibility="gone"/>
 
         <Button
-
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:id="@+id/btn_into"
-
-
             android:text="直接进入"
-            android:textSize="24sp"
+            android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-
-            android:layout_toRightOf="@id/btn_intologin"
-            android:layout_alignBottom="@id/btn_intologin"
-
-            android:background="#ccc"
+            android:background="#ff8680"
+            android:textColor="#fff"
+            android:textSize="20sp"
             android:visibility="gone"/>
+    </LinearLayout>
 
     </RelativeLayout>
 

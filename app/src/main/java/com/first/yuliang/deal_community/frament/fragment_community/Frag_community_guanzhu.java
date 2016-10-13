@@ -164,9 +164,7 @@ public class Frag_community_guanzhu extends Fragment {
 
 // set item background
 
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
-
-                        0x3F, 0x25)));
+                deleteItem.setBackground(R.color.bgcolor);
 
 // set item width
 
