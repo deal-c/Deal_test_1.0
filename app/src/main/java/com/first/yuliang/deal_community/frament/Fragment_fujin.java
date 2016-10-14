@@ -7,14 +7,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.first.yuliang.deal_community.R;
 
 /**
@@ -33,8 +38,21 @@ public class Fragment_fujin extends Fragment  implements LocationSource, AMapLoc
 
         mapView = (MapView) view.findViewById(R.id.map);
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，实现地图生命周期管理
+
         mapView.onCreate(savedInstanceState);
         init();
+
+        AMap.OnMarkerClickListener listener = new AMap.OnMarkerClickListener() {
+
+            @Override
+            public boolean onMarkerClick(Marker arg0) {
+                Toast.makeText(getActivity(),arg0.getTitle()+":  "+arg0.getSnippet(),Toast.LENGTH_LONG).show();
+                return false;
+            }
+        };
+
+     //绑定标注点击事件
+        aMap.setOnMarkerClickListener(listener);
         return view;
     }
     private void init() {
@@ -51,8 +69,27 @@ public class Fragment_fujin extends Fragment  implements LocationSource, AMapLoc
         //跟随：LOCATION_TYPE_MAP_FOLLOW
         //旋转：LOCATION_TYPE_MAP_ROTATE
         //定位：LOCATION_TYPE_LOCATE
+        LatLng marker1 = new LatLng(31.2762990000,120.7417510000);
+        LatLng marker2=new LatLng(31.2751160000,120.7416330000);
+        LatLng marker3=new LatLng(31.2750330000,120.7436610000);
+        final Marker marker = aMap.addMarker(new MarkerOptions().
+                position(marker1).
+                title("文星广场").
+                snippet("吃饭的地方!"));
+        final Marker aff = aMap.addMarker(new MarkerOptions().
+                position(marker2).
+                title("篮球场").
+                snippet("玩的地方!"));
+        final Marker ma= aMap.addMarker(new MarkerOptions().
+                position(marker3).
+                title("教室").
+                snippet("学习的地方!"));
+        aMap.moveCamera(CameraUpdateFactory.zoomTo(16));
+        aMap.getUiSettings().setCompassEnabled(true);
         aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
+
     }
+
 
     /**
      * 定位成功后回调函数
