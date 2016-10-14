@@ -68,6 +68,7 @@ public class Fragment_home extends Fragment {
 
     private ImageButton ib_type;
     private EditText query1;
+    private ImageButton ib_search1;
 
     @Nullable
     @Override
@@ -84,6 +85,16 @@ public class Fragment_home extends Fragment {
                 startActivity(intent);
             }
         });
+//        搜索键点击跳转
+        ib_search1 = ((ImageButton) view.findViewById(R.id.ib_search1));
+        ib_search1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchCommodityActivity.class);
+                startActivity(intent);
+            }
+        });
+//        EditText获得焦点后跳转
         query1 = ((EditText) view.findViewById(R.id.query1));
         query1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
