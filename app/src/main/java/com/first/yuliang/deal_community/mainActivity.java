@@ -23,6 +23,12 @@ public class mainActivity extends AppCompatActivity {
 
     private RadioGroup radiogroup;
     private long mExitTime;
+    Fragment newfragement;
+    Fragment oldfragement;
+    Fragment home;
+    Fragment fujin;
+    Fragment community;
+    Fragment mine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,35 +46,36 @@ public class mainActivity extends AppCompatActivity {
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintResource(R.color.xinxilan);
 //            tintManager.setTintColor(Color.parseColor("#009966"));
+           home=new Fragment_home();
+           fujin=new Fragment_fujin();
+           community=new Fragment_community();
+           mine =new Fragment_mine();
 
         }
 
-        switchfragment(new Fragment_home());
+        switchfragment(home);
         radiogroup = ((RadioGroup) findViewById(R.id.radioGroup));
 
         radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Fragment fragment=null;
+
                 switch (checkedId){
                     case R.id.radio0:
-                        fragment=new Fragment_home();
+                        newfragement=home;
                         break;
                     case R.id.radio1:
-                        fragment=new Fragment_fujin();
+                        newfragement=fujin;
                         break;
                     case R.id.radio3:
-                        fragment=new Fragment_community();
+                        newfragement=community;
                         break;
                     case R.id.radio4:
-                        fragment=new Fragment_mine();
+                        newfragement=mine;
                         break;
 
                 }
-                if (fragment==null){
-                    fragment=new Fragment_community();
-                };
-                switchfragment(fragment);
+                switchfragment(newfragement);
 
             }
 
@@ -80,9 +87,25 @@ public class mainActivity extends AppCompatActivity {
     }
 
     private void switchfragment(Fragment fragment) {
-        FragmentManager fm=  this.getFragmentManager();
-        FragmentTransaction ft= fm.beginTransaction();
-        ft.replace(R.id.fl_content,fragment).commit();
+        // 设置一个默认值
+        if(fragment == null){
+            fragment = home;
+        }
+
+        FragmentManager fm = this.getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        if(oldfragement!=null && !oldfragement.isHidden() && oldfragement.isAdded()){
+            ft.hide(oldfragement);
+        }
+        if(fragment.isAdded()&&fragment.isHidden()){
+            ft.show(fragment);
+        }else {
+            if (!fragment.isAdded()){
+                ft.add(R.id.fl_content,fragment);
+            }
+        }
+        oldfragement=newfragement;
+        ft.commit();
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

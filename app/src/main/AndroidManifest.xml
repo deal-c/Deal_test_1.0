@@ -49,12 +49,22 @@
 
         <activity
             android:name=".mainActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            >
+            
+
+        </activity>
         <activity
             android:name=".ViewPagerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
 
-        </activity>
+
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+
+
+
+
         <activity android:name=".RegActivity" />
         <activity android:name=".regDetailActivity" />
         <activity android:name=".LoginActivity" />
@@ -70,6 +80,12 @@
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
+
+        <service android:name="com.amap.api.location.APSService" />
+
+        <activity android:name=".CommunityDynamic" />
+        <activity android:name=".TestActivity"></activity>
+
         <service android:name="com.amap.api.location.APSService"></service>
 
         <activity android:name=".spanishAcitivity"
@@ -79,6 +95,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

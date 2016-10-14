@@ -1,23 +1,7 @@
 [
     {
-        "merged": "D:\\androidStudio\\androidproject\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
-        "source": "D:\\androidStudio\\androidproject\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
-    },
-    {
-        "merged": "D:\\androidStudio\\androidproject\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
-        "source": "D:\\androidStudio\\androidproject\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
-    },
-    {
-        "merged": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
-        "source": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
-    },
-    {
         "merged": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
         "source": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
-    },
-    {
-        "merged": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
-        "source": "E:\\android\\pro\\Deal_test_1.0\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
     },
     {
         "merged": "D:\\androidworkspace\\Deal_test_1.0\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
