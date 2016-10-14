@@ -1,6 +1,7 @@
 package com.first.yuliang.deal_community;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -147,6 +148,9 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
                     keySearch();
                 }else {
                     lv_search.setVisibility(View.GONE);
+                    ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+                            .hideSoftInputFromWindow(SearchCommodityActivity.this.getCurrentFocus()
+                                    .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }
         });
@@ -200,7 +204,8 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
                     save();
                     getHistory();
                     btn_clear_history.setVisibility(View.GONE);
-                    this.finish();
+                    Intent intent = new Intent(SearchCommodityActivity.this, SearchResultActivity.class);
+                    startActivity(intent);
                 }
                 break;
             case R.id.ib_return:
@@ -340,7 +345,8 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
                         save();
                         getHistory();
                         btn_clear_history.setVisibility(View.GONE);
-                        SearchCommodityActivity.this.finish();
+                        Intent intent = new Intent(SearchCommodityActivity.this, SearchResultActivity.class);
+                        startActivity(intent);
                     }
                 }
                 return false;
