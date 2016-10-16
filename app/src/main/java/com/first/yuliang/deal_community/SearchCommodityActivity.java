@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -58,12 +59,49 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_commodity);
 
+        InputMethodManager m=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+
         query2 = ((EditText) findViewById(R.id.query2));
         query2.requestFocus();
+        keySearch();
 
         lv_history = ((ListView) findViewById(R.id.lv_history));
         lv_history.addFooterView(new ViewStub(this));
+        lv_history.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                query2.setText(history_arr[position]);
+                query2.setSelection(history_arr[position].length());
+                Bundle bundle = new Bundle();
+                bundle.putString("search",history_arr[position]);
+                Intent intent = new Intent(SearchCommodityActivity.this, SearchResultActivity.class);
+                intent.putExtra("bundle",bundle);
+                save();
+                getHistory();
+                btn_clear_history.setVisibility(View.GONE);
+                startActivityForResult(intent,0);
+            }
+        });
         lv_search = ((ListView) findViewById(R.id.lv_search));
+        lv_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String temp = commodityList.get(position).commodityTitle;
+                query2.getText().clear();
+                Log.e("看看===================",temp);
+                query2.setText(temp);
+                query2.setSelection(temp.length());
+                Bundle bundle = new Bundle();
+                bundle.putString("search",temp);
+                Intent intent = new Intent(SearchCommodityActivity.this, SearchResultActivity.class);
+                intent.putExtra("bundle",bundle);
+                save();
+                getHistory();
+                btn_clear_history.setVisibility(View.GONE);
+                startActivityForResult(intent,0);
+            }
+        });
 
         ib_search2 = ((ImageButton) findViewById(R.id.ib_search2));
         ib_search2.setOnClickListener(this);
@@ -148,9 +186,9 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
                     keySearch();
                 }else {
                     lv_search.setVisibility(View.GONE);
-                    ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
-                            .hideSoftInputFromWindow(SearchCommodityActivity.this.getCurrentFocus()
-                                    .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    if(!history.equals("")){
+                        btn_clear_history.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });
@@ -201,11 +239,20 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
         switch (v.getId()){
             case R.id.ib_search2:
                 if(!query2.getText().toString().trim().equals("") && query2.getText().toString().trim()!=null){
+                    query2.setFocusable(false);
+                    query2.setFocusableInTouchMode(true);
                     save();
                     getHistory();
                     btn_clear_history.setVisibility(View.GONE);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("search",query2.getText().toString());
                     Intent intent = new Intent(SearchCommodityActivity.this, SearchResultActivity.class);
-                    startActivity(intent);
+                    intent.putExtra("bundle",bundle);
+                    startActivityForResult(intent,0);
+                }else {
+                    ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+                            .hideSoftInputFromWindow(SearchCommodityActivity.this.getCurrentFocus()
+                                    .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
                 break;
             case R.id.ib_return:
@@ -218,7 +265,6 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
     }
     public void getCommodityList(String search) {
         search = search.replace(" ","%");
-        Log.e("看看数据==============",search);
         RequestParams params = null;
         try {
             params = new RequestParams("http://192.168.191.1:8080/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
@@ -337,20 +383,51 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
         btn_clear_history.setVisibility(View.GONE);
     }
     public void keySearch(){
-        query2.setOnKeyListener(new View.OnKeyListener() {
+
+        query2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId ==EditorInfo.IME_ACTION_SEARCH){
                     if(!query2.getText().toString().trim().equals("") && query2.getText().toString().trim()!=null){
                         save();
                         getHistory();
                         btn_clear_history.setVisibility(View.GONE);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("search",query2.getText().toString());
                         Intent intent = new Intent(SearchCommodityActivity.this, SearchResultActivity.class);
-                        startActivity(intent);
+                        intent.putExtra("bundle",bundle);
+                        startActivityForResult(intent,0);
+                    }else {
+                        Log.e("看看空",query2.getText().toString());
+                        ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+                                .hideSoftInputFromWindow(SearchCommodityActivity.this.getCurrentFocus()
+                                        .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     }
                 }
                 return false;
             }
         });
+    }
+    @Override
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
+            case 0:
+                Bundle bundle=data.getBundleExtra("bundle"); //data为B中回传的Intent
+                String search = bundle.getString("search");//str即为回传的值
+                Log.e("看看返回了没==========",search);
+                if(search.equals(" ")){
+                    query2.setFocusable(false);
+                    query2.setFocusableInTouchMode(true);
+                }else {
+                    query2.requestFocus();
+                    InputMethodManager m=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -64,7 +64,7 @@
         <activity
             android:name=".SearchCommodityActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:windowSoftInputMode="stateVisible" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".TypeActivity"
             android:launchMode="singleTask"
@@ -87,7 +87,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SearchResultActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+                  android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+                  android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>
