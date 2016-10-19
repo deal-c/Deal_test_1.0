@@ -10,18 +10,26 @@
         android:layout_below="@+id/tl_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:divider="#cccccc"
-    android:dividerHeight="1dp"></ListView>
+        android:divider="#dddddd"
+        android:dividerHeight="0.1dp"
+        android:footerDividersEnabled="true" ></ListView>
+    <Button
+        android:visibility="gone"
+        android:id="@+id/btn_clear_history"
+        android:text="清除历史记录"
+        android:layout_centerHorizontal="true"
+        android:textSize="14sp"
+        android:textColor="@color/textcolor"
+        android:layout_below="@+id/lv_history"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:background="@android:color/transparent" />
     <ListView
         android:visibility="gone"
         android:id="@+id/lv_search"
         android:layout_below="@+id/tl_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
         android:divider="#dddddd"
         android:dividerHeight="0.1dp"></ListView>
 </RelativeLayout>
