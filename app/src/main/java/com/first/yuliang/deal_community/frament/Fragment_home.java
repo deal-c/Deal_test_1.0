@@ -96,6 +96,7 @@ public class Fragment_home extends Fragment {
         });
 //        EditText获得焦点后跳转
         query1 = ((EditText) view.findViewById(R.id.query1));
+
         query1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -163,7 +164,7 @@ public class Fragment_home extends Fragment {
                 }if (adlist.size()!=0){
                     for (int i=0;i<4;i++) {
                         //拿不到数据就不显示
-                        ((ImageView) (getActivity()).findViewById(ivs[position])).setVisibility(View.INVISIBLE);
+                        ((ImageView) (getActivity()).findViewById(ivs[position])).setVisibility(View.VISIBLE);
                     }
 
                x.image().bind(iv_adphoto,HttpUtile.host+adlist.get(key).getAdphoto(),imageOptions);
@@ -241,7 +242,7 @@ public class Fragment_home extends Fragment {
         RequestParams params=new RequestParams(HttpUtile.host+"deal_ad/getad");
         params.setCacheMaxAge(1000 * 10);
 
-        x.http().get(params, new Callback.CommonCallback<String>() {
+            x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override
             public void onSuccess(String result) {
