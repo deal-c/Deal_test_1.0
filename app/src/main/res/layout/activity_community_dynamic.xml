@@ -9,4 +9,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.first.yuliang.deal_community.CommunityDynamic">
 
+
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+
+
+       >
+
+<ImageView
+    android:src="@drawable/deal_logo"
+    android:id="@+id/DynamicImg"
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    android:layout_weight=".40"
+    />
+    <ListView
+        android:id="@+id/DyItem"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+       android:layout_weight=".60"
+
+        ></ListView>
+
+
+
+
+   </LinearLayout>
+
 </RelativeLayout>

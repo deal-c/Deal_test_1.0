@@ -18,6 +18,9 @@
         <item name="android:textColor">#33d685</item>
         <item name="android:radius">25dp</item>
     </style>
+    <style name="Comment" parent="android:TextAppearance">
+        <item name="android:textSize">14dp</item>
+    </style>
 
     <color name="bgcolor">#33d685</color>
 </resources>

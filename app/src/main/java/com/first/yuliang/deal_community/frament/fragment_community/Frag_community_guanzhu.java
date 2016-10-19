@@ -28,6 +28,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.first.yuliang.deal_community.CommunityDynamic;
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.frament.pojo.MyComminity;
+import com.first.yuliang.deal_community.model.ComMainActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -302,7 +303,7 @@ public class Frag_community_guanzhu extends Fragment {
         lv_community_guanzhu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), CommunityDynamic.class);
+                Intent intent = new Intent(getActivity(), ComMainActivity.class);
                 startActivity(intent);
             }
         });
