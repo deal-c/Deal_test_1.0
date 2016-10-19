@@ -58,6 +58,12 @@
         <activity android:name=".RegActivity" />
         <activity android:name=".regDetailActivity" />
         <activity android:name=".LoginActivity" />
+        <activity android:name="com.first.yuliang.deal_community.model.ComMainActivity" >
+
+
+
+        </activity>
+
 
         <service android:name="com.amap.api.location.APSService" />
 
