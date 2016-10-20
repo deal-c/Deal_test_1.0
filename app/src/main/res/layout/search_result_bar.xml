@@ -42,8 +42,9 @@
             />
 
     </RelativeLayout>
+
     <ImageButton
-        android:id="@+id/ib_search1"
+        android:id="@+id/ib_search3"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_gravity="center_vertical"
@@ -51,7 +52,7 @@
         android:background="@drawable/ripple_bg"
         android:src="@drawable/search" />
     <ImageButton
-        android:id="@+id/ib_type"
+        android:id="@+id/ib_list"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_gravity="center_vertical"

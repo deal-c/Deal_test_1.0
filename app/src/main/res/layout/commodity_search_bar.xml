@@ -38,8 +38,7 @@
         android:textSize="14sp"
         android:textColor="@color/textcolor"
         android:imeOptions="actionSearch"
-        android:singleLine="true"
-         />
+        android:singleLine="true"/>
 
     <ImageButton
         android:id="@+id/search_clear"
