@@ -4,6 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,12 +32,12 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
-import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -174,8 +181,9 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
                     if (extras != null) {
                         Log.w("test", "data");
                         Bitmap photo = extras.getParcelable("data");
+
                         saveImageToGallery(getApplication(),photo);//保存bitmap到本地
-                        iv_tx.setImageBitmap(photo);
+                        iv_tx.setImageBitmap(toRoundBitmap(photo));
 
 
                     }
@@ -187,6 +195,68 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+    public Bitmap toRoundBitmap(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float roundPx;
+        float left, top, right, bottom, dst_left, dst_top, dst_right, dst_bottom;
+        if (width <= height) {
+            roundPx = width / 2;
+
+            left = 0;
+            top = 0;
+            right = width;
+            bottom = width;
+
+            height = width;
+
+            dst_left = 0;
+            dst_top = 0;
+            dst_right = width;
+            dst_bottom = width;
+        } else {
+            roundPx = height / 2;
+
+            float clip = (width - height) / 2;
+
+            left = clip;
+            right = width - clip;
+            top = 0;
+            bottom = height;
+            width = height;
+
+            dst_left = 0;
+            dst_top = 0;
+            dst_right = height;
+            dst_bottom = height;
+        }
+
+        Bitmap output = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+
+        final Paint paint = new Paint();
+        final Rect src = new Rect((int) left, (int) top, (int) right, (int) bottom);
+        final Rect dst = new Rect((int) dst_left, (int) dst_top, (int) dst_right, (int) dst_bottom);
+        final RectF rectF = new RectF(dst);
+
+        paint.setAntiAlias(true);// 设置画笔无锯齿
+
+        canvas.drawARGB(0, 0, 0, 0); // 填充整个Canvas
+
+        // 以下有两种方法画圆,drawRounRect和drawCircle
+//      canvas.drawRoundRect(rectF, roundPx, roundPx, paint);// 画圆角矩形，第一个参数为图形显示区域，第二个参数和第三个参数分别是水平圆角半径和垂直圆角半径。
+        canvas.drawCircle(roundPx, roundPx, roundPx, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));// 设置两张图片相交时的模式,参考http://trylovecatch.iteye.com/blog/1189452
+        canvas.drawBitmap(bitmap, src, dst, paint); // 以Mode.SRC_IN模式合并bitmap和已经draw了的Circle
+
+        ByteArrayOutputStream logoStream = new ByteArrayOutputStream();
+        boolean res = output.compress(Bitmap.CompressFormat.PNG, 100, logoStream);
+        byte[] logoBuf = logoStream.toByteArray();//将图像保存到byte[]中
+        Bitmap temp = BitmapFactory.decodeByteArray(logoBuf, 0, logoBuf.length);//将图像从byte[]中读取生成Bitmap 对象 temp
+
+        return temp;
+    }
     private void saveImageToGallery(Context context, Bitmap bmp) {
 
 
@@ -222,8 +292,8 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 150);
-        intent.putExtra("outputY", 150);
+        intent.putExtra("outputX", 90);
+        intent.putExtra("outputY", 90);
         intent.putExtra("return-data", true);
         startActivityForResult(intent, PHOTO_CLIP);
     }
@@ -248,41 +318,7 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
 
     private void doCommit() {
 
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                sendImage();
-            }
-
-            private void sendImage() {
-
-                RequestParams params = new RequestParams(HttpUtils.host+"/upload");
-                params.addBodyParameter("file",file);
-                x.http().post(params, new Callback.CommonCallback<String>() {
-
-                    @Override
-                    public void onSuccess(String result) {
-                        Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(Throwable ex, boolean isOnCallback) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(CancelledException cex) {
-
-                    }
-
-                    @Override
-                    public void onFinished() {
-
-                    }
-                });
-            }
-        }).start();
+        sendImage();
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/RegAppServlet");
         try {
             params.addBodyParameter("regusername", URLEncoder.encode(et_reguser.getText().toString().trim(),"utf-8"));
@@ -338,4 +374,31 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
     }
 
 
+    private void sendImage() {
+
+        RequestParams params = new RequestParams(HttpUtile.zy+"/servlet/upload");
+        params.addBodyParameter("file",file);
+        x.http().post(params, new Callback.CommonCallback<String>() {
+
+            @Override
+            public void onSuccess(String result) {
+                Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
 }

@@ -12,11 +12,20 @@
         <!--android:textSize="60sp"-->
         <!--android:layout_gravity="center"/>-->
 
-    <ListView
-        android:id="@+id/lv_fragment1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<ListView-->
+        <!--android:id="@+id/lv_fragment1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-    </ListView>
+    <!--</ListView>-->
+    <GridView
+        android:id="@+id/gv_fragment1"
+
+        android:numColumns="3"
+        android:paddingRight="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </GridView>
+
 
 </LinearLayout>
