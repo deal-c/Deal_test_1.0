@@ -79,40 +79,45 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
         };
         tiezilisst.setAdapter(myadapter);
         backToSearch.setOnClickListener(this);
-        intent = getIntent();
-        community=intent.getParcelableExtra("bundle");
-        communityName.setText(community.getCommunityName()+"");
-        View headview=View.inflate(this,R.layout.comlayout_item,null);
-        final View  footview=View.inflate(this,R.layout.comfootview_item,null);
+        View headview = View.inflate(this, R.layout.comlayout_item, null);
+        final View footview = View.inflate(this, R.layout.comfootview_item, null);
         footview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handler.sendEmptyMessageAtTime(1,1000);
+                handler.sendEmptyMessageAtTime(1, 1000);
             }
         });
-       //headview 的控件、
-        logo = ((ImageView) headview.findViewById(R.id.logo));
-        namecom = ((TextView) headview.findViewById(R.id.namecom));
-        comdesc = ((TextView) headview.findViewById(R.id.comdesc));
-        comImg = ((ImageView) headview.findViewById(R.id.communityimg));
         //添加头部和尾部的view
         tiezilisst.addHeaderView(headview);
         tiezilisst.addFooterView(footview);
-       //拆分图片路径
-        String []imgs=community.getComImg().split(";");
 
+            intent = getIntent();
+            community = intent.getParcelableExtra("bundle");
+            communityName.setText(community.getCommunityName() + "");
 
-        ImageOptions imageOptions = new ImageOptions.Builder()
-                .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-                .build();
-        //设置加载图片
-        x.image().bind(comImg, HttpUtile.host + imgs[0], imageOptions);
+            //headview 的控件、
+            logo = ((ImageView) headview.findViewById(R.id.logo));
+            namecom = ((TextView) headview.findViewById(R.id.namecom));
+            comdesc = ((TextView) headview.findViewById(R.id.comdesc));
+            comImg = ((ImageView) headview.findViewById(R.id.communityimg));
 
-        x.image().bind(logo, HttpUtile.host + imgs[1], imageOptions);
-        //赋值
-        communityName.setText(community.getCommunityName());
-        namecom.setText(community.getCommunityName());
-        comdesc.setText(community.getCommunityInfo());
+            //拆分图片路径
+        if (!community.getComImg().equals("0")) {
+            String[] imgs = community.getComImg().split(";");
+
+            ImageOptions imageOptions = new ImageOptions.Builder()
+                    .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                    .build();
+            //设置加载图片
+
+            x.image().bind(comImg, HttpUtile.host + imgs[0], imageOptions);
+
+            x.image().bind(logo, HttpUtile.host + imgs[1], imageOptions);
+        }
+           // 赋值
+            communityName.setText(community.getCommunityName());
+            namecom.setText(community.getCommunityName());
+            comdesc.setText(community.getCommunityInfo());
 
 
     }

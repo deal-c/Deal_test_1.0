@@ -26,6 +26,14 @@
             android:layout_height="1dp"
             android:layout_above="@+id/radioGroup"
             android:background="#ccc"/>
+        <Button
+            style="@style/radiostyle"
+            android:id="@+id/radio2"
+            android:drawableBottom="@drawable/radio_up_selector"
+            android:layout_alignParentBottom="true"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true" />
         <RadioGroup
             android:background="#fff"
             android:layout_alignParentBottom="true"
@@ -42,21 +50,21 @@
                 android:layout_height="60dp"
                 style="@style/radiostyle"
                 />
+
             <RadioButton
                 android:id="@+id/radio1"
                 android:drawableTop="@drawable/radio_local_selector"
                 android:layout_weight="1"
                 style="@style/radiostyle"
                 android:layout_height="60dp" />
+
             <RadioButton
                 style="@style/radiostyle"
-                android:id="@+id/radio2"
                 android:drawableTop="@drawable/radio_up_selector"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
-
-                />
+                android:visibility="invisible"/>
             <RadioButton
                 android:id="@+id/radio3"
                 android:drawableTop="@drawable/radio_community_selector"

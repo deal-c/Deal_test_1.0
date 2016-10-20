@@ -49,7 +49,7 @@
 
         <activity
             android:name=".mainActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".ViewPagerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -63,8 +63,8 @@
 
         <activity
             android:name=".SearchCommodityActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".TypeActivity"
             android:launchMode="singleTask"
@@ -86,18 +86,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchResultActivity"
-                  android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-                  android:launchMode="singleTask">
-
-        </activity>
+        <activity
+            android:name=".SearchResultActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
             android:name=".frament.Community_Activity.Community_search"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".frament.Community_Activity.Community_model"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-
+        <activity android:name=".publish.deal_publish_Activity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
     </application>
 
 </manifest>

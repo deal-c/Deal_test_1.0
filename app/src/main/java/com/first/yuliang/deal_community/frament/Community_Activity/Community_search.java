@@ -286,20 +286,22 @@ public class Community_search extends AppCompatActivity implements View.OnClickL
                 if (!query2.getText().toString().trim().equals("") && query2.getText().toString().trim() != null) {
                     query2.setFocusable(false);
                     query2.setFocusableInTouchMode(true);
-                    btn_clear_history.setVisibility(View.GONE);
-                    Community temp = communityList.get(0);
-                    if (temp==null){
-                        Toast.makeText(Community_search.this,"搜素类容不存在",Toast.LENGTH_LONG).show();
-                    }else{
-                    Intent intent = new Intent(Community_search.this, Community_model.class);
-                    intent.putExtra("bundle", temp);
-                    query2.getText().clear();
-                    query2.setText(temp.getCommunityName());
-                    query2.setSelection(temp.getCommunityName().length());
                     save();
                     getHistory();
                     btn_clear_history.setVisibility(View.GONE);
-                    startActivity(intent);
+                    Intent intent = new Intent(Community_search.this, Community_model.class);
+
+                    if (communityList.size()!=0){
+                        Community temp = communityList.get(0);
+
+                        intent.putExtra("bundle", temp);
+                        startActivity(intent);
+                    }else {
+
+                        Community temp = new Community(0, "0", "0", "0", "0");
+
+                        intent.putExtra("bundle", temp);
+                        startActivity(intent);
                     }
                 } else {
                     ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
@@ -448,7 +450,9 @@ public class Community_search extends AppCompatActivity implements View.OnClickL
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     if (!query2.getText().toString().trim().equals("") && query2.getText().toString().trim() != null) {
                         Community temp = communityList.get(0);
+
                         Intent intent = new Intent(Community_search.this, Community_model.class);
+                        if (temp.getCommunityName()!=null){
                         intent.putExtra("bundle", temp);
                         query2.getText().clear();
                         query2.setText(temp.getCommunityName());
@@ -457,6 +461,9 @@ public class Community_search extends AppCompatActivity implements View.OnClickL
                         getHistory();
                         btn_clear_history.setVisibility(View.GONE);
                         startActivity(intent);
+                        }else{
+                            startActivity(intent);
+                        }
                     } else {
                         ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
                                 .hideSoftInputFromWindow(Community_search.this.getCurrentFocus()
