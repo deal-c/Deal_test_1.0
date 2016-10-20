@@ -326,7 +326,7 @@ public class SearchResultActivity extends AppCompatActivity {
     }
     public void getHistory() {
         SharedPreferences preferences = getSharedPreferences("commodity_show_config",
-            MODE_PRIVATE);
+                MODE_PRIVATE);
         isGrid = preferences.getBoolean("isGrid", true);
     }
 }

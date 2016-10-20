@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="#eee"
-    tools:context="com.first.yuliang.deal_community.SearchResultActivity">
+                tools:context="com.first.yuliang.deal_community.SearchResultActivity">
     <include android:id="@+id/tl_search_result"
-        layout="@layout/search_result_bar"/>
+             layout="@layout/search_result_bar"/>
     <Button
         android:id="@+id/iv_line1"
         android:layout_below="@id/tl_search_result"
@@ -14,73 +14,73 @@
         android:layout_height="0.1dp"
         android:background="#ddd"
         />
-<LinearLayout
-    android:id="@+id/ll_select"
-    android:layout_below="@+id/iv_line1"
-    android:background="#fff"
-    android:layout_width="match_parent"
-    android:layout_height="36dp"
-    >
-    <Button
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp"
-        android:text="区域"
-        android:textSize="14sp"
-        android:textColor="@color/textcolor"
-        android:background="@android:color/transparent"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/down"/>
-    <ImageView
-        android:layout_width="0.1dp"
-        android:layout_height="match_parent"
-        android:background="#bbb"
-        tools:ignore="Suspicious0dp"/>
-    <Button
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp"
-        android:text="排序"
-        android:textSize="14sp"
-        android:textColor="@color/textcolor"
-        android:background="@android:color/transparent"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/down"/>
-    <ImageView
-        android:layout_width="0.1dp"
-        android:layout_height="match_parent"
-        android:background="#bbb"
-        tools:ignore="Suspicious0dp"/>
-    <Button
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp"
-        android:text="价格"
-        android:textSize="14sp"
-        android:textColor="@color/textcolor"
-        android:background="@android:color/transparent"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/down"/>
-    <ImageView
-        android:layout_width="0.1dp"
-        android:layout_height="match_parent"
-        android:background="#bbb"
-        tools:ignore="Suspicious0dp"/>
-    <Button
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp"
-        android:text="方式"
-        android:textSize="14sp"
-        android:textColor="@color/textcolor"
-        android:background="@android:color/transparent"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/down"/>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_select"
+        android:layout_below="@+id/iv_line1"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:text="区域"
+            android:textSize="14sp"
+            android:textColor="@color/textcolor"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/down"/>
+        <ImageView
+            android:layout_width="0.1dp"
+            android:layout_height="match_parent"
+            android:background="#bbb"
+            tools:ignore="Suspicious0dp"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:text="排序"
+            android:textSize="14sp"
+            android:textColor="@color/textcolor"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/down"/>
+        <ImageView
+            android:layout_width="0.1dp"
+            android:layout_height="match_parent"
+            android:background="#bbb"
+            tools:ignore="Suspicious0dp"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:text="价格"
+            android:textSize="14sp"
+            android:textColor="@color/textcolor"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/down"/>
+        <ImageView
+            android:layout_width="0.1dp"
+            android:layout_height="match_parent"
+            android:background="#bbb"
+            tools:ignore="Suspicious0dp"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:text="方式"
+            android:textSize="14sp"
+            android:textColor="@color/textcolor"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/down"/>
+    </LinearLayout>
     <ImageView
         android:id="@+id/iv_line2"
         android:layout_below="@id/ll_select"
@@ -97,25 +97,25 @@
         android:layout_below="@+id/iv_line2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <TextView
-        android:text="共找到"
-        android:textSize="14sp"
-        android:textColor="@color/textcolor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/tv_total"
-        android:text="0"
-        android:textSize="14sp"
-        android:textColor="@color/textcolor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:text="个宝贝"
-        android:textSize="14sp"
-        android:textColor="@color/textcolor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:text="共找到"
+            android:textSize="14sp"
+            android:textColor="@color/textcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_total"
+            android:text="0"
+            android:textSize="14sp"
+            android:textColor="@color/textcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="个宝贝"
+            android:textSize="14sp"
+            android:textColor="@color/textcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
     <GridView
         android:id="@+id/gv_commodity_list"

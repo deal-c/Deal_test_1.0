@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff">
     <include android:id="@+id/tl_search"
-        layout="@layout/commodity_search_bar"/>
+             layout="@layout/commodity_search_bar"/>
     <Button
         android:id="@+id/iv_line1"
         android:layout_below="@id/tl_search"
