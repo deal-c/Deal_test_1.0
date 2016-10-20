@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ccc">
     <android.support.v7.widget.Toolbar
         android:id="@+id/tl_community"
         android:layout_width="match_parent"
@@ -24,6 +25,7 @@
             android:textColor="#fff"
             />
         <ImageView
+            android:id="@+id/iv_search_community"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="right"

@@ -29,7 +29,7 @@ public class mainActivity extends AppCompatActivity {
     Fragment fujin;
     Fragment community;
     Fragment mine;
-
+    private Fragment[] fragments;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +46,14 @@ public class mainActivity extends AppCompatActivity {
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintResource(R.color.xinxilan);
 //            tintManager.setTintColor(Color.parseColor("#009966"));
-           home=new Fragment_home();
-           fujin=new Fragment_fujin();
-           community=new Fragment_community();
-           mine =new Fragment_mine();
+
 
         }
-
+        home=new Fragment_home();
+        fujin=new Fragment_fujin();
+        community=new Fragment_community();
+        mine =new Fragment_mine();
+        fragments = new Fragment[]{home, fujin, community, mine};
         switchfragment(home);
         radiogroup = ((RadioGroup) findViewById(R.id.radioGroup));
 
@@ -94,17 +95,22 @@ public class mainActivity extends AppCompatActivity {
 
         FragmentManager fm = this.getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        if(oldfragement!=null && !oldfragement.isHidden() && oldfragement.isAdded()){
-            ft.hide(oldfragement);
-        }
-        if(fragment.isAdded()&&fragment.isHidden()){
-            ft.show(fragment);
-        }else {
-            if (!fragment.isAdded()){
-                ft.add(R.id.fl_content,fragment);
+        for (Fragment fragment1 : fragments) {
+            if (fragment1 != fragment) {
+                if (fragment1 != null && !fragment1.isHidden() && fragment1.isAdded()) {
+                    ft.hide(fragment1);
+                }
             }
         }
-        oldfragement=newfragement;
+
+        if (fragment.isAdded() && fragment.isHidden()) {
+            ft.show(fragment);
+        } else {
+            if (!fragment.isAdded()) {
+                ft.add(R.id.fl_content, fragment);
+            }
+        }
+        oldfragement = newfragement;
         ft.commit();
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
