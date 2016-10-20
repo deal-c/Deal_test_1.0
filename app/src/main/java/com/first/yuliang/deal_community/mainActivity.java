@@ -3,12 +3,20 @@ package com.first.yuliang.deal_community;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -30,6 +38,8 @@ public class mainActivity extends AppCompatActivity {
     Fragment community;
     Fragment mine;
     private Fragment[] fragments;
+    private Button dealButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +93,13 @@ public class mainActivity extends AppCompatActivity {
         });
 
 
-
+        dealButton = ((Button) findViewById(R.id.radio2));
+        dealButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                innitPoupwindow(v);
+            }
+        });
 
     }
 
@@ -128,5 +144,36 @@ public class mainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+    private void innitPoupwindow(View view) {
+        View v = LayoutInflater.from(this).inflate(R.layout.deal_button, null);
+        WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
 
+        final PopupWindow popupWindow = new PopupWindow(v,ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+
+        //popupwiondow外面点击，popupwindow消失
+        popupWindow.setFocusable(true);
+        popupWindow.update();
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        v.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        int popupWidth = v.getMeasuredWidth();
+        int popupHeight = v.getMeasuredHeight();
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = 0.7f;
+        getWindow().setAttributes(lp);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1f;
+                getWindow().setAttributes(lp);
+            }
+        });
+
+        popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, (location[0] + view.getWidth() / 2) - popupWidth / 2, location[1] - popupHeight);
+
+    }
 }
