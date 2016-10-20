@@ -94,7 +94,16 @@
         </activity>
         <activity android:name=".SearchResultActivity"
                   android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-                  android:launchMode="singleTask"></activity>
+                  android:launchMode="singleTask">
+
+        </activity>
+        <activity
+            android:name=".frament.Community_Activity.Community_search"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".frament.Community_Activity.Community_model"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+
     </application>
 
 </manifest>

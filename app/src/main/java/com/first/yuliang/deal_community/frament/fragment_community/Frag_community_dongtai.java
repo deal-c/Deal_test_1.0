@@ -90,7 +90,7 @@ public class Frag_community_dongtai extends Fragment{
         protected String[] doInBackground(Void... params) {
             // Simulates a background job.
             try {
-                Thread.sleep(4000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
             }
             return eg;

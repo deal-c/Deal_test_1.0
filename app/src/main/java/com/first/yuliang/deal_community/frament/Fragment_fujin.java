@@ -31,6 +31,7 @@ public class Fragment_fujin extends Fragment  implements LocationSource, AMapLoc
     private AMapLocationClient mlocationClient;
     private LocationSource.OnLocationChangedListener mListener;
     private AMapLocationClientOption mLocationOption;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class Fragment_fujin extends Fragment  implements LocationSource, AMapLoc
 
         mapView.onCreate(savedInstanceState);
         init();
-
+        initMarker();
         AMap.OnMarkerClickListener listener = new AMap.OnMarkerClickListener() {
 
             @Override
@@ -51,24 +52,12 @@ public class Fragment_fujin extends Fragment  implements LocationSource, AMapLoc
             }
         };
 
-     //绑定标注点击事件
+        //绑定标注点击事件
         aMap.setOnMarkerClickListener(listener);
         return view;
     }
-    private void init() {
-        if (aMap == null) {
-            aMap = mapView.getMap();
-            setUpMap();
-        }
-    }
-    private void setUpMap() {
-        aMap.setLocationSource(this);// 设置定位监听
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
-        aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
-        // 设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转3种
-        //跟随：LOCATION_TYPE_MAP_FOLLOW
-        //旋转：LOCATION_TYPE_MAP_ROTATE
-        //定位：LOCATION_TYPE_LOCATE
+
+    private void initMarker() {
         LatLng marker1 = new LatLng(31.2762990000,120.7417510000);
         LatLng marker2=new LatLng(31.2751160000,120.7416330000);
         LatLng marker3=new LatLng(31.2750330000,120.7436610000);
@@ -84,9 +73,27 @@ public class Fragment_fujin extends Fragment  implements LocationSource, AMapLoc
                 position(marker3).
                 title("教室").
                 snippet("学习的地方!"));
+    }
+
+
+    private void init() {
+        if (aMap == null) {
+            aMap = mapView.getMap();
+            setUpMap();
+        }
+    }
+    private void setUpMap() {
+        aMap.setLocationSource(this);// 设置定位监听
+        aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
+        aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
+        // 设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转3种
+        //跟随：LOCATION_TYPE_MAP_FOLLOW
+        //旋转：LOCATION_TYPE_MAP_ROTATE
+        //定位：LOCATION_TYPE_LOCATE
+        aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
+
         aMap.moveCamera(CameraUpdateFactory.zoomTo(16));
         aMap.getUiSettings().setCompassEnabled(true);
-        aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
 
     }
 

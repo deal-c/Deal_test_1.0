@@ -21,26 +21,31 @@
         android:layout_marginLeft="10dp"
         />
     <ImageView
-
-        android:layout_below="@id/iv_dongtai_userphoto"
         android:id="@+id/iv_dongtai_dongtaiphoto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-      />
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ad1"
+        android:layout_below="@+id/tv_dongtai_content"/>
     <TextView
         android:id="@+id/tv_dongtai_content"
         android:textColor="#000"
-        android:layout_below="@id/iv_dongtai_dongtaiphoto"
+        android:layout_below="@id/iv_dongtai_userphoto"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="                    大家好我是小明"
+        android:layout_height="42dp"
+        android:text="                    大家好我是小明,新人报到。希望以后多多关照 "
         android:textSize="16sp"/>
+
     <TextView
-        android:layout_below="@id/tv_dongtai_content"
         android:layout_width="match_parent"
         android:layout_height="19dp"
         android:gravity="right"
         android:textColor="#6b6666"
-        android:text="250个人浏览——40个人评论"/>
+        android:text="250个人浏览——40个人评论"
+        android:layout_below="@+id/iv_dongtai_dongtaiphoto"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView" />
+
 
 </RelativeLayout>
