@@ -44,7 +44,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="dc483996d8ef908fe6f82c534b531e4d">
+            android:value="e4da32758e29f2e19456e1314abdba72">
             //开发者申请的key
         </meta-data>
 
@@ -71,17 +71,20 @@
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
-        <service android:name="com.amap.api.location.APSService"/>
+
 
         <activity android:name=".CommunityDynamic"/>
         <activity android:name=".TestActivity"/>
 
-        <service android:name="com.amap.api.location.APSService"/>
 
         <activity
             android:name=".spanishAcitivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".SearchResultActivity"
@@ -99,11 +102,7 @@
         </activity>
         <activity android:name=".CommodityActivity"
                   android:theme="@style/Theme.AppCompat.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
     </application>
 
