@@ -1,88 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    android:background="#fffff0">
+    android:orientation="vertical"
+    android:padding="15dp">
 
-    <ImageView
-        android:id="@+id/iv_tx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/home_red"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="160dp"/>
-    <EditText
-        android:id="@+id/et_reguser"
-        android:layout_marginTop="20dp"
+    <RelativeLayout
+        android:id="@+id/rl_reg_tx"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_tx"
-        android:hint="请输入用户名"/>
-    <EditText
-        android:id="@+id/et_regPsd"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_reguser"/>
-    <RadioGroup
-        android:id="@+id/rg_sex"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_regPsd"
-        android:gravity="center">
-    <RadioButton
-        android:id="@+id/rb_male"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="男"
-        android:textSize="24sp"
-        />
-        <RadioButton
+        android:padding="5dp">
 
-            android:layout_marginLeft="20dp"
-            android:id="@+id/rb_female"
+        <ImageView
+            android:id="@+id/iv_tx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:text="女"/>
-    </RadioGroup>
+            android:src="@drawable/u88"
+            android:layout_centerInParent="true"/>
 
+    </RelativeLayout>
 
-    <EditText
-        android:id="@+id/et_birthday"
-        android:layout_marginTop="20dp"
+    <RelativeLayout
+        android:id="@+id/rl_reg_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rg_sex"
-        android:hint="请输入生日"/>
+        android:layout_marginTop="10dp">
 
+        <TextView
+            android:id="@+id/tv_reg_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户名："
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+        <EditText
+            android:id="@+id/et_reguser"
 
-    <EditText
-        android:id="@+id/et_oftenplace"
-        android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_reg_username"
+
+            android:background="@drawable/mv_loading_logo"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_reg_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_birthday"
-        android:hint="常住地"/>
-    <EditText
-        android:id="@+id/et_receiveplace"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_reg_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码："
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+        <EditText
+            android:id="@+id/et_regPsd"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_reg_password"
+
+            android:background="@drawable/mv_loading_logo"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_reg_sex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_oftenplace"
-        android:hint="收货地址"/>
-
-    <Button
         android:layout_marginTop="10dp"
-        android:id="@+id/btn_commit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_receiveplace"
-        android:textSize="24sp"
-        android:text="提 交"
+        android:padding="5dip">
+        <RadioGroup
+            android:id="@+id/rg_sex"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        android:layout_alignLeft="@id/iv_tx"/>
-</RelativeLayout>
+            android:layout_centerInParent="true">
+            <RadioButton
+                android:id="@+id/rb_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="男"
+                android:textColor="#000"
+                android:textSize="24sp"
+                />
+            <RadioButton
+
+                android:layout_marginLeft="20dp"
+                android:id="@+id/rb_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textColor="#000"
+                android:text="女"/>
+        </RadioGroup>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_reg_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_reg_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生日："
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+        <EditText
+            android:id="@+id/et_birthday"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_reg_birthday"
+
+            android:background="@drawable/mv_loading_logo"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_reg_oftenplace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_reg_oftenplace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="常住地："
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+        <EditText
+            android:id="@+id/et_oftenplace"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_reg_oftenplace"
+
+            android:background="@drawable/mv_loading_logo"
+            />
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_commit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shapes"
+            android:textSize="24sp"
+            android:text="提 交"
+            android:textColor="#000"
+            android:layout_centerInParent="true"
+
+            />
+    </RelativeLayout>
+</LinearLayout>

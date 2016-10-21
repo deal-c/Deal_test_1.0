@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.Util.MD5Utils;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.UserBean;
 import com.google.gson.Gson;
 
@@ -34,6 +35,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     private CheckBox cb_remeberuser;
     private List<UserBean.User> users=new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,14 +49,17 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
         btn_reg = ((Button) findViewById(R.id.btn_reg));
 
+
         btn_login.setOnClickListener(this);
         btn_reg.setOnClickListener(this);
 
         SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
         String userName = preference.getString("userName","");
         boolean remeberuser = preference.getBoolean("cb_remeberuser",false);
+        int count=preference.getInt("count",0);
         et_username.setText(userName);
         cb_remeberuser.setChecked(remeberuser);
+
     }
 
     @Override
@@ -75,11 +80,12 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     private void register(View v) {
         Intent intent=new Intent(RegActivity.this,regDetailActivity.class);
         startActivity(intent);
+        this.finish();
     }
 
     private void Login(View v) {
 
-        RequestParams params=new RequestParams("http://10.40.5.21:8080/FourProject/servlet/loginApp");
+        RequestParams params=new RequestParams(HttpUtile.zy+"servlet/loginApp");
 //        params.addBodyParameter("username",et_username.getText().toString().trim());
 //        params.addBodyParameter("psd",et_psd.getText().toString().trim());
         x.http().post(params, new Callback.CommonCallback<String>() {
@@ -99,18 +105,32 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                     {
                         if(cb_remeberuser.isChecked())
                         {
+
                             edit.putString("userName", et_username.getText().toString().trim());
                             edit.putBoolean("cb_remeberuser",true);
+                            //edit.putInt("count", 1);
+
+
                         }
                         else
                         {
+
                             edit.putString("userName", "");
                             edit.putBoolean("cb_remeberuser",false);
                         }
+
+                        edit.putInt("loginCount", 1);
+                        edit.putInt("loginUserId",users.get(i).userId);
+
+                        //edit.put
                         edit.commit();
                         Toast.makeText(RegActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(RegActivity.this, mainActivity.class);
+
+                        Intent intent=new Intent(RegActivity.this,mainActivity.class);
+
                         startActivity(intent);
+
+                        RegActivity.this.finish();
                     }
 
                 }
@@ -134,6 +154,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
             }
         });
     }
+
 
 
 }

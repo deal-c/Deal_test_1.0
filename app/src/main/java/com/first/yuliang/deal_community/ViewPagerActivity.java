@@ -1,5 +1,6 @@
 package com.first.yuliang.deal_community;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,6 +37,11 @@ public class ViewPagerActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences(
                 "first_pref", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+
+        SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor edit=preference.edit();
+
+
         editor.putBoolean("isFirstIn", false);
         editor.commit();
 
@@ -61,6 +67,8 @@ public class ViewPagerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                edit.putInt("intoflag",1);
+                edit.commit();
                 Intent intent=new Intent(ViewPagerActivity.this,mainActivity.class);
                 startActivity(intent);
                  finish();
@@ -81,6 +89,9 @@ public class ViewPagerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+                edit.putInt("intoflag",1);
+                edit.commit();
                 Intent intent=new Intent(ViewPagerActivity.this,mainActivity.class);
                 startActivity(intent);
                 finish();
@@ -122,7 +133,9 @@ public class ViewPagerActivity extends AppCompatActivity {
                 previousPage=position;
 
                 if(position==point.length-1)
-                {btn_skip.setVisibility(View.GONE);
+                {
+
+                    btn_skip.setVisibility(View.GONE);
 
                  btn_intologin.setVisibility(View.VISIBLE);
 
