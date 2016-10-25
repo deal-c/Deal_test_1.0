@@ -6,10 +6,15 @@ import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -50,6 +55,8 @@ public class SearchResultActivity extends AppCompatActivity {
     private ImageButton ib_search3;
     private TextView tv_total;
     private LinearLayout ll_total;
+//    private Button btn_ss;
+//    private View ll_ss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +65,18 @@ public class SearchResultActivity extends AppCompatActivity {
 
         intent = getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
-        String search=bundle.getString("search");
+        final String search=bundle.getString("search");
         Log.e("看看是不是传值过来==========",search);
 
+//        ll_ss = findViewById(R.id.ll_ss);
+//
+//        btn_ss = ((Button) findViewById(R.id.btn_ss));
+//        btn_ss.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(SearchResultActivity.this,"试试",Toast.LENGTH_SHORT);
+//            }
+//        });
 
         tv_total = ((TextView) findViewById(R.id.tv_total));
         pb_load_commodity = ((ProgressBar) findViewById(R.id.pb_load_commodity));
@@ -126,7 +142,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 tv_local = ((TextView) view.findViewById(R.id.tv_local));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg, "http://10.40.5.62:8080"+commodity.commodityImg);
+                x.image().bind(iv_cg, "http://10.40.5.62:8080"+(commodity.commodityImg.split(","))[0]);
                 tv_cg.setText(commodity.commodityTitle);
                 tv_price.setText(commodity.price+"");
                 tv_local.setText(commodity.location);
@@ -136,6 +152,17 @@ public class SearchResultActivity extends AppCompatActivity {
         };
         gv_commodity_list.setAdapter(adapter_g);
 
+        gv_commodity_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(SearchResultActivity.this, CommodityActivity.class);
+                CommodityBean.Commodity temp = commodityList.get(position);
+                intent.putExtra("search",search);
+                intent.putExtra("bundle", temp);
+                startActivity(intent);
+            }
+        });
 
         lv_commodity_list = ((ListView) findViewById(R.id.lv_commodity_list));
         adapter_l = new BaseAdapter() {
@@ -178,6 +205,18 @@ public class SearchResultActivity extends AppCompatActivity {
             }
         };
         lv_commodity_list.setAdapter(adapter_l);
+
+        lv_commodity_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(SearchResultActivity.this, CommodityActivity.class);
+                CommodityBean.Commodity temp = commodityList.get(position);
+                intent.putExtra("search",search);
+                intent.putExtra("bundle", temp);
+                startActivity(intent);
+            }
+        });
 
         ll_total = ((LinearLayout) findViewById(R.id.ll_total));
         ll_total.measure(0,0);
@@ -279,7 +318,7 @@ public class SearchResultActivity extends AppCompatActivity {
         search = search.replace(" ","%");
         RequestParams params = null;
         try {
-            params = new RequestParams("http://10.40.5.62:8080/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
+            params = new RequestParams("http://192.168.191.1:8080/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -329,6 +368,22 @@ public class SearchResultActivity extends AppCompatActivity {
                 MODE_PRIVATE);
         isGrid = preferences.getBoolean("isGrid", true);
     }
+
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+//            int[] ll = new int[2];
+//            ll_ss.getLocationOnScreen(ll);
+//            int x = ll[0];
+//            int y = ll[1];
+//            if (ev.getX() < x || ev.getX() > (x + ll_ss.getWidth()) || ev.getY() < y || ev.getY() > (y + ll_ss.getHeight())) {
+//
+//                return super.dispatchTouchEvent(ev);
+//            }else {
+//                return true;
+//            }
+//        }
+//        return super.dispatchTouchEvent(ev);
+//    }
 }
 
 
