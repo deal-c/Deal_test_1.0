@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_addresslist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_modify_address_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/backback"
+
+                android:layout_centerVertical="true"
+                android:gravity="left"/>
+
+            <TextView
+                android:id="@+id/tv_modify_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="地址列表"
+                android:textSize="24sp"
+                android:textColor="#fff"
+
+
+                android:layout_centerInParent="true"
+
+
+                android:gravity="center"
+
+                />
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/tool_addresslist">
+
+        <RelativeLayout
+            android:id="@+id/rl_add_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="7dip"
+            android:background="#ccc"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:id="@+id/tv_add_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新增地址"
+                android:textSize="24sp"
+                android:textColor="#000"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                />
+
+        </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff">
+
+                <ListView
+                    android:id="@+id/lv_alll_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:dividerHeight="1px"
+                    android:divider="#c0c0c0">
+
+                </ListView>
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+</RelativeLayout>

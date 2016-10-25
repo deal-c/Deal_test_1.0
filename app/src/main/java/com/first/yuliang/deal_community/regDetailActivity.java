@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
@@ -59,12 +60,14 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
 
     private EditText et_birthday;
     private ImageView iv_tx;
+    private RelativeLayout rl_reg_birthday;
     private static final int PHOTO_REQUEST = 1;
     private static final int CAMERA_REQUEST = 2;
     private static final int PHOTO_CLIP = 3;
 
     private File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/"+
             getPhotoFileName());
+
 
     private String getPhotoFileName() {
         Date date = new Date(System.currentTimeMillis());
@@ -90,8 +93,11 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
         et_birthday = ((EditText) findViewById(R.id.et_birthday));
         iv_tx = ((ImageView) findViewById(R.id.iv_tx));
 
+        rl_reg_birthday = ((RelativeLayout) findViewById(R.id.rl_reg_birthday));
+
         btn_commit.setOnClickListener(this);
         iv_tx.setOnClickListener(this);
+        rl_reg_birthday.setOnClickListener(this);
     }
 
     @Override
@@ -105,6 +111,12 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
             case R.id.iv_tx:
 
                 showSelect(v);
+
+                break;
+            case R.id.rl_reg_birthday:
+
+                Intent intent=new Intent(regDetailActivity.this,regBirthdayActivity.class);
+                startActivityForResult(intent,5);
 
                 break;
         }
@@ -188,6 +200,12 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
 
                     }
                 }
+                break;
+
+            case 5:
+
+                String date=data.getStringExtra("date");
+                et_birthday.setText(date);
                 break;
             default:
                 break;
@@ -401,4 +419,6 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
             }
         });
     }
+
+
 }

@@ -29,7 +29,7 @@ public class User implements Parcelable {
         this.userPsd = userPsd;
         this.userImg = userImg;
         this.userSex = userSex;
-        this.birthday = birthday;
+        this.birthday=birthday;
         this.userAddress_s = userAddress_s;
 
         LabelId = labelId;
@@ -91,8 +91,6 @@ public class User implements Parcelable {
         this.userAddress_s = userAddress_s;
     }
 
-
-
     public int getLabelId() {
         return LabelId;
     }
@@ -100,7 +98,6 @@ public class User implements Parcelable {
     public void setLabelId(int labelId) {
         LabelId = labelId;
     }
-
 
     @Override
     public int describeContents() {
@@ -116,9 +113,7 @@ public class User implements Parcelable {
         dest.writeByte(this.userSex ? (byte) 1 : (byte) 0);
         dest.writeLong(this.birthday != null ? this.birthday.getTime() : -1);
         dest.writeString(this.userAddress_s);
-
         dest.writeInt(this.LabelId);
-
     }
 
     protected User(Parcel in) {
@@ -127,15 +122,13 @@ public class User implements Parcelable {
         this.userPsd = in.readString();
         this.userImg = in.readString();
         this.userSex = in.readByte() != 0;
-        long tmpBirthday = in.readLong();
-        this.birthday = tmpBirthday == -1 ? null : new Date(tmpBirthday);
+        long tmpUserBirthday = in.readLong();
+        this.birthday = tmpUserBirthday == -1 ? null : new Date(tmpUserBirthday);
         this.userAddress_s = in.readString();
-
         this.LabelId = in.readInt();
-
     }
 
-    public static final Creator<User> CREATOR = new Creator<User>() {
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
         @Override
         public User createFromParcel(Parcel source) {
             return new User(source);

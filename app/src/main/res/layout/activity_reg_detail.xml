@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:padding="15dp"
+    android:background="#fff">
 
     <RelativeLayout
         android:id="@+id/rl_reg_tx"
@@ -42,6 +43,7 @@
         <EditText
             android:id="@+id/et_reguser"
 
+            android:textColor="#000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tv_reg_username"
@@ -66,7 +68,7 @@
             android:layout_centerVertical="true"/>
         <EditText
             android:id="@+id/et_regPsd"
-
+            android:textColor="#000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tv_reg_password"
@@ -126,7 +128,7 @@
             android:layout_centerVertical="true"/>
         <EditText
             android:id="@+id/et_birthday"
-
+            android:textColor="#000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tv_reg_birthday"
@@ -153,7 +155,7 @@
             android:layout_centerVertical="true"/>
         <EditText
             android:id="@+id/et_oftenplace"
-
+            android:textColor="#000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tv_reg_oftenplace"

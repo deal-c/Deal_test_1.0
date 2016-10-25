@@ -20,5 +20,29 @@ public class UserBean {
         public String userAddress_s;
         public String userAddress_c;
         public int LabelId;
+
+        public String getUserImg() {
+            return userImg;
+        }
+
+        public void setUserImg(String userImg) {
+            this.userImg = userImg;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public int getUserId() {
+            return userId;
+        }
+
+        public void setUserId(int userId) {
+            this.userId = userId;
+        }
     }
 }
