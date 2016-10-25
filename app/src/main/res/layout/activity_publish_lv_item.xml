@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="#fff">
+
+
+    <ImageView
+        android:id="@+id/iv_publish_product"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pro"/>
+
+    <TextView
+        android:id="@+id/tv_publish_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="三星7 note"
+        android:textColor="#000"
+
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@id/iv_publish_product"
+        android:textSize="20dp"
+
+        android:layout_toRightOf="@id/iv_publish_product"
+
+        />
+    <TextView
+        android:id="@+id/tv_publish_product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="￥6000"
+        android:textColor="#000"
+        android:textSize="18dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignBottom="@id/iv_publish_product"
+        android:layout_toRightOf="@id/iv_publish_product"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_publish_product_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="#000"
+        android:text="三星手机"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/tv_publish_product_name"
+        android:layout_toRightOf="@id/iv_publish_product"
+        />
+    <TextView
+        android:id="@+id/tv_publish_product_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="容易爆炸"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/tv_publish_product_class"
+        android:layout_toRightOf="@id/iv_publish_product"
+        android:layout_marginTop="3dp"
+        android:textColor="#000"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_publish_product_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2016-10-13 02:00:11"
+        android:textSize="14sp"
+        android:textColor="#000"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/tv_publish_product_price"
+        />
+
+    <TextView
+        android:id="@+id/tv_publish_product_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上海"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_toRightOf="@id/tv_publish_product_price"
+        android:layout_alignTop="@id/tv_publish_product_price"
+        android:layout_marginLeft="10dp"
+        />
+
+</RelativeLayout>

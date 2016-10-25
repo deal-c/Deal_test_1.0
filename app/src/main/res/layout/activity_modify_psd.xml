@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_modify_psd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_modify_psd_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/backback"
+
+                android:layout_centerVertical="true"
+                android:gravity="left"/>
+
+            <TextView
+                android:id="@+id/tv_modify_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="修改密码"
+                android:textSize="20sp"
+                android:textColor="#000"
+
+
+                android:layout_centerInParent="true"
+
+
+
+                />
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_modify_psd"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dip"
+       >
+
+        <TextView
+            android:id="@+id/tv_new_psd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:text="新密码"
+            android:layout_centerVertical="true"
+            android:textColor="#000"
+            android:layout_alignParentLeft="true"/>
+
+       <EditText
+           android:id="@+id/et_new_psd"
+           android:layout_width="match_parent"
+           android:layout_height="35dp"
+
+            android:textColor="#000"
+           android:layout_toRightOf="@id/tv_new_psd"
+           android:layout_alignBottom="@id/tv_new_psd"
+           android:layout_marginLeft="10dp"
+           android:background="@drawable/mv_loading_logo"/>
+
+    </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="1px"
+                android:background="#C0C5C7"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="7dip">
+
+                <TextView
+                    android:id="@+id/tv_again_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:text="再次输入"
+                    android:layout_centerVertical="true"
+                    android:textColor="#000"
+                    android:layout_alignParentLeft="true"/>
+
+                <EditText
+                    android:id="@+id/et_again_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="5dp"
+
+                    android:textColor="#000"
+                    android:layout_toRightOf="@id/tv_again_confirm"
+                    android:background="@drawable/mv_loading_logo"
+                    />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="1px"
+                android:background="#C0C5C7"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip">
+
+            <Button
+                android:id="@+id/btn_queren"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shapegray"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:text="确定"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
