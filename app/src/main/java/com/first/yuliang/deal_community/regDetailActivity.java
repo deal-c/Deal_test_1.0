@@ -394,7 +394,7 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
 
     private void sendImage() {
 
-        RequestParams params = new RequestParams(HttpUtile.zy+"/servlet/upload");
+        RequestParams params = new RequestParams(HttpUtile.zy+"/servlet/uploadImg");
         params.addBodyParameter("file",file);
         x.http().post(params, new Callback.CommonCallback<String>() {
 
