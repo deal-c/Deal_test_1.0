@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.first.yuliang.deal_community.frament.fragment_type_1;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.TypeBean;
 import com.google.gson.Gson;
 
@@ -203,7 +204,7 @@ public class TypeActivity extends AppCompatActivity {
 
     private List<TypeBean.Type> getTypeList() {
 
-        RequestParams params=new RequestParams("http://10.40.5.52:8080/FourProject/servlet/TypeServlet");
+        RequestParams params=new RequestParams(HttpUtile.zy+"servlet/TypeServlet");
         x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override

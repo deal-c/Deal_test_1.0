@@ -8,7 +8,7 @@
         android:id="@+id/tb_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#33d685">
+        android:background="@color/main">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -22,13 +22,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:onClick="backHome"
-            android:src="@drawable/u18"/>
+            android:src="@drawable/u18"
+              android:layout_centerVertical="true"/>
 
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="分类"
-            android:textSize="30sp"
+            android:text="分 类"
+            android:textSize="24sp"
+              android:textColor="#fff"
             android:layout_centerInParent="true"
            />
         </RelativeLayout>
@@ -38,11 +40,12 @@
 
     <ListView
         android:id="@+id/lv_type"
-        android:layout_width="100dp"
+        android:layout_width="90dp"
         android:layout_below="@id/tb_type"
         android:layout_height="match_parent"
-        android:background="#33d685"
-        android:divider="#ccc">
+        android:background="@color/main"
+        android:divider="#ccc"
+        android:dividerHeight="1px">
 
 
     </ListView>

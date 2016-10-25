@@ -7,12 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.first.yuliang.deal_community.R;
-import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.Sub_Type_Bean;
 import com.google.gson.Gson;
 
@@ -33,7 +33,8 @@ public class fragment_type_1 extends Fragment {
 
     //private TextView tv_fragment1;
   // private List<Sub_Type_Bean.Sub_Type> sub_Types;
-    private ListView lv_fragment1;
+   //private ListView lv_fragment1;
+    private GridView gv_fragment1;
 
     private BaseAdapter adapter;
     private List<Sub_Type_Bean.Sub_Type> sub_typess=new ArrayList<>();
@@ -44,8 +45,8 @@ public class fragment_type_1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_type_1, null);
-        lv_fragment1 = ((ListView) view.findViewById(R.id.lv_fragment1));
-
+        //lv_fragment1 = ((ListView) view.findViewById(R.id.lv_fragment1));
+        gv_fragment1=((GridView)view.findViewById(R.id.gv_fragment1));
         //tv_fragment1 = ((TextView) view.findViewById(R.id.tv_fragment1));
 
 
@@ -91,14 +92,14 @@ public class fragment_type_1 extends Fragment {
                 String str2=sub_typess.get(position).sub_type_pic;
 
                 tv_type_1_1.setText(str);
-                x.image().bind(iv_type_1_1, HttpUtils.host1+str2);
+                x.image().bind(iv_type_1_1, HttpUtile.zy1+str2);
 
 
                 return  view;
             }
         };
 
-        lv_fragment1.setAdapter(adapter);
+        gv_fragment1.setAdapter(adapter);
 
 
         getSub_typeList(Id);
@@ -110,7 +111,7 @@ public class fragment_type_1 extends Fragment {
 
 
     private void getSub_typeList(int Id) {
-        RequestParams params=new RequestParams("http://10.40.5.52:8080/FourProject/servlet/sub_type_servlet?typeId="+Id);
+        RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/sub_type_servlet?typeId="+Id);
         x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override
