@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,9 +25,10 @@ import com.first.yuliang.deal_community.frament.Fragment_community;
 import com.first.yuliang.deal_community.frament.Fragment_fujin;
 import com.first.yuliang.deal_community.frament.Fragment_home;
 import com.first.yuliang.deal_community.frament.Fragment_mine;
+import com.first.yuliang.deal_community.publish.deal_publish_Activity;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-public class mainActivity extends AppCompatActivity {
+public class mainActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     private RadioGroup radiogroup;
@@ -39,7 +41,10 @@ public class mainActivity extends AppCompatActivity {
     Fragment mine;
     private Fragment[] fragments;
     private Button dealButton;
-
+    private Button juan;
+    private Button zeng;
+    private Button huan;
+    private Button mai;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +97,6 @@ public class mainActivity extends AppCompatActivity {
 
         });
 
-
         dealButton = ((Button) findViewById(R.id.radio2));
         dealButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +104,8 @@ public class mainActivity extends AppCompatActivity {
                 innitPoupwindow(v);
             }
         });
+
+
 
     }
 
@@ -147,6 +153,17 @@ public class mainActivity extends AppCompatActivity {
     private void innitPoupwindow(View view) {
         View v = LayoutInflater.from(this).inflate(R.layout.deal_button, null);
         WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
+        juan = ((Button) v.findViewById(R.id.btn_juan));
+        zeng = ((Button) v.findViewById(R.id.btn_zeng));
+        huan = ((Button) v.findViewById(R.id.btn_huan));
+        mai = ((Button) v.findViewById(R.id.btn_mai));
+        juan.setOnClickListener(this);
+
+        zeng.setOnClickListener(this);
+
+        huan.setOnClickListener(this);
+
+        mai.setOnClickListener(this);
 
         final PopupWindow popupWindow = new PopupWindow(v,ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
 
@@ -174,6 +191,35 @@ public class mainActivity extends AppCompatActivity {
         });
 
         popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, (location[0] + view.getWidth() / 2) - popupWidth / 2, location[1] - popupHeight);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_juan:
+                Intent intent=new Intent(mainActivity.this, deal_publish_Activity.class);
+                intent.putExtra("key","juan");
+                startActivity(intent);
+                break;
+            case R.id.btn_zeng:
+
+                Intent intent1=new Intent(mainActivity.this, deal_publish_Activity.class);
+                intent1.putExtra("key","zeng");
+                startActivity(intent1);
+                break;
+            case R.id.btn_huan:
+                Intent intent2=new Intent(mainActivity.this, deal_publish_Activity.class);
+                intent2.putExtra("key","huan");
+                startActivity(intent2);
+                break;
+            case R.id.btn_mai:
+                Intent intent3=new Intent(mainActivity.this, deal_publish_Activity.class);
+                intent3.putExtra("key","mai");
+                startActivity(intent3);
+                break;
+
+        }
 
     }
 }

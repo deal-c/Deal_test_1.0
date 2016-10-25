@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="F:\e\Deal_test_1.0\library\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="F:\e\Deal_test_1.0\library\src\release\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="D:\android_workSpaceNew\Deal_git_test\Deal_test_1.0\library\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="D:\android_workSpaceNew\Deal_git_test\Deal_test_1.0\library\src\release\jniLibs"/></dataSet></merger>
