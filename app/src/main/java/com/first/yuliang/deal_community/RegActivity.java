@@ -42,23 +42,58 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_reg);
 
 
-        et_username = ((EditText) findViewById(R.id.et_username));
-        et_psd = ((EditText) findViewById(R.id.et_psd));
-        cb_remeberuser = ((CheckBox) findViewById(R.id.cb_remeberuser));
-        btn_login = ((Button) findViewById(R.id.btn_login));
-
-        btn_reg = ((Button) findViewById(R.id.btn_reg));
 
 
-        btn_login.setOnClickListener(this);
-        btn_reg.setOnClickListener(this);
+
+            et_username = ((EditText) findViewById(R.id.et_username));
+            et_psd = ((EditText) findViewById(R.id.et_psd));
+            cb_remeberuser = ((CheckBox) findViewById(R.id.cb_remeberuser));
+            btn_login = ((Button) findViewById(R.id.btn_login));
+
+            btn_reg = ((Button) findViewById(R.id.btn_reg));
+
+
+            btn_login.setOnClickListener(this);
+            btn_reg.setOnClickListener(this);
 
         SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
-        String userName = preference.getString("userName","");
-        boolean remeberuser = preference.getBoolean("cb_remeberuser",false);
-        int count=preference.getInt("count",0);
-        et_username.setText(userName);
+
+        String userName = preference.getString("userName", "");
+
+        boolean remeberuser = preference.getBoolean("cb_remeberuser", false);
+        int count = preference.getInt("count", 0);
+
+
+        if(preference.getInt("fromModifyToReg",0)!=0)
+        {
+            Intent intent=getIntent();
+            String username = intent.getStringExtra("userNickName").toString().trim();
+            if (username == userName) {
+                et_username.setText(userName);
+
+            } else if (username != userName && userName != "") {
+                SharedPreferences.Editor edit =preference.edit();
+                edit.putString("userName",username);
+                edit.commit();
+                username=preference.getString("userName","");
+
+                et_username.setText(username);
+            }else
+                if(userName=="")
+                {
+                    et_username.setText(userName);
+                }
+        }
+        else
+        {
+            et_username.setText(userName);
+        }
+
+
         cb_remeberuser.setChecked(remeberuser);
+
+
+
 
     }
 
@@ -119,8 +154,11 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                             edit.putBoolean("cb_remeberuser",false);
                         }
 
-                        edit.putInt("loginCount", 1);
-                        edit.putInt("loginUserId",users.get(i).userId);
+//                       edit.putInt("loginCount", 1);
+//                       edit.putInt("loginUserId",users.get(i).userId);
+
+                        edit.putInt("count", 1);
+                        edit.putInt("id",users.get(i).userId);
 
                         //edit.put
                         edit.commit();

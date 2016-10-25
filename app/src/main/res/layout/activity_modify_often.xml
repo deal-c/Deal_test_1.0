@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_modify_often"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+            <ImageView
+                android:id="@+id/iv_modify_often_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/backback"
+
+                android:gravity="left"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:id="@+id/tv_modify_often"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="修改常居地"
+                android:textSize="24sp"
+                android:textColor="#000"
+
+
+                android:layout_centerInParent="true"
+
+
+
+                />
+            <TextView
+                android:id="@+id/tv_often_keep_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保存"
+                android:textSize="20sp"
+                android:textColor="#fff"
+
+
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                />
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_modify_often"
+        android:padding="5dip"
+        android:layout_marginTop="10dp"
+        android:background="#c0c0c0">
+
+        <TextView
+            android:id="@+id/tv_often_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="常居地"
+            android:textSize="20sp"
+            android:padding="5dip"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            />
+        <EditText
+            android:id="@+id/et_often_live"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_toRightOf="@id/tv_often_live"
+            android:layout_alignBottom="@id/tv_often_live"
+            android:layout_marginLeft="15dp"
+            android:textColor="#000"
+            android:background="@drawable/mv_loading_logo"/>
+
+        <ImageView
+            android:id="@+id/iv_remove_often_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/x"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"/>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

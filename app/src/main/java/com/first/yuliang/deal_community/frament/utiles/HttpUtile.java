@@ -7,4 +7,5 @@ public class HttpUtile {
     public static final String host="http://192.168.191.1:8080/";
     public static final String zy="http://192.168.191.1:8080/FourProject/";
     public static final String zy1="http://192.168.191.1:8080";
+    public static final String szj="http://10.40.5.62:8080";
 }

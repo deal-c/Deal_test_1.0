@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">deal_community</string>
-
+    <string name="action_settings">Settings</string>
 </resources>

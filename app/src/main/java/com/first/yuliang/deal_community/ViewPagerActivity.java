@@ -39,7 +39,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
 
         SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor edit=preference.edit();
+        final SharedPreferences.Editor edit1=preference.edit();
 
 
         editor.putBoolean("isFirstIn", false);
@@ -67,8 +67,8 @@ public class ViewPagerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                edit.putInt("intoflag",1);
-                edit.commit();
+                edit1.putInt("intoflag",1);
+                edit1.commit();
                 Intent intent=new Intent(ViewPagerActivity.this,mainActivity.class);
                 startActivity(intent);
                  finish();
@@ -90,8 +90,8 @@ public class ViewPagerActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                edit.putInt("intoflag",1);
-                edit.commit();
+                edit1.putInt("intoflag",1);
+                edit1.commit();
                 Intent intent=new Intent(ViewPagerActivity.this,mainActivity.class);
                 startActivity(intent);
                 finish();
