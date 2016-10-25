@@ -49,7 +49,7 @@
 
         <activity
             android:name=".mainActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".ViewPagerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -58,19 +58,16 @@
         <activity android:name=".RegActivity" />
         <activity android:name=".regDetailActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name="com.first.yuliang.deal_community.model.ComMainActivity" >
-
-
-
-        </activity>
-
+        <activity
+            android:name=".model.ComMainActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
 
         <service android:name="com.amap.api.location.APSService" />
 
         <activity
             android:name=".SearchCommodityActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".TypeActivity"
             android:launchMode="singleTask"
@@ -79,7 +76,10 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <activity android:name=".CommunityDynamic" />
-        <activity android:name=".TestActivity" />
+        <activity android:name=".TestActivity" >
+
+
+        </activity>>
 
         <service android:name="com.amap.api.location.APSService" />
 
@@ -92,18 +92,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchResultActivity"
-                  android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-                  android:launchMode="singleTask">
-
-        </activity>
+        <activity
+            android:name=".SearchResultActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
             android:name=".frament.Community_Activity.Community_search"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".frament.Community_Activity.Community_model"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
     </application>
 
 </manifest>

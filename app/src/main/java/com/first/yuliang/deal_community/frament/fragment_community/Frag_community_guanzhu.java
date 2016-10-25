@@ -25,19 +25,23 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.first.yuliang.deal_community.CommunityDynamic;
-import com.first.yuliang.deal_community.R;
-import com.first.yuliang.deal_community.frament.pojo.MyComminity;
-import com.first.yuliang.deal_community.model.ComMainActivity;
-import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.frament.Community_Activity.Community_model;
+
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
+import com.first.yuliang.deal_community.pojo.Community;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+
 import org.xutils.common.Callback;
-import org.xutils.http.HttpMethod;
+
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,24 +49,23 @@ import java.util.List;
  * Created by yuliang on 2016/9/22.
  */
 public class Frag_community_guanzhu extends Fragment {
-
+  List<Community>   communityList=new ArrayList<>();
     private Button btn_del_guanzhu;
-    MyComminity bean = null;
-    List<MyComminity.myDongtai> comlist = new ArrayList<MyComminity.myDongtai>();
     private BaseAdapter adapter;
     SwipeMenuListView lv_community_guanzhu;
-  private int item=0;
+    private int item=0;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        getAllCommunity();
 
-        // lv_community_guanzhu= (ListView) getActivity().findViewById(R.id.lv_community_guanzhu);
+       lv_community_guanzhu= (SwipeMenuListView) getActivity().findViewById(R.id.lv_community_guanzhu);
         adapter = new BaseAdapter() {
             @Override
             public int getCount() {
-                return comlist.size();
+               return communityList.size();
             }
 
             @Override
@@ -93,19 +96,69 @@ public class Frag_community_guanzhu extends Fragment {
                     viewhoder = (ViewHolder) convertView.getTag();
                 }
 
-                MyComminity.myDongtai dongtai = comlist.get(position);//获取数据打入控件
-                viewhoder.communityName.setText(dongtai.communityName);
-                viewhoder.communityInfo.setText(dongtai.communityInfo);
-                viewhoder.comCreateTime.setText(dongtai.comCreateTime);
-                x.image().bind((viewhoder.comImg), "http://10.40.5.61:8080/usys/imgs/" + dongtai.comImg + ".png");
-              item=dongtai.communityId;
+                Community dongtai = communityList.get(position);//获取数据打入控件
+                viewhoder.communityName.setText(dongtai.getCommunityName());
+                viewhoder.communityInfo.setText(dongtai.getCommunityInfo());
+                viewhoder.comCreateTime.setText(dongtai.getComCreatTime());
+                x.image().bind((viewhoder.comImg), HttpUtils.hostLuoqingshanWifi+"/usys/imgs/" + dongtai.getComImg() + ".png");
+                item=dongtai.getCommunityId();
                 return convertView;
             }
 
         };
 
-        getAllCommunity();
-        lv_community_guanzhu.setAdapter(adapter);
+        System.out.print("为什么会空指针");
+       lv_community_guanzhu.setAdapter(adapter);
+
+
+
+    }
+
+    private void getAllCommunity() {
+
+
+            RequestParams params = new RequestParams
+                    (HttpUtils.hostLuoqingshanSchool+"/usys/MyCom");//网络请求
+            x.http().get(params, new Callback.CommonCallback<String>() {//使用xutils开启网络线程
+                @Override
+                public void onSuccess(String result) {
+                    Gson    gson=new Gson();
+                    Type type = new TypeToken<List<Community>>() {
+                    }.getType();
+                    List<Community>   communityList1=new ArrayList<>();
+                    communityList1  = gson.fromJson(result, type);
+                    Log.e("看看数据====", communityList.toString());
+                    Log.e("看看数据====", gson.toString());
+                    if (result!=null){
+                        communityList.addAll(communityList1);
+                    }
+
+                    adapter.notifyDataSetChanged();//提醒adpter更新数据
+
+
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean
+                        isOnCallback) {
+                    Toast.makeText(getActivity(), ex.toString(), Toast.LENGTH_LONG).show();
+                    System.out.println(ex.toString());
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+
+
+
 
 
     }
@@ -114,7 +167,9 @@ public class Frag_community_guanzhu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.frag_community_guanzhu, null);
-
+        System.out.print("这是为什么");
+        System.out.print("这是为什么");
+        System.out.print("这是为什么");
         lv_community_guanzhu = (SwipeMenuListView) view.findViewById(R.id.lv_community_guanzhu);
 
 
@@ -195,7 +250,7 @@ public class Frag_community_guanzhu extends Fragment {
 
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
 
-                MyComminity.myDongtai dongtai = comlist.get(position);
+               Community dongtai = communityList.get(position);
 
                 switch (index) {
 
@@ -209,7 +264,7 @@ public class Frag_community_guanzhu extends Fragment {
                         delete(item);
                         System.out.print("删除成功");
                         Log.v("tag","message");
-                        comlist.remove(position);
+                        communityList.remove(position);
 
                         adapter.notifyDataSetChanged();
 
@@ -224,7 +279,7 @@ public class Frag_community_guanzhu extends Fragment {
 
             private void delete(int item) {
 
-                RequestParams request=new RequestParams("http://10.40.5.61:8080/usys/deleteComServlt?communityId="+item);
+                RequestParams request=new RequestParams(HttpUtils.hostLuoqingshanSchool+"/usys/deleteComServlt?communityId="+item);
                x.http().get(request, new Callback.CommonCallback<String>() {
                    @Override
                    public void onSuccess(String result) {
@@ -303,8 +358,16 @@ public class Frag_community_guanzhu extends Fragment {
         lv_community_guanzhu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ComMainActivity.class);
+
+
+
+                Community temp = communityList.get(0);
+                Intent intent = new Intent(getActivity(), Community_model.class);
+                intent.putExtra("bundle", temp);
+
                 startActivity(intent);
+
+
             }
         });
 
@@ -323,47 +386,7 @@ public class Frag_community_guanzhu extends Fragment {
 
     }
 
-    private void getAllCommunity() {//获得社区动态的方法
-        RequestParams params = new RequestParams
-                ("http://10.40.5.61:8080/usys/MyCom");//网络请求
-        x.http().get(params, new Callback.CommonCallback<String>() {//使用xutils开启网络线程
-            @Override
-            public void onSuccess(String result) {
-                Gson gson = new Gson();
 
-                bean = gson.fromJson(result, MyComminity.class);//将获得的数据封装进入社区动态bean
-                // Toast.makeText(DongtaiActivity.this,result,Toast.LENGTH_LONG).show();
-                System.out.print(result);
-
-                System.out.println(bean.status + "????");
-
-                comlist.addAll(bean.comlist);
-                adapter.notifyDataSetChanged();//提醒adpter更新数据
-                System.out.print(result);
-
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean
-                    isOnCallback) {
-                //Toast.makeText(Frag_community_guanzhu.this, ex.toString(), Toast.LENGTH_LONG).show();
-                System.out.println(ex.toString());
-
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
-
-
-    }
 
     private int dp2px(int dp) {
 

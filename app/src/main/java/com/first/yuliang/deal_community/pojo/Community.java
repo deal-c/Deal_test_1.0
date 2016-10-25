@@ -9,8 +9,17 @@ public class Community implements Parcelable {
 	private String communityInfo;
 	private String comImg;
 	private String comCreatTime;
-	
-	
+
+	@Override
+	public String toString() {
+		return "Community{" +
+				"communityId=" + communityId +
+				", communityName='" + communityName + '\'' +
+				", communityInfo='" + communityInfo + '\'' +
+				", comImg='" + comImg + '\'' +
+				", comCreatTime='" + comCreatTime + '\'' +
+				'}';
+	}
 
 	public Community(){};
 	
