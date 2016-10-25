@@ -1,16 +1,18 @@
 package com.first.yuliang.deal_community;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -25,19 +27,27 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.first.yuliang.deal_community.MyCenter.modify.ModifyDetail.addAddressDetailActivity;
+import com.first.yuliang.deal_community.address.City;
+import com.first.yuliang.deal_community.address.County;
+import com.first.yuliang.deal_community.address.Province;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.google.gson.Gson;
 
+import org.apache.http.util.EncodingUtils;
+import org.json.JSONArray;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchResultActivity extends AppCompatActivity {
+public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener{
 
     int llHeight;
     private ImageButton ib_return_search;
@@ -55,8 +65,9 @@ public class SearchResultActivity extends AppCompatActivity {
     private ImageButton ib_search3;
     private TextView tv_total;
     private LinearLayout ll_total;
-//    private Button btn_ss;
-//    private View ll_ss;
+    private List<Province> provinces = new ArrayList<Province>();
+    private Button btn_quyu;
+    private LinearLayout ll_select;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +153,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 tv_local = ((TextView) view.findViewById(R.id.tv_local));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg, "http://10.40.5.62:8080"+(commodity.commodityImg.split(","))[0]);
+                x.image().bind(iv_cg, "http://192.168.191.1:8080"+(commodity.commodityImg.split(","))[0]);
                 tv_cg.setText(commodity.commodityTitle);
                 tv_price.setText(commodity.price+"");
                 tv_local.setText(commodity.location);
@@ -196,7 +207,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 tv_local_l = ((TextView) view.findViewById(R.id.tv_local_l));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg_l, "http://10.40.5.62:8080" + (commodity.commodityImg.split(","))[0]);
+                x.image().bind(iv_cg_l, "http://192.168.191.1:8080" + (commodity.commodityImg.split(","))[0]);
                 tv_cg_l.setText(commodity.commodityTitle);
                 tv_price_l.setText(commodity.price + "");
                 tv_local_l.setText(commodity.location);
@@ -302,6 +313,10 @@ public class SearchResultActivity extends AppCompatActivity {
                 }
             }
         });
+        ll_select = ((LinearLayout) findViewById(R.id.ll_select));
+        btn_quyu = ((Button) findViewById(R.id.btn_quyu));
+        btn_quyu.setOnClickListener(this);
+
     }
     @Override
     public void onBackPressed() {
@@ -369,21 +384,126 @@ public class SearchResultActivity extends AppCompatActivity {
         isGrid = preferences.getBoolean("isGrid", true);
     }
 
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-//            int[] ll = new int[2];
-//            ll_ss.getLocationOnScreen(ll);
-//            int x = ll[0];
-//            int y = ll[1];
-//            if (ev.getX() < x || ev.getX() > (x + ll_ss.getWidth()) || ev.getY() < y || ev.getY() > (y + ll_ss.getHeight())) {
-//
-//                return super.dispatchTouchEvent(ev);
-//            }else {
-//                return true;
-//            }
-//        }
-//        return super.dispatchTouchEvent(ev);
-//    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showAddressDialog() {
+
+        new MyCity(SearchResultActivity.this, provinces, null, null, null,
+                new CityPickerDialog.onCityPickedListener() {
+
+                    @Override
+                    public void onPicked(com.first.yuliang.deal_community.address.Province selectProvince, City selectCity, County selectCounty) {
+
+                        StringBuilder address = new StringBuilder();
+                        address.append(
+                                selectProvince != null ? selectProvince
+                                        .getAreaName() : "")
+                                .append(selectCity != null ? selectCity
+                                        .getAreaName() : "")
+                                .append(selectCounty != null ? selectCounty
+                                        .getAreaName() : "");
+                        String text = selectCounty != null ? selectCounty
+                                .getAreaName() : "";
+                        Log.e("地址=============",address+"");
+                    }
+                },261).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_quyu:
+//                Log.e("看看筛选======",ll_select.getBottom()+"");
+                if (provinces.size() > 0) {
+                    showAddressDialog();
+                } else {
+                    new InitAreaTask(SearchResultActivity.this).execute(0);
+                }
+                break;
+        }
+    }
+
+    private class InitAreaTask  extends AsyncTask<Integer, Integer, Boolean> {
+
+
+        Context mContext;
+
+        Dialog progressDialog;
+
+
+
+        public InitAreaTask(Context context) {
+            mContext = context;
+            progressDialog = ToolsClass.createLoadingDialog(mContext, "请稍等...", true,
+                    0);
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            progressDialog.dismiss();
+            if (provinces.size() > 0) {
+                showAddressDialog();
+            } else {
+                Toast.makeText(mContext, "数据初始化失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        protected Boolean doInBackground(Integer... params) {
+            String address = null;
+            InputStream in = null;
+            try {
+                in = mContext.getResources().getAssets().open("address.txt");
+                byte[] arrayOfByte = new byte[in.available()];
+                in.read(arrayOfByte);
+                address = EncodingUtils.getString(arrayOfByte, "UTF-8");
+                JSONArray jsonList = new JSONArray(address);
+                Gson gson = new Gson();
+                for (int i = 0; i < jsonList.length(); i++) {
+                    try {
+                        provinces.add(gson.fromJson(jsonList.getString(i),
+                                Province.class));
+                    } catch (Exception e) {
+                    }
+                }
+                return true;
+            } catch (Exception e) {
+            } finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                    }
+                }
+            }
+            return false;
+        }
+
+    }
 }
 
 

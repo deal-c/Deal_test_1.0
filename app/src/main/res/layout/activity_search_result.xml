@@ -14,7 +14,7 @@
         android:layout_below="@id/tl_search_result"
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:background="#ddd"
+        android:background="#bbb"
         />
     <LinearLayout
         android:id="@+id/ll_select"
@@ -24,6 +24,7 @@
         android:layout_height="36dp"
         >
         <Button
+            android:id="@+id/btn_quyu"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:paddingRight="20dp"
@@ -158,17 +159,9 @@
         android:layout_below="@id/ll_total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <!--<LinearLayout-->
-        <!--android:id="@+id/ll_ss"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:background="#fff"-->
-        <!--android:layout_below="@id/ll_select">-->
-        <!--<Button-->
-            <!--android:id="@+id/btn_ss"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="试试"-->
-            <!--android:background="@drawable/ripple_bg"/>-->
-    <!--</LinearLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
 </RelativeLayout>

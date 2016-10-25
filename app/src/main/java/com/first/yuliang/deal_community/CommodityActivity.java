@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.pojo.CommodityBean;
+import com.first.yuliang.deal_community.pojo.User;
 import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
@@ -61,7 +62,7 @@ public class CommodityActivity extends AppCompatActivity {
     private ImageButton s_1;
     private ObjectAnimator oa1;
     private ObjectAnimator oa2;
-
+    private User user=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -201,7 +202,7 @@ public class CommodityActivity extends AppCompatActivity {
 
                 String img = imgs[position];
 
-                x.image().bind(iv_cg_c, "http://10.40.5.62:8080" + img);
+                x.image().bind(iv_cg_c, "http://192.168.191.1:8080" + img);
 
                 return view;
             }
@@ -217,9 +218,10 @@ public class CommodityActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(String result) {
-                Gson gson = new Gson();
-                CommodityBean bean = gson.fromJson(result, CommodityBean.class);
-                commodityList.addAll(bean.commodities);
+                Gson gson=new Gson();
+                user=gson.fromJson(result,User.class);
+                x.image().bind(iv_user_head, "http://10.40.5.52:8080" + user.getUserImg());
+                tv_user_name.setText(user.getUserName());
                 adapter_l.notifyDataSetChanged();
             }
 
