@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.first.yuliang.deal_community">
+          package="com.first.yuliang.deal_community">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -98,7 +98,7 @@
         <activity
             android:name=".SearchResultActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".frament.Community_Activity.Community_search"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -160,6 +160,14 @@
             android:name=".MyCenter.modify.ModifyDetail.addAddressDetailActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".regBirthdayActivity"></activity>
+        <activity android:name=".publish.deal_publish_Activity"
+                  android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
+        </activity>
+        <activity android:name=".CommodityActivity"
+                  android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

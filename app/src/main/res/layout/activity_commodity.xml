@@ -4,19 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     android:background="#fff"
     tools:context="com.first.yuliang.deal_community.CommodityActivity">
-    <include android:id="@+id/tl_community"
-             layout="@layout/commodity_bar"/>
-    <Button
-        android:id="@+id/btn_bar_shadow"
-        android:layout_below="@+id/tl_community"
-        android:background="#bbb"
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"/>
+
     <ListView
         android:layout_marginBottom="50dp"
-        android:layout_below="@id/btn_bar_shadow"
+        android:layout_marginTop="50dp"
         android:id="@+id/lv_commodity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -65,4 +59,86 @@
             android:background="@color/main"
             android:textColor="#fff"/>
     </RelativeLayout>
+    <ImageView
+        android:id="@+id/iv_black"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#8000"/>
+    <LinearLayout
+        android:id="@+id/ll_share"
+        android:layout_marginTop="-140dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:focusableInTouchMode="true"
+        android:layout_height="190dp"
+        android:background="#fff">
+        <TextView
+            android:padding="10dp"
+            android:id="@+id/tv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分享到"
+            android:textSize="16sp"
+            android:textColor="#a000"/>
+        <LinearLayout
+            android:layout_below="@+id/tv_share"
+            android:id="@+id/ll_share_1"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/s_1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_bg_item"
+                android:src="@drawable/s_1"/>
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_bg_item"
+                android:src="@drawable/s_2"/>
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_bg_item"
+                android:src="@drawable/s_3"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_share_2"
+            android:padding="10dp"
+            android:layout_below="@+id/ll_share_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_bg_item"
+                android:src="@drawable/s_4"/>
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_bg_item"
+                android:src="@drawable/s_5"/>
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_bg_item"
+                android:src="@drawable/s_6"/>
+        </LinearLayout>
+    </LinearLayout>
+    <include android:id="@+id/tl_community"
+             layout="@layout/commodity_bar"/>
+    <Button
+        android:id="@+id/btn_bar_shadow"
+        android:layout_below="@+id/tl_community"
+        android:background="#bbb"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"/>
 </RelativeLayout>
