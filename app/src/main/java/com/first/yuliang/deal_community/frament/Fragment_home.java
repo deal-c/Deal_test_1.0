@@ -53,7 +53,7 @@ public class Fragment_home extends Fragment {
                     }
                     vp_ad.setCurrentItem(currentItem);
 //                   adapter.notifyDataSetChanged();
-                    handler.sendEmptyMessageDelayed(1,1000);
+                    handler.sendEmptyMessageDelayed(1,2500);
                     break;
                 case 2:
                     break;
