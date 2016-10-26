@@ -194,6 +194,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 edit.putInt("fromModifyToReg",1);
                 edit.commit();
                 startActivity(intentBack);
+
+                ModifyActivity.this.finish();
             }
         }).create();
 
@@ -342,4 +344,5 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
+
 }

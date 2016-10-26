@@ -1,5 +1,6 @@
 package com.first.yuliang.deal_community;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +13,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.Util.MD5Utils;
+import com.first.yuliang.deal_community.application.MyApplication;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
+import com.first.yuliang.deal_community.pojo.User;
 import com.first.yuliang.deal_community.pojo.UserBean;
 import com.google.gson.Gson;
 
@@ -35,6 +38,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     private CheckBox cb_remeberuser;
     private List<UserBean.User> users=new ArrayList<>();
 
+    Dialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                 {
                     et_username.setText(userName);
                 }
+
         }
         else
         {
@@ -119,6 +124,10 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     private void Login(View v) {
+
+        progressDialog = ToolsClass.createLoadingDialog(RegActivity.this, "登录中...", true,
+                0);
+        progressDialog.show();
 
         RequestParams params=new RequestParams(HttpUtile.zy+"servlet/loginApp");
 //        params.addBodyParameter("username",et_username.getText().toString().trim());
@@ -160,8 +169,12 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                         edit.putInt("count", 1);
                         edit.putInt("id",users.get(i).userId);
 
+                        User user=new MyApplication().user;
+                        user.setUserId(users.get(i).userId);
                         //edit.put
                         edit.commit();
+
+                        progressDialog.hide();
                         Toast.makeText(RegActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
 
                         Intent intent=new Intent(RegActivity.this,mainActivity.class);
@@ -173,6 +186,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
                 }
 
+                progressDialog.hide();
                 Toast.makeText(RegActivity.this,"登录失败",Toast.LENGTH_SHORT).show();
             }
 
@@ -193,6 +207,25 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=preference.edit();
 
+        if(preference.getInt("fromModifyToReg",0)==1)
+        {
+            edit.putInt("intoflag",1);
+            edit.commit();
+            Intent intent=new Intent(RegActivity.this,mainActivity.class);
+            startActivity(intent);
+        }
+        else
+        {
 
+            edit.putInt("intoflag",1);
+            edit.commit();
+        }
+
+        RegActivity.this.finish();
+    }
 }

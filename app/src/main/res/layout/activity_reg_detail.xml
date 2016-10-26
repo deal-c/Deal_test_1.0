@@ -115,7 +115,8 @@
         android:id="@+id/rl_reg_birthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/tv_reg_birthday"
@@ -126,14 +127,17 @@
             android:textColor="#000"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>
-        <EditText
-            android:id="@+id/et_birthday"
+        <TextView
+            android:id="@+id/tv_birthday"
             android:textColor="#000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tv_reg_birthday"
 
-            android:background="@drawable/mv_loading_logo"
+            android:layout_alignBottom="@id/tv_reg_birthday"
+
+            android:layout_centerVertical="true"
+
             />
 
     </RelativeLayout>
