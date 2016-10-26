@@ -26,10 +26,6 @@
         <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
-    <style name="C_AnimBottom" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/c_push_bottom_in</item>
-        <item name="android:windowExitAnimation">@anim/c_push_bottom_out</item>
-    </style>
     <style name="loading_dialog" parent="android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>

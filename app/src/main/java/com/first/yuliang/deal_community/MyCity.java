@@ -88,19 +88,18 @@ public class MyCity extends Dialog {
                   final com.first.yuliang.deal_community.CityPickerDialog.onCityPickedListener listener,int height) {
         super(context);
         mContext = context;
-
+        View rootView = getLayoutInflater().inflate(
+                R.layout.dialog_city_picker, null);
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setGravity(Gravity.TOP);
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-//        lp.height =100;
-//        lp.y = height-600;
+        getWindow().setGravity(Gravity.BOTTOM);
+//        WindowManager.LayoutParams lp = getWindow().getAttributes();
+//        lp.y = height;
 //        getWindow().setAttributes(lp);
 
         getWindow().setBackgroundDrawable(
                 new ColorDrawable(Color.parseColor("#00000000")));
-        getWindow().setWindowAnimations(R.style.C_AnimBottom);
-        View rootView = getLayoutInflater().inflate(
-                R.layout.dialog_city_picker, null);
+        getWindow().setWindowAnimations(R.style.AnimBottom);
+
         int screenWidth = mContext.getWindowManager().getDefaultDisplay()
                 .getWidth();
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(screenWidth,
