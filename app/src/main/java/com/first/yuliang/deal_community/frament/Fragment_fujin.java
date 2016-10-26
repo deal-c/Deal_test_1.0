@@ -57,6 +57,16 @@ public class Fragment_fujin extends Fragment  implements LocationSource, AMapLoc
         return view;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden){
+            mapView.setVisibility(View.GONE);
+        }else{
+            mapView.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void initMarker() {
         LatLng marker1 = new LatLng(31.2762990000,120.7417510000);
         LatLng marker2=new LatLng(31.2751160000,120.7416330000);
