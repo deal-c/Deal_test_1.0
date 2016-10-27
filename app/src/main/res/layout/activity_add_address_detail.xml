@@ -169,15 +169,16 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>
 
-        <EditText
-            android:id="@+id/et_city"
+        <TextView
+            android:id="@+id/tv_address_city"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_toRightOf="@id/tv_city"
             android:layout_marginLeft="10dp"
             android:textColor="#000"
             android:textSize="14sp"
-            android:background="@drawable/mv_loading_logo"/>
+            android:layout_alignBottom="@id/tv_city"
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
