@@ -1,16 +1,17 @@
 package com.first.yuliang.deal_community;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 
 import com.first.yuliang.deal_community.address.City;
 import com.first.yuliang.deal_community.address.County;
@@ -83,9 +84,10 @@ public class MyCity extends Dialog {
     }
 
 
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
     public MyCity(Activity context, List<Province> provinces,
                   Province defaultProvince, City defaultCity, County defaultCounty,
-                  final com.first.yuliang.deal_community.CityPickerDialog.onCityPickedListener listener,int height) {
+                  final com.first.yuliang.deal_community.CityPickerDialog.onCityPickedListener listener, int height) {
         super(context);
         mContext = context;
         View rootView = getLayoutInflater().inflate(

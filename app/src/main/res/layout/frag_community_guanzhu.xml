@@ -50,8 +50,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/result"
-        android:layout_toEndOf="@+id/result">
+      >
 
     </GridView>
 

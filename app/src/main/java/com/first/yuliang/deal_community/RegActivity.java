@@ -171,6 +171,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
                         User user=new MyApplication().user;
                         user.setUserId(users.get(i).userId);
+                        user.setUserName(users.get(i).getUserName());
                         //edit.put
                         edit.commit();
 

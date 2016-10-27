@@ -1,6 +1,9 @@
 package com.first.yuliang.deal_community.frament.fragment_community;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,11 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
-import com.first.yuliang.deal_community.application.MyApplication;
 import com.first.yuliang.deal_community.frament.Community_Activity.Community_model;
 import com.first.yuliang.deal_community.frament.Community_Activity.Community_search;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
-import com.first.yuliang.deal_community.model.User;
 import com.first.yuliang.deal_community.pojo.Community;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -110,22 +111,96 @@ public class Frag_community_guanzhu extends Fragment {
                 }
             }
         });
-
+       comlist_care.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+           @Override
+           public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            if (comlist.size()==position){
+                return false;
+            }else {
+                initDialog(position);
+                return true;
+            }
+           }
+       });
         getcomlist();
 
         return view;
     }
+    private void initDialog(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("提示"); //设置标题
+        builder.setMessage("是否取消关注？"); //设置内容
+
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();//关闭dialog
+                Toast.makeText(getActivity(), "已取消关注", Toast.LENGTH_SHORT).show();
+                cancleCare(position);
+                comlist.remove(position);
+                madapter.notifyDataSetChanged();
+
+
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() { //设置取消按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    void cancleCare(int position){
+        int id = getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id", 0);
+        RequestParams params = new RequestParams(HttpUtile.yu + "/community/manegecarecom");
+        params.addQueryStringParameter("flag", "delete");
+        params.addQueryStringParameter("userId", id + "");
+        params.addQueryStringParameter("communityId", + comlist.get(position).getCommunityId()+"");
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Toast.makeText(getActivity(), result, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(getActivity(), "取关失败", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getcomlist();
+    }
 
     //根据userid 获得关注的社区List
     void getcomlist() {
-        User user = new MyApplication().user;
-        if (user.mName!=null) {
-            result1.setVisibility(View.GONE);
+        int id=getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
+
+            if (id!=0) {
+                result1.setVisibility(View.GONE);
 
             RequestParams params = new RequestParams(HttpUtile.yu + "/community/manegecarecom");
 
             params.addQueryStringParameter("flag", "getall");
-            params.addQueryStringParameter("userId", user.mId + "");
+            params.addQueryStringParameter("userId",id+ "");
 
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
@@ -167,4 +242,5 @@ public class Frag_community_guanzhu extends Fragment {
 
         }
     }
+
 }
