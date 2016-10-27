@@ -38,7 +38,7 @@ import java.util.List;
  * Created by yuliang on 2016/9/22.
  */
 public class Frag_community_guanzhu extends Fragment {
-
+//哼
     List<Community> comlist = new ArrayList<Community>();
     private GridView comlist_care;
     private BaseAdapter madapter;
