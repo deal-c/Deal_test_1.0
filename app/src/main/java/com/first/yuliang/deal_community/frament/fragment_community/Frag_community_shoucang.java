@@ -30,6 +30,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.frament.Community_Activity.Community_model;
 
+import com.first.yuliang.deal_community.frament.pojo.Dynamic;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
 import com.first.yuliang.deal_community.pojo.Community;
@@ -50,11 +51,11 @@ import java.util.List;
  * Created by yuliang on 2016/9/22.
  */
 public class Frag_community_shoucang extends Fragment {
-    List<Community>   communityList=new ArrayList<>();
+    List<Dynamic>   communityList=new ArrayList<>();
     private Button btn_del_guanzhu;
     private BaseAdapter adapter;
     SwipeMenuListView lv_community_guanzhu;
-    private int item=0;
+    private String item=null;
     private int userId=1;
  //   int Id=getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
 
@@ -104,12 +105,12 @@ public class Frag_community_shoucang extends Fragment {
                     viewhoder = (ViewHolder) convertView.getTag();
                 }
 
-                Community dongtai = communityList.get(position);//获取数据打入控件
-                viewhoder.communityName.setText(dongtai.getCommunityName());
-                viewhoder.communityInfo.setText(dongtai.getCommunityInfo());
-                viewhoder.comCreateTime.setText(dongtai.getComCreatTime());
-                x.image().bind((viewhoder.comImg), HttpUtils.hostLuoqingshanWifi+"/usys/imgs/" + dongtai.getComImg() + ".png");
-                item=dongtai.getCommunityId();
+                Dynamic dongtai = communityList.get(position);//获取数据打入控件
+                viewhoder.communityName.setText(dongtai.getUserId().getUserName());
+                viewhoder.communityInfo.setText(dongtai.getContent());
+                viewhoder.comCreateTime.setText(dongtai.getPublishTime());
+                x.image().bind((viewhoder.comImg), HttpUtils.hostLuoqingshanWifi+"/usys/imgs/" + dongtai.getUserId().getUserImg() + ".png");
+              String  item=dongtai.getDynamicId();
                 return convertView;
             }
 
@@ -133,7 +134,7 @@ public class Frag_community_shoucang extends Fragment {
                 Gson    gson=new Gson();
                 Type type = new TypeToken<List<Community>>() {
                 }.getType();
-                List<Community>   communityList1=new ArrayList<>();
+                List<Dynamic>   communityList1=new ArrayList<>();
                 communityList1  = gson.fromJson(result, type);
                 Log.e("今天看看数据====", communityList1.toString());
                 Log.e("今天看看数据====", gson.toString());
@@ -258,7 +259,7 @@ public class Frag_community_shoucang extends Fragment {
 
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
 
-                Community dongtai = communityList.get(position);
+                Dynamic dongtai = communityList.get(position);
 
                 switch (index) {
 
@@ -285,7 +286,7 @@ public class Frag_community_shoucang extends Fragment {
 
             }
 
-            private void delete(int item) {
+            private void delete(String item) {
 
                 RequestParams request=new RequestParams(HttpUtils.hostLuoqingshanSchool+"/usys/deleteComServlt?communityId="+item);
                 x.http().get(request, new Callback.CommonCallback<String>() {
@@ -369,7 +370,7 @@ public class Frag_community_shoucang extends Fragment {
 
 
 
-                Community temp = communityList.get(0);
+                Dynamic temp = communityList.get(0);
                 Intent intent = new Intent(getActivity(), Community_model.class);
                 intent.putExtra("bundle", temp);
 

@@ -20,9 +20,11 @@ import com.first.yuliang.deal_community.application.MyApplication;
 import com.first.yuliang.deal_community.frament.Community_Activity.Community_model;
 import com.first.yuliang.deal_community.frament.Community_Activity.Community_search;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
-import com.first.yuliang.deal_community.model.User;
+
 import com.first.yuliang.deal_community.pojo.Community;
 
+
+import com.first.yuliang.deal_community.pojo.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -120,13 +122,13 @@ public class Frag_community_guanzhu extends Fragment {
     //根据userid 获得关注的社区List
     void getcomlist() {
         User user = new MyApplication().user;
-        if (user.mName!=null) {
+        if (user.getUserName()!=null) {
             result1.setVisibility(View.GONE);
 
             RequestParams params = new RequestParams(HttpUtile.yu + "/community/manegecarecom");
 
             params.addQueryStringParameter("flag", "getall");
-            params.addQueryStringParameter("userId", user.mId + "");
+            params.addQueryStringParameter("userId", user.getUserId() + "");
 
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override

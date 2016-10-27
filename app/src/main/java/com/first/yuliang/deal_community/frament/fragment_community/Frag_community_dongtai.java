@@ -1,6 +1,7 @@
 package com.first.yuliang.deal_community.frament.fragment_community;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,6 +20,7 @@ import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.frament.Community_Activity.ContentAdapter;
 import com.first.yuliang.deal_community.frament.pojo.Dynamic;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
+import com.first.yuliang.deal_community.model.ComMainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -118,6 +121,19 @@ public class Frag_community_dongtai extends Fragment{
         mListItems.addAll(Arrays.asList(eg));
         getAlldynamic();
         lv_community_dongtai.setAdapter(mAdapter);
+        lv_community_dongtai.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent  intent=new Intent(getActivity(), ComMainActivity.class);
+                intent.putExtra("dynamicList", dynamicArrayList);
+             //   startActivity(intent);
+
+
+
+            }
+        });
+
+
         return view;
     }
 
