@@ -47,7 +47,7 @@ public class ComMainActivity extends Activity {
         setColor();
         getAllDynamic();
         Intent it = getIntent();
-     String sendynamiclist=it.getStringExtra("dynamicList");
+        String sendynamiclist=it.getStringExtra("dynamicList");
         Gson    gson=new Gson();
         Type type = new TypeToken<List<Dynamic>>() {
         }.getType();
@@ -128,9 +128,9 @@ public class ComMainActivity extends Activity {
                 Type type = new TypeToken<List<Comment>>() {
                 }.getType();
                 mymoments=gson.fromJson(result,type);
-
+                Log.e("我来看看数据====", result);
                 if (result != null) {
-                    Log.e("看看数据====", mymoments.toString());
+                    Log.e("我看看数据====", mymoments.toString());
                     moments.addAll(mymoments);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -140,7 +140,7 @@ public class ComMainActivity extends Activity {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-
+                Log.e("我去来看看数据====", isOnCallback+"1");
             }
 
             @Override
@@ -159,6 +159,10 @@ public class ComMainActivity extends Activity {
 
     public void inputComment(final View v) {
         inputComment(v, null);
+
+
+
+
     }
 
     public void inputComment(final View v, User receiver) {
@@ -171,6 +175,6 @@ public class ComMainActivity extends Activity {
     }
 
     public void backonclick(View view) {
-        finish();
+finish();
     }
 }

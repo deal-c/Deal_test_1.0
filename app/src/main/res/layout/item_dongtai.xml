@@ -5,9 +5,11 @@
     android:padding="15dp"
     android:background="#fff">
     <ImageView
+
         android:id="@+id/iv_dongtai_userphoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/touxiang"/>
     <TextView
         android:textColor="#000"
@@ -22,7 +24,7 @@
         />
     <ImageView
         android:id="@+id/iv_dongtai_dongtaiphoto"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ad1"
@@ -33,7 +35,7 @@
         android:layout_below="@id/iv_dongtai_userphoto"
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:text="                    大家好我是小明,新人报到。希望以后多多关照 "
+        android:text="            大家好我是小明,新人报到。希望以后多多关照 "
         android:textSize="16sp"/>
 
     <TextView

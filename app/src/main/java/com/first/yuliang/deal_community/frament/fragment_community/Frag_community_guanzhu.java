@@ -22,6 +22,7 @@ import com.first.yuliang.deal_community.frament.Community_Activity.Community_sea
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.model.User;
 import com.first.yuliang.deal_community.pojo.Community;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

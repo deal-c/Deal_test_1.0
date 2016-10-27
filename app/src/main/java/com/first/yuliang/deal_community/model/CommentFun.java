@@ -176,12 +176,12 @@ public class CommentFun {
             Log.e("看看数据====", remarkUserId+"???");
 
             RequestParams requestParams=new RequestParams("http://10.40.5.61:8080/usys/backComment");
-            //requestParams.addBodyParameter("remarkContent",remarkContent);
-            //requestParams.addBodyParameter("recieveId",recieveId);
-            //requestParams.addBodyParameter("dynamicId",dynamicId);
-            //requestParams.addBodyParameter("reciever",reciever);
-            //requestParams.addBodyParameter("commentator",commentator);
-            //requestParams.addBodyParameter("remarkUserId",remarkUserId);
+            requestParams.addBodyParameter("remarkContent",remarkContent);
+            requestParams.addBodyParameter("recieveId",recieveId);
+            requestParams.addBodyParameter("dynamicId",dynamicId);
+            requestParams.addBodyParameter("reciever",reciever);
+            requestParams.addBodyParameter("commentator",commentator);
+            requestParams.addBodyParameter("remarkUserId",remarkUserId);
             x.http().get(requestParams, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String result) {
@@ -190,7 +190,7 @@ public class CommentFun {
 
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
-                    Log.e("看看数据====", isOnCallback+"???");
+                    Log.e("看看数据====", ex+"???");
                 }
 
                 @Override

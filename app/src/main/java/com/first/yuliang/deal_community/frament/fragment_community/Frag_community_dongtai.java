@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,23 @@ import android.widget.TextView;
 
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.frament.Community_Activity.ContentAdapter;
+import com.first.yuliang.deal_community.frament.pojo.Dynamic;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
+
+import me.nereo.multi_image_selector.bean.Image;
 
 /**
  * Created by yuliang on 2016/9/22.
@@ -29,14 +42,14 @@ public class Frag_community_dongtai extends Fragment{
     private ListView lv_community_dongtai;
     private BaseAdapter mAdapter;
     private LinkedList<String> mListItems;
-
+    public ArrayList<Dynamic> dynamicArrayList=new ArrayList<>();
     private String []eg=new String[]{"","","","","","","","","","",""};
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
-    View view=inflater.inflate(R.layout.frag_community_dontai,null);
+        View view=inflater.inflate(R.layout.frag_community_dontai,null);
 //         final int []imgs={R.drawable.dongtai1,R.drawable.dongtai2,R.drawable.dongtai3,R.drawable.dongtai4,R.drawable.dongtai5,};
         pull_to_refresh_listview = ((PullToRefreshListView) view.findViewById(R.id.pull_to_refresh_listview));
         pull_to_refresh_listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
@@ -54,12 +67,17 @@ public class Frag_community_dongtai extends Fragment{
 
         });
         mAdapter=new BaseAdapter() {
+            private TextView textView;
+            private TextView tv_dongtai_content;
+
+            private TextView tv_dongtai_usename;
+            private ImageView iv_dongtai_userphoto;
             private ImageView iv_dongtai_dongtaiphoto;
 
             @Override
             public int getCount() {
 
-                return mListItems.size();
+                return dynamicArrayList.size();
             }
 
             @Override
@@ -75,22 +93,18 @@ public class Frag_community_dongtai extends Fragment{
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view =View.inflate(getActivity().getApplicationContext(),R.layout.item_dongtai,null );
-              /*  myViewHolder   holder=new myViewHolder();
 
+                iv_dongtai_userphoto = ((ImageView) view.findViewById(R.id.iv_dongtai_userphoto));
+                tv_dongtai_usename = ((TextView) view.findViewById(R.id.tv_dongtai_usename));
+                iv_dongtai_dongtaiphoto = ((ImageView) view.findViewById(R.id.iv_dongtai_dongtaiphoto));
+                tv_dongtai_content = ((TextView) view.findViewById(R.id.tv_dongtai_content));
+                textView = ((TextView) view.findViewById(R.id.textView));
 
-               if (convertView==null){
-                holder.iv_dongtai_dongtaiphoto=(ImageView) convertView.findViewById(R.id.iv_dongtai_dongtaiphoto);
-                holder.iv_dongtai_userphoto=(ImageView)convertView.findViewById(R.id.iv_dongtai_userphoto);
-                holder.textView=(TextView)convertView.findViewById(R.id.textView);
-                holder.tv_dongtai_usename=(TextView)convertView.findViewById(R.id.tv_dongtai_usename);
-                holder.tv_dongtai_content=(TextView)convertView.findViewById(R.id.tv_dongtai_content);
-                convertView.setTag(holder);}
-            else {
-                   holder = (myViewHolder) convertView.getTag();
-                }
-
-*/
-
+                tv_dongtai_usename.setText(dynamicArrayList.get(position).getUserId().getUserName());
+                tv_dongtai_content.setText(dynamicArrayList.get(position).getContent());
+                textView.setText(dynamicArrayList.get(position).getPublishTime());
+                x.image().bind(iv_dongtai_dongtaiphoto,HttpUtils.hostLuoqingshanSchool+"/usys/imgs/"+dynamicArrayList.get(position).getPic()+".png");
+                x.image().bind(iv_dongtai_userphoto,HttpUtils.hostLuoqingshanSchool+"/usys/imgs/"+dynamicArrayList.get(position).getUserId().getUserImg()+".png");
 
                 return view;
 
@@ -102,9 +116,66 @@ public class Frag_community_dongtai extends Fragment{
 
         mListItems = new LinkedList<String>();
         mListItems.addAll(Arrays.asList(eg));
+        getAlldynamic();
         lv_community_dongtai.setAdapter(mAdapter);
         return view;
     }
+
+    private void getAlldynamic() {
+        RequestParams params = new RequestParams
+                (HttpUtils.hostLuoqingshanSchool+"/usys/Radomdynamic");//网络请求
+        x.http().post(params, new org.xutils.common.Callback.CommonCallback<String>() {//使用xutils开启网络线程
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                Type type = new TypeToken<List<Dynamic>>() {
+                }.getType();
+
+
+                List<Dynamic>   communityList1=new ArrayList<>();
+                communityList1  = gson.fromJson(result, type);
+
+                if (result!=null){
+                    dynamicArrayList.addAll(communityList1);
+                    mAdapter.notifyDataSetChanged();
+                    Log.e("dynamic看看数据====", dynamicArrayList.toString());
+                    Log.e("dynamic看看数据====", gson.toString());
+                }
+
+
+
+
+
+
+
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean
+                    isOnCallback) {
+                //Toast.makeText(Frag_community_guanzhu.this, ex.toString(), Toast.LENGTH_LONG).show();
+                System.out.println(ex.toString());
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+
+
+
+
+    }
+
     private class GetDataTask extends AsyncTask<Void, Void, String[]> {
 
         @Override
@@ -126,13 +197,13 @@ public class Frag_community_dongtai extends Fragment{
             super.onPostExecute(result);
         }
     }
-public static class myViewHolder{
-    TextView    tv_dongtai_usename;
-    TextView     tv_dongtai_content;
-    TextView     textView;
-    ImageView   iv_dongtai_userphoto;
-    ImageView     iv_dongtai_dongtaiphoto;
+    public static class myViewHolder{
+        TextView    tv_dongtai_usename;
+        TextView     tv_dongtai_content;
+        TextView     textView;
+        ImageView   iv_dongtai_userphoto;
+        ImageView     iv_dongtai_dongtaiphoto;
 
-}
+    }
 
 }

@@ -78,6 +78,28 @@
             android:name=".TypeActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".frament.testpic.TestPicActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+
+        </activity>
+
+        <activity
+            android:name=".frament.testpic.ImageGridActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".frament.testpic.PublishedActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar" >
+
+
+
+        </activity>
+        <activity
+            android:name=".frament.testpic.PhotoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
 
 
 
@@ -90,10 +112,14 @@
             android:name=".spanishAcitivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity android:name=".model.ComMainActivity">
+
         </activity>
         <activity
             android:name=".SearchResultActivity"
@@ -104,7 +130,11 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".frament.Community_Activity.Community_model"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" >
+
+
+
+        </activity>
         <activity
             android:name=".publish.deal_publish_Activity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
@@ -160,14 +190,7 @@
             android:name=".MyCenter.modify.ModifyDetail.addAddressDetailActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".regBirthdayActivity"></activity>
-        <activity android:name=".publish.deal_publish_Activity"
-                  android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
-        </activity>
-        <activity android:name=".CommodityActivity"
-                  android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
     </application>
 
 </manifest>

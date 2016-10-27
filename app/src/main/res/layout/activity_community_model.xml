@@ -42,7 +42,6 @@
 
 
     <ListView
-
         android:id="@+id/lv_tiezi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,6 +51,7 @@
     </ListView>
 
     <Button
+        android:onClick="inputDynamicClick"
         android:id="@+id/fatie"
         android:layout_width="40dp"
         android:layout_height="40dp"
