@@ -60,7 +60,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
     private Button care;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_model);
         //设置信息栏颜色
@@ -208,7 +208,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
 
 
     @Override
-    public void onClick(View v) {
+     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.backToSearch:
                 finish();
@@ -218,12 +218,17 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void careCommunity() {
+        private void careCommunity() {
+
         if (care.getText().toString().trim().equals("关注")) {
 
+
             int id = this.getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id", 0);
+
+
             if (id != 0) {
                 care.setText("已关注");
+
                 RequestParams params = new RequestParams(HttpUtile.yu + "/community/manegecarecom");
                 params.addQueryStringParameter("flag", "add");
                 params.addQueryStringParameter("userId", id + "");
@@ -253,7 +258,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
             } else {
                 Toast.makeText(Community_model.this, "还未登陆", Toast.LENGTH_LONG).show();
             }
-        }else{
+        } else {
             Toast.makeText(Community_model.this, "你已关注过了", Toast.LENGTH_LONG).show();
         }
     }
