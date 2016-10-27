@@ -54,6 +54,7 @@
             android:layout_alignStart="@+id/namecom"
             android:id="@+id/comdesc" />
         <Button
+            android:id="@+id/care"
             android:layout_alignBottom="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
