@@ -20,6 +20,7 @@ public class UserBean {
         public String userAddress_s;
         public String userAddress_c;
         public int LabelId;
+        private String token;
 
         public String getUserImg() {
             return userImg;
@@ -44,5 +45,6 @@ public class UserBean {
         public void setUserId(int userId) {
             this.userId = userId;
         }
+
     }
 }
