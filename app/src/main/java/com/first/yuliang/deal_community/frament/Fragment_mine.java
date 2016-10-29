@@ -217,7 +217,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
 
         if(RongIM.getInstance()!=null)
         {
-            RongIM.getInstance().startPrivateChat(getActivity(),"48","yuliang");
+            RongIM.getInstance().startPrivateChat(getActivity(),"49","title");
         }
 
     }

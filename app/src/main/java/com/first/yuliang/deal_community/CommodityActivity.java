@@ -2,18 +2,15 @@ package com.first.yuliang.deal_community;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -22,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.first.yuliang.deal_community.pojo.User;
 import com.google.gson.Gson;
@@ -202,7 +200,7 @@ public class CommodityActivity extends AppCompatActivity {
 
                 String img = imgs[position];
 
-                x.image().bind(iv_cg_c, "http://192.168.191.1:8080" + img);
+                x.image().bind(iv_cg_c, HttpUtile.szj + img);
 
                 return view;
             }
@@ -246,7 +244,7 @@ public class CommodityActivity extends AppCompatActivity {
         search = search.replace(" ","%");
         RequestParams params = null;
         try {
-            params = new RequestParams("http://192.168.191.1:8080/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
+            params = new RequestParams(HttpUtile.szj+"/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

@@ -38,4 +38,8 @@
 
 
     <color name="bgcolor">#33d685</color>
+    <style name="Animation">
+        <item name="android:windowEnterAnimation">@anim/enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/out_anim</item>
+    </style>
 </resources>

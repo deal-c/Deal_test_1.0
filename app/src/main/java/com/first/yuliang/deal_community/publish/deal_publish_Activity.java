@@ -1,23 +1,30 @@
 package com.first.yuliang.deal_community.publish;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.frament.pojo.CommodityInfo;
+import com.first.yuliang.deal_community.frament.utiles.ToastUtil;
+import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -25,10 +32,9 @@ import org.xutils.x;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 
 import me.nereo.multi_image_selector.MultiImageSelector;
-
-import static com.first.yuliang.deal_community.frament.utiles.HttpUtile.yu;
 
 public class deal_publish_Activity extends AppCompatActivity implements View.OnClickListener{
 
@@ -43,6 +49,13 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
     private RadioButton huan;
     private RadioButton  mai;
     private ImageView backtomain;
+    private EditText pro_title;
+    private EditText pro_desc;
+    private EditText location;
+    private Spinner pro_type;
+    private EditText pro_price;
+    private int userid;
+    private Integer buyway;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,22 +68,35 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
         zeng = ((RadioButton) findViewById(R.id.rb_zeng));
         mai = ((RadioButton) findViewById(R.id.rb_mai));
         punish = ((Button) findViewById(R.id.btn_punish));
+
         gv_photos = ((GridView) findViewById(R.id.gv_photos));
+        pro_title = ((EditText) findViewById(R.id.pub_product_title));
+        pro_desc = ((EditText) findViewById(R.id.pub_pro_desc));
+        location = ((EditText) findViewById(R.id.ways_desc));
+        pro_type = ((Spinner) findViewById(R.id.punish_type));
+        pro_price = ((EditText) findViewById(R.id.publish_price));
+
+
+
         backtomain.setOnClickListener(this);
         Intent intent=getIntent();
         String key=intent.getStringExtra("key");
         switch (key){
             case "juan":
                 juan.setChecked(true);
+                buyway=1;
                 break;
             case "zeng":
                 zeng.setChecked(true);
+                buyway=2;
                 break;
             case "huan":
                 huan.setChecked(true);
+                buyway=3;
                 break;
             case "mai":
                 mai.setChecked(true);
+                buyway=4;
                 break;
         }
 
@@ -158,7 +184,13 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
       switch (v.getId()){
           case R.id.btn_punish:
-              initDialog();
+              userid=this.getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
+           if (userid!=0){
+               initDialog();
+           } else{
+               ToastUtil.show(this,"还未登录");
+           }
+
               break;
           case R.id.backTomain:
               finish();
@@ -176,7 +208,7 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();//关闭dialog
 
-                sendImage();
+                uploadImage();
                 Toast.makeText(getApplicationContext(), "已确定", Toast.LENGTH_SHORT).show();
             }
         });
@@ -189,20 +221,35 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
         builder.create().show();
     }
 
-    private void sendImage() {
 
-        RequestParams params = new RequestParams(yu+"/proupload/imgup");
-        params.addBodyParameter("file",file);
-        x.http().post(params, new Callback.CommonCallback<String>() {
+    public void uploadImage(){
 
+        RequestParams requestParams=new RequestParams("http://192.168.191.1:8080/uploadpro/upimg");
+        requestParams.setMultipart(true);
+
+        CommodityInfo pro=new CommodityInfo(userid,
+                pro_title.getText().toString(),
+        Double.parseDouble(pro_price.getText().toString()),
+                pro_desc.getText().toString(),
+                null,new Date(),
+                location.getText().toString(),
+                buyway,pro_type.getSelectedItem().toString(),null,null
+                );
+        Gson gson=new Gson();
+        String info=gson.toJson(pro);
+        requestParams.addBodyParameter("file",file);
+        requestParams.addBodyParameter("info",info);
+
+        x.http().post(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                Toast.makeText(getApplicationContext(),result, Toast.LENGTH_SHORT).show();
+                Log.i("ModifyPersonInfo", "onSuccess: ");
+                ToastUtil.show(deal_publish_Activity.this,result);
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(getApplicationContext(),"defeat", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -215,8 +262,9 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
 
             }
         });
-    }
 
     }
+    }
+
 
 

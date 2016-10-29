@@ -4,9 +4,11 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,7 +16,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
@@ -26,18 +34,16 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.TextureMapView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.amap.api.maps.model.animation.Animation;
+import com.amap.api.maps.model.animation.ScaleAnimation;
 import com.amap.api.maps.overlay.PoiOverlay;
-import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.core.SuggestionCity;
-import com.amap.api.services.district.DistrictItem;
-import com.amap.api.services.district.DistrictResult;
-import com.amap.api.services.district.DistrictSearch;
-import com.amap.api.services.district.DistrictSearchQuery;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.first.yuliang.deal_community.CityPickerDialog;
@@ -46,14 +52,23 @@ import com.first.yuliang.deal_community.ToolsClass;
 import com.first.yuliang.deal_community.address.City;
 import com.first.yuliang.deal_community.address.County;
 import com.first.yuliang.deal_community.address.Province;
+import com.first.yuliang.deal_community.frament.pojo.GProduct;
+import com.first.yuliang.deal_community.frament.pojo.Store;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.frament.utiles.ToastUtil;
+import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.util.EncodingUtils;
 import org.json.JSONArray;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +76,7 @@ import java.util.List;
  * Created by yuliang on 2016/9/21.
  */
 public class Fragment_fujin extends Fragment implements LocationSource,
-        AMapLocationListener, View.OnClickListener, PoiSearch.OnPoiSearchListener ,DistrictSearch.OnDistrictSearchListener {
+        AMapLocationListener, View.OnClickListener, PoiSearch.OnPoiSearchListener {
     TextureMapView mapView = null;
     AMap aMap = null;
     private AMapLocationClient mlocationClient;
@@ -73,6 +88,11 @@ public class Fragment_fujin extends Fragment implements LocationSource,
     private Button product;
     private Button quyu;
     private List<Province> provinces = new ArrayList<Province>();
+    private List<Store> storeList = new ArrayList<Store>();
+    private List<GProduct> gProductList = new ArrayList<GProduct>();
+    private Button change;
+    private CommodityBean.Commodity commodity;
+    private ImageView image;
 
     @Nullable
     @Override
@@ -85,22 +105,38 @@ public class Fragment_fujin extends Fragment implements LocationSource,
         maijia = ((Button) view.findViewById(R.id.fujin_maijia));
         product = ((Button) view.findViewById(R.id.fujin_product));
         quyu = ((Button) view.findViewById(R.id.btn_quyu));
-
+        change = ((Button) view.findViewById(R.id.change));
         quyu.setOnClickListener(this);
         maijia.setOnClickListener(this);
         product.setOnClickListener(this);
-
+        change.setOnClickListener(this);
 
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，实现地图生命周期管理
 
         mapView.onCreate(savedInstanceState);
+
         init();
-        initMarker();
+//        initMarker();
+
+        //获得storelist
+        getStoeList();
+        getProductList();
+
         AMap.OnMarkerClickListener listener = new AMap.OnMarkerClickListener() {
 
             @Override
             public boolean onMarkerClick(Marker arg0) {
-                Toast.makeText(getActivity(), arg0.getTitle() + ":  " + arg0.getSnippet(), Toast.LENGTH_LONG).show();
+                if (arg0.getTitle()!="" && arg0.getTitle()!=null) {
+                    Toast.makeText(getActivity(), arg0.getTitle() + ":  " + arg0.getSnippet(), Toast.LENGTH_LONG).show();
+                }else {
+
+                    int id =((GProduct)arg0.getObject()).getCommodityid();
+                    getcombyid(id);
+                    Toast.makeText(getActivity(),commodity.commodityTitle, Toast.LENGTH_LONG).show();
+                    arg0.setInfoWindowEnable(false);
+                    innitPoupwindow();
+
+                }
                 return false;
             }
         };
@@ -120,23 +156,23 @@ public class Fragment_fujin extends Fragment implements LocationSource,
         }
     }
 
-    private void initMarker() {
-        LatLng marker1 = new LatLng(31.2762990000, 120.7417510000);
-        LatLng marker2 = new LatLng(31.2751160000, 120.7416330000);
-        LatLng marker3 = new LatLng(31.2750330000, 120.7436610000);
-        Marker marker = aMap.addMarker(new MarkerOptions().
-                position(marker1).
-                title("文星广场").
-                snippet("吃饭的地方!"));
-        Marker aff = aMap.addMarker(new MarkerOptions().
-                position(marker2).
-                title("篮球场").
-                snippet("玩的地方!"));
-        Marker ma = aMap.addMarker(new MarkerOptions().
-                position(marker3).
-                title("教室").
-                snippet("学习的地方!"));
-    }
+//    private void initMarker() {
+//        LatLng marker1 = new LatLng(31.2762990000, 120.7417510000);
+//        LatLng marker2 = new LatLng(31.2751160000, 120.7416330000);
+//        LatLng marker3 = new LatLng(31.2750330000, 120.7436610000);
+//        Marker marker = aMap.addMarker(new MarkerOptions().
+//                position(marker1).
+//                title("文星广场").
+//                snippet("吃饭的地方!"));
+//        Marker aff = aMap.addMarker(new MarkerOptions().
+//                position(marker2).
+//                title("篮球场").
+//                snippet("玩的地方!"));
+//        Marker ma = aMap.addMarker(new MarkerOptions().
+//                position(marker3).
+//                title("教室").
+//                snippet("学习的地方!"));
+//    }
 
 
     private void init() {
@@ -190,7 +226,9 @@ public class Fragment_fujin extends Fragment implements LocationSource,
                     && amapLocation.getErrorCode() == 0) {
                 Log.d("===经度：", "" + amapLocation.getLongitude());
                 Log.d("===纬度：", "" + amapLocation.getLatitude());
+                LatLng location = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());
                 mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
+
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": " + amapLocation.getErrorInfo();
                 Log.e("AmapErr", errText);
@@ -221,11 +259,11 @@ public class Fragment_fujin extends Fragment implements LocationSource,
             //获取一次定位结果：该方法默认为false。
             mLocationOption.setOnceLocation(true);
 
-          //获取最近3s内精度最高的一次定位结果：
-         //设置setOnceLocationLatest(boolean b)接口为true，启动定位时SDK会返回最近3s内精度最高的一次定位结果。如果设置其为true，setOnceLocation(boolean b)接口也会被设置为true，反之不会，默认为false。
+            //获取最近3s内精度最高的一次定位结果：
+            //设置setOnceLocationLatest(boolean b)接口为true，启动定位时SDK会返回最近3s内精度最高的一次定位结果。如果设置其为true，setOnceLocation(boolean b)接口也会被设置为true，反之不会，默认为false。
 //            mLocationOption.setOnceLocationLatest(true);
 
-        //设置是否返回地址信息（默认返回地址信息）
+            //设置是否返回地址信息（默认返回地址信息）
             mLocationOption.setNeedAddress(true);
             mlocationClient.startLocation();
         }
@@ -286,14 +324,16 @@ public class Fragment_fujin extends Fragment implements LocationSource,
         }
     }
 
-
+boolean is3d=true;
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fujin_maijia:
-//                getAllmaijia();
+                getAllmaijia();
+
                 break;
             case R.id.fujin_product:
+                getAllproduct();
                 break;
             case R.id.btn_quyu:
                 if (provinces.size() > 0) {
@@ -301,22 +341,71 @@ public class Fragment_fujin extends Fragment implements LocationSource,
                 } else {
                     new InitAreaTask(getActivity()).execute(0);
                 }
+                break;
+            case R.id.change:
+                if (is3d) {
+                    aMap.moveCamera(CameraUpdateFactory.changeTilt(50));
 
+                    is3d=false;
+                }else {
+                    aMap.moveCamera(CameraUpdateFactory.changeTilt(0));
+                    is3d=true;
+                }
                 break;
         }
 
     }
 
-    boolean flag = false;
+    boolean flag1 = true;
 
-    void getAllmaijia() {
-        if (flag) {
+    boolean flag2 = true;
+
+    private void getAllproduct() {
+        flag2=true;
+        if (!flag1) {
             aMap.clear();
-            flag = true;
+            etupLocationStyle();
+            Log.i("biaoji","隐藏商品");
+            flag1 = true;
         } else {
             aMap.clear();
-            initMarker();
-            flag = false;
+            etupLocationStyle();
+            addProMakerToMap();
+            flag1 = false;
+            Log.i("biaoji","显示商品");
+        }
+    }
+
+    private void addProMakerToMap() {
+
+        for (GProduct s : gProductList) {
+            LatLng marker = new LatLng(s.getLatitude(), s.getLongitude());
+            Marker a = aMap.addMarker(new MarkerOptions().
+//                    snippet(s.getCommodityid()+"").
+                    position(marker).icon(BitmapDescriptorFactory
+                    .defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+//            a.setInfoWindowEnable(false);
+            a.setObject(s);
+            startGrowAnimation(a);
+
+        }
+    }
+
+
+
+    void getAllmaijia() {
+        flag1=true;
+        if (!flag2) {
+            aMap.clear();
+            etupLocationStyle();
+            flag2 = true;
+            Log.i("biaoji","隐藏卖家");
+        } else {
+            aMap.clear();
+            etupLocationStyle();
+            addMarkersToMap();
+            flag2 = false;
+            Log.i("biaoji","显示卖家");
         }
     }
 
@@ -333,11 +422,13 @@ public class Fragment_fujin extends Fragment implements LocationSource,
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    //级联对话框
     private void showAddressDialog() {
 
         new CityPickerDialog(getActivity(), provinces, null, null, null,
@@ -357,44 +448,12 @@ public class Fragment_fujin extends Fragment implements LocationSource,
                         String text = selectCounty != null ? selectCounty
                                 .getAreaName() : "";
                         //将address赋值
-                           //poi搜素
+                        //poi搜素
                         doSearchQuery(address.toString());
-//                        search(address.toString());
+//
 
                     }
                 }).show();
-
-    }
-
-
-
-    private void search(String address){
-        aMap.clear();
-        DistrictSearch search = new DistrictSearch(getActivity());
-        DistrictSearchQuery query = new DistrictSearchQuery( );
-        query.setKeywords(address);
-        query.setShowBoundary(true);
-
-        Log.i("why",address);
-        search.setQuery(query);
-        search.setOnDistrictSearchListener(this);
-        search.searchDistrictAsyn();
-    }
-    @Override
-    public void onDistrictSearched(DistrictResult districtResult) {
-        Log.i("why","进来了");
-
-        final DistrictItem item = districtResult.getDistrict().get(0);
-        LatLonPoint centerLatLng=item.getCenter();
-        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(centerLatLng.getLatitude(), centerLatLng.getLongitude()),15));
-        if(centerLatLng!=null){
-            Log.i("why","!!!");
-            aMap.moveCamera(
-
-                    CameraUpdateFactory.newLatLngZoom(new LatLng(centerLatLng.getLatitude(), centerLatLng.getLongitude()),15));
-        }else {
-            Log.i("why","buhuiba ");
-        }
 
     }
 
@@ -465,7 +524,7 @@ public class Fragment_fujin extends Fragment implements LocationSource,
     private PoiSearch poiSearch;// POI搜索
 
     protected void doSearchQuery(String keyWord) {
-        Log.i("why",keyWord);
+        Log.i("why", keyWord);
         currentPage = 0;
         query = new PoiSearch.Query(keyWord, "", "");// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
         query.setPageSize(10);// 设置每页最多返回多少条poiitem
@@ -491,10 +550,15 @@ public class Fragment_fujin extends Fragment implements LocationSource,
                     if (poiItems != null && poiItems.size() > 0) {
                         aMap.clear();// 清理之前的图标
                         PoiOverlay poiOverlay = new PoiOverlay(aMap, poiItems);
-                        poiOverlay.removeFromMap();
-                        poiOverlay.addToMap();
-                        aMap.moveCamera(CameraUpdateFactory.zoomTo(17));
-                        poiOverlay.zoomToSpan();
+//                        poiOverlay.removeFromMap();
+//                        poiOverlay.addToMap();
+                        LatLng a=new LatLng(poiOverlay.getPoiItem(0).getLatLonPoint().getLatitude(),poiOverlay.getPoiItem(0).getLatLonPoint().getLongitude());
+                        aMap.animateCamera(  CameraUpdateFactory.newCameraPosition(new CameraPosition(a, 17, 50, 0)) ,1000,null);
+//                        aMap.moveCamera(CameraUpdateFactory.zoomTo(14));
+                        is3d=false;
+//                        poiOverlay.zoomToSpan();
+
+
                     } else if (suggestionCities != null
                             && suggestionCities.size() > 0) {
                         showSuggestCity(suggestionCities);
@@ -528,4 +592,153 @@ public class Fragment_fujin extends Fragment implements LocationSource,
 
     }
 
+    private void getStoeList() {
+        RequestParams params = new RequestParams(HttpUtile.yu + "/community/togetstore");
+
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                Type type = new TypeToken<List<Store>>() {
+                }.getType();
+                storeList = gson.fromJson(result, type);
+                Log.i("storeList", storeList.size() + "");
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(getActivity(), "网络访问错误", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+    }
+
+    private void addMarkersToMap() {
+
+        for (Store s : storeList) {
+            LatLng marker = new LatLng(s.getLatitude(), s.getLongitude());
+            Marker a = aMap.addMarker(new MarkerOptions().
+                    position(marker).
+                    title(s.getTitle()).
+                    snippet(s.getContent()).icon(BitmapDescriptorFactory
+                    .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+            startGrowAnimation(a);
+        }
+
+
+    }
+
+    private void getProductList() {
+        RequestParams params = new RequestParams(HttpUtile.yu + "/community/togetgproduct");
+
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                Type type = new TypeToken<List<GProduct>>() {
+                }.getType();
+                gProductList = gson.fromJson(result, type);
+                Log.i("storeList", gProductList.size() + "");
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(getActivity(), "网络访问错误", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+    }
+    //开启maker 生长动画
+    private void startGrowAnimation(Marker growMarker) {
+        if(growMarker != null) {
+            Log.i("biaoji","进了来");
+            Animation animation = new ScaleAnimation(0,1,0,1);
+            animation.setInterpolator(new LinearInterpolator());
+            //整个移动所需要的时间
+            animation.setDuration(1000);
+            //设置动画
+            growMarker.setAnimation(animation);
+            //开始动画
+            growMarker.startAnimation();
+        }
+    }
+
+   private void getcombyid(int commodityId){
+       RequestParams params=new RequestParams(HttpUtile.yu+"/community/togetproduct");
+       params.addQueryStringParameter("commodityId",commodityId+"");
+       x.http().get(params, new Callback.CommonCallback<String>() {
+           @Override
+           public void onSuccess(String result) {
+               Gson gson=new Gson();
+                commodity=gson.fromJson(result,CommodityBean.Commodity.class);
+
+           }
+
+           @Override
+           public void onError(Throwable ex, boolean isOnCallback) {
+
+           }
+
+           @Override
+           public void onCancelled(CancelledException cex) {
+
+           }
+
+           @Override
+           public void onFinished() {
+
+           }
+       });
+
+    }
+    private void innitPoupwindow() {
+        Log.i("innitPoupwindow","进来了");
+        View v = LayoutInflater.from(getActivity()).inflate(R.layout.pro_popwindow_item, null);
+        WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+
+        final PopupWindow popupWindow = new PopupWindow(v, ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+
+        //popupwiondow外面点击，popupwindow消失
+        popupWindow.setFocusable(true);
+        popupWindow.update();
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+
+        ((LinearLayout) v.findViewById(R.id.pop)).setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"跳转的商品详情",Toast.LENGTH_LONG).show();
+            }
+        });
+        ((TextView) v.findViewById(R.id.tv_11)).setText(commodity.commodityTitle);
+        ((TextView) v.findViewById(R.id.tv_22)).setText("￥："+commodity.price);
+        image = ((ImageView) v.findViewById(R.id.iv11));
+        x.image().bind(image,"http://10.40.5.62:8080"+commodity.commodityImg);
+        popupWindow.setAnimationStyle(R.style.Animation);
+//        popupWindow.showAsDropDown(view);
+        popupWindow.showAsDropDown(getView());
+
+    }
 }
