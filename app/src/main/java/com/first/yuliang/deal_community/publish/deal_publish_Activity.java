@@ -18,7 +18,6 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
-import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -28,6 +27,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import me.nereo.multi_image_selector.MultiImageSelector;
+
+import static com.first.yuliang.deal_community.frament.utiles.HttpUtile.yu;
 
 public class deal_publish_Activity extends AppCompatActivity implements View.OnClickListener{
 
@@ -158,8 +159,10 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
       switch (v.getId()){
           case R.id.btn_punish:
               initDialog();
+              break;
           case R.id.backTomain:
               finish();
+              break;
       }
     }
 
@@ -172,6 +175,7 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();//关闭dialog
+
                 sendImage();
                 Toast.makeText(getApplicationContext(), "已确定", Toast.LENGTH_SHORT).show();
             }
@@ -187,7 +191,7 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
 
     private void sendImage() {
 
-        RequestParams params = new RequestParams(HttpUtile.yu+"/proupload/imgup");
+        RequestParams params = new RequestParams(yu+"/proupload/imgup");
         params.addBodyParameter("file",file);
         x.http().post(params, new Callback.CommonCallback<String>() {
 
@@ -212,4 +216,7 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
             }
         });
     }
-}
+
+    }
+
+

@@ -10,7 +10,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,10 +53,10 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
     private TextView tv_address_keep;
     private EditText et_reciver;
     private EditText et_contactPhone;
-    private EditText et_city;
+    private TextView tv_address_city;
 
     private EditText et_city_detail;
-    private SwitchCompat sc_isdefault;
+
     private ImageView iv_add;
     private CheckBox cb_isdefault;
     private RelativeLayout rl_city;
@@ -110,7 +109,7 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
         tv_address_keep = ((TextView) findViewById(R.id.tv_address_keep));
         et_reciver = ((EditText) findViewById(R.id.et_reciver));
         et_contactPhone = ((EditText) findViewById(R.id.et_contactPhone));
-        et_city = ((EditText) findViewById(R.id.et_city));
+        tv_address_city = ((TextView) findViewById(R.id.tv_address_city));
         iv_add = ((ImageView) findViewById(R.id.iv_add));
         et_city_detail = ((EditText) findViewById(R.id.et_city_detail));
         cb_isdefault = ((CheckBox) findViewById(R.id.cb_isdefault));
@@ -131,7 +130,7 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
 
         try {
             params.addBodyParameter("contactPhoneNum", et_contactPhone.getText().toString().trim());
-            params.addBodyParameter("city", URLEncoder.encode(et_city.getText().toString().trim(), "utf-8"));
+            params.addBodyParameter("city", URLEncoder.encode(tv_address_city.getText().toString().trim(), "utf-8"));
             params.addBodyParameter("userName", URLEncoder.encode(et_reciver.getText().toString().trim(), "utf-8"));
             params.addBodyParameter("addressDetail", URLEncoder.encode(et_city_detail.getText().toString().trim(), "utf-8"));
             params.addBodyParameter("isdefault", URLEncoder.encode(cb_isdefault.getText().toString().trim(), "utf-8"));
@@ -320,7 +319,7 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
                                         .getAreaName() : "");
                         String text = selectCounty != null ? selectCounty
                                 .getAreaName() : "";
-                        et_city.setText(address);
+                        tv_address_city.setText(address);
                     }
                 }).show();
     }

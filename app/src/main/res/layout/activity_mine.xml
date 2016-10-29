@@ -50,23 +50,25 @@
 
                 <ImageView
                     android:id="@+id/iv_pic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentTop="true"
                     android:src="@drawable/u88"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="10dp"/>
+                  android:layout_marginTop="20dp"
+                    android:scaleType="centerCrop"
+                   android:layout_centerInParent="true"/>
 
                 <TextView
                     android:id="@+id/tv_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="请登录用户"
-                    android:layout_toRightOf="@id/iv_pic"
-                    android:layout_alignTop="@id/iv_pic"
-                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/iv_pic"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
                     android:textSize="18sp"
                     android:textColor="#fff"/>
+
             </RelativeLayout>
 
             <View
@@ -358,7 +360,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="联系客服"
+                    android:text="联系卖家"
                     android:textColor="#000"
                     android:textSize="20sp"
 

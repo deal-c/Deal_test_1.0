@@ -3,6 +3,7 @@ package com.first.yuliang.deal_community.frament;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -15,7 +16,6 @@ import android.widget.TextView;
 
 import com.first.yuliang.deal_community.MyCenter.MyBuyActivity;
 import com.first.yuliang.deal_community.MyCenter.MyCoinActivity;
-import com.first.yuliang.deal_community.MyCenter.MyContactActivity;
 import com.first.yuliang.deal_community.MyCenter.MyMaiActivity;
 import com.first.yuliang.deal_community.MyCenter.MyPublishActivity;
 import com.first.yuliang.deal_community.MyCenter.MyRecentActivity;
@@ -32,6 +32,10 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
+
 /**
  * Created by yuliang on 2016/9/21.
  */
@@ -46,11 +50,10 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
     private RelativeLayout rl_recent;
     private RelativeLayout rl_contact;
     private RelativeLayout rl_shehzhi;
-    private TextView tv_publish_num;
-    private TextView tv_mai_num;
-    private TextView tv_buy_num;
+
+
     int id=0;
-    //int loginUserId=0;
+
     private User user=null;
 
     @Nullable
@@ -81,14 +84,13 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
         tv_login = ((TextView) view.findViewById(R.id.tv_login));
 
         id=getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
+       Log.e("IDddd","+++++++"+id);
 
-        Log.e("id+++","++"+id );
         int intoflag=getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("intoflag",0);
 
 
-//        loginUserId=getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("loginUserId",0);
-//        int loginCount=getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("loginCount",1);
-        //Log.e("loginCount","=============="+loginCount+"++++++++++++"+loginUserId);
+
+
         if(intoflag==1)
         {
             iv_pic.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +172,6 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
         {
             case R.id.rl_publish:
                 Intent intenPublisht=new Intent(getActivity(),MyPublishActivity.class);
-                //intenPublisht.putExtra("userId",)
                 intenPublisht.putExtra("userId",id+"");
                 startActivity(intenPublisht);
                 break;
@@ -195,8 +196,13 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
                 startActivity(intentRecent);
                 break;
             case R.id.rl_contact:
-                Intent intentContact=new Intent(getActivity(),MyContactActivity.class);
-                startActivity(intentContact);
+//                Intent intentContact=new Intent(getActivity(),MyContactActivity.class);
+//                intentContact.putExtra("userId",id+"");
+//                startActivity(intentContact);
+
+
+                start();
+
                 break;
             case R.id.rl_shehzhi:
                 Intent intentShezhi=new Intent(getActivity(),MyShezhiActivity.class);
@@ -204,6 +210,16 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
                 break;
 
         }
+    }
+
+    private void start() {
+
+
+        if(RongIM.getInstance()!=null)
+        {
+            RongIM.getInstance().startPrivateChat(getActivity(),"48","yuliang");
+        }
+
     }
 
     @Override
@@ -219,9 +235,6 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
 
     private void getUserData()
     {
-
-        Log.e("hhhh","+++++" );
-
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/SelectUserServlet?id="+id);
 
         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -229,16 +242,17 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
             @Override
             public void onSuccess(String result) {
 
-
-
                 Gson gson=new Gson();
                 user=gson.fromJson(result,User.class);
-
-                Log.e("gggggg" ,"+++");
 
 
 
                 tv_login.setText(user.getUserName());
+
+                x.image().bind(iv_pic,HttpUtile.zy1+user.getUserImg());
+
+                String token=user.getToken();
+                connect(token);
 
                 iv_pic.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -265,6 +279,34 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
             @Override
             public void onFinished() {
 
+            }
+        });
+    }
+
+    private void connect(String token) {
+
+        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+            @Override
+            public void onTokenIncorrect() {
+                Log.e("Activitycc", "--onTokenIncorrect");
+            }
+
+            @Override
+            public void onSuccess(String userid) {
+
+                Log.e("Activitycc", "--onSuccess" + userid);
+
+
+
+                RongIM.getInstance().refreshUserInfoCache(new UserInfo(userid,user.getUserName(), Uri.parse(HttpUtile.zy1+user.getUserImg())));
+
+
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+
+                Log.e("Activitycc", "--onError" + errorCode);
             }
         });
     }
