@@ -41,6 +41,7 @@
             android:background="#bbb"
             tools:ignore="Suspicious0dp"/>
         <Button
+            android:id="@+id/btn_paixu"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:paddingRight="20dp"
@@ -57,6 +58,7 @@
             android:background="#bbb"
             tools:ignore="Suspicious0dp"/>
         <Button
+            android:id="@+id/btn_jiage"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:paddingRight="20dp"
@@ -73,6 +75,7 @@
             android:background="#bbb"
             tools:ignore="Suspicious0dp"/>
         <Button
+            android:id="@+id/btn_way"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:paddingRight="20dp"
