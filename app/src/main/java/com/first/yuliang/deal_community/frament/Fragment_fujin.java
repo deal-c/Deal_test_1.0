@@ -4,9 +4,12 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
@@ -17,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,6 +37,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
+import com.amap.api.maps.Projection;
 import com.amap.api.maps.TextureMapView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
@@ -72,6 +78,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.amap.api.maps.model.BitmapDescriptorFactory.defaultMarker;
+
 /**
  * Created by yuliang on 2016/9/21.
  */
@@ -93,7 +101,7 @@ public class Fragment_fujin extends Fragment implements LocationSource,
     private Button change;
     private CommodityBean.Commodity commodity;
     private ImageView image;
-
+    Dialog progressDialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -130,11 +138,15 @@ public class Fragment_fujin extends Fragment implements LocationSource,
                     Toast.makeText(getActivity(), arg0.getTitle() + ":  " + arg0.getSnippet(), Toast.LENGTH_LONG).show();
                 }else {
 
+                   // icon(BitmapDescriptorFactory
+                    //        .defaultMarker(BitmapDescriptorFactory.HUE_RED))
+
                     int id =((GProduct)arg0.getObject()).getCommodityid();
                     getcombyid(id);
+                    jumpPoint(arg0);
                     Toast.makeText(getActivity(),commodity.commodityTitle, Toast.LENGTH_LONG).show();
                     arg0.setInfoWindowEnable(false);
-                    innitPoupwindow();
+//                    innitPoupwindow();
 
                 }
                 return false;
@@ -382,8 +394,8 @@ boolean is3d=true;
             LatLng marker = new LatLng(s.getLatitude(), s.getLongitude());
             Marker a = aMap.addMarker(new MarkerOptions().
 //                    snippet(s.getCommodityid()+"").
-                    position(marker).icon(BitmapDescriptorFactory
-                    .defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                    position(marker).icon(
+                            defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 //            a.setInfoWindowEnable(false);
             a.setObject(s);
             startGrowAnimation(a);
@@ -630,8 +642,8 @@ boolean is3d=true;
             Marker a = aMap.addMarker(new MarkerOptions().
                     position(marker).
                     title(s.getTitle()).
-                    snippet(s.getContent()).icon(BitmapDescriptorFactory
-                    .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+                    snippet(s.getContent()).icon(
+                    defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
             startGrowAnimation(a);
         }
 
@@ -684,6 +696,9 @@ boolean is3d=true;
     }
 
    private void getcombyid(int commodityId){
+       progressDialog = ToolsClass.createLoadingDialog(getActivity(), "注册中...", true,
+               0);
+       progressDialog.show();
        RequestParams params=new RequestParams(HttpUtile.yu+"/community/togetproduct");
        params.addQueryStringParameter("commodityId",commodityId+"");
        x.http().get(params, new Callback.CommonCallback<String>() {
@@ -691,12 +706,12 @@ boolean is3d=true;
            public void onSuccess(String result) {
                Gson gson=new Gson();
                 commodity=gson.fromJson(result,CommodityBean.Commodity.class);
-
+               innitPoupwindow();
            }
 
            @Override
            public void onError(Throwable ex, boolean isOnCallback) {
-
+                  ToastUtil.show(getActivity(),"访问失败");
            }
 
            @Override
@@ -706,7 +721,7 @@ boolean is3d=true;
 
            @Override
            public void onFinished() {
-
+               progressDialog.dismiss();
            }
        });
 
@@ -735,10 +750,41 @@ boolean is3d=true;
         ((TextView) v.findViewById(R.id.tv_11)).setText(commodity.commodityTitle);
         ((TextView) v.findViewById(R.id.tv_22)).setText("￥："+commodity.price);
         image = ((ImageView) v.findViewById(R.id.iv11));
-        x.image().bind(image,"http://10.40.5.62:8080"+commodity.commodityImg);
+        x.image().bind(image,HttpUtile.szj+commodity.commodityImg);
         popupWindow.setAnimationStyle(R.style.Animation);
 //        popupWindow.showAsDropDown(view);
-        popupWindow.showAsDropDown(getView());
+        popupWindow.showAsDropDown(maijia);
 
     }
+
+    public void jumpPoint(final Marker marker) {
+        final Handler handler = new Handler();
+        final long start = SystemClock.uptimeMillis();
+        Projection proj = aMap.getProjection();
+        final LatLng markerLatlng = marker.getPosition();
+        Point markerPoint = proj.toScreenLocation(markerLatlng);
+        markerPoint.offset(0, -100);
+        final LatLng startLatLng = proj.fromScreenLocation(markerPoint);
+        final long duration = 1500;
+
+        final Interpolator interpolator = new BounceInterpolator();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                long elapsed = SystemClock.uptimeMillis() - start;
+                float t = interpolator.getInterpolation((float) elapsed
+                        / duration);
+                double lng = t * markerLatlng.longitude + (1 - t)
+                        * startLatLng.longitude;
+                double lat = t * markerLatlng.latitude + (1 - t)
+                        * startLatLng.latitude;
+                marker.setPosition(new LatLng(lat, lng));
+                if (t < 1.0) {
+                    handler.postDelayed(this, 16);
+                }
+            }
+        });
+    }
+
+
 }
