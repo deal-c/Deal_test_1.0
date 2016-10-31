@@ -158,7 +158,7 @@ public class CommodityActivity extends AppCompatActivity {
                 tv_local = ((TextView) view.findViewById(R.id.tv_local));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg, "http://10.40.5.62:8080"+(commodity.commodityImg.split(","))[0]);
+                x.image().bind(iv_cg, "http://192.168.191.1:8080"+(commodity.commodityImg.split(","))[0]);
                 tv_cg.setText(commodity.commodityTitle);
                 tv_price.setText(commodity.price+"");
                 tv_local.setText(commodity.location);
