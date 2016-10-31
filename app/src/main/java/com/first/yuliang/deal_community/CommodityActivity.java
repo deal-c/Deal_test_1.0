@@ -1,6 +1,7 @@
 package com.first.yuliang.deal_community;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,13 +40,13 @@ public class CommodityActivity extends AppCompatActivity {
 
     private ListView lv_commodity;
     private Intent intent;
+    private String search;
+    private CommodityBean.Commodity commodity;
     private BaseAdapter adapter_l;
     private BaseAdapter adapter_g;
     final List<CommodityBean.Commodity> commodityList = new ArrayList<CommodityBean.Commodity>();
     private GridView gv_commodity;
     private String[] imgs;
-    private CommodityBean.Commodity commodity;
-    private String search;
     private ImageView iv_user_head;
     private TextView tv_user_name;
     private Button btn_local;
@@ -63,6 +64,9 @@ public class CommodityActivity extends AppCompatActivity {
     private ObjectAnimator oa1;
     private ObjectAnimator oa2;
     private User user=null;
+    private Button btn_buy;
+    private int id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,6 +212,23 @@ public class CommodityActivity extends AppCompatActivity {
             }
         };
         lv_commodity.setAdapter(adapter_l);
+        btn_buy = ((Button) findViewById(R.id.btn_buy));
+        btn_buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                id = getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
+                if(id == 0){
+                    Intent intent = new Intent(CommodityActivity.this, RegActivity.class);
+                    intent.putExtra("flag",1);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(CommodityActivity.this, Order.class);
+                    intent.putExtra("search",search);
+                    intent.putExtra("bundle",commodity);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private void getUser(Integer releaseUserId) {

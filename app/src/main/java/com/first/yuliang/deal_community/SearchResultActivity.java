@@ -32,6 +32,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -96,6 +98,8 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     private Button btn_price;
     private Button btn_way;
     private CustomSeekbar customSeekBar;
+    private RadioGroup rg_way;
+    private int way = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -356,7 +360,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void getCommodityList(String search) {
-
+        tv_null.setVisibility(View.GONE);
         if(adapter_g!=null && adapter_l!=null) {
             gv_commodity_list.setAdapter(null);
             lv_commodity_list.setAdapter(null);
@@ -365,7 +369,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         search = search.replace(" ","%");
         RequestParams params = null;
         String url = CommodityURL.SUN_0 + "selectcommodity";
-        String select = "?search="+search+"&"+"location="+location+"&"+"orderFlag="+orderFlag+"&"+"lowPrice="+c_low+"&"+"highPrice="+c_high;
+        String select = "?search="+search+"&"+"location="+location+"&"+"orderFlag="+orderFlag+"&"+"lowPrice="+c_low+"&"+"highPrice="+c_high+"&"+"way="+way;
         Log.e("看url===========",url+select);
         params = new RequestParams(url+select);
         x.http().get(params,new Callback.CommonCallback<String>(){
@@ -499,13 +503,35 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
         PopupWindow popupWindow=new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-
-
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
 
         //显示在v的下面
         popupWindow.showAsDropDown(line);
+        rg_way = ((RadioGroup) view.findViewById(R.id.rg_way));
+        rg_way.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.radioButton0:
+                        way = 0;
+                        getCommodityList(search);
+                        break;
+                    case R.id.radioButton1:
+                        way = 1;
+                        getCommodityList(search);
+                        break;
+                    case R.id.radioButton2:
+                        way = 2;
+                        getCommodityList(search);
+                        break;
+                    case R.id.radioButton3:
+                        way = 3;
+                        getCommodityList(search);
+                        break;
+                }
+            }
+        });
     }
     @Override
     public void onTouchResponse(int volume) {
