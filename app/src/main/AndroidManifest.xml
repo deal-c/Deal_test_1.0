@@ -191,6 +191,15 @@
                     android:scheme="rong" />
             </intent-filter>
 
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".regBirthdayActivity"/>
+        <activity
+            android:name=".publish.deal_publish_Activity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
+        <activity
+            android:name=".CommodityActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
     </application>
 
