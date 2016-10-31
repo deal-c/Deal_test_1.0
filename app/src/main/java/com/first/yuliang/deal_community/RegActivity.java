@@ -14,9 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.Util.MD5Utils;
-import com.first.yuliang.deal_community.application.MyApplication;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
-import com.first.yuliang.deal_community.pojo.User;
 import com.first.yuliang.deal_community.pojo.UserBean;
 import com.google.gson.Gson;
 
@@ -28,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class RegActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn_register;
@@ -38,8 +35,6 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     private EditText et_psd;
     private CheckBox cb_remeberuser;
     private List<UserBean.User> users=new ArrayList<>();
-    private int flag = 0;
-    private Intent intent;
 
     Dialog progressDialog;
 
@@ -49,20 +44,19 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_reg);
 
 
-        intent = getIntent();
-        flag = Integer.parseInt(intent.getStringExtra("flag"));
-        Log.e("看看是不是传值过来==========",flag+"");
-
-            et_username = ((EditText) findViewById(R.id.et_username));
-            et_psd = ((EditText) findViewById(R.id.et_psd));
-            cb_remeberuser = ((CheckBox) findViewById(R.id.cb_remeberuser));
-            btn_login = ((Button) findViewById(R.id.btn_login));
-
-            btn_reg = ((Button) findViewById(R.id.btn_reg));
 
 
-            btn_login.setOnClickListener(this);
-            btn_reg.setOnClickListener(this);
+
+        et_username = ((EditText) findViewById(R.id.et_username));
+        et_psd = ((EditText) findViewById(R.id.et_psd));
+        cb_remeberuser = ((CheckBox) findViewById(R.id.cb_remeberuser));
+        btn_login = ((Button) findViewById(R.id.btn_login));
+
+        btn_reg = ((Button) findViewById(R.id.btn_reg));
+
+
+        btn_login.setOnClickListener(this);
+        btn_reg.setOnClickListener(this);
 
         SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
 
@@ -74,24 +68,28 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
         if(preference.getInt("fromModifyToReg",0)!=0)
         {
-            Intent intent=getIntent();
-            String username = intent.getStringExtra("userNickName").toString().trim();
-            if (username == userName) {
-                et_username.setText(userName);
 
-            } else if (username != userName && userName != "") {
-                SharedPreferences.Editor edit =preference.edit();
-                edit.putString("userName",username);
-                edit.commit();
-                username=preference.getString("userName","");
+            if(preference.getInt("zhuxiao",0)==0) {
+                Intent intent = getIntent();
+                String userNickName = intent.getStringExtra("userNickName").toString().trim();
+                if (userNickName == userName) {
+                    et_username.setText(userName);
 
-                et_username.setText(username);
-            }else
-                if(userName=="")
-                {
+                } else if (userNickName != userName && userName != "") {
+                    SharedPreferences.Editor edit = preference.edit();
+                    edit.putString("userName", userNickName);
+                    edit.commit();
+                    userNickName = preference.getString("userName", "");
+
+                    et_username.setText(userNickName);
+                } else if (userName == "") {
                     et_username.setText(userName);
                 }
-
+            }else
+            {
+                //Intent intent=getIntent();
+                et_username.setText(preference.getString("userName",""));
+            }
         }
         else
         {
@@ -137,8 +135,6 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
 
         RequestParams params=new RequestParams(HttpUtile.zy+"servlet/loginApp");
-//        params.addBodyParameter("username",et_username.getText().toString().trim());
-//        params.addBodyParameter("psd",et_psd.getText().toString().trim());
         x.http().post(params, new Callback.CommonCallback<String>() {
 
 
@@ -175,18 +171,19 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
                         edit.putInt("count", 1);
                         edit.putInt("id",users.get(i).userId);
-
-                        User user=new MyApplication().user;
-                        user.setUserId(users.get(i).userId);
+//
+//                        User user=new MyApplication().user;
+//                        user.setUserId(users.get(i).userId);
 
                         edit.commit();
 
                         progressDialog.hide();
                         Toast.makeText(RegActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                        if (flag==0) {
-                            Intent intent = new Intent(RegActivity.this, mainActivity.class);
-                            startActivity(intent);
-                        }
+
+                        Intent intent=new Intent(RegActivity.this,mainActivity.class);
+
+                        startActivity(intent);
+
                         RegActivity.this.finish();
                     }
 
@@ -199,6 +196,10 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
+
+
+                Toast.makeText(RegActivity.this,"未登录",Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -209,6 +210,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
         });
     }
@@ -220,7 +222,10 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
         if(preference.getInt("fromModifyToReg",0)==1)
         {
+            //edit.putInt("fromModifyToReg",2);
+            edit.putInt("id",0);
             edit.putInt("intoflag",1);
+            edit.putInt("zhuxiao",1);
             edit.commit();
             Intent intent=new Intent(RegActivity.this,mainActivity.class);
             startActivity(intent);
