@@ -186,7 +186,7 @@
                     android:pathPrefix="/conversation/"
                     android:scheme="rong" />
             </intent-filter>
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            </activity>
         <activity android:name=".regBirthdayActivity"/>
         <activity
             android:name=".publish.deal_publish_Activity"
