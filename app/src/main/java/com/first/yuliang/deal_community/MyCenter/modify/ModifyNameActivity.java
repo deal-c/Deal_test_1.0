@@ -1,6 +1,8 @@
 package com.first.yuliang.deal_community.MyCenter.modify;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +34,9 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
     private Toolbar toolbar_modify_name;
 
 
+
+    SharedPreferences preference=null;
+    SharedPreferences.Editor edit=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,8 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
         tv_keep_name = ((TextView) findViewById(R.id.tv_keep_name));
         iv_modify_name_back = ((ImageView) findViewById(R.id.iv_modify_name_back));
 
+        preference= getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
+        edit=preference.edit();
 
         Intent intent=getIntent();
         String userName=intent.getStringExtra("name");
@@ -51,6 +58,8 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
 //        Log.e("userId","++++++++++"+userId);
 //        Log.e("userId","=========="+userName);
         et_nicheng.setText(userName);
+        edit.putString("modifyNameBefore",et_nicheng.getText().toString());
+        edit.commit();
 
         iv_remove.setOnClickListener(this);
 
@@ -64,6 +73,8 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
 
     private void getUserNameData() {
 
+      edit.putInt("iskeepName",1);
+        edit.commit();
 
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/ModifyUserServlet");
         try {
@@ -89,6 +100,9 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
                 }
                 else
                 {
+
+                    edit.putInt("iskeepName",0);
+                    edit.commit();
                     Toast.makeText(ModifyNameActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -125,10 +139,19 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.iv_modify_name_back:
 
-                Intent intentName = new Intent();
-                intentName.putExtra("name", et_nicheng.getText().toString().trim());
-                ModifyNameActivity.this.setResult(2, intentName);
-                ModifyNameActivity.this.finish();
+                if(preference.getInt("iskeepName",0)!=0) {
+                    Intent intentName = new Intent();
+                    intentName.putExtra("name", et_nicheng.getText().toString().trim());
+                    ModifyNameActivity.this.setResult(2, intentName);
+                    ModifyNameActivity.this.finish();
+                }
+                else
+                {
+                    Intent intentName = new Intent();
+                    intentName.putExtra("name", preference.getString("modifyNameBefore","").toString().trim());
+                    ModifyNameActivity.this.setResult(2, intentName);
+                    ModifyNameActivity.this.finish();
+                }
                 break;
 
         }
@@ -143,9 +166,18 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onBackPressed() {
 
-        Intent intentName = new Intent();
-        intentName.putExtra("name", et_nicheng.getText().toString().trim());
-        ModifyNameActivity.this.setResult(2, intentName);
-        ModifyNameActivity.this.finish();
+        if(preference.getInt("iskeepName",0)!=0) {
+            Intent intentName = new Intent();
+            intentName.putExtra("name", et_nicheng.getText().toString().trim());
+            ModifyNameActivity.this.setResult(2, intentName);
+            ModifyNameActivity.this.finish();
+        }
+        else
+        {
+            Intent intentName = new Intent();
+            intentName.putExtra("name", preference.getString("modifyNameBefore","").toString().trim());
+            ModifyNameActivity.this.setResult(2, intentName);
+            ModifyNameActivity.this.finish();
+        }
     }
 }

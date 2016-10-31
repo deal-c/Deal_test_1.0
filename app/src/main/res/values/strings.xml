@@ -14,4 +14,7 @@
         <item>自行车</item>
         <item>数码产品</item>
     </string-array>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+    <string name="title_alert">提示</string>
 </resources>

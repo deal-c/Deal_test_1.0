@@ -56,6 +56,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
 
     int userId=0;
     private ImageView iv_modify_main_back;
+    private ImageView iv_modify_tx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,9 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
 
         //Log.e("userId","++++++++"+userId);
         rl_modify_tx = ((RelativeLayout) findViewById(R.id.rl_modify_tx));
+        iv_modify_tx = ((ImageView) findViewById(R.id.iv_modify_tx));
+
+        x.image().bind(iv_modify_tx,HttpUtile.zy1+user.getUserImg());
 
         rl_modify_name = ((RelativeLayout) findViewById(R.id.rl_modify_name));
         tv_show_name = ((TextView) findViewById(R.id.tv_show_name));
@@ -118,7 +122,9 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
         {
             case R.id.rl_modify_tx:
                 Intent intent_modify_tx=new Intent(this,ModifyTxActivity.class);
-                startActivity(intent_modify_tx);
+                intent_modify_tx.putExtra("userId",userId+"");
+                intent_modify_tx.putExtra("userImg",user.getUserImg());
+                startActivityForResult(intent_modify_tx,4);
                 break;
             case R.id.rl_modify_name:
                 Intent intent_modify_name=new Intent(this,ModifyNameActivity.class);
@@ -185,10 +191,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 dialog.dismiss();
                 ModifyActivity.this.finish();
                 Intent intentBack=new Intent(ModifyActivity.this, RegActivity.class);
-
                 intentBack.putExtra("userNickName",tv_show_name.getText().toString().trim());
-               // Log.e("userNickName","++++++++++"+tv_show_name.getText().toString().trim());
-
+//                intentBack.putExtra("flag","0");
                 SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit=preference.edit();
                 edit.putInt("fromModifyToReg",1);
@@ -221,6 +225,12 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
             case 3:
                 String data3=data.getStringExtra("often");
                 tv_show_oftenlive.setText(data3);
+                break;
+            case 4:
+
+
+                String data4=data.getStringExtra("data");
+                x.image().bind(iv_modify_tx,HttpUtile.zy1+data4);
                 break;
 
         }

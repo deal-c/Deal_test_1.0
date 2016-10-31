@@ -1,6 +1,8 @@
 package com.first.yuliang.deal_community.MyCenter.modify;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -29,6 +31,8 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
     private ImageView iv_modify_often_back;
     int userId=0;
 
+    SharedPreferences preference=null;
+    SharedPreferences.Editor edit=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +43,16 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
         iv_remove_often_live = ((ImageView) findViewById(R.id.iv_remove_often_live));
         iv_modify_often_back = ((ImageView) findViewById(R.id.iv_modify_often_back));
 
+        preference= getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
+        edit=preference.edit();
 
         Intent intent=getIntent();
         String userAddress_s=intent.getStringExtra("userAddress_s");
         userId=Integer.parseInt(intent.getStringExtra("userId").trim());
 
         et_often_live.setText(userAddress_s);
+        edit.putString("modifyOftenBefore",et_often_live.getText().toString());
+        edit.commit();
 
         iv_remove_often_live.setOnClickListener(this);
 
@@ -67,10 +75,18 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.iv_modify_often_back:
 
-                Intent intentName = new Intent();
-                intentName.putExtra("often", et_often_live.getText().toString().trim());
-                ModifyOftenActivity.this.setResult(3, intentName);
-                ModifyOftenActivity.this.finish();
+                if(preference.getInt("iskeepOften",0)!=0) {
+                    Intent intentName = new Intent();
+                    intentName.putExtra("often", et_often_live.getText().toString().trim());
+                    ModifyOftenActivity.this.setResult(3, intentName);
+                    ModifyOftenActivity.this.finish();
+                }else
+                {
+                    Intent intentName = new Intent();
+                    intentName.putExtra("often", preference.getString("modifyOftenBefore","").toString().trim());
+                    ModifyOftenActivity.this.setResult(3, intentName);
+                    ModifyOftenActivity.this.finish();
+                }
                 break;
 
         }
@@ -78,6 +94,8 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
 
     private void getUserOftenData() {
 
+        edit.putInt("iskeepOften",1);
+        edit.commit();
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/ModifyUserOftenServlet");
         try {
             params.addBodyParameter("userAddress_s", URLEncoder.encode(et_often_live.getText().toString(),"UTF-8"));
@@ -102,6 +120,8 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
                 }
                 else
                 {
+                    edit.putInt("iskeepOften",0);
+                    edit.commit();
                     Toast.makeText(ModifyOftenActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -129,10 +149,17 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onBackPressed() {
-
-        Intent intentOften = new Intent();
-        intentOften.putExtra("often", et_often_live.getText().toString().trim());
-        ModifyOftenActivity.this.setResult(3, intentOften);
-        ModifyOftenActivity.this.finish();
+        if(preference.getInt("iskeepOften",0)!=0) {
+            Intent intentName = new Intent();
+            intentName.putExtra("often", et_often_live.getText().toString().trim());
+            ModifyOftenActivity.this.setResult(3, intentName);
+            ModifyOftenActivity.this.finish();
+        }else
+        {
+            Intent intentName = new Intent();
+            intentName.putExtra("often", preference.getString("modifyOftenBefore","").toString().trim());
+            ModifyOftenActivity.this.setResult(3, intentName);
+            ModifyOftenActivity.this.finish();
+        }
     }
 }
