@@ -38,7 +38,7 @@ public class Order extends AppCompatActivity {
     private TextView cg_title;
     private TextView cg_price;
     private TextView cg_local;
-    private User user=null;
+    private User user = null;
     private TextView user_name;
     private TextView address;
     private TextView phone_num;
@@ -54,29 +54,18 @@ public class Order extends AppCompatActivity {
         intent = getIntent();
         search = intent.getStringExtra("search");
         commodity = intent.getParcelableExtra("bundle");
-        Log.e("看看是不是传值过来==========",commodity.commodityTitle);
 
         id = getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
 
-        if(id == 0){
-        }else{
-            getUser(id);
-        }
-        user_name = ((TextView) findViewById(R.id.tv_user_name));
-        user_name.setText(user.getUserName());
         getAddress(id);
+        user_name = ((TextView) findViewById(R.id.tv_user_name));
         address = ((TextView) findViewById(R.id.tv_address_2));
-
-//        for(int)
-//
-//        address.setText(addressList);
         phone_num = ((TextView) findViewById(R.id.tv_phone2));
 
-        getUser(commodity.releaseUserId);
+        getSeller(commodity.releaseUserId);
         seller_head = ((ImageView) findViewById(R.id.iv_seller_head));
         seller_name = ((TextView) findViewById(R.id.iv_seller_name));
-        x.image().bind(seller_head, "http://10.40.5.52:8080" + user.getUserImg());
-        seller_name.setText(user.getUserName());
+
 
         iv_cg = ((ImageView) findViewById(R.id.iv_cg_l));
         x.image().bind(iv_cg, "http://192.168.191.1:8080"+(commodity.commodityImg.split(","))[0]);
@@ -102,8 +91,10 @@ public class Order extends AppCompatActivity {
                 Type type=new TypeToken<List<Address>>(){}.getType();
                 List<Address> newAddressList=new ArrayList<Address>();
                 newAddressList=gson.fromJson(result,type);
-
                 addressList.addAll(newAddressList);
+                user_name.setText(addressList.get(0).getUserName());
+                address.setText(addressList.get(0).getCity()+addressList.get(0).getAddressDetail());
+                phone_num.setText(addressList.get(0).getContactPhoneNum());
             }
 
             @Override
@@ -123,21 +114,23 @@ public class Order extends AppCompatActivity {
         });
     }
 
-    private void getUser(Integer releaseUserId) {
+    private void getSeller(Integer releaseUserId) {
 
         RequestParams params = null;
-        params = new RequestParams("http://10.40.5.52:8080/FourProject/servlet/SelectUserServlet?id="+ releaseUserId);
-        x.http().get(params,new Callback.CommonCallback<String>(){
+        params = new RequestParams("http://10.40.5.52:8080/FourProject/servlet/SelectUserServlet?id=" + releaseUserId);
+        x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override
             public void onSuccess(String result) {
-                Gson gson=new Gson();
-                user=gson.fromJson(result,User.class);
+                Gson gson = new Gson();
+                user = gson.fromJson(result, User.class);
+                x.image().bind(seller_head, "http://10.40.5.52:8080" + user.getUserImg());
+                seller_name.setText(user.getUserName());
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(Order.this,"是不是我的无法连接服务器",Toast.LENGTH_LONG).show();
+                Toast.makeText(Order.this, "是不是我的无法连接服务器", Toast.LENGTH_LONG).show();
             }
 
             @Override
