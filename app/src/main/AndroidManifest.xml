@@ -170,15 +170,10 @@
             android:name=".MyCenter.modify.ModifyDetail.addAddressDetailActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".regBirthdayActivity" />
-
-
-
-
-
-        <activity android:name=".MyCenter.ConversationActivity"
-
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+        <activity
+            android:name=".MyCenter.ConversationActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -190,6 +185,9 @@
                     android:pathPrefix="/conversation/"
                     android:scheme="rong" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MessageActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
 
         </activity>
     </application>
