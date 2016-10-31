@@ -182,6 +182,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
                         Intent intent=new Intent(RegActivity.this,mainActivity.class);
 
+                       // intent.putExtra("flag",1);
                         startActivity(intent);
 
                         RegActivity.this.finish();
