@@ -80,10 +80,12 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
                 TextView tv_phone_num=((TextView) view.findViewById(R.id.tv_phone_num));
                 TextView tv_morenAddress=((TextView) view.findViewById(R.id.tv_morenAddress));
 
+
                 if(addressList.get(position).isdefault())
                 {
                     tv_morenAddress.setVisibility(View.VISIBLE);
                 }
+
                 String address=addressList.get(position).getCity().toString()+addressList.get(position).getAddressDetail();
                 tv_main_address.setText(address);
                 tv_nickname.setText(addressList.get(position).getUserName().toString());
@@ -153,6 +155,8 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
                     Toast.makeText(ModifyAddressActivity.this,"删除成功",Toast.LENGTH_SHORT).show();
                    // adapter.notifyDataSetChanged();
                     getAllAddress();
+
+
                 }
                 else
                 {

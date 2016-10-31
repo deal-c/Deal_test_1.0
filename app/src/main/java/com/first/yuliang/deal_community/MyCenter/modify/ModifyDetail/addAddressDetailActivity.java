@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -65,11 +66,17 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
 
 
 
+    SharedPreferences preference=null;
+    SharedPreferences.Editor edit=null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_address_detail);
 
+        preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
+        edit=preference.edit();
 
         Intent intent = getIntent();
 
@@ -187,7 +194,11 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (cb_isdefault.isChecked()) {
+
+                    //edit.putInt("ischecked",1);
+                    edit.commit();
                     cb_isdefault.setText("选中");
+
                 } else {
                     cb_isdefault.setText("未选中");
                 }

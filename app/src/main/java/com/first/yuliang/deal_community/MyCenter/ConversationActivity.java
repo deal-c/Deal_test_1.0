@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
@@ -15,10 +16,15 @@ import io.rong.imlib.model.UserInfo;
 
 public class ConversationActivity extends AppCompatActivity {
 
+    private TextView tv_conversation_contactor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversation);
+
+        tv_conversation_contactor = ((TextView) findViewById(R.id.tv_conversation_contactor));
+
         RongIM.setConversationBehaviorListener(new RongIM.ConversationBehaviorListener() {
 
 

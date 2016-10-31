@@ -1,6 +1,7 @@
 package com.first.yuliang.deal_community.frament;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,12 +13,14 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.first.yuliang.deal_community.MessageActivity;
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.SearchCommodityActivity;
 import com.first.yuliang.deal_community.TypeActivity;
@@ -37,6 +40,8 @@ import java.util.List;
  * Created by yuliang on 2016/9/21.
  */
 public class Fragment_home extends Fragment {
+
+
     private Handler handler=new Handler(){
 
 
@@ -69,14 +74,27 @@ public class Fragment_home extends Fragment {
     private ImageButton ib_type;
     private EditText query1;
     private ImageButton ib_search1;
+    private Button btn_message;
+
+    int id=0;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.activity_home,null);
 
+        id=getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
 
         ib_type=((ImageButton) view.findViewById(R.id.ib_type));
+        btn_message = ((Button) view.findViewById(R.id.btn_message));
+        btn_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),MessageActivity.class);
+                intent.putExtra("id",id+"");
+                startActivity(intent);
+            }
+        });
 
         ib_type.setOnClickListener(new View.OnClickListener() {
             @Override
