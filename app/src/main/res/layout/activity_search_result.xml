@@ -123,17 +123,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-    <GridView
-        android:id="@+id/gv_commodity_list"
+    <ListView
+        android:id="@+id/lv_gv_commodity_list"
         android:layout_below="@+id/ll_total"
-        android:numColumns="2"
-        android:paddingRight="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </GridView>
+    </ListView>
     <ListView
         android:visibility="gone"
-        android:layout_margin="5dp"
         android:id="@+id/lv_commodity_list"
         android:layout_below="@+id/ll_total"
         android:background="#eee"
@@ -162,9 +159,4 @@
         android:layout_below="@id/ll_total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </LinearLayout>
 </RelativeLayout>

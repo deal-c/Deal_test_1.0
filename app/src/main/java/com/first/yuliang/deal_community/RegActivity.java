@@ -35,6 +35,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     private EditText et_psd;
     private CheckBox cb_remeberuser;
     private List<UserBean.User> users=new ArrayList<>();
+    private String flag;
 
     Dialog progressDialog;
 
@@ -43,9 +44,9 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
 
-
-
-
+        Intent intentFlag = getIntent();
+        flag = intentFlag.getStringExtra("flag");
+        Log.e("看=============flag",flag);
 
         et_username = ((EditText) findViewById(R.id.et_username));
         et_psd = ((EditText) findViewById(R.id.et_psd));
@@ -179,11 +180,11 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
                         progressDialog.hide();
                         Toast.makeText(RegActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                        if (flag.equals(0)) {
+                            Intent intent = new Intent(RegActivity.this, mainActivity.class);
 
-                        Intent intent=new Intent(RegActivity.this,mainActivity.class);
-
-                        startActivity(intent);
-
+                            startActivity(intent);
+                        }
                         RegActivity.this.finish();
                     }
 
