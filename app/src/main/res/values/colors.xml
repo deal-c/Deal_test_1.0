@@ -7,4 +7,5 @@
     <color name="main">#33d685</color>
     <color name="textcolor">#99000000</color>
     <color name="checkbox">#fff</color>
+    <color name="sc">#ff6666</color>
 </resources>

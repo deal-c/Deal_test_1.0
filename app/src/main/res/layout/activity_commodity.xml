@@ -51,12 +51,13 @@
             android:gravity="center"
             android:drawableTop="@drawable/sc"/>
         <Button
+            android:id="@+id/btn_buy"
             android:layout_below="@+id/iv_line_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="我想要"
-            android:background="@color/main"
+            android:background="@drawable/ripple_bg_btn"
             android:textColor="#fff"/>
     </RelativeLayout>
     <ImageView

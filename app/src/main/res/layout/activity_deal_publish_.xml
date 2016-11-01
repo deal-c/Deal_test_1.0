@@ -14,14 +14,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@color/bgcolor">
+        android:background="#ededed">
 
-        <ImageView
+        <TextView
             android:id="@+id/backTomain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/return_" />
+             android:text="×"
+            android:textSize="32sp"/>
 
         <TextView
             android:id="@+id/tv_communityname1"
@@ -29,13 +30,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text=" 发 布 "
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
+        android:layout_marginBottom="60dp"
         android:id="@+id/sv_punish"
-        android:background="#ccc"
+        android:background="#f1f0f0"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tl_community_model">
@@ -43,24 +45,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <RelativeLayout
+            android:paddingTop="5dp"
             android:background="#fff"
             android:id="@+id/publish_title"
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
             <EditText
+                android:paddingLeft="10dp"
+                android:id="@+id/pub_product_title"
                 android:background="#fff"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:gravity="center_vertical"
-                android:hint="  标题"
+                android:hint="标题"
                 android:layout_alignParentBottom="true"/>
 
 
         </RelativeLayout>
 
         <RelativeLayout
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:background="#fff"
             android:layout_marginTop="1dp"
             android:id="@+id/product_desc"
             android:layout_width="match_parent"
@@ -68,38 +76,37 @@
             android:layout_below="@id/publish_title">
 
             <EditText
+                android:textSize="13sp"
                 android:background="#fff"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top"
-                android:hint=" 商品描述"
-                android:id="@+id/editText"
+                android:hint="描述一下你的闲置"
+                android:id="@+id/pub_pro_desc"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 
-        <GridView
+        <com.first.yuliang.deal_community.Util.NoScrollGridView
             android:padding="10dp"
             android:background="#fff"
-            android:layout_marginTop="1dp"
             android:id="@+id/gv_photos"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/product_desc"
             android:numColumns="3"
 
             >
-        </GridView>
+        </com.first.yuliang.deal_community.Util.NoScrollGridView>
         <RadioGroup
-
             android:id="@+id/rg_ways"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="15dp"
             android:background="#fff"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/gv_photos"
+            android:layout_height="70dp"
+            android:layout_below="@+id/ways_desc"
             android:orientation="horizontal"
             android:gravity="center">
             <RadioButton
@@ -123,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <RadioButton
-                android:text="增"
+                android:text="赠"
                 android:id="@+id/rb_zeng"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -131,48 +138,65 @@
 
         </RadioGroup>
             <TextView
-                android:layout_marginTop="1dp"
+                android:gravity="center_vertical"
+                android:textSize="12sp"
                 android:id="@+id/ways_desc"
-                android:background="#fff"
-                android:text="测试文字"
-                android:layout_below="@+id/rg_ways"
+                android:background="@drawable/locationbg"
+                android:hint="地理位置"
+                android:paddingLeft="43dp"
+                android:layout_below="@+id/gv_photos"
                 android:layout_width="match_parent"
-                android:layout_height="60dp" />
-            <TextView
+                android:layout_height="30dp" />
+            <Spinner
                 android:layout_marginTop="1dp"
                 android:id="@+id/punish_type"
-                android:textColor="#000"
-                android:gravity="center"
+                android:paddingLeft="10dp"
                 android:background="#fff"
-                android:text="分类"
-                android:layout_below="@+id/ways_desc"
-                android:layout_width="match_parent"
-                android:layout_height="60dp" />
-            <RelativeLayout
-                android:layout_marginTop="1dp"
-                android:gravity="center"
-                android:background="#fff"
+                android:layout_below="@+id/publish_price"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@+id/punish_type"
-                android:layout_centerVertical="true">
+                android:entries="@array/spingarr"/>
+            <EditText
+                android:layout_marginTop="1dp"
+                android:id="@+id/publish_price"
+                android:background="@drawable/price"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="0.00"
+                android:inputType="numberDecimal"
+                android:gravity="center"
+                android:layout_below="@+id/rg_ways"/>
 
-
-                <Button
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/button"
-                    android:layout_width="120dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/btn_punish"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
-                    android:text="发布"
-                    android:textSize="20dp"
-                    android:textColor="#fff"
-                    />
-            </RelativeLayout>
         </RelativeLayout>
 
     </ScrollView>
+
+    <View
+        android:background="#ccc"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/rl_bottom"
+        />
+    <RelativeLayout
+        android:background="#fff"
+        android:id="@+id/rl_bottom"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+    <Button
+        android:layout_centerInParent="true"
+        android:background="@drawable/button"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/btn_punish"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="确定发布"
+        android:textSize="20dp"
+        android:textColor="#fff"
+        />
+    </RelativeLayout>
 
 </RelativeLayout>

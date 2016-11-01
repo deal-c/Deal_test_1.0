@@ -1,5 +1,6 @@
 package com.first.yuliang.deal_community;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -65,6 +66,8 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
     private static final int PHOTO_REQUEST = 1;
     private static final int CAMERA_REQUEST = 2;
     private static final int PHOTO_CLIP = 3;
+
+    Dialog progressDialog;
 
     private File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/"+
             getPhotoFileName());
@@ -337,12 +340,23 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
 
     private void doCommit() {
 
-        sendImage();
-        RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/RegAppServlet");
+        progressDialog = ToolsClass.createLoadingDialog(regDetailActivity.this, "注册中...", true,
+                0);
+        progressDialog.show();
+       // sendImage();
+       // Bitmap bmp = BitmapFactory.decodeFile("");
+       // uploadImage();
+        //RequestParams params=new RequestParams(HttpUtile.zy1+"/Project/servlet/RegAppServlet");
+        RequestParams params=new RequestParams(HttpUtile.zy1+"/Project/servlet/upload1");
         try {
+
+            params.setMultipart(true);
+            params.addBodyParameter("file",file);
+
             params.addBodyParameter("regusername", URLEncoder.encode(et_reguser.getText().toString().trim(),"utf-8"));
             params.addBodyParameter("reguserpsd",et_regpsd.getText().toString().trim());
             params.addBodyParameter("userSex",rb_female.isChecked()?"false":"true");
+           // params.addBodyParameter("userImg",getPhotoFileName());
             params.addBodyParameter("birthday",tv_birthday.getText().toString().trim());
             params.addBodyParameter("userAddress_s", URLEncoder.encode(et_oftenplace.getText().toString().trim(),"utf-8"));
         } catch (UnsupportedEncodingException e) {
@@ -355,12 +369,16 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
             public void onSuccess(String result) {
 
 
+
                 SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit=preference.edit();
 
 
 
+
                 if(Integer.parseInt(result.trim())!=0) {
+
+                    progressDialog.hide();
                     Toast.makeText(regDetailActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
 
                     edit.putInt("count",1);
@@ -371,13 +389,21 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
                     regDetailActivity.this.finish();
                 }else
                 {
+//
+//                    edit.putInt("intoflag",1);
+//                    edit.commit();
+
+                    progressDialog.hide();
                     Toast.makeText(regDetailActivity.this,"注册失败",Toast.LENGTH_SHORT).show();
+
+
                 }
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
+                Toast.makeText(regDetailActivity.this,"未注册",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -388,38 +414,56 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
         });
     }
 
 
-    private void sendImage() {
 
-        RequestParams params = new RequestParams(HttpUtile.zy+"/servlet/uploadImg");
-        params.addBodyParameter("file",file);
-        x.http().post(params, new Callback.CommonCallback<String>() {
 
-            @Override
-            public void onSuccess(String result) {
-                Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
-            }
+    @Override
+    public void onBackPressed() {
+        SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=preference.edit();
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
 
-            }
+            edit.putInt("intoflag",1);
+            edit.commit();
 
-            @Override
-            public void onCancelled(CancelledException cex) {
 
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
+        regDetailActivity.this.finish();
     }
 
 
+    //上传图片
+//    public void uploadImage(){
+//
+//        RequestParams requestParams=new RequestParams(HttpUtile.zy1+"/Project/servlet/upload1");
+//        requestParams.setMultipart(true);
+//        requestParams.addBodyParameter("file",file);
+//
+//        x.http().post(requestParams, new Callback.CommonCallback<String>() {
+//            @Override
+//            public void onSuccess(String result) {
+//                Log.i("ModifyPersonInfo", "onSuccess: ");
+//            }
+//
+//            @Override
+//            public void onError(Throwable ex, boolean isOnCallback) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(CancelledException cex) {
+//
+//            }
+//
+//            @Override
+//            public void onFinished() {
+//
+//            }
+//        });
+//
+//    }
 }

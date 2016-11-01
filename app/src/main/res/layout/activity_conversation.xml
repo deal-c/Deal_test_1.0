@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_conversation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_conversation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+            <ImageView
+                android:id="@+id/iv_conversation_contactor_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/backback"
+
+                android:gravity="left"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:id="@+id/tv_conversation_contactor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系人"
+                android:textSize="24sp"
+                android:textColor="#000"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <fragment
+        android:id="@+id/conversation"
+        android:name="io.rong.imkit.fragment.ConversationFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_conversation"/>
+
+</RelativeLayout>

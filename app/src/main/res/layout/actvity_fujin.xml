@@ -50,6 +50,12 @@
         android:layout_height="match_parent">
 
     </com.amap.api.maps.TextureMapView>
-
+<Button
+    android:id="@+id/change"
+    android:layout_width="60dp"
+    android:layout_height="40dp"
+    android:text="切换"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="60dp"/>
 
 </RelativeLayout>

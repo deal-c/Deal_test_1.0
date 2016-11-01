@@ -22,11 +22,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.google.gson.Gson;
 
@@ -267,7 +267,7 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
         search = search.replace(" ","%");
         RequestParams params = null;
         try {
-            params = new RequestParams("http://192.168.191.1:8080/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
+            params = new RequestParams(HttpUtile.szj+"/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
