@@ -52,7 +52,7 @@ public class PublishedActivity extends Activity {
 	private GridView noScrollgridview;
 	private GridAdapter adapter;
 	private TextView activity_selectimg_send;
-	private EditText writen_content;
+	private TextView writen_content;
 	private String	sendCommunityid=null;
 	String content;
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +87,9 @@ public class PublishedActivity extends Activity {
 
 
 
-		writen_content=(EditText)findViewById(R.id.writen_content);
+		writen_content=(TextView)findViewById(R.id.writen_content);
 		content=writen_content.getText().toString();
-		Log.e("我来来来来看看评论都的数据====",content);
+		//Log.e("我来来来来看看评论都的数据====",content);
 		activity_selectimg_send = (TextView) findViewById(R.id.activity_selectimg_send);
 		activity_selectimg_send.setOnClickListener(new OnClickListener() {
 
@@ -120,7 +120,7 @@ public class PublishedActivity extends Activity {
 
 	private void sendDynamicToservlt(List	list,String	content) {
 
-		Log.e("我来看看评论都的数据====",content);
+
 
 		Gson	gson=new Gson();
 		String	imgList=gson.toJson(list);
@@ -130,7 +130,7 @@ public class PublishedActivity extends Activity {
 		request.addBodyParameter("userId",String.valueOf(userId));
 		request.addBodyParameter("content",content);
 		request.addBodyParameter("sendCommunityid",sendCommunityid);
-
+		Log.e("我来看看评论都的数据====",content);
 
 
 
