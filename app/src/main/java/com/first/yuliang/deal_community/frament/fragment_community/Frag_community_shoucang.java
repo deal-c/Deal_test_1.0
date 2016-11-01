@@ -1,7 +1,6 @@
 package com.first.yuliang.deal_community.frament.fragment_community;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
@@ -54,23 +53,16 @@ public class Frag_community_shoucang extends Fragment {
     List<Dynamic>   communityList=new ArrayList<>();
     private Button btn_del_guanzhu;
     private BaseAdapter adapter;
-    SwipeMenuListView lv_community_guanzhu;
+    SwipeMenuListView lv_community_shoucang;
     private String item=null;
-    private int userId=1;
- //   int Id=getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
-
-
-
-
+private int userId=1;
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-      /*  if(Id!=0){
-            userId=Id;
-        }*/
+
         getAllCommunity(userId);
 
-        lv_community_guanzhu= (SwipeMenuListView) getActivity().findViewById(R.id.lv_community_shoucang);
+        lv_community_shoucang= (SwipeMenuListView) getActivity().findViewById(R.id.lv_community_shoucang);
         adapter = new BaseAdapter() {
             @Override
             public int getCount() {
@@ -109,35 +101,35 @@ public class Frag_community_shoucang extends Fragment {
                 viewhoder.communityName.setText(dongtai.getUserId().getUserName());
                 viewhoder.communityInfo.setText(dongtai.getContent());
                 viewhoder.comCreateTime.setText(dongtai.getPublishTime());
-                x.image().bind((viewhoder.comImg), HttpUtils.hostLuoqingshanWifi+"/usys/imgs/" + dongtai.getUserId().getUserImg() + ".png");
-              String  item=dongtai.getDynamicId();
+                x.image().bind(viewhoder.comImg, "http://10.40.5.61:8080/usys/imgs/"+dongtai.getUserId().getUserImg()+".png");
+                item=dongtai.getDynamicId();
                 return convertView;
             }
 
         };
 
         System.out.print("为什么会空指针");
-        lv_community_guanzhu.setAdapter(adapter);
+        lv_community_shoucang.setAdapter(adapter);
 
 
 
     }
 
-    private void getAllCommunity(int    myuserId) {
+    private void getAllCommunity(int  userId) {
 
 
         RequestParams params = new RequestParams
-                (HttpUtils.hostLuoqingshanSchool+"/usys/ZanDynamic?userId="+myuserId);//网络请求
+                (HttpUtils.hostLuoqingshanSchool+"/usys/ZanDynamic?userId="+userId);//网络请求
         x.http().get(params, new Callback.CommonCallback<String>() {//使用xutils开启网络线程
             @Override
             public void onSuccess(String result) {
                 Gson    gson=new Gson();
-                Type type = new TypeToken<List<Community>>() {
+                Type type = new TypeToken<List<Dynamic>>() {
                 }.getType();
                 List<Dynamic>   communityList1=new ArrayList<>();
                 communityList1  = gson.fromJson(result, type);
-                Log.e("今天看看数据====", communityList1.toString());
-                Log.e("今天看看数据====", gson.toString());
+                Log.e("看看数据====", communityList.toString());
+                Log.e("看看数据====", gson.toString());
                 if (result!=null){
                     communityList.addAll(communityList1);
                 }
@@ -179,7 +171,7 @@ public class Frag_community_shoucang extends Fragment {
         System.out.print("这是为什么");
         System.out.print("这是为什么");
         System.out.print("这是为什么");
-        lv_community_guanzhu = (SwipeMenuListView) view.findViewById(R.id.lv_community_shoucang);
+        lv_community_shoucang = (SwipeMenuListView) view.findViewById(R.id.lv_community_shoucang);
 
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
@@ -249,11 +241,11 @@ public class Frag_community_shoucang extends Fragment {
 
 // set creator
 
-        lv_community_guanzhu.setMenuCreator(creator);
+        lv_community_shoucang.setMenuCreator(creator);
 
 // step 2. listener item click event
 
-        lv_community_guanzhu.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+        lv_community_shoucang.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
 
             @Override
 
@@ -322,7 +314,7 @@ public class Frag_community_shoucang extends Fragment {
 
 // set SwipeListener
 
-        lv_community_guanzhu.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
+        lv_community_shoucang.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
 
             @Override
 
@@ -348,7 +340,7 @@ public class Frag_community_shoucang extends Fragment {
 
 // test item long click
 
-        lv_community_guanzhu.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        lv_community_shoucang.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
             @Override
 
@@ -364,17 +356,16 @@ public class Frag_community_shoucang extends Fragment {
 
         });
         //点击进入社区动态界面
-        lv_community_guanzhu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv_community_shoucang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
 
-                Dynamic temp = communityList.get(0);
+             /* Dynamic temp = communityList.get(0);
                 Intent intent = new Intent(getActivity(), Community_model.class);
                 intent.putExtra("bundle", temp);
-
-                startActivity(intent);
+                startActivity(intent);*/
 
 
             }

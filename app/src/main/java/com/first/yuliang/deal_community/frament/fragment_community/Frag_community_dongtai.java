@@ -47,7 +47,7 @@ public class Frag_community_dongtai extends Fragment{
     private LinkedList<String> mListItems;
     public ArrayList<Dynamic> dynamicArrayList=new ArrayList<>();
     private String []eg=new String[]{"","","","","","","","","","",""};
-
+    private String  jsondynamiclist;
 
     @Nullable
     @Override
@@ -125,8 +125,8 @@ public class Frag_community_dongtai extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent  intent=new Intent(getActivity(), ComMainActivity.class);
-                intent.putExtra("dynamicList", dynamicArrayList);
-             //   startActivity(intent);
+                intent.putExtra("dynamicList", jsondynamiclist);
+               startActivity(intent);
 
 
 
@@ -152,6 +152,7 @@ public class Frag_community_dongtai extends Fragment{
                 communityList1  = gson.fromJson(result, type);
 
                 if (result!=null){
+                    jsondynamiclist=result;
                     dynamicArrayList.addAll(communityList1);
                     mAdapter.notifyDataSetChanged();
                     Log.e("dynamic看看数据====", dynamicArrayList.toString());

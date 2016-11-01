@@ -12,6 +12,7 @@ public class User {
         this.mId = mId;
         this.mName = mName;
     }
+    public User(){}
 
     public int getmId() {
         return mId;

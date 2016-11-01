@@ -20,6 +20,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,16 +40,27 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
+import com.google.gson.Gson;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 public class PublishedActivity extends Activity {
 
 	private GridView noScrollgridview;
 	private GridAdapter adapter;
 	private TextView activity_selectimg_send;
-	private TextView writen_content;
+	private EditText writen_content;
+	private String	sendCommunityid=null;
+	String content;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_selectimg);
+		Intent	intent=getIntent();
+		sendCommunityid=intent.getStringExtra("sendCommunityid");
+
 		Init();
 	}
 
@@ -71,6 +84,12 @@ public class PublishedActivity extends Activity {
 				}
 			}
 		});
+
+
+
+		writen_content=(EditText)findViewById(R.id.writen_content);
+		content=writen_content.getText().toString();
+		Log.e("我来来来来看看评论都的数据====",content);
 		activity_selectimg_send = (TextView) findViewById(R.id.activity_selectimg_send);
 		activity_selectimg_send.setOnClickListener(new OnClickListener() {
 
@@ -85,14 +104,59 @@ public class PublishedActivity extends Activity {
 				// 高清的压缩图片全部就在  list 路径里面了
 				// 高清的压缩过的 bmp 对象  都在 Bimp.bmp里面
 				// 完成上传服务器后 .........
+
+			sendDynamicToservlt(list,content);
+
+
+
+
 				FileUtils.deleteDir();
 
-				writen_content=(TextView)findViewById(R.id.writen_content);
-		      String content=(String)writen_content.getText();
 
 
 			}
 		});
+	}
+
+	private void sendDynamicToservlt(List	list,String	content) {
+
+		Log.e("我来看看评论都的数据====",content);
+
+		Gson	gson=new Gson();
+		String	imgList=gson.toJson(list);
+		int userId=this.getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
+		RequestParams	request=new RequestParams(HttpUtils.hostLuoqingshanSchool+"usys/recieveDynamic");
+		request.addBodyParameter("imgList",imgList);
+		request.addBodyParameter("userId",String.valueOf(userId));
+		request.addBodyParameter("content",content);
+		request.addBodyParameter("sendCommunityid",sendCommunityid);
+
+
+
+
+		x.http().post(request, new Callback.CommonCallback<String>() {
+			@Override
+			public void onSuccess(String result) {
+
+			}
+
+			@Override
+			public void onError(Throwable ex, boolean isOnCallback) {
+
+			}
+
+			@Override
+			public void onCancelled(CancelledException cex) {
+
+			}
+
+			@Override
+			public void onFinished() {
+
+			}
+		});
+
+
 	}
 
 	public void Ibackonclick(View view) {

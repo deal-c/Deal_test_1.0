@@ -1,6 +1,7 @@
 package com.first.yuliang.deal_community.model;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ public class ComMainActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.main);
+       int  userId=this.getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
         setColor();
         getAllDynamic();
         Intent it = getIntent();
@@ -74,7 +76,7 @@ public class ComMainActivity extends Activity {
         // comments.add(new Comment(new User(i + 300, "用户" + (i + 300)), "评论" + i, null));
 
 
-        mAdapter = new MomentAdapter(this,dynamicArrayList ,moments, new CustomTagHandler(this, new CustomTagHandler.OnCommentClickListener() {
+        mAdapter = new MomentAdapter(this,dynamicArrayList ,userId,moments, new CustomTagHandler(this, new CustomTagHandler.OnCommentClickListener() {
             @Override
             public void onCommentatorClick(View view, User commentator) {
                 Toast.makeText(getApplicationContext(), commentator.mName, Toast.LENGTH_SHORT).show();
@@ -87,8 +89,8 @@ public class ComMainActivity extends Activity {
 
             @Override
             public void onContentClick(View view, User commentator, User receiver) {
-                if (commentator != null && commentator.mId == sUser.mId) { // 不能回复自己的评论
-                    return;
+                        if (commentator != null && commentator.mId == sUser.mId) { // 不能回复自己的评论
+                            return;
                 }
                 inputComment(view, commentator);
             }
@@ -166,7 +168,8 @@ public class ComMainActivity extends Activity {
     }
 
     public void inputComment(final View v, User receiver) {
-        CommentFun.inputComment(ComMainActivity.this, mListView, v, receiver, new CommentFun.InputCommentListener() {
+        int userId=this.getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
+        CommentFun.inputComment(ComMainActivity.this,userId,mListView, v, receiver, new CommentFun.InputCommentListener() {
             @Override
             public void onCommitComment(Comment comment) {
                 mAdapter.notifyDataSetChanged();

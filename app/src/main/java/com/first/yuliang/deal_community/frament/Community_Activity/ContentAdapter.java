@@ -16,6 +16,8 @@ import com.first.yuliang.deal_community.frament.pojo.Dynamic;
 
 import org.xutils.x;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +26,7 @@ import java.util.List;
 public class ContentAdapter extends BaseAdapter implements View.OnClickListener {
 
     private static final String TAG = "ContentAdapter";
-    private List<Dynamic> mContentList;
+    private ArrayList<Dynamic> mContentList;
     private LayoutInflater mInflater;
     private Callback mCallback;
 
@@ -37,7 +39,7 @@ public class ContentAdapter extends BaseAdapter implements View.OnClickListener 
         public void click(View v);
     }
 
-    public ContentAdapter(Context context, List<Dynamic> contentList,
+    public ContentAdapter(Context context, ArrayList<Dynamic> contentList,
                           Callback callback) {
         mContentList = contentList;
         mInflater = LayoutInflater.from(context);

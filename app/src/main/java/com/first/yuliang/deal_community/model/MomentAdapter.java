@@ -25,17 +25,18 @@ public class MomentAdapter extends BaseAdapter {
 
     public static final int VIEW_HEADER = 0;
     public static final int VIEW_MOMENT = 1;
-
+    int myUserId;
     ArrayList<Dynamic> mylist;
     private ArrayList<Comment> mList;
     private Context mContext;
     private CustomTagHandler mTagHandler;
 
-    public MomentAdapter(Context context, ArrayList<Dynamic> dynamicList, ArrayList<Comment> list, CustomTagHandler tagHandler) {
+    public MomentAdapter(Context context, ArrayList<Dynamic> dynamicList,int userId,ArrayList<Comment> list, CustomTagHandler tagHandler) {
         mList = list;
         mContext = context;
         mTagHandler = tagHandler;
         mylist=dynamicList;
+        myUserId=userId;
     }
 
     @Override

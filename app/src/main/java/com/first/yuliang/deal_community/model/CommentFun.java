@@ -41,7 +41,7 @@ public class CommentFun {
      * @param btnComment
      * @param tagHandler
      */
-    public static void parseCommentList(Context context, ArrayList<Comment> mCommentList, LinearLayout commentList,
+    public static void parseCommentList(Context context,ArrayList<Comment> mCommentList, LinearLayout commentList,
                                         View btnComment, Html.TagHandler tagHandler) {
         if (btnComment != null) {
             btnComment.setTag(KEY_COMMENT_SOURCE_COMMENT_LIST, mCommentList);
@@ -90,7 +90,7 @@ public class CommentFun {
     /**
      * 弹出评论对话框
      */
-    public static void inputComment(final Activity activity, final ListView listView,
+    public static void inputComment(final Activity activity, final int userId, final ListView listView,
                                     final View btnComment, final User receiver,
                                     final InputCommentListener listener) {
 
@@ -98,7 +98,7 @@ public class CommentFun {
 
         String hint;
         if (receiver != null) {
-            if (receiver.mId == ComMainActivity.sUser.mId) {
+            if (receiver.mId == userId) {
                 hint = "我也说一句";
             } else {
                 hint = "回复 " + receiver.mName;
@@ -129,7 +129,7 @@ public class CommentFun {
                 ArrayList<Comment> mylist=new ArrayList();
                 mylist.add(comment);
 
-                addRemark(mylist);
+                addRemark(mylist,userId);
                 if (listener != null) {
                     listener.onCommitComment(comment);
                 }
@@ -159,30 +159,30 @@ public class CommentFun {
 
     }
 
-    private static void addRemark(ArrayList<Comment> mylist) {
+    private static void addRemark(ArrayList<Comment> mylist,int userId) {
 
-
+            String remarkUserId=String.valueOf(userId);
             String dynamicId=String.valueOf(ComMainActivity.dynamicArrayList.get(0).getDynamicId());
             String reciever=mylist.get(0).getmReceiver().mName;
             String recieveId=String.valueOf(mylist.get(0).getmReceiver().mId);
             String remarkContent=mylist.get(0).getmContent();
             String commentator=mylist.get(0).getmCommentator().mName;
-            String remarkUserId=String.valueOf(mylist.get(0).getmCommentator().mId);
+
             Log.e("看看数据====", dynamicId+"???");
             Log.e("看看数据====", reciever+"???");
             Log.e("看看数据====", commentator+"???");
             Log.e("看看数据====", recieveId+"???");
             Log.e("看看数据====", remarkContent+"???");
-            Log.e("看看数据====", remarkUserId+"???");
+            Log.e("我自己看看数据====", remarkUserId+"???");
 
-            RequestParams requestParams=new RequestParams("http://10.40.5.61:8080/usys/backComment");
+            RequestParams requestParams=new RequestParams("http://10.40.5.61:8080/usys/MyBackComment");
             requestParams.addBodyParameter("remarkContent",remarkContent);
             requestParams.addBodyParameter("recieveId",recieveId);
             requestParams.addBodyParameter("dynamicId",dynamicId);
             requestParams.addBodyParameter("reciever",reciever);
             requestParams.addBodyParameter("commentator",commentator);
             requestParams.addBodyParameter("remarkUserId",remarkUserId);
-            x.http().get(requestParams, new Callback.CommonCallback<String>() {
+            x.http().post(requestParams, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String result) {
                     Log.e("看看数据====", result+"???");
