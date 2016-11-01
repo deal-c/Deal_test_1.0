@@ -35,7 +35,6 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     private EditText et_psd;
     private CheckBox cb_remeberuser;
     private List<UserBean.User> users=new ArrayList<>();
-    private String flag;
 
     Dialog progressDialog;
 
@@ -44,9 +43,9 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
 
-        Intent intentFlag = getIntent();
-        flag = intentFlag.getStringExtra("flag");
-        Log.e("看=============flag",flag);
+
+
+
 
         et_username = ((EditText) findViewById(R.id.et_username));
         et_psd = ((EditText) findViewById(R.id.et_psd));
@@ -123,7 +122,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     private void register(View v) {
         Intent intent=new Intent(RegActivity.this,regDetailActivity.class);
         startActivity(intent);
-        this.finish();
+        //this.finish();
     }
 
     private void Login(View v) {
@@ -180,11 +179,11 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
                         progressDialog.hide();
                         Toast.makeText(RegActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                        if (flag.equals(0)) {
-                            Intent intent = new Intent(RegActivity.this, mainActivity.class);
 
-                            startActivity(intent);
-                        }
+                        Intent intent=new Intent(RegActivity.this,mainActivity.class);
+
+                        startActivity(intent);
+
                         RegActivity.this.finish();
                     }
 
@@ -224,7 +223,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         if(preference.getInt("fromModifyToReg",0)==1)
         {
             //edit.putInt("fromModifyToReg",2);
-            edit.putInt("id",0);
+           // edit.putInt("id",0);
             edit.putInt("intoflag",1);
             edit.putInt("zhuxiao",1);
             edit.commit();

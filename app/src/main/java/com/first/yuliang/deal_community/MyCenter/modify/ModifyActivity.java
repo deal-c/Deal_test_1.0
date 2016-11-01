@@ -196,6 +196,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit=preference.edit();
                 edit.putInt("fromModifyToReg",1);
+                edit.putInt("id",0);
                 edit.commit();
                 startActivity(intentBack);
 

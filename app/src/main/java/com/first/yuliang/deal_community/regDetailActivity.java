@@ -428,6 +428,7 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
         SharedPreferences.Editor edit=preference.edit();
 
 
+        //edit.putInt("id",0);
             edit.putInt("intoflag",1);
             edit.commit();
 
@@ -466,4 +467,5 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
 //        });
 //
 //    }
+
 }
