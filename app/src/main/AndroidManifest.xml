@@ -78,6 +78,31 @@
             android:name=".TypeActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".frament.testpic.TestPicActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+
+        </activity>
+
+        <activity
+            android:name=".frament.testpic.ImageGridActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".frament.testpic.PublishedActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar" >
+
+
+
+        </activity>
+        <activity
+            android:name=".frament.testpic.PhotoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+
+
+
         <activity android:name=".CommunityDynamic" />
         <activity android:name=".TestActivity" />
 
@@ -91,6 +116,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+        </activity>
+        <activity android:name=".model.ComMainActivity">
+
         </activity>
         <activity
             android:name=".SearchResultActivity"

@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="我想要"
-            android:background="@color/main"
+            android:background="@drawable/ripple_bg_btn"
             android:textColor="#fff"/>
     </RelativeLayout>
     <ImageView

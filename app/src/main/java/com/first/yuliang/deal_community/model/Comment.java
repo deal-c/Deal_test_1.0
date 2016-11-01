@@ -1,8 +1,7 @@
 package com.first.yuliang.deal_community.model;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 评论对象

@@ -3,6 +3,7 @@ package com.first.yuliang.deal_community;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +24,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.first.yuliang.deal_community.Util.DateUtil;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
+import com.first.yuliang.deal_community.pojo.CommodityCollection;
 import com.first.yuliang.deal_community.pojo.User;
 import com.google.gson.Gson;
 
@@ -34,6 +37,7 @@ import org.xutils.x;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CommodityActivity extends AppCompatActivity {
@@ -64,8 +68,13 @@ public class CommodityActivity extends AppCompatActivity {
     private ObjectAnimator oa1;
     private ObjectAnimator oa2;
     private User user=null;
+    private List<CommodityCollection.CommodityCollect> collection = new ArrayList<CommodityCollection.CommodityCollect>();
     private Button btn_buy;
     private int id;
+    private Button btn_sc;
+    private boolean flag_sc = false;
+    private Drawable sc_1;
+    private Drawable sc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +88,13 @@ public class CommodityActivity extends AppCompatActivity {
         getUser(commodity.releaseUserId);
 
         share = 0;
+
+        id = getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
+        if (id!=0){
+            Date date = new Date();
+            insertCBH(id,commodity.commodityId,date);
+            queryCollection(id,commodity.commodityId);
+        }
 
         view_bar = View.inflate(CommodityActivity.this,R.layout.commodity_bar,null);
         ib_re_se_re = ((ImageButton) findViewById(R.id.ib_return_search_result));
@@ -216,16 +232,44 @@ public class CommodityActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                id = getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
                 if(id == 0){
                     Intent intent = new Intent(CommodityActivity.this, RegActivity.class);
-                    intent.putExtra("flag",1);
+                    intent.putExtra("flag","1");
                     startActivity(intent);
                 }else{
                     Intent intent = new Intent(CommodityActivity.this, Order.class);
                     intent.putExtra("search",search);
                     intent.putExtra("bundle",commodity);
                     startActivity(intent);
+                }
+            }
+        });
+        btn_sc = ((Button) findViewById(R.id.ib_sc));
+        sc = getResources().getDrawable(R.drawable.sc);
+        sc_1 = getResources().getDrawable(R.drawable.sc_1);
+        btn_sc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (flag_sc){
+                    btn_sc.setCompoundDrawablesWithIntrinsicBounds(null,sc,null,null);
+                    btn_sc.setTextColor(getResources().getColor(R.color.main));
+                    btn_sc.setText("收藏");
+                    Date date = new Date();
+                    insertSC(id,commodity.commodityId,date,flag_sc);
+                    flag_sc = false;
+                }else {
+                    if (id==0){
+                        Intent intent = new Intent(CommodityActivity.this, RegActivity.class);
+                        intent.putExtra("flag","1");
+                        startActivity(intent);
+                    }else {
+                        btn_sc.setCompoundDrawablesWithIntrinsicBounds(null,sc_1,null,null);
+                        btn_sc.setTextColor(getResources().getColor(R.color.sc));
+                        btn_sc.setText("已收藏");
+                        Date date = new Date();
+                        insertSC(id,commodity.commodityId,date,flag_sc);
+                        flag_sc = true;
+                    }
                 }
             }
         });
@@ -342,5 +386,97 @@ public class CommodityActivity extends AppCompatActivity {
         } else {
             return true;
         }
+    }
+    private void insertCBH(int id,int commodity,Date date){
+
+        String url = "http://192.168.191.1:8080/csys/commoditybh?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date);
+        Log.e("看看历史====",url);
+        RequestParams params = new RequestParams(url);
+        x.http().get(params,new Callback.CommonCallback<String>(){
+
+            @Override
+            public void onSuccess(String result) {
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(CommodityActivity.this,"是不是无法插入历史",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+    private void insertSC(int id,int commodity,Date date,boolean flag_sc){
+        String url = "http://192.168.191.1:8080/csys/insertcommoditycollect?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date)+"&"+"flag="+flag_sc;
+        Log.e("看看收藏====",url);
+        RequestParams params = new RequestParams(url);
+        x.http().get(params,new Callback.CommonCallback<String>(){
+
+            @Override
+            public void onSuccess(String result) {
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(CommodityActivity.this,"是不是无法插入收藏",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+    private void queryCollection(int id, final int commodity){
+        String url = "http://192.168.191.1:8080/csys/qureycommoditycollection?userId="+id;
+        Log.e("看看收藏====",url);
+        RequestParams params = new RequestParams(url);
+        x.http().get(params,new Callback.CommonCallback<String>(){
+
+            @Override
+            public void onSuccess(String result) {
+                Gson gson=new Gson();
+                CommodityCollection collect=gson.fromJson(result,CommodityCollection.class);
+                collection.addAll(collect.cc);
+                for (CommodityCollection.CommodityCollect c : collection) {
+                    if(c.commodityId == commodity){
+                        btn_sc.setCompoundDrawablesWithIntrinsicBounds(null,sc_1,null,null);
+                        btn_sc.setTextColor(getResources().getColor(R.color.sc));
+                        btn_sc.setText("已收藏");
+                        flag_sc = true;
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(CommodityActivity.this,"是不是无法插入收藏",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
     }
 }

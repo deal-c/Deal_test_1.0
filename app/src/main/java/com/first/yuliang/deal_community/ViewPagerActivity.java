@@ -80,7 +80,7 @@ public class ViewPagerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(ViewPagerActivity.this,RegActivity.class);
-                intent.putExtra("flag",0);
+                intent.putExtra("flag","0");
                 startActivity(intent);
                 finish();
             }

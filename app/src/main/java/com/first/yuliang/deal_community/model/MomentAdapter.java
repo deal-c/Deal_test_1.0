@@ -25,17 +25,18 @@ public class MomentAdapter extends BaseAdapter {
 
     public static final int VIEW_HEADER = 0;
     public static final int VIEW_MOMENT = 1;
-
+    int myUserId;
     ArrayList<Dynamic> mylist;
     private ArrayList<Comment> mList;
     private Context mContext;
     private CustomTagHandler mTagHandler;
 
-    public MomentAdapter(Context context, ArrayList<Dynamic> dynamicList, ArrayList<Comment> list, CustomTagHandler tagHandler) {
+    public MomentAdapter(Context context, ArrayList<Dynamic> dynamicList,int userId,ArrayList<Comment> list, CustomTagHandler tagHandler) {
         mList = list;
         mContext = context;
         mTagHandler = tagHandler;
         mylist=dynamicList;
+        myUserId=userId;
     }
 
     @Override
@@ -93,7 +94,8 @@ public class MomentAdapter extends BaseAdapter {
                 }else{
                 convertView = View.inflate(mContext, R.layout.item_moment, null);
 
-holder.btn_input_comment=(TextView)convertView.findViewById(R.id.btn_input_comment);holder.name = (TextView) convertView.findViewById(R.id.name);
+                     holder.btn_input_comment=(TextView)convertView.findViewById(R.id.btn_input_comment);
+                    holder.name = (TextView) convertView.findViewById(R.id.name);
                 holder.time = (TextView) convertView.findViewById(R.id.time);
                 holder.img = (ImageView) convertView.findViewById(R.id.author_icon);
                 holder.content = (TextView) convertView.findViewById(R.id.content);
@@ -109,10 +111,9 @@ holder.btn_input_comment=(TextView)convertView.findViewById(R.id.btn_input_comme
             int index = position ;
             ViewHolder holder = (ViewHolder) convertView.getTag();
             holder.oncreatetime.setText(mylist.get(index).getPublishTime());
-            holder.dongtaiTitle.setText(mylist.get(index).getTitle());
-           // x.image().bind((holder.headerImg), HttpUtils.hostLuoqingshanSchool+"/usys/imgs/" + mylist.get(index).getPic() + ".png");
-
-            holder.dongtai_userName.setText(mylist.get(index).getUserId().getUserName());
+            //holder.dongtaiTitle.setText(mylist.get(index).getTitle());
+            x.image().bind((holder.headerImg), HttpUtils.hostLuoqingshanSchool+"/usys/imgs/" + mylist.get(index).getUserId().getUserImg()+ ".png");
+            x.image().bind((holder.dontaipic), HttpUtils.hostLuoqingshanSchool+"/usys/imgs/" + mylist.get(index).getPic() + ".png");holder.dongtai_userName.setText(mylist.get(index).getUserId().getUserName());
             holder.dongtaiContent.setText(mylist.get(index).getContent());
 
 
@@ -120,15 +121,10 @@ holder.btn_input_comment=(TextView)convertView.findViewById(R.id.btn_input_comme
         } else {
             int index = position - 1;
             ViewHolder holder = (ViewHolder) convertView.getTag();
-            holder.name.setText(mList.get(index).getmReceiver().mName);
+            holder.name.setText(mList.get(index).getmReceiver().getmName());
             holder.time.setText(mList.get(index).getRemaekTime());
             x.image().bind((holder.img), HttpUtils.hostLuoqingshanSchool+"/usys/imgs/" + mList.get(index).getImgs() + ".png");
             holder.content.setText(mList.get(index).mContent);
-
-
-
-
-
 
             CommentFun.parseCommentList(mContext,mList.get(index).getList(),
                     holder.mCommentList, holder.mBtnInput, mTagHandler);

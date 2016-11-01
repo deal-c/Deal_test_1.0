@@ -103,6 +103,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent(getActivity(), RegActivity.class);
+                    intent.putExtra("flag","0");
                     startActivity(intent);
 
                 }

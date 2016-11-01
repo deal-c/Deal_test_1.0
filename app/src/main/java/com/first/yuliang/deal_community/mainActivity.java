@@ -189,7 +189,7 @@ public class mainActivity extends AppCompatActivity implements View.OnClickListe
                 getWindow().setAttributes(lp);
             }
         });
-
+        popupWindow.setAnimationStyle(R.style.Animation);
         popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, (location[0] + view.getWidth() / 2) - popupWidth / 2, location[1] - popupHeight);
 
     }

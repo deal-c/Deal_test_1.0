@@ -192,7 +192,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 ModifyActivity.this.finish();
                 Intent intentBack=new Intent(ModifyActivity.this, RegActivity.class);
                 intentBack.putExtra("userNickName",tv_show_name.getText().toString().trim());
-//                intentBack.putExtra("flag","0");
+                intentBack.putExtra("flag","0");
                 SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit=preference.edit();
                 edit.putInt("fromModifyToReg",1);
