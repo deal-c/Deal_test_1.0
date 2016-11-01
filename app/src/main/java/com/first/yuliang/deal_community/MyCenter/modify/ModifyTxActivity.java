@@ -1,5 +1,6 @@
 package com.first.yuliang.deal_community.MyCenter.modify;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.ToolsClass;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 
 import org.xutils.common.Callback;
@@ -52,6 +54,7 @@ public class ModifyTxActivity extends AppCompatActivity implements View.OnClickL
     private TextView tv_keep_tx;
     SharedPreferences preference=null;
     SharedPreferences.Editor edit=null;
+    Dialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,6 +196,12 @@ public class ModifyTxActivity extends AppCompatActivity implements View.OnClickL
 
     private void updateTx() {
 
+
+
+
+        progressDialog = ToolsClass.createLoadingDialog(ModifyTxActivity.this, " ", true,
+                0);
+        progressDialog.show();
         edit.putInt("iskeepTx",1);
         edit.commit();
 
@@ -210,6 +219,7 @@ public class ModifyTxActivity extends AppCompatActivity implements View.OnClickL
 
                 if(result!="")
                 {
+                    progressDialog.hide();
                     Toast.makeText(ModifyTxActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
                     edit.putString("userImgAfter",result);
                     edit.commit();
@@ -224,6 +234,7 @@ public class ModifyTxActivity extends AppCompatActivity implements View.OnClickL
 
                     edit.putInt("iskeepTx",0);
                     edit.commit();
+                    progressDialog.hide();
                     Toast.makeText(ModifyTxActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -231,7 +242,7 @@ public class ModifyTxActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
-                Toast.makeText(ModifyTxActivity.this,"onError",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ModifyTxActivity.this,"无法修改",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -242,6 +253,7 @@ public class ModifyTxActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
 
             @Override

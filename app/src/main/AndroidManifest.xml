@@ -201,6 +201,11 @@
                   android:windowSoftInputMode="adjustPan|stateHidden">
 
         </activity>
+
+        <activity
+            android:name=".MessageActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

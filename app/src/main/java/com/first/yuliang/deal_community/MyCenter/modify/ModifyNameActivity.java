@@ -1,12 +1,12 @@
 package com.first.yuliang.deal_community.MyCenter.modify;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.ToolsClass;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 
 import org.xutils.common.Callback;
@@ -33,6 +34,7 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
     int userId=0;
     private Toolbar toolbar_modify_name;
 
+    Dialog progressDialog;
 
 
     SharedPreferences preference=null;
@@ -76,6 +78,9 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
       edit.putInt("iskeepName",1);
         edit.commit();
 
+        progressDialog = ToolsClass.createLoadingDialog(ModifyNameActivity.this, "修改中...", true,
+                0);
+        progressDialog.show();
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/ModifyUserServlet");
         try {
             params.addBodyParameter("userName", URLEncoder.encode(et_nicheng.getText().toString(),"UTF-8"));
@@ -94,6 +99,7 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
 
                 if(result!="") {
 
+                    progressDialog.hide();
                     Toast.makeText(ModifyNameActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
 
                    // ModifyNameActivity.this.finish();
@@ -101,6 +107,7 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
                 else
                 {
 
+                    progressDialog.hide();
                     edit.putInt("iskeepName",0);
                     edit.commit();
                     Toast.makeText(ModifyNameActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
@@ -110,6 +117,7 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
+                Toast.makeText(ModifyNameActivity.this,"无法修改",Toast.LENGTH_SHORT).show();
 
             }
 
@@ -121,6 +129,7 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
         });
 
@@ -134,7 +143,7 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
                 removeContent();
                  break;
             case R.id.tv_keep_name:
-                Log.e("ModifyNameActivity","++++++++++hhhhhhhhh");
+
                 getUserNameData();
                 break;
             case R.id.iv_modify_name_back:

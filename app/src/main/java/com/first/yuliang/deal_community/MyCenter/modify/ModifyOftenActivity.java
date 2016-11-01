@@ -1,5 +1,6 @@
 package com.first.yuliang.deal_community.MyCenter.modify;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.ToolsClass;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 
 import org.xutils.common.Callback;
@@ -33,6 +35,8 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
 
     SharedPreferences preference=null;
     SharedPreferences.Editor edit=null;
+    Dialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,8 +98,13 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
 
     private void getUserOftenData() {
 
+
+        progressDialog = ToolsClass.createLoadingDialog(ModifyOftenActivity.this, "修改中...", true,
+                0);
+        progressDialog.show();
         edit.putInt("iskeepOften",1);
         edit.commit();
+
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/ModifyUserOftenServlet");
         try {
             params.addBodyParameter("userAddress_s", URLEncoder.encode(et_often_live.getText().toString(),"UTF-8"));
@@ -114,12 +123,16 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
 
                 if(result!="") {
 
+
+
+                    progressDialog.hide();
                     Toast.makeText(ModifyOftenActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
 
                     // ModifyNameActivity.this.finish();
                 }
                 else
                 {
+                    progressDialog.hide();
                     edit.putInt("iskeepOften",0);
                     edit.commit();
                     Toast.makeText(ModifyOftenActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
@@ -129,6 +142,7 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
+                Toast.makeText(ModifyOftenActivity.this,"无法修改",Toast.LENGTH_SHORT).show();
 
             }
 
@@ -140,6 +154,7 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
         });
 
