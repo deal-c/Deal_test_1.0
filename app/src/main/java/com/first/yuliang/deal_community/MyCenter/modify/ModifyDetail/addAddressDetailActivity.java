@@ -11,7 +11,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,6 +62,7 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
     private RelativeLayout rl_city;
     private List<Province> provinces = new ArrayList<Province>();
 
+    Dialog progressDialog;
 
 
 
@@ -133,6 +133,12 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
 
     private void getAddressData() {
 
+
+        progressDialog = ToolsClass.createLoadingDialog(addAddressDetailActivity.this, "添加中...", true,
+                0);
+        progressDialog.show();
+
+
         RequestParams params = new RequestParams(HttpUtile.zy + "/servlet/addAddressServlet");
 
         try {
@@ -153,14 +159,15 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
             @Override
             public void onSuccess(String result) {
 
-                Log.e("result", "+++++++++" + result);
-
                 if (Boolean.parseBoolean(result.toString().trim())) {
-//
+
+                    progressDialog.hide();
                     Toast.makeText(addAddressDetailActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     addAddressDetailActivity.this.setResult(3, intent);
                 } else {
+
+                    progressDialog.hide();
                     Toast.makeText(addAddressDetailActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -168,6 +175,7 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
+                Toast.makeText(addAddressDetailActivity.this, "无法添加", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -178,6 +186,7 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
         });
 
@@ -193,10 +202,9 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
         cb_isdefault.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (cb_isdefault.isChecked()) {
+                if (isChecked) {
 
-                    //edit.putInt("ischecked",1);
-                    edit.commit();
+
                     cb_isdefault.setText("选中");
 
                 } else {
@@ -234,6 +242,9 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
 
         }
     }
+
+
+
 
     private void getMobilePhoneNum() {
 

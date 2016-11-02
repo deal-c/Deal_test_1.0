@@ -1,5 +1,6 @@
 package com.first.yuliang.deal_community.pojo;
 
+import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -24,7 +25,7 @@ public class CommodityBean {
         public String commodityClass;
         public Integer buyUserId;
         public Integer statement;
-        public Integer dianzan;
+        public Integer total;
 
         @Override
         public int describeContents() {
@@ -45,7 +46,7 @@ public class CommodityBean {
             dest.writeString(this.commodityClass);
             dest.writeValue(this.buyUserId);
             dest.writeValue(this.statement);
-            dest.writeValue(this.dianzan);
+            dest.writeValue(this.total);
         }
 
         public Commodity() {
@@ -64,7 +65,7 @@ public class CommodityBean {
             this.commodityClass = in.readString();
             this.buyUserId = (Integer) in.readValue(Integer.class.getClassLoader());
             this.statement = (Integer) in.readValue(Integer.class.getClassLoader());
-            this.dianzan = (Integer) in.readValue(Integer.class.getClassLoader());
+            this.total = (Integer) in.readValue(Integer.class.getClassLoader());
         }
 
         public static final Parcelable.Creator<Commodity> CREATOR = new Parcelable.Creator<Commodity>() {

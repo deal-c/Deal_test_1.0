@@ -80,9 +80,7 @@
                     android:id="@+id/lv_alll_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:dividerHeight="1px"
-                    android:divider="#c0c0c0">
+                    >
 
                 </ListView>
             </RelativeLayout>

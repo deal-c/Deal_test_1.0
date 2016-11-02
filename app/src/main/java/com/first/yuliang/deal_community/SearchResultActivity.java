@@ -68,6 +68,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     private ListView lv_commodity_list;
     private BaseAdapter adapter_g;
     private BaseAdapter adapter_l;
+    private BaseAdapter adapter_lg;
     List<CommodityBean.Commodity> commodityList = new ArrayList<CommodityBean.Commodity>();
     private ProgressBar pb_load_commodity;
     private TextView tv_null;
@@ -100,6 +101,17 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     private CustomSeekbar customSeekBar;
     private RadioGroup rg_way;
     private int way = 0;
+    private int page = 0;
+    private View view_g;
+    private ListView lv_gv;
+    private View view_load1;
+    private View view_load2;
+    private Button btn_load1;
+    private Button btn_bottom1;
+    private ProgressBar pb_load1;
+    private Button btn_load2;
+    private Button btn_bottom2;
+    private ProgressBar pb_load2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +126,35 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         mContext = this;
         initpop();
         line = ((ImageView) findViewById(R.id.iv_line2));
+
+
+        view_load1 = View.inflate(SearchResultActivity.this,R.layout.pull_to_load,null);
+        btn_load1 = ((Button) view_load1.findViewById(R.id.btn_load));
+        btn_bottom1 = ((Button) view_load1.findViewById(R.id.btn_bottom));
+        pb_load1 = ((ProgressBar) view_load1.findViewById(R.id.pb_load));
+        btn_load1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pb_load1.setVisibility(View.VISIBLE);
+                btn_load1.setVisibility(View.GONE);
+                page++;
+                getCommodityList(search);
+            }
+        });
+        view_load2 = View.inflate(SearchResultActivity.this,R.layout.pull_to_load,null);
+
+        btn_load2 = ((Button) view_load2.findViewById(R.id.btn_load));
+        btn_bottom2 = ((Button) view_load2.findViewById(R.id.btn_bottom));
+        pb_load2 = ((ProgressBar) view_load2.findViewById(R.id.pb_load));
+        btn_load2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pb_load2.setVisibility(View.VISIBLE);
+                btn_load2.setVisibility(View.GONE);
+                page++;
+                getCommodityList(search);
+            }
+        });
 
         tv_total = ((TextView) findViewById(R.id.tv_total));
         pb_load_commodity = ((ProgressBar) findViewById(R.id.pb_load_commodity));
@@ -146,7 +187,10 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         });
         tv_null = ((TextView) findViewById(R.id.tv_null));
         getCommodityList(search);
-        gv_commodity_list = ((GridView) findViewById(R.id.gv_commodity_list));
+
+        lv_gv = ((ListView) findViewById(R.id.lv_gv_commodity_list));
+        view_g = View.inflate(SearchResultActivity.this,R.layout.commodity_footer,null);
+        gv_commodity_list = ((GridView) view_g.findViewById(R.id.gv_commodity));
 
         adapter_g = new BaseAdapter() {
             private TextView tv_local;
@@ -187,8 +231,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 return view;
             }
         };
-
-
         gv_commodity_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -201,6 +243,29 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
+        lv_gv.addHeaderView(view_g);
+        lv_gv.addFooterView(view_load1);
+        adapter_lg = new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return 0;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                return null;
+            }
+        };
         lv_commodity_list = ((ListView) findViewById(R.id.lv_commodity_list));
         adapter_l = new BaseAdapter() {
             private TextView tv_local_l;
@@ -242,7 +307,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             }
         };
 
-
+        lv_commodity_list.addFooterView(view_load2);
         lv_commodity_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -258,7 +323,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         ll_total = ((LinearLayout) findViewById(R.id.ll_total));
         ll_total.measure(0,0);
         llHeight = ll_total.getMeasuredHeight();
-        gv_commodity_list.setOnScrollListener(new AbsListView.OnScrollListener() {
+        lv_gv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -315,11 +380,11 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         getHistory();
         if (isGrid){
             ib_list.setImageResource(R.drawable.type);
-            gv_commodity_list.setVisibility(View.GONE);
+            lv_gv.setVisibility(View.GONE);
             lv_commodity_list.setVisibility(View.VISIBLE);
         }else {
             ib_list.setImageResource(R.drawable.line);
-            gv_commodity_list.setVisibility(View.VISIBLE);
+            lv_gv.setVisibility(View.VISIBLE);
             lv_commodity_list.setVisibility(View.GONE);
         }
         ib_list.setOnClickListener(new View.OnClickListener() {
@@ -328,12 +393,12 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 getHistory();
                 if (isGrid){
                     ib_list.setImageResource(R.drawable.line);
-                    gv_commodity_list.setVisibility(View.VISIBLE);
+                    lv_gv.setVisibility(View.VISIBLE);
                     lv_commodity_list.setVisibility(View.GONE);
                     save(false);
                 }else {
                     ib_list.setImageResource(R.drawable.type);
-                    gv_commodity_list.setVisibility(View.GONE);
+                    lv_gv.setVisibility(View.GONE);
                     lv_commodity_list.setVisibility(View.VISIBLE);
                     save(true);
                 }
@@ -360,16 +425,21 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void getCommodityList(String search) {
+        btn_bottom1.setVisibility(View.GONE);
+        btn_bottom2.setVisibility(View.GONE);
         tv_null.setVisibility(View.GONE);
-        if(adapter_g!=null && adapter_l!=null) {
+        if(page==0){
+            pb_load_commodity.setVisibility(View.VISIBLE);
+            view_load1.setVisibility(View.GONE);
+        }
+        if(adapter_g!=null && adapter_l!=null && page==0) {
             gv_commodity_list.setAdapter(null);
             lv_commodity_list.setAdapter(null);
         }
-        pb_load_commodity.setVisibility(View.VISIBLE);
         search = search.replace(" ","%");
         RequestParams params = null;
         String url = CommodityURL.SUN_0 + "selectcommodity";
-        String select = "?search="+search+"&"+"location="+location+"&"+"orderFlag="+orderFlag+"&"+"lowPrice="+c_low+"&"+"highPrice="+c_high+"&"+"way="+way;
+        String select = "?search="+search+"&"+"location="+location+"&"+"orderFlag="+orderFlag+"&"+"lowPrice="+c_low+"&"+"highPrice="+c_high+"&"+"way="+way+"&"+"page="+page;
         Log.e("看url===========",url+select);
         params = new RequestParams(url+select);
         x.http().get(params,new Callback.CommonCallback<String>(){
@@ -378,7 +448,9 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             public void onSuccess(String result) {
                 Gson gson = new Gson();
                 CommodityBean bean = gson.fromJson(result, CommodityBean.class);
-                commodityList.clear();
+                if(page==0){
+                    commodityList.clear();
+                }
                 commodityList.addAll(bean.commodities);
                 pb_load_commodity.setVisibility(View.GONE);
                 ll_total.setVisibility(View.VISIBLE);
@@ -386,12 +458,25 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                     tv_null.setVisibility(View.VISIBLE);
                 }
                 Log.e("+++++++++++++++", String.valueOf(commodityList.size()));
-                tv_total.setText(String.valueOf(commodityList.size()));
+                tv_total.setText(String.valueOf(commodityList.get(0).total));
 
                 gv_commodity_list.setAdapter(adapter_g);
+
+                lv_gv.setAdapter(adapter_lg);
+
                 lv_commodity_list.setAdapter(adapter_l);
                 adapter_g.notifyDataSetChanged();
                 adapter_l.notifyDataSetChanged();
+                pb_load1.setVisibility(View.GONE);
+                pb_load2.setVisibility(View.GONE);
+                btn_load1.setVisibility(View.VISIBLE);
+                if (commodityList.get(0).total==commodityList.size()){
+                    btn_load1.setVisibility(View.GONE);
+                    btn_load2.setVisibility(View.GONE);
+                    btn_bottom1.setVisibility(View.VISIBLE);
+                    btn_bottom2.setVisibility(View.VISIBLE);
+                }
+                view_load1.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -479,7 +564,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_quyu:
-//                Log.e("看看筛选======",ll_select.getBottom()+"");
+                page = 0;
                 if (provinces.size() > 0) {
                     showAddressDialog();
                 } else {
@@ -487,12 +572,15 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 }
                 break;
             case R.id.btn_paixu:
+                page = 0;
                 showPXPopupWindow(v);
                 break;
             case R.id.btn_jiage:
+                page = 0;
                 showJGPopupWindow(v);
                 break;
             case R.id.btn_way:
+                page = 0;
                 showFSPopupWindow(v);
                 break;
         }

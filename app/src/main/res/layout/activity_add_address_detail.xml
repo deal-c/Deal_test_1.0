@@ -232,7 +232,9 @@
            android:layout_height="wrap_content"
            android:layout_alignParentRight="true"
            android:layout_marginRight="10dp"
-           android:background="@drawable/checkbox_check"/>
+           android:textColor="#000"
+           android:text="未选中"
+           android:button="@drawable/ismoren"/>
 
 
     </RelativeLayout>

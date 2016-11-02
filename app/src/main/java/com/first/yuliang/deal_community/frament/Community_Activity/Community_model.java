@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,7 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.frament.pojo.Dynamic;
+import com.first.yuliang.deal_community.frament.testpic.PublishedActivity;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
+import com.first.yuliang.deal_community.model.ComMainActivity;
 import com.first.yuliang.deal_community.pojo.Community;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,7 +40,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Community_model extends AppCompatActivity implements View.OnClickListener {
+public class Community_model extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, ContentAdapter.Callback {
 
     private ImageView backToSearch;
     private TextView communityName;
@@ -43,7 +48,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
     private ListView tiezilisst;
     private Community community;
     private Intent intent;
-    private BaseAdapter myadapter;
+    private ContentAdapter myadapter;
     private ImageView comImg;
     Handler handler = new Handler() {
         @Override
@@ -54,10 +59,14 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
             myadapter.notifyDataSetChanged();
         }
     };
+    private int sendCommunityid = 0;
+    ArrayList<Dynamic> dynamicList = new ArrayList<>();
     private ImageView logo;
     private TextView namecom;
     private TextView comdesc;
     private Button care;
+
+    private     String  sendynamiclist;
 
     @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -66,30 +75,8 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
         //设置信息栏颜色
         setColor();
         initview();
-        myadapter = new BaseAdapter() {
-            @Override
-            public int getCount() {
-                return count;
-            }
 
-            @Override
-            public Object getItem(int position) {
-                return null;
-            }
 
-            @Override
-            public long getItemId(int position) {
-                return 0;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = View.inflate(Community_model.this, R.layout.item_dongtai, null);
-
-                return view;
-            }
-        };
-        tiezilisst.setAdapter(myadapter);
         backToSearch.setOnClickListener(this);
         View headview = View.inflate(this, R.layout.comlayout_item, null);
         final View footview = View.inflate(this, R.layout.comfootview_item, null);
@@ -107,7 +94,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
         community = intent.getParcelableExtra("bundle");
         //判断是否关注了
         ifCare();
-
+        sendCommunityid=community.getCommunityId();
         communityName.setText(community.getCommunityName() + "");
 
         //headview 的控件、
@@ -136,8 +123,80 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
         namecom.setText(community.getCommunityName());
         comdesc.setText(community.getCommunityInfo());
 
+        myadapter = new ContentAdapter(this,dynamicList,this);
+        geAlldynamic(sendCommunityid);
+
+        tiezilisst.setAdapter(myadapter);
+        tiezilisst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(Community_model.this, ComMainActivity.class);
+
+
+
+                intent.putExtra("dynamicList", sendynamiclist);
+                Community_model.this.startActivity(intent);
+
+
+
+
+            }
+        });
 
     }
+
+    private void geAlldynamic(int sendCommunityid) {
+        RequestParams params = new RequestParams
+                (HttpUtils.hostLuoqingshanSchool+"/usys/Dservlt?sendCommunityid=" + sendCommunityid);//网络请求
+        x.http().get(params, new org.xutils.common.Callback.CommonCallback<String>() {//使用xutils开启网络线程
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                Type type = new TypeToken<List<Dynamic>>() {
+                }.getType();
+
+
+                List<Dynamic>   communityList1=new ArrayList<>();
+                communityList1  = gson.fromJson(result, type);
+                Log.e("看看数据====", dynamicList.toString());
+                Log.e("看看数据====", gson.toString());
+                if (result!=null){
+                    dynamicList.addAll(communityList1);
+                    sendynamiclist=result;
+                }
+
+                System.out.print(result);
+
+
+
+
+                myadapter.notifyDataSetChanged();
+                System.out.print(dynamicList);
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean
+                    isOnCallback) {
+                //Toast.makeText(Frag_community_guanzhu.this, ex.toString(), Toast.LENGTH_LONG).show();
+                System.out.println(ex.toString());
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+
+    }
+
 
     List<Community> comlist_care = new ArrayList<Community>();
 
@@ -188,7 +247,8 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
     private void initview() {
         backToSearch = ((ImageView) findViewById(R.id.backToSearch));
         communityName = ((TextView) findViewById(R.id.tv_communityname1));
-        tiezilisst = ((ListView) findViewById(R.id.lv_tiezi));
+        tiezilisst=((ListView) findViewById(R.id.lv_tiezi));
+
     }
 
     //设置信息栏颜色
@@ -261,5 +321,20 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
         } else {
             Toast.makeText(Community_model.this, "你已关注过了", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+    public void inputDynamicClick(View view) {
+
+        Intent intent=new Intent(Community_model.this,PublishedActivity.class);
+        intent.putExtra("sendCommunityid",sendCommunityid);
+        startActivity(intent);
+    }
+    @Override
+    public void click(View v) {
+
     }
 }

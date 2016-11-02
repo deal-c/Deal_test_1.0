@@ -1,5 +1,6 @@
 package com.first.yuliang.deal_community.MyCenter.modify;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.ToolsClass;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 
 import org.xutils.common.Callback;
@@ -26,6 +28,8 @@ public class ModifyPsdActivity extends AppCompatActivity implements View.OnClick
 
     int userId=0;
     private ImageView iv_modify_psd_back;
+
+    Dialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +92,9 @@ public class ModifyPsdActivity extends AppCompatActivity implements View.OnClick
 
     private void getUserPsdData(View v) {
 
+        progressDialog = ToolsClass.createLoadingDialog(ModifyPsdActivity.this, "修改中...", true,
+                0);
+        progressDialog.show();
 
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/SelectUserPsdServlet");
         params.addBodyParameter("userId",userId+"");
@@ -100,9 +107,11 @@ public class ModifyPsdActivity extends AppCompatActivity implements View.OnClick
 
                 if(Boolean.parseBoolean(result.toString().trim()))
                 {
+                    progressDialog.hide();
                     Toast.makeText(ModifyPsdActivity.this,"密码修改成功",Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    progressDialog.hide();
                     Toast.makeText(ModifyPsdActivity.this,"密码修改失败",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -120,6 +129,7 @@ public class ModifyPsdActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
         });
 

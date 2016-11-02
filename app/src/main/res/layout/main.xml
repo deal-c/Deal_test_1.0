@@ -10,11 +10,15 @@
 
     <!-- 搜索输入框的相对布局 -->
     <RelativeLayout
-
+        android:id="@+id/headhead"
         android:paddingLeft="5dp"
       android:layout_below="@+id/backheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
+
+
+
         <ListView android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#ffffff"
@@ -22,7 +26,10 @@
             android:dividerHeight="10dp"
             android:divider="#ffffff"
             android:cacheColorHint="@android:color/transparent"
-            ></ListView>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"></ListView>
+
     </RelativeLayout>
 
     <LinearLayout
@@ -70,6 +77,37 @@
             android:background="@drawable/ripple_bg"
             android:src="@drawable/type" />
     </LinearLayout>
+   <RelativeLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/headhead"
+
+
+       >
+
+       <TextView
+
+           android:layout_alignParentBottom="true"
+           android:layout_marginTop="10dp"
+           android:layout_marginBottom="10dp"
+           android:id="@+id/btn_input_comment"
+           android:hint="评论"
+           android:paddingLeft="5dp"
+           android:paddingRight="5dp"
+           android:textSize="14dp"
+           android:textColor="#000000"
+           android:layout_width="match_parent"
+           android:gravity="center_vertical"
+           android:layout_height="30dp"
+           android:background="@drawable/bg_input_comment"
+           android:textColorHint="#aaaaaa"
+           android:onClick="inputComment"
+           />
+
+
+
+
+   </RelativeLayout>
 
 </RelativeLayout>
 

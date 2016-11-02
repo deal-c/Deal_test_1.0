@@ -122,7 +122,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     private void register(View v) {
         Intent intent=new Intent(RegActivity.this,regDetailActivity.class);
         startActivity(intent);
-        this.finish();
+        //this.finish();
     }
 
     private void Login(View v) {
@@ -223,7 +223,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         if(preference.getInt("fromModifyToReg",0)==1)
         {
             //edit.putInt("fromModifyToReg",2);
-            edit.putInt("id",0);
+           // edit.putInt("id",0);
             edit.putInt("intoflag",1);
             edit.putInt("zhuxiao",1);
             edit.commit();

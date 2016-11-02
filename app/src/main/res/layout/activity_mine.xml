@@ -89,9 +89,10 @@
 
                 <ImageView
                     android:id="@+id/iv_mypublish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/u88"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/publish"
+                    android:scaleType="centerCrop"
                     android:layout_centerVertical="true"
                     />
 
@@ -102,7 +103,7 @@
                     android:layout_centerVertical="true"
                     android:text="我发布的"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:layout_toRightOf="@id/iv_mypublish"
                     android:layout_marginLeft="24dp"/>
 
@@ -134,9 +135,10 @@
 
                 <ImageView
                     android:id="@+id/iv_mymai"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/u88"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/maichu"
+                    android:scaleType="centerCrop"
                     android:layout_centerVertical="true" />
 
                 <TextView
@@ -146,7 +148,7 @@
                     android:layout_centerVertical="true"
                     android:text="我卖出的"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:layout_toRightOf="@id/iv_mymai"
                     android:layout_marginLeft="24dp"/>
 
@@ -178,9 +180,10 @@
 
                 <ImageView
                     android:id="@+id/iv_mybuy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/u88"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/buy"
+                    android:scaleType="centerCrop"
                     android:layout_centerVertical="true" />
 
                 <TextView
@@ -190,7 +193,7 @@
                     android:layout_centerVertical="true"
                     android:text="我买到的"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:layout_toRightOf="@id/iv_mybuy"
                     android:layout_marginLeft="24dp"/>
 
@@ -222,9 +225,10 @@
 
                 <ImageView
                     android:id="@+id/iv_myzan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/u88"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/zan"
+                    android:scaleType="centerCrop"
                     android:layout_centerVertical="true" />
 
                 <TextView
@@ -232,9 +236,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="我赞过的"
+                    android:text="我的收藏"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:layout_toRightOf="@id/iv_myzan"
                     android:layout_marginLeft="24dp"/>
 
@@ -267,9 +271,10 @@
 
                 <ImageView
                     android:id="@+id/iv_my_gold_coin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/u88"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/coin"
+                    android:scaleType="centerCrop"
                     android:layout_centerVertical="true" />
 
                 <TextView
@@ -279,7 +284,7 @@
                     android:layout_centerVertical="true"
                     android:text="我的金币"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:layout_toRightOf="@id/iv_my_gold_coin"
                     android:layout_marginLeft="24dp"/>
 
@@ -325,7 +330,7 @@
                     android:layout_centerVertical="true"
                     android:text="最近浏览"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
 
                     android:layout_marginLeft="10dp"/>
 
@@ -362,7 +367,7 @@
                     android:layout_centerVertical="true"
                     android:text="联系卖家"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
 
                     android:layout_marginLeft="10dp"/>
 
@@ -399,7 +404,7 @@
                     android:layout_centerVertical="true"
                     android:text="设置"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
 
                     android:layout_marginLeft="10dp"/>
 
