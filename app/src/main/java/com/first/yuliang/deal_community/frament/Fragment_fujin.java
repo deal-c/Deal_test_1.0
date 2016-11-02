@@ -3,6 +3,7 @@ package com.first.yuliang.deal_community.frament;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
@@ -53,6 +54,7 @@ import com.amap.api.services.core.SuggestionCity;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.first.yuliang.deal_community.CityPickerDialog;
+import com.first.yuliang.deal_community.CommodityActivity;
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.ToolsClass;
 import com.first.yuliang.deal_community.address.City;
@@ -102,6 +104,7 @@ public class Fragment_fujin extends Fragment implements LocationSource,
     private CommodityBean.Commodity commodity;
     private ImageView image;
     Dialog progressDialog;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -127,24 +130,24 @@ public class Fragment_fujin extends Fragment implements LocationSource,
 //        initMarker();
 
         //获得storelist
-        getStoeList();
-        getProductList();
+//        getStoeList();
+//        getProductList();
 
         AMap.OnMarkerClickListener listener = new AMap.OnMarkerClickListener() {
 
             @Override
             public boolean onMarkerClick(Marker arg0) {
-                if (arg0.getTitle()!="" && arg0.getTitle()!=null) {
+                if (arg0.getTitle() != "" && arg0.getTitle() != null) {
                     Toast.makeText(getActivity(), arg0.getTitle() + ":  " + arg0.getSnippet(), Toast.LENGTH_LONG).show();
-                }else {
+                } else {
 
-                   // icon(BitmapDescriptorFactory
+                    // icon(BitmapDescriptorFactory
                     //        .defaultMarker(BitmapDescriptorFactory.HUE_RED))
 
-                    int id =((GProduct)arg0.getObject()).getCommodityid();
+                    int id = ((GProduct) arg0.getObject()).getCommodityid();
                     getcombyid(id);
                     jumpPoint(arg0);
-                    Toast.makeText(getActivity(),commodity.commodityTitle, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), commodity.commodityTitle, Toast.LENGTH_LONG).show();
                     arg0.setInfoWindowEnable(false);
 //                    innitPoupwindow();
 
@@ -336,7 +339,8 @@ public class Fragment_fujin extends Fragment implements LocationSource,
         }
     }
 
-boolean is3d=true;
+    boolean is3d = true;
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -358,10 +362,10 @@ boolean is3d=true;
                 if (is3d) {
                     aMap.moveCamera(CameraUpdateFactory.changeTilt(50));
 
-                    is3d=false;
-                }else {
+                    is3d = false;
+                } else {
                     aMap.moveCamera(CameraUpdateFactory.changeTilt(0));
-                    is3d=true;
+                    is3d = true;
                 }
                 break;
         }
@@ -373,18 +377,21 @@ boolean is3d=true;
     boolean flag2 = true;
 
     private void getAllproduct() {
-        flag2=true;
+        flag2 = true;
         if (!flag1) {
             aMap.clear();
             etupLocationStyle();
-            Log.i("biaoji","隐藏商品");
+            Log.i("biaoji", "隐藏商品");
             flag1 = true;
         } else {
+            progressDialog = ToolsClass.createLoadingDialog(getActivity(), "加载中...", true,
+                    0);
+            progressDialog.show();
             aMap.clear();
             etupLocationStyle();
-            addProMakerToMap();
+            getProductList();
             flag1 = false;
-            Log.i("biaoji","显示商品");
+            Log.i("biaoji", "显示商品");
         }
     }
 
@@ -394,7 +401,7 @@ boolean is3d=true;
             LatLng marker = new LatLng(s.getLatitude(), s.getLongitude());
             Marker a = aMap.addMarker(new MarkerOptions().
 //                    snippet(s.getCommodityid()+"").
-                    position(marker).icon(
+        position(marker).icon(
                             defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 //            a.setInfoWindowEnable(false);
             a.setObject(s);
@@ -404,20 +411,22 @@ boolean is3d=true;
     }
 
 
-
     void getAllmaijia() {
-        flag1=true;
+        flag1 = true;
         if (!flag2) {
             aMap.clear();
             etupLocationStyle();
             flag2 = true;
-            Log.i("biaoji","隐藏卖家");
+            Log.i("biaoji", "隐藏卖家");
         } else {
             aMap.clear();
+            progressDialog = ToolsClass.createLoadingDialog(getActivity(), "加载中...", true,
+                    0);
+            progressDialog.show();
             etupLocationStyle();
-            addMarkersToMap();
+            getStoeList();
             flag2 = false;
-            Log.i("biaoji","显示卖家");
+            Log.i("biaoji", "显示卖家");
         }
     }
 
@@ -564,10 +573,10 @@ boolean is3d=true;
                         PoiOverlay poiOverlay = new PoiOverlay(aMap, poiItems);
 //                        poiOverlay.removeFromMap();
 //                        poiOverlay.addToMap();
-                        LatLng a=new LatLng(poiOverlay.getPoiItem(0).getLatLonPoint().getLatitude(),poiOverlay.getPoiItem(0).getLatLonPoint().getLongitude());
-                        aMap.animateCamera(  CameraUpdateFactory.newCameraPosition(new CameraPosition(a, 17, 50, 0)) ,1000,null);
+                        LatLng a = new LatLng(poiOverlay.getPoiItem(0).getLatLonPoint().getLatitude(), poiOverlay.getPoiItem(0).getLatLonPoint().getLongitude());
+                        aMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(a, 17, 50, 0)), 1000, null);
 //                        aMap.moveCamera(CameraUpdateFactory.zoomTo(14));
-                        is3d=false;
+                        is3d = false;
 //                        poiOverlay.zoomToSpan();
 
 
@@ -606,7 +615,7 @@ boolean is3d=true;
 
     private void getStoeList() {
         RequestParams params = new RequestParams(HttpUtile.yu + "/community/togetstore");
-
+        params.setConnectTimeout(3*1000);
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -614,6 +623,7 @@ boolean is3d=true;
                 Type type = new TypeToken<List<Store>>() {
                 }.getType();
                 storeList = gson.fromJson(result, type);
+                addMarkersToMap();
                 Log.i("storeList", storeList.size() + "");
             }
 
@@ -629,7 +639,7 @@ boolean is3d=true;
 
             @Override
             public void onFinished() {
-
+                progressDialog.dismiss();
             }
         });
 
@@ -650,9 +660,10 @@ boolean is3d=true;
 
     }
 
+    //productlist
     private void getProductList() {
         RequestParams params = new RequestParams(HttpUtile.yu + "/community/togetgproduct");
-
+        params.setConnectTimeout(3*1000);
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -661,6 +672,8 @@ boolean is3d=true;
                 }.getType();
                 gProductList = gson.fromJson(result, type);
                 Log.i("storeList", gProductList.size() + "");
+                addProMakerToMap();
+
             }
 
             @Override
@@ -676,15 +689,17 @@ boolean is3d=true;
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
         });
 
     }
+
     //开启maker 生长动画
     private void startGrowAnimation(Marker growMarker) {
-        if(growMarker != null) {
-            Log.i("biaoji","进了来");
-            Animation animation = new ScaleAnimation(0,1,0,1);
+        if (growMarker != null) {
+            Log.i("biaoji", "进了来");
+            Animation animation = new ScaleAnimation(0, 1, 0, 1);
             animation.setInterpolator(new LinearInterpolator());
             //整个移动所需要的时间
             animation.setDuration(1000);
@@ -695,39 +710,41 @@ boolean is3d=true;
         }
     }
 
-   private void getcombyid(int commodityId){
-       progressDialog = ToolsClass.createLoadingDialog(getActivity(), "注册中...", true,
-               0);
-       progressDialog.show();
-       RequestParams params=new RequestParams(HttpUtile.yu+"/community/togetproduct");
-       params.addQueryStringParameter("commodityId",commodityId+"");
-       x.http().get(params, new Callback.CommonCallback<String>() {
-           @Override
-           public void onSuccess(String result) {
-               Gson gson=new Gson();
-                commodity=gson.fromJson(result,CommodityBean.Commodity.class);
-               innitPoupwindow();
-           }
+    private void getcombyid(int commodityId) {
+        progressDialog = ToolsClass.createLoadingDialog(getActivity(), "加载中...", true,
+                0);
+        progressDialog.show();
+        RequestParams params = new RequestParams(HttpUtile.yu + "/community/togetproduct");
+        params.addQueryStringParameter("commodityId", commodityId + "");
+        params.setConnectTimeout(3*1000);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                commodity = gson.fromJson(result, CommodityBean.Commodity.class);
+                innitPoupwindow();
+            }
 
-           @Override
-           public void onError(Throwable ex, boolean isOnCallback) {
-                  ToastUtil.show(getActivity(),"访问失败");
-           }
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                ToastUtil.show(getActivity(), "访问失败");
+            }
 
-           @Override
-           public void onCancelled(CancelledException cex) {
+            @Override
+            public void onCancelled(CancelledException cex) {
 
-           }
+            }
 
-           @Override
-           public void onFinished() {
-               progressDialog.dismiss();
-           }
-       });
+            @Override
+            public void onFinished() {
+                progressDialog.dismiss();
+            }
+        });
 
     }
+
     private void innitPoupwindow() {
-        Log.i("innitPoupwindow","进来了");
+        Log.i("innitPoupwindow", "进来了");
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.pro_popwindow_item, null);
         WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
 
@@ -744,13 +761,26 @@ boolean is3d=true;
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"跳转的商品详情",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "跳转的商品详情", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), CommodityActivity.class);
+                CommodityBean.Commodity temp = commodity;
+                intent.putExtra("search", commodity.commodityTitle);
+                intent.putExtra("bundle", temp);
+                startActivity(intent);
             }
         });
         ((TextView) v.findViewById(R.id.tv_11)).setText(commodity.commodityTitle);
-        ((TextView) v.findViewById(R.id.tv_22)).setText("￥："+commodity.price);
+        ((TextView) v.findViewById(R.id.tv_22)).setText("￥：" + commodity.price);
         image = ((ImageView) v.findViewById(R.id.iv11));
-        x.image().bind(image,HttpUtile.szj+commodity.commodityImg);
+
+        if (commodity.commodityImg.split("upload")[0].equals("/csys/")){
+            x.image().bind(image, HttpUtile.szj+(commodity.commodityImg.split(","))[0]);
+        }else{
+
+            x.image().bind(image, HttpUtile.yu+(commodity.commodityImg.split(","))[0]);
+        }
+//
+//        x.image().bind(image, HttpUtile.szj + commodity.commodityImg);
         popupWindow.setAnimationStyle(R.style.Animation);
 //        popupWindow.showAsDropDown(view);
         popupWindow.showAsDropDown(maijia);

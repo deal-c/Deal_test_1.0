@@ -6,6 +6,6 @@ package com.first.yuliang.deal_community.Util;
 
 public class CommodityURL {
 
-    public static final String SUN_0 = "http://192.168.191.1:8080/csys/";
+    public static final String SUN_0 = "http://10.40.5.62:8080/csys/";
     public static final String SUN_1 = "http://10.40.5.62:8080/csys/";
 }

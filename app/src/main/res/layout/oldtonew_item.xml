@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e7e7e7">
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:id="@+id/time_oldnew"
+        android:layout_width="140dp"
+        android:layout_height="38dp"
+        android:text="2016年11月1日"
+        android:textColor="#fff"
+        android:background="@drawable/button_gray"/>
+
+    <RelativeLayout
+        android:background="@drawable/shape"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/time_oldnew"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:id="@+id/old_title"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+
+            android:text="双11.以旧换新大放送!"/>
+        <ImageView
+            android:layout_marginTop="6dp"
+            android:id="@+id/iv_old_img"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_below="@+id/old_title"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:src="@drawable/ad2"
+            android:scaleType="centerCrop" />
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:background="#efefef"
+            android:layout_below="@id/iv_old_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:id="@+id/old_desc"
+            android:layout_marginTop="5dp"
+            android:text="新版note7爆炸威力更强，杀伤力更大，便于携带"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/iv_olddingwei"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="5dp"
+                android:layout_below="@id/old_desc"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/near_red"/>
+            <TextView
+                android:id="@+id/old_place"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/iv_olddingwei"
+                android:layout_alignBottom="@+id/iv_olddingwei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="苏州市吴中区仁爱路1号"
+                android:textSize="10dp"
+               />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

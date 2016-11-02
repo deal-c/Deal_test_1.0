@@ -144,7 +144,6 @@
                     android:pathPrefix="/conversationlist"
                     android:scheme="rong" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MyCenter.MyShezhiActivity"
@@ -173,8 +172,8 @@
         <activity android:name=".regBirthdayActivity" />
         <activity
             android:name=".MyCenter.ConversationActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -186,19 +185,27 @@
                     android:pathPrefix="/conversation/"
                     android:scheme="rong" />
             </intent-filter>
-            </activity>
-        <activity android:name=".regBirthdayActivity"/>
-        <activity
-            android:name=".publish.deal_publish_Activity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
+        <activity android:name=".regBirthdayActivity" />
         <activity
             android:name=".CommodityActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".Order"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".home_button_activity.huan_magic"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".home_button_activity.re_use"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity android:name=".home_button_activity.juan_dongtai"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity android:name=".home_button_activity.old_tonew"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
         </activity>
-        <activity android:name=".Order"
-                  android:theme="@style/Theme.AppCompat.NoActionBar"
-                  android:windowSoftInputMode="adjustPan|stateHidden">
+        <activity android:name=".MessageActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
         </activity>
     </application>

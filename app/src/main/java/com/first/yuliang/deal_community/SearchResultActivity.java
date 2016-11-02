@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -32,7 +32,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +43,7 @@ import com.first.yuliang.deal_community.Util.SeekBarPressure;
 import com.first.yuliang.deal_community.address.City;
 import com.first.yuliang.deal_community.address.County;
 import com.first.yuliang.deal_community.address.Province;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.google.gson.Gson;
 
@@ -179,7 +179,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 tv_local = ((TextView) view.findViewById(R.id.tv_local));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg, "http://192.168.191.1:8080"+(commodity.commodityImg.split(","))[0]);
+                x.image().bind(iv_cg, HttpUtile.szj+(commodity.commodityImg.split(","))[0]);
                 tv_cg.setText(commodity.commodityTitle);
                 tv_price.setText(commodity.price+"");
                 tv_local.setText(commodity.location);
@@ -233,7 +233,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 tv_local_l = ((TextView) view.findViewById(R.id.tv_local_l));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg_l, "http://192.168.191.1:8080" + (commodity.commodityImg.split(","))[0]);
+                x.image().bind(iv_cg_l, HttpUtile.szj+ (commodity.commodityImg.split(","))[0]);
                 tv_cg_l.setText(commodity.commodityTitle);
                 tv_price_l.setText(commodity.price + "");
                 tv_local_l.setText(commodity.location);

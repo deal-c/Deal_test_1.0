@@ -26,6 +26,10 @@ import com.first.yuliang.deal_community.SearchCommodityActivity;
 import com.first.yuliang.deal_community.TypeActivity;
 import com.first.yuliang.deal_community.frament.pojo.Adbean;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
+import com.first.yuliang.deal_community.home_button_activity.huan_magic;
+import com.first.yuliang.deal_community.home_button_activity.juan_dongtai;
+import com.first.yuliang.deal_community.home_button_activity.old_tonew;
+import com.first.yuliang.deal_community.home_button_activity.re_use;
 import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
@@ -39,7 +43,7 @@ import java.util.List;
 /**
  * Created by yuliang on 2016/9/21.
  */
-public class Fragment_home extends Fragment {
+public class Fragment_home extends Fragment implements View.OnClickListener{
 
 
     private Handler handler=new Handler(){
@@ -51,14 +55,14 @@ public class Fragment_home extends Fragment {
             super.handleMessage(msg);
             switch (msg.what){
                 case 1:
-                    if(currentItem>3){
-                        currentItem=0;
-                    }else {
-                        currentItem++;
-                    }
-                    vp_ad.setCurrentItem(currentItem);
-//                   adapter.notifyDataSetChanged();
-                    handler.sendEmptyMessageDelayed(1,2500);
+//                    if(currentItem>3){
+//                        currentItem=0;
+//                    }else {
+//                        currentItem++;
+//                    }
+//                    vp_ad.setCurrentItem(currentItem);
+////                   adapter.notifyDataSetChanged();
+//                    handler.sendEmptyMessageDelayed(1,2500);
                     break;
                 case 2:
                     break;
@@ -77,6 +81,10 @@ public class Fragment_home extends Fragment {
     private Button btn_message;
 
     int id=0;
+    private Button qiji_huan;
+    private Button zai_liyong;
+    private Button dongtai_juan;
+    private Button jiu_huanxin;
 
     @Nullable
     @Override
@@ -87,6 +95,19 @@ public class Fragment_home extends Fragment {
 
         ib_type=((ImageButton) view.findViewById(R.id.ib_type));
         btn_message = ((Button) view.findViewById(R.id.btn_message));
+
+        //对应主页的四个按钮
+        qiji_huan = ((Button) view.findViewById(R.id.qiji_huan));
+        zai_liyong = ((Button) view.findViewById(R.id.zaili_yong));
+        dongtai_juan = ((Button) view.findViewById(R.id.jun_dongtai));
+        jiu_huanxin = ((Button) view.findViewById(R.id.jiu_huanxin));
+
+        qiji_huan.setOnClickListener(this);
+        zai_liyong.setOnClickListener(this);
+        dongtai_juan.setOnClickListener(this);
+        jiu_huanxin.setOnClickListener(this);
+
+
         btn_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -297,6 +318,32 @@ public class Fragment_home extends Fragment {
             }
         });
 
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.qiji_huan:
+                Intent intent1=new Intent(getActivity(), huan_magic.class);
+                startActivity(intent1);
+                break;
+            case R.id.zaili_yong:
+                Intent intent2=new Intent(getActivity(), re_use.class);
+                startActivity(intent2);
+                break;
+            case R.id.jun_dongtai:
+                Intent intent3=new Intent(getActivity(),juan_dongtai.class);
+                startActivity(intent3);
+                break;
+            case R.id.jiu_huanxin:
+                Intent intent4=new Intent(getActivity(), old_tonew.class);
+                startActivity(intent4);
+                break;
+
+
+
+        }
 
     }
 }
