@@ -10,8 +10,7 @@ public class CommodityCollection {
 
     public Integer status;
     public List<CommodityCollect> cc;
-
-    public static class CommodityCollect{
+    public class CommodityCollect{
 
         public Integer commodityCollectionId;
 

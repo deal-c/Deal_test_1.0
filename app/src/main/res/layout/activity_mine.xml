@@ -37,15 +37,6 @@
                 >
 
 
-                <ImageView
-                    android:id="@+id/iv_chat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:paddingTop="17dip"
-                    android:paddingRight="17dip"
-                    android:src="@drawable/u77"/>
-
 
 
                 <ImageView

@@ -11,8 +11,10 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +43,8 @@ import org.xutils.x;
 import java.io.ByteArrayOutputStream;
 
 import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
 
 /**
  * Created by yuliang on 2016/9/21.
@@ -260,6 +264,8 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
                 Gson gson=new Gson();
                 user=gson.fromJson(result,User.class);
 
+                String token=user.getToken();
+                connect(token);
 
 
                 tv_login.setText(user.getUserName());
@@ -367,31 +373,31 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
 
         return temp;
     }
-//    private void connect(String token) {
-//
-//        RongIM.connect(token, new RongIMClient.ConnectCallback() {
-//            @Override
-//            public void onTokenIncorrect() {
-//                Log.e("Activitycc", "--onTokenIncorrect");
-//            }
-//
-//            @Override
-//            public void onSuccess(String userid) {
-//
-//                Log.e("Activitycc", "--onSuccess" + userid);
-//
-//
-//
-//                RongIM.getInstance().refreshUserInfoCache(new UserInfo(userid,user.getUserName(), Uri.parse(HttpUtile.zy1+user.getUserImg())));
-//
-//
-//            }
-//
-//            @Override
-//            public void onError(RongIMClient.ErrorCode errorCode) {
-//
-//                Log.e("Activitycc", "--onError" + errorCode);
-//            }
-//        });
-//    }
+    private void connect(String token) {
+
+        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+            @Override
+            public void onTokenIncorrect() {
+                Log.e("Activitycc", "--onTokenIncorrect");
+            }
+
+            @Override
+            public void onSuccess(String userid) {
+
+                Log.e("Activitycc", "--onSuccess" + userid);
+
+
+
+                RongIM.getInstance().refreshUserInfoCache(new UserInfo(userid,user.getUserName(), Uri.parse(HttpUtile.zy1+user.getUserImg())));
+
+
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+
+                Log.e("Activitycc", "--onError" + errorCode);
+            }
+        });
+    }
 }

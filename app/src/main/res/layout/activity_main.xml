@@ -27,12 +27,13 @@
             android:layout_above="@+id/radioGroup"
             android:background="#ccc"/>
         <Button
-            style="@style/radiostyle"
+            style="@style/button"
+            android:background="#fff"
             android:id="@+id/radio2"
-            android:drawableBottom="@drawable/radio_up_selector"
+            android:drawableBottom="@drawable/up_1"
             android:layout_alignParentBottom="true"
             android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_height="45dp"
             android:layout_centerHorizontal="true" />
         <RadioGroup
             android:background="#fff"

@@ -1,25 +1,15 @@
 package com.first.yuliang.deal_community;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.User;
-import com.google.gson.Gson;
-
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
 
 import io.rong.imkit.RongIM;
-import io.rong.imlib.RongIMClient;
-import io.rong.imlib.model.UserInfo;
 
 public class MessageActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -41,7 +31,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
         Intent intent=getIntent();
         int id=Integer.parseInt(intent.getStringExtra("id").toString().trim());
-       getContactorData(id);
+       //getContactorData(id);
 
     }
 
@@ -91,76 +81,73 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         {
 
             RongIM.getInstance().startConversationList(this);
-//            RongIM.getInstance().startPrivateChat(MessageActivity.this,"48"," ");
-//            //getUserData();
-//            getContactorData(48);
 
 
         }
     }
 
-    private void getContactorData(int id) {
-
-
-        RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/SelectUserServlet?id="+id);
-
-        x.http().get(params, new Callback.CommonCallback<String>() {
-
-            @Override
-            public void onSuccess(String result) {
-                Gson gson=new Gson();
-                user=gson.fromJson(result,User.class);
-                String token=user.getToken();
-                connect(token);
-
-               // RongIM.getInstance().refreshUserInfoCache(new UserInfo(user.getUserId()+"",user.getUserName(), Uri.parse(HttpUtile.zy1+user.getUserImg())));
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
-
-    }
-
-    private void connect(String token) {
-
-        RongIM.connect(token, new RongIMClient.ConnectCallback() {
-            @Override
-            public void onTokenIncorrect() {
-                Log.e("Activitycc", "--onTokenIncorrect");
-            }
-
-            @Override
-            public void onSuccess(String userid) {
-
-                Log.e("Activitycc", "--onSuccess" + userid);
-
-
-
-                RongIM.getInstance().refreshUserInfoCache(new UserInfo(userid,user.getUserName(), Uri.parse(HttpUtile.zy1+user.getUserImg())));
-
-
-            }
-
-            @Override
-            public void onError(RongIMClient.ErrorCode errorCode) {
-
-                Log.e("Activitycc", "--onError" + errorCode);
-            }
-        });
-    }
+//    private void getContactorData(int id) {
+//
+//
+//        RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/SelectUserServlet?id="+id);
+//
+//        x.http().get(params, new Callback.CommonCallback<String>() {
+//
+//            @Override
+//            public void onSuccess(String result) {
+//                Gson gson=new Gson();
+//                user=gson.fromJson(result,User.class);
+//                String token=user.getToken();
+//                connect(token);
+//
+//               // RongIM.getInstance().refreshUserInfoCache(new UserInfo(user.getUserId()+"",user.getUserName(), Uri.parse(HttpUtile.zy1+user.getUserImg())));
+//            }
+//
+//            @Override
+//            public void onError(Throwable ex, boolean isOnCallback) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(CancelledException cex) {
+//
+//            }
+//
+//            @Override
+//            public void onFinished() {
+//
+//            }
+//        });
+//
+//    }
+//
+//    private void connect(String token) {
+//
+//        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+//            @Override
+//            public void onTokenIncorrect() {
+//                Log.e("Activitycc", "--onTokenIncorrect");
+//            }
+//
+//            @Override
+//            public void onSuccess(String userid) {
+//
+//                Log.e("Activitycc", "--onSuccess" + userid);
+//
+//
+//
+//                RongIM.getInstance().refreshUserInfoCache(new UserInfo(userid,user.getUserName(), Uri.parse(HttpUtile.zy1+user.getUserImg())));
+//
+//
+//            }
+//
+//            @Override
+//            public void onError(RongIMClient.ErrorCode errorCode) {
+//
+//                Log.e("Activitycc", "--onError" + errorCode);
+//            }
+//        });
+//    }
 
 
     @Override

@@ -4,18 +4,16 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -132,6 +130,15 @@ public class CommodityActivity extends AppCompatActivity {
 
         View view = View.inflate(CommodityActivity.this,R.layout.commodity_head,null);
         iv_user_head = ((ImageView) view.findViewById(R.id.iv_user_head));
+        iv_user_head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(CommodityActivity.this,MaijiaInfoActivity.class);
+                Log.e("dededee","======="+3);
+                intent.putExtra("id",71+"");
+                startActivity(intent);
+            }
+        });
         tv_user_name = ((TextView) view.findViewById(R.id.tv_user_name));
         btn_local = ((Button) view.findViewById(R.id.btn_local));
         btn_local.setText(commodity.location);
@@ -178,7 +185,7 @@ public class CommodityActivity extends AppCompatActivity {
                 tv_local = ((TextView) view.findViewById(R.id.tv_local));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg, "http://192.168.191.1:8080"+(commodity.commodityImg.split(","))[0]);
+                x.image().bind(iv_cg, "http://10.40.5.62:8080"+(commodity.commodityImg.split(","))[0]);
                 tv_cg.setText(commodity.commodityTitle);
                 tv_price.setText(commodity.price+"");
                 tv_local.setText(commodity.location);
@@ -222,7 +229,7 @@ public class CommodityActivity extends AppCompatActivity {
 
                 String img = imgs[position];
 
-                x.image().bind(iv_cg_c, "http://192.168.191.1:8080" + img);
+                x.image().bind(iv_cg_c, "http://10.40.5.62:8080" + img);
 
                 return view;
             }
@@ -311,7 +318,7 @@ public class CommodityActivity extends AppCompatActivity {
         search = search.replace(" ","%");
         RequestParams params = null;
         try {
-            params = new RequestParams("http://192.168.191.1:8080/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
+            params = new RequestParams("http://10.40.5.62:8080/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -389,7 +396,7 @@ public class CommodityActivity extends AppCompatActivity {
     }
     private void insertCBH(int id,int commodity,Date date){
 
-        String url = "http://192.168.191.1:8080/csys/commoditybh?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date);
+        String url = "http://10.40.5.62:8080/csys/commoditybh?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date);
         Log.e("看看历史====",url);
         RequestParams params = new RequestParams(url);
         x.http().get(params,new Callback.CommonCallback<String>(){
@@ -416,7 +423,7 @@ public class CommodityActivity extends AppCompatActivity {
         });
     }
     private void insertSC(int id,int commodity,Date date,boolean flag_sc){
-        String url = "http://192.168.191.1:8080/csys/insertcommoditycollect?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date)+"&"+"flag="+flag_sc;
+        String url = "http://10.40.5.62:8080/csys/insertcommoditycollect?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date)+"&"+"flag="+flag_sc;
         Log.e("看看收藏====",url);
         RequestParams params = new RequestParams(url);
         x.http().get(params,new Callback.CommonCallback<String>(){
@@ -443,7 +450,7 @@ public class CommodityActivity extends AppCompatActivity {
         });
     }
     private void queryCollection(int id, final int commodity){
-        String url = "http://192.168.191.1:8080/csys/qureycommoditycollection?userId="+id;
+        String url = "http://10.40.5.62:8080/csys/qureycommoditycollection?userId="+id;
         Log.e("看看收藏====",url);
         RequestParams params = new RequestParams(url);
         x.http().get(params,new Callback.CommonCallback<String>(){

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/shangjiainfo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/main">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/u18"
+            />
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商家信息"
+            android:textSize="24sp"
+            android:textColor="#fff"
+           android:layout_centerInParent="true"/>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <RelativeLayout
+
+        android:id="@+id/rl_shangjia_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/shangjiainfo">
+        
+        <RelativeLayout
+            android:id="@+id/rl_shangjia_tou"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#cc9966"
+            android:layout_marginTop="20dp"
+
+            >
+            <ImageView
+                android:id="@+id/iv_shangjia_tx"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/testtx"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_shangjia_tx"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp">
+            <TextView
+                android:id="@+id/tv_shangjia_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="vanxe"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                />
+
+
+                <TextView
+                    android:id="@+id/tv_shangjia_often"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:text="苏州"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@id/tv_shangjia_name"/>
+
+                <ImageView
+                    android:id="@+id/iv_guanzhu"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/guanzhu"
+                   android:layout_marginTop="5dp"
+                    android:layout_below="@id/tv_shangjia_often"
+
+                    />
+                <TextView
+                    android:id="@+id/tv_guanzhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/iv_guanzhu"
+                    android:text="关注"
+                    android:textSize="18sp"
+                    android:textColor="#fff"
+                    android:layout_alignBottom="@id/iv_guanzhu"
+                    android:layout_marginBottom="5dp"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_sichat"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_toRightOf="@id/tv_guanzhu"
+                    android:src="@drawable/sichat"
+                    android:layout_alignTop="@id/iv_guanzhu"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/iv_sichat"
+                    android:text="私信"
+                    android:textSize="18sp"
+                    android:textColor="#fff"
+                    android:layout_alignTop="@id/tv_guanzhu"/>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_guanzhu_pinglun"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/rl_shangjia_tou"
+            android:background="#bbcc9966">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:layout_centerInParent="true"
+                android:text="收到了100条评论"/>
+        </RelativeLayout>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_guanzhu_pinglun"
+            android:layout_marginTop="10dp">
+
+        </ListView>
+        
+    </RelativeLayout>
+
+</RelativeLayout>
