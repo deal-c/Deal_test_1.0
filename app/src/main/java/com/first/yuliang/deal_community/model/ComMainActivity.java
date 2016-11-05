@@ -118,7 +118,7 @@ if(position==0){Toast.makeText(ComMainActivity.this,"你点我啊",Toast.LENGTH_
         }
     }
     private void getAllDynamic() {
-        final RequestParams request = new RequestParams(HttpUtils.hostLuoqingshanSchool+"/usys/NewDynamicServlt");
+        final RequestParams request = new RequestParams(HttpUtils.hostLuoqingshanSchool+"/usys/ThirdDynamic");
 
         request.addBodyParameter("dynamicId",dynamicArrayList.get(dynamicId).getDynamicId());
         x.http().post(request, new Callback.CommonCallback<String>() {
