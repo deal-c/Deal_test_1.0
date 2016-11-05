@@ -87,7 +87,7 @@ public class fragment_product extends Fragment {
                 tv_publish_product_class.setText(product.getProductClass());
                 tv_publish_product_time.setText(DateUtils.dateToString(product.getReleaseTime()));
                 tv_publish_product_desc.setText(product.getProductDescribe());
-                x.image().bind(iv_publish_product,HttpUtile.szj+product.getProductImg());
+                x.image().bind(iv_publish_product,HttpUtile.zy1+product.getProductImg());
 
 
                 return view;

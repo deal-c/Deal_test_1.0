@@ -1,6 +1,7 @@
 package com.first.yuliang.deal_community;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.MyCenter.MyBuyActivity;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 
 import org.xutils.common.Callback;
@@ -48,6 +50,7 @@ public class BuySuccessActivity extends AppCompatActivity{
     private LinearLayout ll_success;
     private Button btn_into;
     private Button btn_return;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,7 @@ public class BuySuccessActivity extends AppCompatActivity{
         intent = getIntent();
         tips = intent.getStringExtra("tips");
         commodity = intent.getParcelableExtra("bundle");
-
+        id = getSharedPreferences("shared_loginn_info",Context.MODE_PRIVATE).getInt("id",0);
         Log.e("看看支付数据",commodity.commodityId+commodity.price+tips);
 
         pay = (Button) findViewById(R.id.btn_zhifu);
@@ -265,7 +268,7 @@ public class BuySuccessActivity extends AppCompatActivity{
     }
     private void updateCommodityState(int commodityId){
         RequestParams params = null;
-        String url = "http://192.168.191.1:8080/csys/modifycommoditystate?commodityId="+commodityId+"&state=2";
+        String url = HttpUtile.szj + "/csys/modifycommoditystate?commodityId="+commodityId+"&buyUserId="+id+"&state=2";
         params = new RequestParams(url);
         x.http().get(params, new Callback.CommonCallback<String>() {
 

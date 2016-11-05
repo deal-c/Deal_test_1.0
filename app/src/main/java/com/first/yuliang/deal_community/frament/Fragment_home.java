@@ -206,7 +206,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
                         ((ImageView) (getActivity()).findViewById(ivs[position])).setVisibility(View.VISIBLE);
                     }
 
-               x.image().bind(iv_adphoto,HttpUtile.host+adlist.get(key).getAdphoto(),imageOptions);
+               x.image().bind(iv_adphoto,HttpUtile.yu+adlist.get(key).getAdphoto(),imageOptions);
 //                iv_adphoto.setImageResource(imgs[position]);
                 tv_title.setText(adlist.get(key).getAdtitle());
                 tv_content.setText("    "+adlist.get(key).getAdcontent());
@@ -278,7 +278,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
     }
     private void getAdList() {
 
-        RequestParams params=new RequestParams(HttpUtile.host+"deal_ad/getad");
+        RequestParams params=new RequestParams(HttpUtile.yu+"deal_ad/getad");
         params.setCacheMaxAge(1000 * 10);
 
             x.http().get(params, new Callback.CommonCallback<String>() {

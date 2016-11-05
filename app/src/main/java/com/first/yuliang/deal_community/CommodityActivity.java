@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.Util.DateUtil;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.first.yuliang.deal_community.pojo.CommodityCollection;
 import com.first.yuliang.deal_community.pojo.User;
@@ -178,7 +179,7 @@ public class CommodityActivity extends AppCompatActivity {
                 tv_local = ((TextView) view.findViewById(R.id.tv_local));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg, "http://192.168.191.1:8080"+(commodity.commodityImg.split(","))[0]);
+                x.image().bind(iv_cg, HttpUtile.szj+(commodity.commodityImg.split(","))[0]);
                 tv_cg.setText(commodity.commodityTitle);
                 tv_price.setText(commodity.price+"");
                 tv_local.setText(commodity.location);
@@ -222,7 +223,7 @@ public class CommodityActivity extends AppCompatActivity {
 
                 String img = imgs[position];
 
-                x.image().bind(iv_cg_c, "http://192.168.191.1:8080" + img);
+                x.image().bind(iv_cg_c, HttpUtile.szj + img);
 
                 return view;
             }
@@ -277,14 +278,14 @@ public class CommodityActivity extends AppCompatActivity {
     private void getUser(Integer releaseUserId) {
 
         RequestParams params = null;
-        params = new RequestParams("http://10.40.5.52:8080/FourProject/servlet/SelectUserServlet?id="+ releaseUserId);
+        params = new RequestParams(HttpUtile.zy1+"/FourProject/servlet/SelectUserServlet?id="+ releaseUserId);
         x.http().get(params,new Callback.CommonCallback<String>(){
 
             @Override
             public void onSuccess(String result) {
                 Gson gson=new Gson();
                 user=gson.fromJson(result,User.class);
-                x.image().bind(iv_user_head, "http://10.40.5.52:8080" + user.getUserImg());
+                x.image().bind(iv_user_head, HttpUtile.zy1 + user.getUserImg());
                 tv_user_name.setText(user.getUserName());
                 adapter_l.notifyDataSetChanged();
             }
@@ -310,7 +311,7 @@ public class CommodityActivity extends AppCompatActivity {
         search = search.replace(" ","%");
         RequestParams params = null;
         try {
-            params = new RequestParams("http://192.168.191.1:8080/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
+            params = new RequestParams(HttpUtile.szj+"/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -344,7 +345,7 @@ public class CommodityActivity extends AppCompatActivity {
     }
     public void getCommodityById(int commodityId) {
         RequestParams params = null;
-        params = new RequestParams("http://192.168.191.1:8080/csys/getcommoditybyid?commodityId="+ commodityId);
+        params = new RequestParams(HttpUtile.szj+"/csys/getcommoditybyid?commodityId="+ commodityId);
         x.http().get(params,new Callback.CommonCallback<String>(){
 
             @Override
@@ -424,7 +425,7 @@ public class CommodityActivity extends AppCompatActivity {
     }
     private void insertCBH(int id,int commodity,Date date){
 
-        String url = "http://192.168.191.1:8080/csys/commoditybh?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date);
+        String url = HttpUtile.szj+"/csys/commoditybh?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date);
         Log.e("看看历史====",url);
         RequestParams params = new RequestParams(url);
         x.http().get(params,new Callback.CommonCallback<String>(){
@@ -451,7 +452,7 @@ public class CommodityActivity extends AppCompatActivity {
         });
     }
     private void insertSC(int id,int commodity,Date date,boolean flag_sc){
-        String url = "http://192.168.191.1:8080/csys/insertcommoditycollect?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date)+"&"+"flag="+flag_sc;
+        String url = HttpUtile.szj+"/csys/insertcommoditycollect?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date)+"&"+"flag="+flag_sc;
         Log.e("看看收藏====",url);
         RequestParams params = new RequestParams(url);
         x.http().get(params,new Callback.CommonCallback<String>(){
@@ -478,7 +479,7 @@ public class CommodityActivity extends AppCompatActivity {
         });
     }
     private void queryCollection(int id, final int commodity){
-        String url = "http://192.168.191.1:8080/csys/qureycommoditycollection?userId="+id;
+        String url = HttpUtile.szj+"/csys/qureycommoditycollection?userId="+id;
         Log.e("看看收藏====",url);
         RequestParams params = new RequestParams(url);
         x.http().get(params,new Callback.CommonCallback<String>(){

@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.security.auth.login.LoginException;
+
 public class Order extends AppCompatActivity {
 
     private Intent intent;
@@ -77,7 +79,7 @@ public class Order extends AppCompatActivity {
 
 
         iv_cg = ((ImageView) findViewById(R.id.iv_cg_l));
-        x.image().bind(iv_cg, "http://192.168.191.1:8080"+(commodity.commodityImg.split(","))[0]);
+        x.image().bind(iv_cg, HttpUtile.szj +(commodity.commodityImg.split(","))[0]);
         cg_title = ((TextView) findViewById(R.id.tv_cg_l));
         cg_title.setText(commodity.commodityTitle);
         cg_price = ((TextView) findViewById(R.id.tv_price_l));
@@ -94,7 +96,7 @@ public class Order extends AppCompatActivity {
             public void onClick(View v) {
                 Date date = new Date();
                 insertOrder(date);
-                updateCommodityState(commodity.commodityId);
+                updateCommodityState(commodity.commodityId,id);
                 Intent intent = new Intent(Order.this, BuySuccessActivity.class);
                 intent.putExtra("tips",et_post_way.getText().toString());
                 intent.putExtra("bundle",commodity);
@@ -149,14 +151,14 @@ public class Order extends AppCompatActivity {
     private void getSeller(Integer releaseUserId) {
 
         RequestParams params = null;
-        params = new RequestParams("http://10.40.5.52:8080/FourProject/servlet/SelectUserServlet?id=" + releaseUserId);
+        params = new RequestParams(HttpUtile.zy+"/servlet/SelectUserServlet?id=" + releaseUserId);
         x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override
             public void onSuccess(String result) {
                 Gson gson = new Gson();
                 user = gson.fromJson(result, User.class);
-                x.image().bind(seller_head, "http://10.40.5.52:8080" + user.getUserImg());
+                x.image().bind(seller_head, HttpUtile.zy1 + user.getUserImg());
                 seller_name.setText(user.getUserName());
             }
 
@@ -176,9 +178,10 @@ public class Order extends AppCompatActivity {
             }
         });
     }
-    private void updateCommodityState(int commodityId){
+    private void updateCommodityState(int commodityId,int id){
+        Log.e("看看userid",id+"");
         RequestParams params = null;
-        String url = "http://192.168.191.1:8080/csys/modifycommoditystate?commodityId="+commodityId+"&state=1";
+        String url = HttpUtile.szj + "/csys/modifycommoditystate?commodityId="+commodityId+"&buyUserId="+id+"&state=1";
         params = new RequestParams(url);
         x.http().get(params, new Callback.CommonCallback<String>() {
 
@@ -205,7 +208,7 @@ public class Order extends AppCompatActivity {
     }
     private void insertOrder(Date date){
         RequestParams params = null;
-        String url = "http://192.168.191.1:8080/csys/insertorder?userId="+id+"&"+"commodityId="+commodity.commodityId+
+        String url = HttpUtile.szj +"/csys/insertorder?userId="+id+"&"+"commodityId="+commodity.commodityId+
                 "&"+"changeDate="+ DateUtil.dateToStringDate(date) +"&"+"changeTime="+ DateUtil.dateToStringTime(date) +"&"+
                 "addressName="+ addressList.get(i).getUserName() +"&"+"addressCity="+ addressList.get(i).getCity()+"&"+"addressDetail="+addressList.get(i).getAddressDetail() +"&"+ "addressPhoneNum="+addressList.get(i).getContactPhoneNum() +"&"+
                 "tips=" + et_post_way.getText().toString() +"&"+"price="+ commodity.price;

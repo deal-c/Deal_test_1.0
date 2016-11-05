@@ -34,7 +34,7 @@ public class StateUtil {
     public static String getSellState(int state){
         String sta = "";
         if (state==0){
-            sta="交易关闭";
+            sta="未售出";
         }
         if (state==1){
             sta="未付款";

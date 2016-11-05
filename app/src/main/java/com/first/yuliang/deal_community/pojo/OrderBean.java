@@ -22,12 +22,10 @@ public class OrderBean {
 
     private double price;
 
-    private CommodityInfo commodityInfo;
+    private CommodityInfoUser commodityInfoUser;
 
-    public OrderBean() {
-    }
-
-    public OrderBean(int orderId, int userId, CommodityInfo commodityInfo, Date changeTime,
+    public OrderBean(){}
+    public OrderBean(int orderId, int userId, CommodityInfoUser commodityInfoUser, Date changeTime,
                  int state, String addressInfo, String tips, double price) {
         super();
         this.orderId = orderId;
@@ -37,7 +35,7 @@ public class OrderBean {
         this.addressInfo = addressInfo;
         this.tips = tips;
         this.price = price;
-        this.commodityInfo = commodityInfo;
+        this.commodityInfoUser = commodityInfoUser;
     }
 
     public int getOrderId() {
@@ -56,12 +54,12 @@ public class OrderBean {
         this.userId = userId;
     }
 
-    public CommodityInfo getCommodityInfo() {
-        return commodityInfo;
+    public CommodityInfoUser getCommodityInfoUser() {
+        return commodityInfoUser;
     }
 
-    public void setCommodityInfo(CommodityInfo commodityInfo) {
-        this.commodityInfo = commodityInfo;
+    public void setCommodityInfoUser(CommodityInfoUser commodityInfoUser) {
+        this.commodityInfoUser = commodityInfoUser;
     }
 
     public Date getChangeTime() {

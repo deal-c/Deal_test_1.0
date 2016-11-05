@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -17,10 +18,11 @@ import com.first.yuliang.deal_community.BuySuccessActivity;
 import com.first.yuliang.deal_community.CommodityActivity;
 import com.first.yuliang.deal_community.Order;
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.Util.DateUtil;
 import com.first.yuliang.deal_community.Util.StateUtil;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
-import com.first.yuliang.deal_community.pojo.CommodityInfo;
+import com.first.yuliang.deal_community.pojo.CommodityInfoUser;
 import com.first.yuliang.deal_community.pojo.OrderBean;
 import com.first.yuliang.deal_community.pojo.User;
 import com.google.gson.Gson;
@@ -32,7 +34,7 @@ import org.xutils.x;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.net.URLEncoder;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,10 +45,12 @@ public class MyBuyActivity extends AppCompatActivity {
     private ListView lv_mybuy;
     private BaseAdapter adapter;
     private CommodityBean.Commodity commodity;
-    List<OrderBean> orderList;
-    List<CommodityInfo> commodityList=new ArrayList<CommodityInfo>();
+    List<OrderBean> orderList=new ArrayList<OrderBean>();
+    List<CommodityInfoUser> commodityList = new ArrayList<CommodityInfoUser>();
     List<User> userList = new ArrayList<User>();
-
+    private View view;
+    private Button btn_state;
+    private String tips;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +71,10 @@ public class MyBuyActivity extends AppCompatActivity {
             private TextView tv_price_order;
             private ImageView iv_head;
             private ImageView iv_cg_l;
-            private Button btn_state;
 
             @Override
             public int getCount() {
-                return 0;
+                return orderList.size();
             }
 
             @Override
@@ -86,7 +89,8 @@ public class MyBuyActivity extends AppCompatActivity {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                View view = View.inflate(MyBuyActivity.this,R.layout.item_mybuy,null);
+
+                view = View.inflate(MyBuyActivity.this,R.layout.item_mybuy,null);
 
                 iv_head = ((ImageView) view.findViewById(R.id.iv_head_buy));
                 iv_cg_l = ((ImageView) view.findViewById(R.id.iv_cg_l));
@@ -99,10 +103,10 @@ public class MyBuyActivity extends AppCompatActivity {
                 btn_state = ((Button) view.findViewById(R.id.btn_buy));
 
                 User user = userList.get(position);
-                CommodityInfo commodityInfo = commodityList.get(position);
+                CommodityInfoUser commodityInfo = commodityList.get(position);
                 OrderBean order = orderList.get(position);
-                x.image().bind(iv_head, "http://10.40.5.52:8080" + user.getUserImg());
-                x.image().bind(iv_cg_l, "http://192.168.191.1:8080" + commodityInfo.getCommodityImg());
+                x.image().bind(iv_head, HttpUtile.zy1 + user.getUserImg());
+                x.image().bind(iv_cg_l, HttpUtile.szj+ (commodityInfo.getCommodityImg().split(","))[0]);
 
                 tv_name.setText(user.getUserName());
                 tv_state.setText(StateUtil.getBuyState(order.getState()));
@@ -110,31 +114,38 @@ public class MyBuyActivity extends AppCompatActivity {
                 tv_price_l.setText(commodityInfo.getPrice()+"");
                 tv_local_l.setText(commodityInfo.getLocation());
                 tv_price_order.setText(order.getPrice()+"");
-                getBtn(btn_state,order.getState(),order);
-
+                getBtn(order.getState(),order);
                 return view;
             }
         };
+        lv_mybuy.setAdapter(adapter);
     }
 
     private void getOrder(int userid){
         RequestParams params = null;
-        params = new RequestParams(HttpUtile.yu+"/csys/getorderbyid?userId="+userid);
+        params = new RequestParams(HttpUtile.szj+"csys/getorderbyid?userId="+userid);
         x.http().get(params,new Callback.CommonCallback<String>(){
 
             @Override
             public void onSuccess(String result) {
                 Gson gson = new Gson();
-                Type type = new TypeToken<List<Order>>() {
+                Type type = new TypeToken<List<OrderBean>>() {
                 }.getType();
-                orderList = gson.fromJson(result, type);
+
+                Log.e("kkkkkkkkkk",result);
+                try {
+                    orderList = gson.fromJson(URLDecoder.decode(result,"utf-8"), type);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 for (int i = 0; i < orderList.size(); i++)
                 {
-                    commodityList.add(orderList.get(i).getCommodityInfo());
+                    commodityList.add(orderList.get(i).getCommodityInfoUser());
                 }
                 for (int j = 0; j < commodityList.size(); j++)
                 {
-                    userList.add(commodityList.get(j).getUser());
+                    userList.add(commodityList.get(j).getUser_r());
+                    Log.e("kkkkkkkkkk",userList.get(0).getUserName());
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -156,36 +167,34 @@ public class MyBuyActivity extends AppCompatActivity {
         });
     }
 
-    private void getBtn(Button btn_state, final int state, final OrderBean order) {
+    private void getBtn(final int state, final OrderBean order) {
         if (state==0){
             btn_state.setText("删除订单");
-            btn_state.setBackgroundResource(R.color.checkbox);
+            btn_state.setBackgroundResource(R.drawable.button_stroke);
             btn_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    updateCommodityState(order.getCommodityInfo().getCommodityId(),state);
+                    updateCommodityState(order.getCommodityInfoUser().getCommodityId(),state);
                     deleteOrder(order.getOrderId());
                     getOrder(order.getUserId());
+                    getOrder(id);
                 }
             });
         }
         if (state==1){
             btn_state.setText("立即付款");
             btn_state.setTextColor(getResources().getColor(R.color.checkbox));
-            btn_state.setBackgroundResource(R.color.main);
+            btn_state.setBackgroundResource(R.drawable.button_main);
             btn_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(MyBuyActivity.this, BuySuccessActivity.class);
-                    intent.putExtra("tips",order.getTips());
-                    intent.putExtra("bundle",commodity);
-                    startActivity(intent);
+                    getCommodityById(order.getCommodityInfoUser().getCommodityId(),order.getTips());
                 }
             });
         }
         if (state==2){
             btn_state.setText("取消订单");
-            btn_state.setBackgroundResource(R.color.checkbox);
+            btn_state.setBackgroundResource(R.drawable.button_stroke);
             btn_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -194,7 +203,7 @@ public class MyBuyActivity extends AppCompatActivity {
         }
         if (state==3){
             btn_state.setText("查看物流");
-            btn_state.setBackgroundResource(R.color.checkbox);
+            btn_state.setBackgroundResource(R.drawable.button_stroke);
             btn_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -205,28 +214,30 @@ public class MyBuyActivity extends AppCompatActivity {
         if (state==4){
             btn_state.setText("确认收货");
             btn_state.setTextColor(getResources().getColor(R.color.checkbox));
-            btn_state.setBackgroundResource(R.color.main);
+            btn_state.setBackgroundResource(R.drawable.button_main);
             btn_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    updateCommodityState(order.getCommodityInfo().getCommodityId(),5);
+                    updateCommodityState(order.getCommodityInfoUser().getCommodityId(),5);
+                    getOrder(id);
                 }
             });
         }
         if (state==5){
             btn_state.setText("评价");
             btn_state.setTextColor(getResources().getColor(R.color.checkbox));
-            btn_state.setBackgroundResource(R.color.main);
+            btn_state.setBackgroundResource(R.drawable.button_main);
             btn_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    updateCommodityState(order.getCommodityInfo().getCommodityId(),6);
+                    updateCommodityState(order.getCommodityInfoUser().getCommodityId(),6);
+                    getOrder(id);
                 }
             });
         }
         if (state==6){
             btn_state.setText("交易成功");
-            btn_state.setBackgroundResource(R.color.checkbox);
+            btn_state.setBackgroundResource(R.drawable.button_stroke);
             btn_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -237,7 +248,7 @@ public class MyBuyActivity extends AppCompatActivity {
     }
     private void deleteOrder(int orderId){
         RequestParams params = null;
-        params = new RequestParams(HttpUtile.yu+"/csys/deletorder?orderId="+orderId);
+        params = new RequestParams(HttpUtile.szj+"/csys/deletorder?orderId="+orderId);
         x.http().get(params,new Callback.CommonCallback<String>(){
 
             @Override
@@ -263,7 +274,7 @@ public class MyBuyActivity extends AppCompatActivity {
     }
     private void updateCommodityState(int commodityId,int state) {
         RequestParams params = null;
-        String url = "http://192.168.191.1:8080/csys/modifycommoditystate?commodityId=" + commodityId + "&state="+state;
+        String url = HttpUtile.szj +"/csys/modifycommoditystate?commodityId=" + commodityId +"&buyUserId="+id + "&state="+state;
         params = new RequestParams(url);
         x.http().get(params, new Callback.CommonCallback<String>() {
 
@@ -275,6 +286,42 @@ public class MyBuyActivity extends AppCompatActivity {
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 Toast.makeText(MyBuyActivity.this, "是不是我的无法连接服务器", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+    public void getCommodityById(int commodityId,String t) {
+        tips = t;
+        RequestParams params = null;
+        params = new RequestParams(HttpUtile.szj+"/csys/getcommoditybyid?commodityId="+ commodityId);
+        x.http().get(params,new Callback.CommonCallback<String>(){
+
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                commodity = gson.fromJson(result, CommodityBean.Commodity.class);
+                if(commodity.statement!=1&&commodity.statement!=0){
+                    Toast.makeText(MyBuyActivity.this,"该商品已被购买",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(MyBuyActivity.this, BuySuccessActivity.class);
+                    intent.putExtra("search", tips);
+                    intent.putExtra("bundle", commodity);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(MyBuyActivity.this,"是不是这里无法连接服务器",Toast.LENGTH_LONG).show();
             }
 
             @Override
