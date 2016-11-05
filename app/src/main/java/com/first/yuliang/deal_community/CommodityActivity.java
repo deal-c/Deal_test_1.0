@@ -35,6 +35,7 @@ import org.xutils.x;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -285,7 +286,7 @@ public class CommodityActivity extends AppCompatActivity {
     private void getUser(Integer releaseUserId) {
 
         RequestParams params = null;
-        params = new RequestParams(HttpUtile.zy+"/servlet/SelectUserServlet?id="+ releaseUserId);
+        params = new RequestParams(HttpUtile.zy1+"/FourProject/servlet/SelectUserServlet?id="+ releaseUserId);
         x.http().get(params,new Callback.CommonCallback<String>(){
 
             @Override

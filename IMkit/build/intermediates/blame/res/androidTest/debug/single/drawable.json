@@ -72,12 +72,12 @@
         "source": "D:\\android_workSpaceNew\\Deal_git_test\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable\\rc_ic_location.xml"
     },
     {
-        "merged": "D:\\android_workSpaceNew\\Deal_git_test\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\rc_pb_file_download_progress.xml",
-        "source": "D:\\android_workSpaceNew\\Deal_git_test\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable\\rc_pb_file_download_progress.xml"
-    },
-    {
         "merged": "D:\\android_workSpaceNew\\Deal_git_test\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\rc_btn_send.xml",
         "source": "D:\\android_workSpaceNew\\Deal_git_test\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable\\rc_btn_send.xml"
+    },
+    {
+        "merged": "D:\\android_workSpaceNew\\Deal_git_test\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\rc_pb_file_download_progress.xml",
+        "source": "D:\\android_workSpaceNew\\Deal_git_test\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable\\rc_pb_file_download_progress.xml"
     },
     {
         "merged": "D:\\android_workSpaceNew\\Deal_git_test\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\rc_read_receipt_request_button.xml",

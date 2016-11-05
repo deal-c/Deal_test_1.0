@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ public class MyPublishActivity extends AppCompatActivity implements View.OnClick
     int userId=0;
     List<Product> productList=new ArrayList<>();
     Dialog progressDialog;
-    private ImageView iv_publish_back;
+    private ImageButton iv_publish_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,8 @@ public class MyPublishActivity extends AppCompatActivity implements View.OnClick
         else {
 
             lv_publish = ((ListView) findViewById(R.id.lv_publish));
-            iv_publish_back = ((ImageView) findViewById(R.id.iv_publish_back));
+            View view = View.inflate(MyPublishActivity.this,R.layout.mypubulish,null);
+            iv_publish_back = ((ImageButton)view.findViewById(R.id.ib_return_mine));
             iv_publish_back.setOnClickListener(this);
 
             adapter = new BaseAdapter() {
@@ -161,8 +163,7 @@ public class MyPublishActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch(v.getId())
         {
-            case R.id.iv_publish_back:
-
+            case R.id.ib_return_mine:
 
                 MyPublishActivity.this.finish();
                 break;
