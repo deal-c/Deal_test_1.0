@@ -40,19 +40,19 @@ import me.nereo.multi_image_selector.bean.Image;
 /**
  * Created by yuliang on 2016/9/22.
  */
-public class Frag_community_dongtai extends Fragment{
+public class Frag_community_dongtai extends Fragment {
     private PullToRefreshListView pull_to_refresh_listview;
     private ListView lv_community_dongtai;
     private BaseAdapter mAdapter;
     private LinkedList<String> mListItems;
-    public ArrayList<Dynamic> dynamicArrayList=new ArrayList<>();
-    private String []eg=new String[]{"","","","","","","","","","",""};
-    private String  jsondynamiclist;
+    public ArrayList<Dynamic> dynamicArrayList = new ArrayList<>();
+    private String[] eg = new String[]{"", "", "", "", "", "", "", "", "", "", ""};
+    private String jsondynamiclist;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.frag_community_dontai,null);
+        View view = inflater.inflate(R.layout.frag_community_dontai, null);
 //         final int []imgs={R.drawable.dongtai1,R.drawable.dongtai2,R.drawable.dongtai3,R.drawable.dongtai4,R.drawable.dongtai5,};
         pull_to_refresh_listview = ((PullToRefreshListView) view.findViewById(R.id.pull_to_refresh_listview));
         pull_to_refresh_listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
@@ -69,7 +69,7 @@ public class Frag_community_dongtai extends Fragment{
             }
 
         });
-        mAdapter=new BaseAdapter() {
+        mAdapter = new BaseAdapter() {
             private TextView textView;
             private TextView tv_dongtai_content;
 
@@ -95,7 +95,7 @@ public class Frag_community_dongtai extends Fragment{
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                View view =View.inflate(getActivity().getApplicationContext(),R.layout.item_dongtai,null );
+                View view = View.inflate(getActivity().getApplicationContext(), R.layout.item_dongtai, null);
 
                 iv_dongtai_userphoto = ((ImageView) view.findViewById(R.id.iv_dongtai_userphoto));
                 tv_dongtai_usename = ((TextView) view.findViewById(R.id.tv_dongtai_usename));
@@ -106,8 +106,8 @@ public class Frag_community_dongtai extends Fragment{
                 tv_dongtai_usename.setText(dynamicArrayList.get(position).getUserId().getUserName());
                 tv_dongtai_content.setText(dynamicArrayList.get(position).getContent());
                 textView.setText(dynamicArrayList.get(position).getPublishTime());
-                x.image().bind(iv_dongtai_dongtaiphoto,HttpUtils.hostLuoqingshanSchool+"/usys/imgs/"+dynamicArrayList.get(position).getPic()+".png");
-                x.image().bind(iv_dongtai_userphoto,HttpUtils.hostLuoqingshanSchool+"/usys/imgs/"+dynamicArrayList.get(position).getUserId().getUserImg()+".png");
+                x.image().bind(iv_dongtai_dongtaiphoto, HttpUtils.hostLuoqingshanSchool + "/usys/imgs/" + dynamicArrayList.get(position).getPic() + ".png");
+                x.image().bind(iv_dongtai_userphoto, HttpUtils.hostLuoqingshanSchool + "/usys/imgs/" + dynamicArrayList.get(position).getUserId().getUserImg() + ".png");
 
                 return view;
 
@@ -115,7 +115,7 @@ public class Frag_community_dongtai extends Fragment{
             }
         };
 
-        lv_community_dongtai =pull_to_refresh_listview.getRefreshableView();
+        lv_community_dongtai = pull_to_refresh_listview.getRefreshableView();
 
         mListItems = new LinkedList<String>();
         mListItems.addAll(Arrays.asList(eg));
@@ -124,10 +124,10 @@ public class Frag_community_dongtai extends Fragment{
         lv_community_dongtai.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent  intent=new Intent(getActivity(), ComMainActivity.class);
+                Intent intent = new Intent(getActivity(), ComMainActivity.class);
                 intent.putExtra("dynamicList", jsondynamiclist);
-               startActivity(intent);
-
+                intent.putExtra("dynamicId",String.valueOf(position-1));
+                startActivity(intent);
 
 
             }
@@ -139,7 +139,7 @@ public class Frag_community_dongtai extends Fragment{
 
     private void getAlldynamic() {
         RequestParams params = new RequestParams
-                (HttpUtils.hostLuoqingshanSchool+"/usys/Radomdynamic");//网络请求
+                (HttpUtils.hostLuoqingshanSchool + "/usys/Radomdynamic");//网络请求
         x.http().post(params, new org.xutils.common.Callback.CommonCallback<String>() {//使用xutils开启网络线程
             @Override
             public void onSuccess(String result) {
@@ -148,22 +148,16 @@ public class Frag_community_dongtai extends Fragment{
                 }.getType();
 
 
-                List<Dynamic>   communityList1=new ArrayList<>();
-                communityList1  = gson.fromJson(result, type);
+                List<Dynamic> communityList1 = new ArrayList<>();
+                communityList1 = gson.fromJson(result, type);
 
-                if (result!=null){
-                    jsondynamiclist=result;
+                if (result != null) {
+                    jsondynamiclist = result;
                     dynamicArrayList.addAll(communityList1);
                     mAdapter.notifyDataSetChanged();
                     Log.e("dynamic看看数据====", dynamicArrayList.toString());
                     Log.e("dynamic看看数据====", gson.toString());
                 }
-
-
-
-
-
-
 
 
             }
@@ -188,9 +182,6 @@ public class Frag_community_dongtai extends Fragment{
         });
 
 
-
-
-
     }
 
     private class GetDataTask extends AsyncTask<Void, Void, String[]> {
@@ -204,6 +195,7 @@ public class Frag_community_dongtai extends Fragment{
             }
             return eg;
         }
+
         @Override
         protected void onPostExecute(String[] result) {
             mListItems.addFirst("Added after refresh...");
@@ -214,12 +206,13 @@ public class Frag_community_dongtai extends Fragment{
             super.onPostExecute(result);
         }
     }
-    public static class myViewHolder{
-        TextView    tv_dongtai_usename;
-        TextView     tv_dongtai_content;
-        TextView     textView;
-        ImageView   iv_dongtai_userphoto;
-        ImageView     iv_dongtai_dongtaiphoto;
+
+    public static class myViewHolder {
+        TextView tv_dongtai_usename;
+        TextView tv_dongtai_content;
+        TextView textView;
+        ImageView iv_dongtai_userphoto;
+        ImageView iv_dongtai_dongtaiphoto;
 
     }
 

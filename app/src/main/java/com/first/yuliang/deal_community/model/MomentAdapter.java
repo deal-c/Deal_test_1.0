@@ -1,6 +1,7 @@
 package com.first.yuliang.deal_community.model;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -25,17 +26,17 @@ public class MomentAdapter extends BaseAdapter {
 
     public static final int VIEW_HEADER = 0;
     public static final int VIEW_MOMENT = 1;
-    int myUserId;
-    ArrayList<Dynamic> mylist;
+   public   static int myUserId;
+    public static Dynamic mylist;
     private ArrayList<Comment> mList;
     private Context mContext;
     private CustomTagHandler mTagHandler;
-
-    public MomentAdapter(Context context, ArrayList<Dynamic> dynamicList,int userId,ArrayList<Comment> list, CustomTagHandler tagHandler) {
+   public static String dynamicId;
+    public MomentAdapter(Context context,Dynamic dynamic,int userId,ArrayList<Comment> list, CustomTagHandler tagHandler) {
         mList = list;
         mContext = context;
         mTagHandler = tagHandler;
-        mylist=dynamicList;
+        mylist=dynamic;
         myUserId=userId;
     }
 
@@ -110,11 +111,11 @@ public class MomentAdapter extends BaseAdapter {
         if (position == 0) {
             int index = position ;
             ViewHolder holder = (ViewHolder) convertView.getTag();
-            holder.oncreatetime.setText(mylist.get(index).getPublishTime());
+            holder.oncreatetime.setText(mylist.getPublishTime());
             //holder.dongtaiTitle.setText(mylist.get(index).getTitle());
-            x.image().bind((holder.headerImg), HttpUtils.hostLuoqingshanSchool+"/usys/imgs/" + mylist.get(index).getUserId().getUserImg()+ ".png");
-            x.image().bind((holder.dontaipic), HttpUtils.hostLuoqingshanSchool+"/usys/imgs/" + mylist.get(index).getPic() + ".png");holder.dongtai_userName.setText(mylist.get(index).getUserId().getUserName());
-            holder.dongtaiContent.setText(mylist.get(index).getContent());
+            x.image().bind((holder.headerImg), HttpUtils.hostLuoqingshanSchool+"/usys/imgs/" + mylist.getUserId().getUserImg()+ ".png");
+            x.image().bind((holder.dontaipic), HttpUtils.hostLuoqingshanSchool+"/usys/imgs/" + mylist.getPic() + ".png");holder.dongtai_userName.setText(mylist.getUserId().getUserName());
+            holder.dongtaiContent.setText(mylist.getContent());
 
 
 
@@ -126,8 +127,17 @@ public class MomentAdapter extends BaseAdapter {
             x.image().bind((holder.img), HttpUtils.hostLuoqingshanSchool+"/usys/imgs/" + mList.get(index).getImgs() + ".png");
             holder.content.setText(mList.get(index).mContent);
 
-            CommentFun.parseCommentList(mContext,mList.get(index).getList(),
-                    holder.mCommentList, holder.mBtnInput, mTagHandler);
+        if(mList.get(index).getList()!=null){
+   // Log.e("看看数据","能不能靠谱点");
+    CommentFun.parseCommentList(mContext,mList.get(index).getList(),
+            holder.mCommentList, holder.mBtnInput, mTagHandler,mylist);
+}
+
+
+/*
+       MyCommentFun.parseCommentList(mContext,mList.get(index).getList(),
+                    holder.mCommentList, holder.mBtnInput, mTagHandler);*/
+
         }
         return convertView;
 

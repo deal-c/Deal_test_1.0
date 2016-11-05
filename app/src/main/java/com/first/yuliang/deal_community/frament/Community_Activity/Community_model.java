@@ -72,6 +72,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
      protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_model);
+
         //设置信息栏颜色
         setColor();
         initview();
@@ -95,6 +96,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
         //判断是否关注了
         ifCare();
         sendCommunityid=community.getCommunityId();
+        Log.e("我的从comId数据====","22"+sendCommunityid);
         communityName.setText(community.getCommunityName() + "");
 
         //headview 的控件、
@@ -131,10 +133,8 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(Community_model.this, ComMainActivity.class);
-
-
-
                 intent.putExtra("dynamicList", sendynamiclist);
+                intent.putExtra("dynamicId",String.valueOf(position-1));
                 Community_model.this.startActivity(intent);
 
 
@@ -328,9 +328,9 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
 
     }
     public void inputDynamicClick(View view) {
-
+        Log.e("看看数据====", sendCommunityid+"aaa");
         Intent intent=new Intent(Community_model.this,PublishedActivity.class);
-        intent.putExtra("sendCommunityid",sendCommunityid);
+        intent.putExtra("sendCommunityid",String.valueOf(sendCommunityid));
         startActivity(intent);
     }
     @Override
