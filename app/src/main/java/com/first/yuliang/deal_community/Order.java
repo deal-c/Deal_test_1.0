@@ -105,6 +105,9 @@ public class Order extends AppCompatActivity {
             }
         });
     }
+            }
+        });
+    }
 
     private void getAddress(int id) {
 
@@ -209,6 +212,64 @@ public class Order extends AppCompatActivity {
     private void insertOrder(Date date){
         RequestParams params = null;
         String url = HttpUtile.szj +"/csys/insertorder?userId="+id+"&"+"commodityId="+commodity.commodityId+
+                "&"+"changeDate="+ DateUtil.dateToStringDate(date) +"&"+"changeTime="+ DateUtil.dateToStringTime(date) +"&"+
+                "addressName="+ addressList.get(i).getUserName() +"&"+"addressCity="+ addressList.get(i).getCity()+"&"+"addressDetail="+addressList.get(i).getAddressDetail() +"&"+ "addressPhoneNum="+addressList.get(i).getContactPhoneNum() +"&"+
+                "tips=" + et_post_way.getText().toString() +"&"+"price="+ commodity.price;
+        Log.e("url=============",url);
+        params = new RequestParams(url);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+
+            @Override
+            public void onSuccess(String result) {
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(Order.this, "是不是我的无法连接服务器", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+    private void updateCommodityState(int commodityId){
+        RequestParams params = null;
+        String url = "http://192.168.191.1:8080/csys/modifycommoditystate?commodityId="+commodityId+"&state=1";
+        params = new RequestParams(url);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+
+            @Override
+            public void onSuccess(String result) {
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(Order.this, "是不是我的无法连接服务器", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+    private void insertOrder(Date date){
+        RequestParams params = null;
+        String url = "http://192.168.191.1:8080/csys/insertorder?userId="+id+"&"+"commodityId="+commodity.commodityId+
                 "&"+"changeDate="+ DateUtil.dateToStringDate(date) +"&"+"changeTime="+ DateUtil.dateToStringTime(date) +"&"+
                 "addressName="+ addressList.get(i).getUserName() +"&"+"addressCity="+ addressList.get(i).getCity()+"&"+"addressDetail="+addressList.get(i).getAddressDetail() +"&"+ "addressPhoneNum="+addressList.get(i).getContactPhoneNum() +"&"+
                 "tips=" + et_post_way.getText().toString() +"&"+"price="+ commodity.price;
