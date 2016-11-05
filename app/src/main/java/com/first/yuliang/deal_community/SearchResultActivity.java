@@ -42,6 +42,7 @@ import com.first.yuliang.deal_community.Util.SeekBarPressure;
 import com.first.yuliang.deal_community.address.City;
 import com.first.yuliang.deal_community.address.County;
 import com.first.yuliang.deal_community.address.Province;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.google.gson.Gson;
 
