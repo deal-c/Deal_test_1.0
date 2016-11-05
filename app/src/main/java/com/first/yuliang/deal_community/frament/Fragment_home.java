@@ -10,17 +10,23 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.first.yuliang.deal_community.CommodityActivity;
 import com.first.yuliang.deal_community.MessageActivity;
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.SearchCommodityActivity;
@@ -29,6 +35,7 @@ import com.first.yuliang.deal_community.Util.NoScrollGridView;
 import com.first.yuliang.deal_community.Util.RoundCornerImageView;
 import com.first.yuliang.deal_community.frament.pojo.Adbean;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
+import com.first.yuliang.deal_community.frament.utiles.ToastUtil;
 import com.first.yuliang.deal_community.home_button_activity.huan_magic;
 import com.first.yuliang.deal_community.home_button_activity.juan_dongtai;
 import com.first.yuliang.deal_community.home_button_activity.old_tonew;
@@ -98,6 +105,13 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
     private BaseAdapter gadapter;
     private List <CommodityBean.Commodity> prolist=new ArrayList<>();
     private NoScrollGridView guessyoulike;
+    private NoScrollGridView gv_hot;
+    private BaseAdapter hotadapter;
+    private ScrollView mScrollView;
+    private int hotcount=5;
+    private ProgressBar jiazaimore;
+    private List <CommodityBean.Commodity> hotlist=new ArrayList<>();
+    private View tv_bootom;
 
     @Nullable
     @Override
@@ -116,6 +130,90 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         jiu_huanxin = ((Button) view.findViewById(R.id.jiu_huanxin));
         gv_song = ((NoScrollGridView) view.findViewById(R.id.gv_song));
         guessyoulike = ((NoScrollGridView) view.findViewById(R.id.gv_guessyoulike));
+        gv_hot = ((NoScrollGridView) view.findViewById(R.id.gv_hot));
+        mScrollView = ((ScrollView) view.findViewById(R.id.sv_home));
+        jiazaimore = ((ProgressBar) view.findViewById(R.id.jiazaimore));
+        tv_bootom = view.findViewById(R.id.tv_bottom);
+
+
+        mScrollView.setOnTouchListener(new TouchListenerImpl());
+
+        hotadapter=new BaseAdapter() {
+            private TextView locate;
+            private TextView pro_price;
+            private TextView pri_title;
+            private ImageView pro_img;
+
+            @Override
+            public int getCount() {
+
+                return hotcount;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v=View.inflate(getActivity(),R.layout.item_hot,null);
+
+                if (hotlist.size()!=0){
+
+
+                CommodityBean.Commodity com=hotlist.get(position);
+
+
+                pro_img = ((ImageView) v.findViewById(R.id.iv_cg_l));
+                pri_title = ((TextView) v.findViewById(R.id.tv_cg_l));
+                pro_price = ((TextView) v.findViewById(R.id.tv_price_l));
+                locate = ((TextView) v.findViewById(R.id.tv_local_l));
+                ImageOptions options=new ImageOptions.Builder()
+                        .setImageScaleType(CENTER_CROP)
+                        .setFailureDrawableId(R.drawable.loadfailed)
+                        .build();
+
+                if (com.commodityImg.split("upload")[0].equals("/csys/")){
+                    x.image().bind(pro_img,HttpUtile.szj+com.commodityImg,options);
+                }else{
+
+                    x.image().bind(pro_img,HttpUtile.yu+com.commodityImg,options);
+                }
+
+
+                pri_title.setText(com.commodityTitle);
+                pro_price.setText(com.price+"");
+                locate.setText(com.location);
+
+                }
+
+                return v;
+            }
+        };
+
+
+        gv_hot.setAdapter(hotadapter);
+
+        gv_hot.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(), "跳转的商品详情", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), CommodityActivity.class);
+                CommodityBean.Commodity temp = hotlist.get(position);
+                intent.putExtra("search", temp.commodityTitle);
+                intent.putExtra("bundle", temp);
+                startActivity(intent);
+            }
+        });
+
+        gethotlist();
+        hotadapter.notifyDataSetChanged();
 
         gadapter=new BaseAdapter() {
             private RoundCornerImageView pro_img;
@@ -198,7 +296,27 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
                 return v;
             }
         };
+
+
         gv_song.setAdapter(madapter);
+        gv_song.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //prolist
+
+                if (prolist.size()!=0){
+                Toast.makeText(getActivity(), "跳转的商品详情", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), CommodityActivity.class);
+                CommodityBean.Commodity temp = prolist.get(position);
+                intent.putExtra("search", temp.commodityTitle);
+                intent.putExtra("bundle", temp);
+                startActivity(intent);
+                }else {
+                    ToastUtil.show(getActivity(),"请检查网络连接");
+                }
+            }
+        });
+
 
         getSongProduct();
 
@@ -418,6 +536,9 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
     }
 
+
+
+   // 获得广告list
     private void getAdList() {
 
         RequestParams params=new RequestParams(HttpUtile.yu+"deal_ad/getad");
@@ -488,4 +609,90 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         }
 
     }
+//获得热门商品list
+    private void gethotlist(){
+        RequestParams params =new RequestParams(HttpUtile.szj+"/csys/getallbrowse");
+
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                CommodityBean bean = gson.fromJson(result, CommodityBean.class);
+//                Type type=new TypeToken<List<CommodityBean.Commodity>>(){}.getType();
+                hotlist.addAll(bean.commodities);
+                Log.e("onSuccess",hotlist.size()+"" );
+                hotadapter.notifyDataSetChanged();
+                jiazaimore.setVisibility(View.GONE);
+                 ToastUtil.show(getActivity(),"success");
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                ToastUtil.show(getActivity(),"error");
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+
+    }
+
+    //下拉加载更多
+    private class TouchListenerImpl implements View.OnTouchListener {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    break;
+                case MotionEvent.ACTION_MOVE:
+
+                    int scrollY=view.getScrollY();
+                    int height=view.getHeight();
+                    int scrollViewMeasuredHeight=mScrollView.getChildAt(0).getMeasuredHeight();
+                    if(scrollY==0){
+                        Log.e("滑动到了顶端 ", scrollY+"");
+                    }
+                    if((scrollY+height)==scrollViewMeasuredHeight){
+//                        Log.e("滑动到了底部 scrollY=", scrollY+"");
+                        hotcount+=5;
+                          if (hotlist.size()<hotcount){
+                              jiazaimore.setVisibility(View.GONE);
+                              tv_bootom.setVisibility(View.VISIBLE);
+
+                          }else {
+
+                              hotadapter.notifyDataSetChanged();
+                              jiazaimore.setVisibility(View.GONE);
+                          }
+
+
+
+
+
+//                        Log.e("滑动到了底部 height=", height+"");
+                    }else if (scrollY>0 &&(scrollY+height)<scrollViewMeasuredHeight){
+                        jiazaimore.setVisibility(View.VISIBLE);
+                        tv_bootom.setVisibility(View.GONE);
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            return false;
+        }
+
+    };
+
+
+
 }

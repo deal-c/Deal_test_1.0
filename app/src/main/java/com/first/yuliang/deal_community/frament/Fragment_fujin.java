@@ -786,7 +786,7 @@ public class Fragment_fujin extends Fragment implements LocationSource,
         popupWindow.showAsDropDown(maijia);
 
     }
-
+  //点击动画
     public void jumpPoint(final Marker marker) {
         final Handler handler = new Handler();
         final long start = SystemClock.uptimeMillis();

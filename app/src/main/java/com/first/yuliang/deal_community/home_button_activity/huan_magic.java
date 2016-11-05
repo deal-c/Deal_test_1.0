@@ -17,7 +17,8 @@ public class huan_magic extends AppCompatActivity {
 
 
         pic = ((GifView) findViewById(R.id.circlepic));
-        pic.setMovieResource(R.drawable.loadddd);
+        pic.setMovieResource(R.drawable.huangif);
+
 
 //              ImageOptions imageOptions = new ImageOptions.Builder()
 //                .setImageScaleType(CENTER_CROP)
