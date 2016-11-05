@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:text="为贫困地区捐赠的"/>
     <TextView
+        android:id="@+id/tv_junproname"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/tv_product"
         android:layout_marginTop="10dp"
@@ -34,6 +35,7 @@
         android:layout_height="wrap_content"
         android:text="iphon6"/>
     <ImageView
+        android:id="@+id/juan_pic"
         android:layout_margin="5dp"
         android:layout_alignParentRight="true"
         android:layout_width="100dp"

@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,21 +25,28 @@ import com.first.yuliang.deal_community.MessageActivity;
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.SearchCommodityActivity;
 import com.first.yuliang.deal_community.TypeActivity;
+import com.first.yuliang.deal_community.Util.NoScrollGridView;
+import com.first.yuliang.deal_community.Util.RoundCornerImageView;
 import com.first.yuliang.deal_community.frament.pojo.Adbean;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.home_button_activity.huan_magic;
 import com.first.yuliang.deal_community.home_button_activity.juan_dongtai;
 import com.first.yuliang.deal_community.home_button_activity.old_tonew;
 import com.first.yuliang.deal_community.home_button_activity.re_use;
+import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.widget.ImageView.ScaleType.CENTER_CROP;
 
 /**
  * Created by yuliang on 2016/9/21.
@@ -85,6 +93,11 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
     private Button zai_liyong;
     private Button dongtai_juan;
     private Button jiu_huanxin;
+    private NoScrollGridView gv_song;
+    private BaseAdapter madapter;
+    private BaseAdapter gadapter;
+    private List <CommodityBean.Commodity> prolist=new ArrayList<>();
+    private NoScrollGridView guessyoulike;
 
     @Nullable
     @Override
@@ -101,6 +114,95 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         zai_liyong = ((Button) view.findViewById(R.id.zaili_yong));
         dongtai_juan = ((Button) view.findViewById(R.id.jun_dongtai));
         jiu_huanxin = ((Button) view.findViewById(R.id.jiu_huanxin));
+        gv_song = ((NoScrollGridView) view.findViewById(R.id.gv_song));
+        guessyoulike = ((NoScrollGridView) view.findViewById(R.id.gv_guessyoulike));
+
+        gadapter=new BaseAdapter() {
+            private RoundCornerImageView pro_img;
+            private TextView pro_desc;
+            @Override
+            public int getCount() {
+                return 2;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View  v=View.inflate(getActivity(),R.layout.gridview_song_item,null);
+                pro_desc = ((TextView) v.findViewById(R.id.pro_desc));
+                pro_img = ((RoundCornerImageView) v.findViewById(R.id.pro_img));
+                if (prolist.size()!=0){
+                    CommodityBean.Commodity com=prolist.get(position);
+                    pro_desc.setText(com.commodityTitle);
+                    ImageOptions options=new ImageOptions.Builder()
+                            .setImageScaleType(CENTER_CROP)
+                            .setFailureDrawableId(R.drawable.loadfailed)
+                            .setLoadingDrawableId(R.drawable.shalou)
+                            .build();
+
+                    x.image().bind(pro_img,HttpUtile.szj+com.commodityImg,options);
+                }
+                return v;
+            }
+        };
+
+        guessyoulike.setAdapter(gadapter);
+
+
+        madapter=new BaseAdapter() {
+            private RoundCornerImageView pro_img;
+            private TextView pro_desc;
+
+            @Override
+            public int getCount() {
+                return 4;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+
+                View  v=View.inflate(getActivity(),R.layout.gridview_song_item,null);
+
+                pro_desc = ((TextView) v.findViewById(R.id.pro_desc));
+                pro_img = ((RoundCornerImageView) v.findViewById(R.id.pro_img));
+                if (prolist.size()!=0){
+                CommodityBean.Commodity com=prolist.get(position);
+                pro_desc.setText(com.commodityTitle);
+                ImageOptions options=new ImageOptions.Builder()
+                .setImageScaleType(CENTER_CROP)
+                .setFailureDrawableId(R.drawable.loadfailed)
+                .setLoadingDrawableId(R.drawable.shalou)
+                .build();
+
+                x.image().bind(pro_img,HttpUtile.szj+com.commodityImg,options);
+                }
+                return v;
+            }
+        };
+        gv_song.setAdapter(madapter);
+
+        getSongProduct();
+
+
 
         qiji_huan.setOnClickListener(this);
         zai_liyong.setOnClickListener(this);
@@ -188,7 +290,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
 
                 ImageOptions imageOptions=new ImageOptions.Builder()
-                        .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                        .setImageScaleType(CENTER_CROP)
                         .build();
                 int key=-1;
                 switch (position){
@@ -206,6 +308,12 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
                         ((ImageView) (getActivity()).findViewById(ivs[position])).setVisibility(View.VISIBLE);
                     }
 
+//              ImageOptions imageOptions = new ImageOptions.Builder()
+//                .setImageScaleType(CENTER_CROP)
+//                .setCircular(true)
+//                .setFailureDrawableId(R.mipmap.ic_launcher)
+//                .setLoadingDrawableId(R.mipmap.ic_launcher)
+//                .build();
                x.image().bind(iv_adphoto,HttpUtile.host+adlist.get(key).getAdphoto(),imageOptions);
 //                iv_adphoto.setImageResource(imgs[position]);
                 tv_title.setText(adlist.get(key).getAdtitle());
@@ -276,6 +384,40 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
         return view;
     }
+    //获得推荐赠送的商品列表
+    private void getSongProduct() {
+        RequestParams params=new RequestParams(HttpUtile.yu+"/community/togetjuan");
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                Gson gson=new Gson();
+                Type type=new TypeToken<List<CommodityBean.Commodity>>(){}.getType();
+                prolist=gson.fromJson(result,type);
+
+
+                madapter.notifyDataSetChanged();
+                gadapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+    }
+
     private void getAdList() {
 
         RequestParams params=new RequestParams(HttpUtile.host+"deal_ad/getad");
