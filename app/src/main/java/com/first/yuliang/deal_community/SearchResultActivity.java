@@ -36,7 +36,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.first.yuliang.deal_community.Util.SunURL;
 import com.first.yuliang.deal_community.Util.CustomSeekbar;
 import com.first.yuliang.deal_community.Util.ResponseOnTouch;
 import com.first.yuliang.deal_community.Util.SeekBarPressure;

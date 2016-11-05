@@ -1,20 +1,17 @@
 package com.first.yuliang.deal_community;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.first.yuliang.deal_community.Util.CustomDialog;
 import com.first.yuliang.deal_community.Util.DateUtil;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.Address;
@@ -31,8 +28,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.security.auth.login.LoginException;
 
 public class Order extends AppCompatActivity {
 
@@ -105,10 +100,6 @@ public class Order extends AppCompatActivity {
             }
         });
     }
-            }
-        });
-    }
-
     private void getAddress(int id) {
 
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/getAllAddressServlet");
@@ -243,37 +234,6 @@ public class Order extends AppCompatActivity {
     private void updateCommodityState(int commodityId){
         RequestParams params = null;
         String url = "http://192.168.191.1:8080/csys/modifycommoditystate?commodityId="+commodityId+"&state=1";
-        params = new RequestParams(url);
-        x.http().get(params, new Callback.CommonCallback<String>() {
-
-            @Override
-            public void onSuccess(String result) {
-
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(Order.this, "是不是我的无法连接服务器", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
-    }
-    private void insertOrder(Date date){
-        RequestParams params = null;
-        String url = "http://192.168.191.1:8080/csys/insertorder?userId="+id+"&"+"commodityId="+commodity.commodityId+
-                "&"+"changeDate="+ DateUtil.dateToStringDate(date) +"&"+"changeTime="+ DateUtil.dateToStringTime(date) +"&"+
-                "addressName="+ addressList.get(i).getUserName() +"&"+"addressCity="+ addressList.get(i).getCity()+"&"+"addressDetail="+addressList.get(i).getAddressDetail() +"&"+ "addressPhoneNum="+addressList.get(i).getContactPhoneNum() +"&"+
-                "tips=" + et_post_way.getText().toString() +"&"+"price="+ commodity.price;
-        Log.e("url=============",url);
         params = new RequestParams(url);
         x.http().get(params, new Callback.CommonCallback<String>() {
 
