@@ -236,11 +236,10 @@ public class CommodityActivity extends AppCompatActivity {
                     Intent intent = new Intent(CommodityActivity.this, RegActivity.class);
                     intent.putExtra("flag","1");
                     startActivity(intent);
-                }else{
-                    Intent intent = new Intent(CommodityActivity.this, Order.class);
-                    intent.putExtra("search",search);
-                    intent.putExtra("bundle",commodity);
-                    startActivity(intent);
+                }else if(id==commodity.releaseUserId){
+                    Toast.makeText(CommodityActivity.this,"您不能购买自己的商品",Toast.LENGTH_SHORT).show();
+                }else {
+                    getCommodityById(commodity.commodityId);
                 }
             }
         });
@@ -343,6 +342,42 @@ public class CommodityActivity extends AppCompatActivity {
             }
         });
     }
+    public void getCommodityById(int commodityId) {
+        RequestParams params = null;
+        params = new RequestParams("http://192.168.191.1:8080/csys/getcommoditybyid?commodityId="+ commodityId);
+        x.http().get(params,new Callback.CommonCallback<String>(){
+
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                commodity = gson.fromJson(result, CommodityBean.Commodity.class);
+                if(commodity.statement!=1&&commodity.statement!=0){
+                    Toast.makeText(CommodityActivity.this,"该商品已被购买",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(CommodityActivity.this, Order.class);
+                    intent.putExtra("search", search);
+                    intent.putExtra("bundle", commodity);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(CommodityActivity.this,"是不是这里无法连接服务器",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+
     public ObjectAnimator getAnimationInto(){
         oa1 = ObjectAnimator.ofFloat(ll_share,"translationY",0,ll_share.getHeight());
         oa1.setDuration(500);

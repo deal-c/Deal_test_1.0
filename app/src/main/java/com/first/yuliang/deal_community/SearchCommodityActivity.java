@@ -267,7 +267,7 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
         search = search.replace(" ","%");
         RequestParams params = null;
         try {
-            params = new RequestParams(HttpUtile.szj+"/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
+            params = new RequestParams(HttpUtile.yu+"/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
