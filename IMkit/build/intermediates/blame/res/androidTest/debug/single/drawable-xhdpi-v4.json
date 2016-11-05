@@ -1,11 +1,11 @@
 [
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_read_receipt_request.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_read_receipt_request.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u2601.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u2601.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_read_receipt_request.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_read_receipt_request.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u23f3.png",
@@ -48,12 +48,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_indicator_hover.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f494.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f494.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_camera_normal.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_camera_normal.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f494.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f494.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f36b.png",
@@ -64,12 +64,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f366.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_conversation_list_msg_sending.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_conversation_list_msg_sending.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_icon_admin_hover.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_icon_admin_hover.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_conversation_list_msg_sending.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_conversation_list_msg_sending.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_praise_hover.png",
@@ -84,12 +84,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_volume_6.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_btn_pub_service_enter_normal.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_btn_pub_service_enter_normal.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_bubble_no_right.9.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_bubble_no_right.9.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_btn_pub_service_enter_normal.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_btn_pub_service_enter_normal.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f60a.png",
@@ -108,12 +108,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ac_audio_file_icon.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f451.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f451.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_bg_toast.9.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_bg_toast.9.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f451.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f451.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_bg_voice_popup.9.png",
@@ -160,12 +160,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_files_selected.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_file_icon_else.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_file_icon_else.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_voice_receive.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_voice_receive.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_file_icon_else.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_file_icon_else.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f46a.png",
@@ -180,20 +180,20 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f3c2.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ad_list_file_checked.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ad_list_file_checked.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_keyboard_normal.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_keyboard_normal.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_bubble_right.9.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_bubble_right.9.png"
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ad_list_file_checked.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ad_list_file_checked.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_voice_receive_play1.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_voice_receive_play1.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_bubble_right.9.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_bubble_right.9.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f30f.png",
@@ -212,12 +212,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_cs_group_uncheck.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_picture_selected.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_picture_selected.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_bubble_left_file.9.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_bubble_left_file.9.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_picture_selected.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_picture_selected.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_yes.png",
@@ -244,12 +244,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_delete.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f47c.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f47c.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f4e2.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f4e2.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f47c.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f47c.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_btn_send_normal.9.png",
@@ -300,12 +300,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_origin_check_nor.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_def_coversation_portrait.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_def_coversation_portrait.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_volume_2.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_volume_2.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_def_coversation_portrait.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_def_coversation_portrait.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f349.png",
@@ -348,12 +348,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_file_icon_excel.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_btn_voice_normal.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_btn_voice_normal.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f339.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f339.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_btn_voice_normal.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_btn_voice_normal.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_btn_open_file_selected.png",
@@ -364,12 +364,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f525.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_volume_0.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_volume_0.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_radio_button_off.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_radio_button_off.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_volume_0.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_volume_0.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f64a.png",
@@ -408,12 +408,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_extend_selected.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f62c.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f62c.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f613.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f613.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f62c.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f62c.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_volume_1.png",
@@ -428,28 +428,28 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f3b5.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f47d.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f47d.png"
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_receive_voice_two.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_receive_voice_two.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ac_file_preview.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ac_file_preview.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_receive_voice_two.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_receive_voice_two.png"
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f47d.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f47d.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_picture_normal.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_picture_normal.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_text_normal.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_text_normal.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f3a4.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f3a4.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_text_normal.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_text_normal.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u270c.png",
@@ -480,20 +480,20 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_picsel_catalog_pic_shadow.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ad_list_video_icon.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ad_list_video_icon.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_no_hover.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_no_hover.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_camera_selected.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_camera_selected.png"
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ad_list_video_icon.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ad_list_video_icon.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_grid_camera.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_grid_camera.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_camera_selected.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_camera_selected.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f622.png",
@@ -676,12 +676,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ac_text_file_icon.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f602.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f602.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_yes_hover.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_yes_hover.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f602.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f602.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_conversation_list_empty.png",
@@ -696,12 +696,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_warning.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_def_msg_portrait.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_def_msg_portrait.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_no_hover.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_no_hover.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_def_msg_portrait.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_def_msg_portrait.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f633.png",
@@ -732,32 +732,32 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_notice_wraning.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_picsel_back_pressed.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_picsel_back_pressed.png"
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_notice_point.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_notice_point.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_location_normal.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_location_normal.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_notice_point.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_notice_point.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_volume_3.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_volume_3.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_picsel_back_pressed.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_picsel_back_pressed.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u2600.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u2600.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f44e.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f44e.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f377.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f377.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f44e.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f44e.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f616.png",
@@ -804,20 +804,20 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_btn_pub_service_enter_hover.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_location_item_default.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_location_item_default.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_star.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_star.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f384.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f384.png"
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_location_item_default.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_location_item_default.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_keyboard_selected.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_keyboard_selected.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f384.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f384.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f614.png",
@@ -948,12 +948,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_cs_group_ok_disabled.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u2b50.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u2b50.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_voice_sent_play1.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_voice_sent_play1.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u2b50.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u2b50.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f62d.png",
@@ -1036,12 +1036,12 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_default_portrait.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u270f.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u270f.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f3c0.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f3c0.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u270f.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u270f.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_volume_wraning.png",
@@ -1076,20 +1076,20 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f600.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_voide_message_unread.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_voide_message_unread.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u23f0.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u23f0.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_public_service_menu_bg.9.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_public_service_menu_bg.9.png"
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_voide_message_unread.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_voide_message_unread.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f605.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f605.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_public_service_menu_bg.9.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_public_service_menu_bg.9.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_send_voice_three.png",
@@ -1136,28 +1136,28 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f6ab.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_btn_send_hover.9.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_btn_send_hover.9.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_setting_friends_add.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_setting_friends_add.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_btn_send_hover.9.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_btn_send_hover.9.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_default_discussion_portrait.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_default_discussion_portrait.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ac_sd_card_icon.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ac_sd_card_icon.png"
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_notification_connecting.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_notification_connecting.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_receive_voice_three.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_receive_voice_three.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_notification_connecting.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_notification_connecting.png"
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ac_sd_card_icon.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ac_sd_card_icon.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_cs_group_list_divide_line.png",
@@ -1172,10 +1172,6 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_voice_normal.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f48a.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f48a.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f634.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f634.png"
     },
@@ -1184,24 +1180,28 @@
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_notice_loading.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_bubble_no_left.9.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_bubble_no_left.9.png"
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f48a.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f48a.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_smiley_selected.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_smiley_selected.png"
     },
     {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_bubble_no_left.9.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_bubble_no_left.9.png"
+    },
+    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f615.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f615.png"
     },
     {
-        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ed_pub_service_search_normal.9.png",
-        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ed_pub_service_search_normal.9.png"
-    },
-    {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ic_voice_receive_play2.png",
         "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_voice_receive_play2.png"
+    },
+    {
+        "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_ed_pub_service_search_normal.9.png",
+        "source": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ed_pub_service_search_normal.9.png"
     },
     {
         "merged": "E:\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f44c.png",

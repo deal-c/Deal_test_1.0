@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.frament.pojo.Dynamic;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 
 import org.xutils.x;
 
@@ -84,7 +85,7 @@ public class ContentAdapter extends BaseAdapter implements View.OnClickListener 
         }
         holder.textView.setText(mContentList.get(position).getContent());
         holder.tv_dongtai_content.setText(mContentList.get(position).getContent());
-        x.image().bind((holder.iv_dongtai_userphoto), "http://10.40.5.61:8080/usys/imgs/" +mContentList.get(position).getUserId().getUserImg() + ".png");
+        x.image().bind((holder.iv_dongtai_userphoto), HttpUtile.zy1+mContentList.get(position).getUserId().getUserImg());
         holder.tv_dongtai_usename.setText(mContentList.get(position).getUserId().getUserName());
         x.image().bind((holder.iv_dongtai_dongtaiphoto), "http://10.40.5.61:8080/usys/imgs/" +mContentList.get(position).getPic() + ".png");
     //    holder.lv_tiezi.setOnClickListener(this);

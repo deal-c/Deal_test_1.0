@@ -104,7 +104,7 @@ private int userId=1;
                 viewhoder.communityName.setText(dongtai.getUserId().getUserName());
                 viewhoder.communityInfo.setText(dongtai.getContent());
                 viewhoder.comCreateTime.setText(dongtai.getPublishTime());
-                x.image().bind(viewhoder.comImg, "http://10.40.5.61:8080/usys/imgs/"+dongtai.getUserId().getUserImg()+".png");
+                x.image().bind(viewhoder.comImg, HttpUtile.zy1+dongtai.getUserId().getUserImg());
                 item=dongtai.getDynamicId();
                 return convertView;
             }

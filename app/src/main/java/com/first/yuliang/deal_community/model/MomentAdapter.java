@@ -26,12 +26,12 @@ public class MomentAdapter extends BaseAdapter {
 
     public static final int VIEW_HEADER = 0;
     public static final int VIEW_MOMENT = 1;
-   public   static int myUserId;
+    public   static int myUserId;
     public static Dynamic mylist;
     private ArrayList<Comment> mList;
     private Context mContext;
     private CustomTagHandler mTagHandler;
-   public static String dynamicId;
+    public static String dynamicId;
     public MomentAdapter(Context context,Dynamic dynamic,int userId,ArrayList<Comment> list, CustomTagHandler tagHandler) {
         mList = list;
         mContext = context;
@@ -73,30 +73,30 @@ public class MomentAdapter extends BaseAdapter {
             ViewHolder holder = new ViewHolder();
 
 
-                if (position==0) {
+            if (position==0) {
 
 
-                    convertView = View.inflate(mContext, R.layout.item_header, null);
-                    holder.dongtai_userName = (TextView) convertView.findViewById(R.id.dongtai_userName);
+                convertView = View.inflate(mContext, R.layout.item_header, null);
+                holder.dongtai_userName = (TextView) convertView.findViewById(R.id.dongtai_userName);
 
-                    holder.dongtaiContent = (TextView) convertView.findViewById(R.id.dongtaiContent);
+                holder.dongtaiContent = (TextView) convertView.findViewById(R.id.dongtaiContent);
 
-                    holder.headerImg = (ImageView) convertView.findViewById(R.id.headerImg);
-                    holder.dongtaiTitle = (TextView) convertView.findViewById(R.id.dongtaiTitle);
-                    holder.dongtaizan = (Button) convertView.findViewById(R.id.dongtaizan);
-                    holder.dontaipic = (ImageView) convertView.findViewById(R.id.dontaipic);
-                    holder.oncreatetime = (TextView) convertView.findViewById(R.id.oncreatetime);
-                    convertView.setTag(holder);
-
-
+                holder.headerImg = (ImageView) convertView.findViewById(R.id.headerImg);
+                holder.dongtaiTitle = (TextView) convertView.findViewById(R.id.dongtaiTitle);
+                holder.dongtaizan = (Button) convertView.findViewById(R.id.dongtaizan);
+                holder.dontaipic = (ImageView) convertView.findViewById(R.id.dontaipic);
+                holder.oncreatetime = (TextView) convertView.findViewById(R.id.oncreatetime);
+                convertView.setTag(holder);
 
 
 
-                }else{
+
+
+            }else{
                 convertView = View.inflate(mContext, R.layout.item_moment, null);
 
-                     holder.btn_input_comment=(TextView)convertView.findViewById(R.id.btn_input_comment);
-                    holder.name = (TextView) convertView.findViewById(R.id.name);
+                holder.btn_input_comment=(TextView)convertView.findViewById(R.id.btn_input_comment);
+                holder.name = (TextView) convertView.findViewById(R.id.name);
                 holder.time = (TextView) convertView.findViewById(R.id.time);
                 holder.img = (ImageView) convertView.findViewById(R.id.author_icon);
                 holder.content = (TextView) convertView.findViewById(R.id.content);
@@ -127,11 +127,11 @@ public class MomentAdapter extends BaseAdapter {
             x.image().bind((holder.img), HttpUtils.hostLuoqingshanSchool+"/usys/imgs/" + mList.get(index).getImgs() + ".png");
             holder.content.setText(mList.get(index).mContent);
 
-        if(mList.get(index).getList()!=null){
-   // Log.e("看看数据","能不能靠谱点");
-    CommentFun.parseCommentList(mContext,mList.get(index).getList(),
-            holder.mCommentList, holder.mBtnInput, mTagHandler,mylist);
-}
+          /*  if(mList.get(index).getList()!=null){
+                // Log.e("看看数据","能不能靠谱点");
+                CommentFun.parseCommentList(mContext,mList.get(index).getList(),
+                        holder.mCommentList, holder.mBtnInput, mTagHandler,mylist);
+            }*/
 
 
 /*

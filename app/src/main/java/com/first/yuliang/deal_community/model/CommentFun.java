@@ -140,10 +140,11 @@ public class CommentFun {
 
                 } else if(position!=0){
                     ArrayList<Comment> tomyfirstlist = new ArrayList();
-                    tomycomment = new Comment(ComMainActivity.sUser, content, receiver);
-                    tomyfirstlist.add(tomycomment);
+                    tomycomment = new Comment(ComMainActivity.sUser,content,receiver);
+                    //commentList.add(tomycomment);
+                   tomyfirstlist.add(tomycomment);
                     moments.get(position-1).setList(tomyfirstlist);
-                    addRemark(tomyfirstlist, userId);
+                    addRemark(tomyfirstlist,userId);
                 }
                 else {
                     commentList.add(comment);

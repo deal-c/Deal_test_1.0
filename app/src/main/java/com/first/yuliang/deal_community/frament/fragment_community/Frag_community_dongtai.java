@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.frament.Community_Activity.ContentAdapter;
 import com.first.yuliang.deal_community.frament.pojo.Dynamic;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
 import com.first.yuliang.deal_community.model.ComMainActivity;
 import com.google.gson.Gson;
@@ -107,7 +108,7 @@ public class Frag_community_dongtai extends Fragment {
                 tv_dongtai_content.setText(dynamicArrayList.get(position).getContent());
                 textView.setText(dynamicArrayList.get(position).getPublishTime());
                 x.image().bind(iv_dongtai_dongtaiphoto, HttpUtils.hostLuoqingshanSchool + "/usys/imgs/" + dynamicArrayList.get(position).getPic() + ".png");
-                x.image().bind(iv_dongtai_userphoto, HttpUtils.hostLuoqingshanSchool + "/usys/imgs/" + dynamicArrayList.get(position).getUserId().getUserImg() + ".png");
+                x.image().bind(iv_dongtai_userphoto, HttpUtile.zy1  + dynamicArrayList.get(position).getUserId().getUserImg());
 
                 return view;
 
