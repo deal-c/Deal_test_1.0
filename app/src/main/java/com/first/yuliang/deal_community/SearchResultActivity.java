@@ -36,7 +36,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.first.yuliang.deal_community.Util.CommodityURL;
+import com.first.yuliang.deal_community.Util.SunURL;
 import com.first.yuliang.deal_community.Util.CustomSeekbar;
 import com.first.yuliang.deal_community.Util.ResponseOnTouch;
 import com.first.yuliang.deal_community.Util.SeekBarPressure;
@@ -437,7 +437,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         }
         search = search.replace(" ","%");
         RequestParams params = null;
-        String url = CommodityURL.SUN_0 + "selectcommodity";
+        String url = HttpUtile.szj + "/csys/selectcommodity";
         String select = "?search="+search+"&"+"location="+location+"&"+"orderFlag="+orderFlag+"&"+"lowPrice="+c_low+"&"+"highPrice="+c_high+"&"+"way="+way+"&"+"page="+page;
         Log.e("看url===========",url+select);
         params = new RequestParams(url+select);

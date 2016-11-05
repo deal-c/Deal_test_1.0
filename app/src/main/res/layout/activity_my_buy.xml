@@ -3,10 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+                android:background="#eee"
     tools:context="com.first.yuliang.deal_community.MyCenter.MyBuyActivity">
     <include android:id="@+id/tl_mybuy"
              layout="@layout/mybuy"/>
     <ListView
+        android:layout_below="@+id/tl_mybuy"
+        android:id="@+id/lv_mybuy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>

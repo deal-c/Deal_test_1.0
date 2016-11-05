@@ -35,7 +35,6 @@ import org.xutils.x;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -186,7 +185,7 @@ public class CommodityActivity extends AppCompatActivity {
                 tv_local = ((TextView) view.findViewById(R.id.tv_local));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg, "http://10.40.5.62:8080"+(commodity.commodityImg.split(","))[0]);
+                x.image().bind(iv_cg, HttpUtile.szj+(commodity.commodityImg.split(","))[0]);
                 tv_cg.setText(commodity.commodityTitle);
                 tv_price.setText(commodity.price+"");
                 tv_local.setText(commodity.location);
@@ -230,7 +229,7 @@ public class CommodityActivity extends AppCompatActivity {
 
                 String img = imgs[position];
 
-                x.image().bind(iv_cg_c, "http://10.40.5.62:8080" + img);
+                x.image().bind(iv_cg_c, HttpUtile.szj + img);
 
                 return view;
             }
@@ -244,11 +243,11 @@ public class CommodityActivity extends AppCompatActivity {
                     Intent intent = new Intent(CommodityActivity.this, RegActivity.class);
                     intent.putExtra("flag","1");
                     startActivity(intent);
-                }else{
-                    Intent intent = new Intent(CommodityActivity.this, Order.class);
-                    intent.putExtra("search",search);
-                    intent.putExtra("bundle",commodity);
-                    startActivity(intent);
+                }else if(id==commodity.releaseUserId){
+                    Toast.makeText(CommodityActivity.this,"您不能购买自己的商品",Toast.LENGTH_SHORT).show();
+                }else {
+                    getCommodityById(commodity.commodityId);
+                    getCommodityById(commodity.commodityId);
                 }
             }
         });
@@ -323,7 +322,7 @@ public class CommodityActivity extends AppCompatActivity {
         search = search.replace(" ","%");
         RequestParams params = null;
         try {
-            params = new RequestParams("http://10.40.5.62:8080/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
+            params = new RequestParams(HttpUtile.szj+"/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -355,6 +354,42 @@ public class CommodityActivity extends AppCompatActivity {
             }
         });
     }
+    public void getCommodityById(int commodityId) {
+        RequestParams params = null;
+        params = new RequestParams(HttpUtile.szj+"/csys/getcommoditybyid?commodityId="+ commodityId);
+        x.http().get(params,new Callback.CommonCallback<String>(){
+
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                commodity = gson.fromJson(result, CommodityBean.Commodity.class);
+                if(commodity.statement!=1&&commodity.statement!=0){
+                    Toast.makeText(CommodityActivity.this,"该商品已被购买",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(CommodityActivity.this, Order.class);
+                    intent.putExtra("search", search);
+                    intent.putExtra("bundle", commodity);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(CommodityActivity.this,"是不是这里无法连接服务器",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+
     public ObjectAnimator getAnimationInto(){
         oa1 = ObjectAnimator.ofFloat(ll_share,"translationY",0,ll_share.getHeight());
         oa1.setDuration(500);
@@ -401,7 +436,7 @@ public class CommodityActivity extends AppCompatActivity {
     }
     private void insertCBH(int id,int commodity,Date date){
 
-        String url = "http://10.40.5.62:8080/csys/commoditybh?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date);
+        String url = HttpUtile.szj+"/csys/commoditybh?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date);
         Log.e("看看历史====",url);
         RequestParams params = new RequestParams(url);
         x.http().get(params,new Callback.CommonCallback<String>(){
@@ -428,7 +463,7 @@ public class CommodityActivity extends AppCompatActivity {
         });
     }
     private void insertSC(int id,int commodity,Date date,boolean flag_sc){
-        String url = "http://10.40.5.62:8080/csys/insertcommoditycollect?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date)+"&"+"flag="+flag_sc;
+        String url = HttpUtile.szj+"/csys/insertcommoditycollect?commodityId="+commodity+"&"+"userId="+id+"&"+"date="+DateUtil.dateToStringDate(date)+"&"+"time="+DateUtil.dateToStringTime(date)+"&"+"flag="+flag_sc;
         Log.e("看看收藏====",url);
         RequestParams params = new RequestParams(url);
         x.http().get(params,new Callback.CommonCallback<String>(){
@@ -455,7 +490,7 @@ public class CommodityActivity extends AppCompatActivity {
         });
     }
     private void queryCollection(int id, final int commodity){
-        String url = "http://10.40.5.62:8080/csys/qureycommoditycollection?userId="+id;
+        String url = HttpUtile.szj+"/csys/qureycommoditycollection?userId="+id;
         Log.e("看看收藏====",url);
         RequestParams params = new RequestParams(url);
         x.http().get(params,new Callback.CommonCallback<String>(){
