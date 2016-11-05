@@ -1,33 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:orientation="vertical"
+
 android:background="#fff"
-    android:padding="10dp">
+   >
 
 
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar_birthday"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/main">
 
 
-<DatePicker
+    <ImageView
+        android:id="@+id/iv_modify_birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/comego"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="修改生日"
+        android:textColor="#fff"
+        android:layout_gravity="center_horizontal"/>
+
+</android.support.v7.widget.Toolbar>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/toolbar_birthday">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+       >
+
+        <DatePicker
+
+
+    android:layout_marginTop="20dp"
     android:id="@+id/datePicker"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:background="@color/main"/>
-
-<Button
-    android:id="@+id/btn_modify_birthday_confirm"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="确 定"
-    android:textColor="#fff"
-    android:textSize="24sp"
-    android:layout_marginTop="20dp"
-    android:background="@drawable/shapes"
-    android:layout_gravity="center"
-    />
+  android:layout_gravity="center"
+    android:background="#cccccc"
+   />
 
 
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_birthday_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/datePicker"
+        android:text="确定"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shapes"/>
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
+</RelativeLayout>

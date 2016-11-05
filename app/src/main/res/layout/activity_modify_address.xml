@@ -6,19 +6,17 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_addresslist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/main"
         >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/iv_modify_address_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/backback"
+                android:src="@drawable/comego"
 
                 android:layout_centerVertical="true"
                 android:gravity="left"/>
@@ -28,18 +26,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="地址列表"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textColor="#fff"
 
 
-                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
 
 
                 android:gravity="center"
 
                 />
 
-        </RelativeLayout>
+
     </android.support.v7.widget.Toolbar>
 
         <LinearLayout
@@ -80,9 +78,7 @@
                     android:id="@+id/lv_alll_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:dividerHeight="1px"
-                    android:divider="#c0c0c0">
+                    >
 
                 </ListView>
             </RelativeLayout>

@@ -9,25 +9,20 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/bgcolor">
+
         <ImageView
-            android:layout_marginLeft="10dp"
-            android:id="@+id/iv_message"
-            android:layout_width="30dp"
+            android:layout_width="68dp"
             android:layout_height="30dp"
-            android:src="@drawable/xiaoxi"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="社区"
             android:layout_gravity="center"
-
             android:textSize="23sp"
             android:textColor="#fff"
+            android:src="@drawable/shequ_font"
             />
         <ImageView
             android:id="@+id/iv_search_community"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="right"
             android:layout_marginRight="10dp"
             android:src="@drawable/search"/>
@@ -55,7 +50,6 @@
            >
             <RadioButton
                 style="@style/radiostyle"
-
                 android:background="@drawable/community_tab_bgcorlor"
                 android:textColor="@drawable/community_tab_textcolor"
                 android:text="动态"

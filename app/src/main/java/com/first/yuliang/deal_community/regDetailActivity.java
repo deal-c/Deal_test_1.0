@@ -343,10 +343,7 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
         progressDialog = ToolsClass.createLoadingDialog(regDetailActivity.this, "注册中...", true,
                 0);
         progressDialog.show();
-       // sendImage();
-       // Bitmap bmp = BitmapFactory.decodeFile("");
-       // uploadImage();
-        //RequestParams params=new RequestParams(HttpUtile.zy1+"/Project/servlet/RegAppServlet");
+
         RequestParams params=new RequestParams(HttpUtile.zy1+"/Project/servlet/upload1");
         try {
 
@@ -356,7 +353,6 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
             params.addBodyParameter("regusername", URLEncoder.encode(et_reguser.getText().toString().trim(),"utf-8"));
             params.addBodyParameter("reguserpsd",et_regpsd.getText().toString().trim());
             params.addBodyParameter("userSex",rb_female.isChecked()?"false":"true");
-           // params.addBodyParameter("userImg",getPhotoFileName());
             params.addBodyParameter("birthday",tv_birthday.getText().toString().trim());
             params.addBodyParameter("userAddress_s", URLEncoder.encode(et_oftenplace.getText().toString().trim(),"utf-8"));
         } catch (UnsupportedEncodingException e) {
@@ -381,7 +377,7 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
                     progressDialog.hide();
                     Toast.makeText(regDetailActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
 
-                    edit.putInt("count",1);
+
                     edit.putInt("id",Integer.parseInt(result));
                     edit.commit();
                     Intent intent = new Intent(regDetailActivity.this, mainActivity.class);
@@ -389,9 +385,6 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
                     regDetailActivity.this.finish();
                 }else
                 {
-//
-//                    edit.putInt("intoflag",1);
-//                    edit.commit();
 
                     progressDialog.hide();
                     Toast.makeText(regDetailActivity.this,"注册失败",Toast.LENGTH_SHORT).show();
@@ -424,13 +417,6 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onBackPressed() {
-        SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit=preference.edit();
-
-
-            edit.putInt("intoflag",1);
-            edit.commit();
-
 
         regDetailActivity.this.finish();
     }
@@ -466,4 +452,5 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
 //        });
 //
 //    }
+
 }

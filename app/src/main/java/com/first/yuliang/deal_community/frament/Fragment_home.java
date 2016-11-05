@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,22 +25,33 @@ import com.first.yuliang.deal_community.MessageActivity;
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.SearchCommodityActivity;
 import com.first.yuliang.deal_community.TypeActivity;
+import com.first.yuliang.deal_community.Util.NoScrollGridView;
+import com.first.yuliang.deal_community.Util.RoundCornerImageView;
 import com.first.yuliang.deal_community.frament.pojo.Adbean;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
+import com.first.yuliang.deal_community.home_button_activity.huan_magic;
+import com.first.yuliang.deal_community.home_button_activity.juan_dongtai;
+import com.first.yuliang.deal_community.home_button_activity.old_tonew;
+import com.first.yuliang.deal_community.home_button_activity.re_use;
+import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.widget.ImageView.ScaleType.CENTER_CROP;
 
 /**
  * Created by yuliang on 2016/9/21.
  */
-public class Fragment_home extends Fragment {
+public class Fragment_home extends Fragment implements View.OnClickListener{
 
 
     private Handler handler=new Handler(){
@@ -51,14 +63,14 @@ public class Fragment_home extends Fragment {
             super.handleMessage(msg);
             switch (msg.what){
                 case 1:
-                    if(currentItem>3){
-                        currentItem=0;
-                    }else {
-                        currentItem++;
-                    }
-                    vp_ad.setCurrentItem(currentItem);
-//                   adapter.notifyDataSetChanged();
-                    handler.sendEmptyMessageDelayed(1,2500);
+//                    if(currentItem>3){
+//                        currentItem=0;
+//                    }else {
+//                        currentItem++;
+//                    }
+//                    vp_ad.setCurrentItem(currentItem);
+////                   adapter.notifyDataSetChanged();
+//                    handler.sendEmptyMessageDelayed(1,2500);
                     break;
                 case 2:
                     break;
@@ -77,6 +89,15 @@ public class Fragment_home extends Fragment {
     private Button btn_message;
 
     int id=0;
+    private Button qiji_huan;
+    private Button zai_liyong;
+    private Button dongtai_juan;
+    private Button jiu_huanxin;
+    private NoScrollGridView gv_song;
+    private BaseAdapter madapter;
+    private BaseAdapter gadapter;
+    private List <CommodityBean.Commodity> prolist=new ArrayList<>();
+    private NoScrollGridView guessyoulike;
 
     @Nullable
     @Override
@@ -87,6 +108,108 @@ public class Fragment_home extends Fragment {
 
         ib_type=((ImageButton) view.findViewById(R.id.ib_type));
         btn_message = ((Button) view.findViewById(R.id.btn_message));
+
+        //对应主页的四个按钮
+        qiji_huan = ((Button) view.findViewById(R.id.qiji_huan));
+        zai_liyong = ((Button) view.findViewById(R.id.zaili_yong));
+        dongtai_juan = ((Button) view.findViewById(R.id.jun_dongtai));
+        jiu_huanxin = ((Button) view.findViewById(R.id.jiu_huanxin));
+        gv_song = ((NoScrollGridView) view.findViewById(R.id.gv_song));
+        guessyoulike = ((NoScrollGridView) view.findViewById(R.id.gv_guessyoulike));
+
+        gadapter=new BaseAdapter() {
+            private RoundCornerImageView pro_img;
+            private TextView pro_desc;
+            @Override
+            public int getCount() {
+                return 2;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View  v=View.inflate(getActivity(),R.layout.gridview_song_item,null);
+                pro_desc = ((TextView) v.findViewById(R.id.pro_desc));
+                pro_img = ((RoundCornerImageView) v.findViewById(R.id.pro_img));
+                if (prolist.size()!=0){
+                    CommodityBean.Commodity com=prolist.get(position);
+                    pro_desc.setText(com.commodityTitle);
+                    ImageOptions options=new ImageOptions.Builder()
+                            .setImageScaleType(CENTER_CROP)
+                            .setFailureDrawableId(R.drawable.loadfailed)
+                            .setLoadingDrawableId(R.drawable.shalou)
+                            .build();
+
+                    x.image().bind(pro_img,HttpUtile.szj+com.commodityImg,options);
+                }
+                return v;
+            }
+        };
+
+        guessyoulike.setAdapter(gadapter);
+
+
+        madapter=new BaseAdapter() {
+            private RoundCornerImageView pro_img;
+            private TextView pro_desc;
+
+            @Override
+            public int getCount() {
+                return 4;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+
+                View  v=View.inflate(getActivity(),R.layout.gridview_song_item,null);
+
+                pro_desc = ((TextView) v.findViewById(R.id.pro_desc));
+                pro_img = ((RoundCornerImageView) v.findViewById(R.id.pro_img));
+                if (prolist.size()!=0){
+                CommodityBean.Commodity com=prolist.get(position);
+                pro_desc.setText(com.commodityTitle);
+                ImageOptions options=new ImageOptions.Builder()
+                .setImageScaleType(CENTER_CROP)
+                .setFailureDrawableId(R.drawable.loadfailed)
+                .setLoadingDrawableId(R.drawable.shalou)
+                .build();
+
+                x.image().bind(pro_img,HttpUtile.szj+com.commodityImg,options);
+                }
+                return v;
+            }
+        };
+        gv_song.setAdapter(madapter);
+
+        getSongProduct();
+
+
+
+        qiji_huan.setOnClickListener(this);
+        zai_liyong.setOnClickListener(this);
+        dongtai_juan.setOnClickListener(this);
+        jiu_huanxin.setOnClickListener(this);
+
+
         btn_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,7 +290,7 @@ public class Fragment_home extends Fragment {
 
 
                 ImageOptions imageOptions=new ImageOptions.Builder()
-                        .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                        .setImageScaleType(CENTER_CROP)
                         .build();
                 int key=-1;
                 switch (position){
@@ -185,7 +308,13 @@ public class Fragment_home extends Fragment {
                         ((ImageView) (getActivity()).findViewById(ivs[position])).setVisibility(View.VISIBLE);
                     }
 
-               x.image().bind(iv_adphoto,HttpUtile.host+adlist.get(key).getAdphoto(),imageOptions);
+//              ImageOptions imageOptions = new ImageOptions.Builder()
+//                .setImageScaleType(CENTER_CROP)
+//                .setCircular(true)
+//                .setFailureDrawableId(R.mipmap.ic_launcher)
+//                .setLoadingDrawableId(R.mipmap.ic_launcher)
+//                .build();
+               x.image().bind(iv_adphoto,HttpUtile.yu+adlist.get(key).getAdphoto(),imageOptions);
 //                iv_adphoto.setImageResource(imgs[position]);
                 tv_title.setText(adlist.get(key).getAdtitle());
                 tv_content.setText("    "+adlist.get(key).getAdcontent());
@@ -255,9 +384,43 @@ public class Fragment_home extends Fragment {
 
         return view;
     }
+    //获得推荐赠送的商品列表
+    private void getSongProduct() {
+        RequestParams params=new RequestParams(HttpUtile.yu+"/community/togetjuan");
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                Gson gson=new Gson();
+                Type type=new TypeToken<List<CommodityBean.Commodity>>(){}.getType();
+                prolist=gson.fromJson(result,type);
+
+
+                madapter.notifyDataSetChanged();
+                gadapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+    }
+
     private void getAdList() {
 
-        RequestParams params=new RequestParams(HttpUtile.host+"deal_ad/getad");
+        RequestParams params=new RequestParams(HttpUtile.yu+"deal_ad/getad");
         params.setCacheMaxAge(1000 * 10);
 
             x.http().get(params, new Callback.CommonCallback<String>() {
@@ -297,6 +460,32 @@ public class Fragment_home extends Fragment {
             }
         });
 
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.qiji_huan:
+                Intent intent1=new Intent(getActivity(), huan_magic.class);
+                startActivity(intent1);
+                break;
+            case R.id.zaili_yong:
+                Intent intent2=new Intent(getActivity(), re_use.class);
+                startActivity(intent2);
+                break;
+            case R.id.jun_dongtai:
+                Intent intent3=new Intent(getActivity(),juan_dongtai.class);
+                startActivity(intent3);
+                break;
+            case R.id.jiu_huanxin:
+                Intent intent4=new Intent(getActivity(), old_tonew.class);
+                startActivity(intent4);
+                break;
+
+
+
+        }
 
     }
 }

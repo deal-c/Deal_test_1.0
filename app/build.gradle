@@ -33,6 +33,7 @@ dependencies {
     compile files('libs/AMap_Search_V3.5.0_20160927.jar')
     compile project(':multi-image-selector')
     compile 'org.apache.httpcomponents:httpcore:4.4.4'
+    compile files('libs/BmobPay_v3.0.3_160621.jar')
 }
 
 dependencies {

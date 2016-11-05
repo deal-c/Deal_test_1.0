@@ -7,20 +7,18 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_modify_psd"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/main"
 
         >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/iv_modify_psd_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/backback"
+                android:src="@drawable/comego"
 
                 android:layout_centerVertical="true"
                 android:gravity="left"/>
@@ -30,17 +28,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="修改密码"
-                android:textSize="20sp"
-                android:textColor="#000"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:layout_gravity="center_horizontal"
 
 
-                android:layout_centerInParent="true"
+
 
 
 
                 />
 
-        </RelativeLayout>
+
     </android.support.v7.widget.Toolbar>
 
 

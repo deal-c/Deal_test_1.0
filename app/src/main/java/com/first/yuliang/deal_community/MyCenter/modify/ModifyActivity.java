@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,6 +23,7 @@ import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.RegActivity;
+import com.first.yuliang.deal_community.Util.DateUtils;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.User;
 
@@ -67,7 +67,6 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
         user=intent.getParcelableExtra("user");
         userId=user.getUserId();
 
-        //Log.e("userId","++++++++"+userId);
         rl_modify_tx = ((RelativeLayout) findViewById(R.id.rl_modify_tx));
         iv_modify_tx = ((ImageView) findViewById(R.id.iv_modify_tx));
 
@@ -87,8 +86,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
         rl_modify_birthday = ((RelativeLayout) findViewById(R.id.rl_modify_birthday));
         tv_show_birthday = ((TextView) findViewById(R.id.tv_show_birthday));
 
-        Log.e("birthday","++++++++++"+user.getBirthday());
-        //tv_show_birthday.setText(DateUtils.dateToString(user.getBirthday(),"yyyy-MM-dd"));
+       // Log.e("birthday","++++++++++"+user.getBirthday());
+        tv_show_birthday.setText(DateUtils.dateToString(user.getuserBirthday()));
 
 
         rl_modify_psd = ((RelativeLayout) findViewById(R.id.rl_modify_psd));
@@ -137,8 +136,9 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.rl_modify_birthday:
                Intent intent=new Intent(this,ModifyBirthdayActivity.class);
-                ///intent.putExtra("birthday",tv_show_birthday.getText().toString());
+                intent.putExtra("birthday",tv_show_birthday.getText().toString());
                 intent.putExtra("userId",userId+"");
+
                 startActivityForResult(intent,1);
                 break;
             case R.id.rl_modify_psd:
@@ -196,6 +196,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit=preference.edit();
                 edit.putInt("fromModifyToReg",1);
+                edit.putInt("id",0);
                 edit.commit();
                 startActivity(intentBack);
 

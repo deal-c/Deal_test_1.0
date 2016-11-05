@@ -79,7 +79,7 @@ public class Community_search extends AppCompatActivity implements View.OnClickL
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 query2.setText(history_arr[position]);
                 query2.setSelection(history_arr[position].length());
-                RequestParams params = new RequestParams(HttpUtile.host +"/community/togetcombyname");
+                RequestParams params = new RequestParams(HttpUtile.yu +"/community/togetcombyname");
                 params.addQueryStringParameter("name", history_arr[position]);
                 save();
                 getHistory();
@@ -318,7 +318,7 @@ public class Community_search extends AppCompatActivity implements View.OnClickL
 
     public void getCommunityList(String search) {
         search = search.replace(" ", "%");
-        RequestParams params = new RequestParams(HttpUtile.host+"/community/togetcommunity");
+        RequestParams params = new RequestParams(HttpUtile.yu+"/community/togetcommunity");
         params.addQueryStringParameter("name", search);
         x.http().get(params, new Callback.CommonCallback<String>() {
 

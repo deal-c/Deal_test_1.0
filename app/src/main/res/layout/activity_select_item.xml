@@ -5,6 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="15dp"
+    android:background="#ccc"
+    android:layout_marginRight="10dp"
     >
 
     <Button
@@ -13,7 +15,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape"
         android:textSize="20sp"
-        android:text="take photo"
+        android:text="拍 照"
         android:textColor="@color/main"/>
     <View
         android:layout_width="match_parent"
@@ -26,7 +28,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape"
         android:textSize="20sp"
-        android:text="choose from library"
+        android:text="从相册选择"
         android:textColor="@color/main"/>
 
 

@@ -116,9 +116,9 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
                     .build();
             //设置加载图片
 
-            x.image().bind(comImg, HttpUtile.host + imgs[0], imageOptions);
+            x.image().bind(comImg, HttpUtile.yu + imgs[0], imageOptions);
 
-            x.image().bind(logo, HttpUtile.host + imgs[1], imageOptions);
+            x.image().bind(logo, HttpUtile.yu + imgs[1], imageOptions);
         }
 // 赋值
         communityName.setText(community.getCommunityName());
