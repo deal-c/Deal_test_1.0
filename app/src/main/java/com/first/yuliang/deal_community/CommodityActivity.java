@@ -4,18 +4,16 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -239,6 +237,7 @@ public class CommodityActivity extends AppCompatActivity {
                 }else if(id==commodity.releaseUserId){
                     Toast.makeText(CommodityActivity.this,"您不能购买自己的商品",Toast.LENGTH_SHORT).show();
                 }else {
+                    getCommodityById(commodity.commodityId);
                     getCommodityById(commodity.commodityId);
                 }
             }
