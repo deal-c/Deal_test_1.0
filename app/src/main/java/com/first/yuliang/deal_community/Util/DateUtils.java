@@ -14,7 +14,7 @@ public class DateUtils {
 		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
 		return sdf.format(date);
 	}
-	
+
 	public static Date stringToDate(String dateStr){
 		Date date = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -24,7 +24,7 @@ public class DateUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return date;
 	}
 }

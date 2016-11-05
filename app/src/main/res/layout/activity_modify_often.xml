@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="修改常居地"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textColor="#fff"
 
                 android:layout_gravity="center_horizontal"
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="保存"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="#fff"
 
                 android:layout_gravity="right"

@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:text="我的"
             android:layout_gravity="center"
-            android:textSize="30sp"
+            android:textSize="18sp"
             android:textColor="#fff"/>
     </android.support.v7.widget.Toolbar>
 
@@ -80,8 +80,8 @@
 
                 <ImageView
                     android:id="@+id/iv_mypublish"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
                     android:src="@drawable/publish"
                     android:scaleType="centerCrop"
                     android:layout_centerVertical="true"
@@ -126,8 +126,8 @@
 
                 <ImageView
                     android:id="@+id/iv_mymai"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
                     android:src="@drawable/maichu"
                     android:scaleType="centerCrop"
                     android:layout_centerVertical="true" />
@@ -171,8 +171,8 @@
 
                 <ImageView
                     android:id="@+id/iv_mybuy"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
                     android:src="@drawable/buy"
                     android:scaleType="centerCrop"
                     android:layout_centerVertical="true" />
@@ -216,9 +216,9 @@
 
                 <ImageView
                     android:id="@+id/iv_myzan"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/zan"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:src="@drawable/shoucang"
                     android:scaleType="centerCrop"
                     android:layout_centerVertical="true" />
 
@@ -262,8 +262,8 @@
 
                 <ImageView
                     android:id="@+id/iv_my_gold_coin"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
                     android:src="@drawable/coin"
                     android:scaleType="centerCrop"
                     android:layout_centerVertical="true" />

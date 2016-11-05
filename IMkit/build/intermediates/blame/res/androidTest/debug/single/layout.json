@@ -1,11 +1,11 @@
 [
     {
-        "merged": "F:\\e\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\rc_item_public_service_conversation.xml",
-        "source": "F:\\e\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\layout\\rc_item_public_service_conversation.xml"
-    },
-    {
         "merged": "F:\\e\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\rc_cs_item_single_choice.xml",
         "source": "F:\\e\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\layout\\rc_cs_item_single_choice.xml"
+    },
+    {
+        "merged": "F:\\e\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\rc_item_public_service_conversation.xml",
+        "source": "F:\\e\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\layout\\rc_item_public_service_conversation.xml"
     },
     {
         "merged": "F:\\e\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\rc_item_image_message.xml",

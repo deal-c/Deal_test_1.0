@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_re_use"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.first.yuliang.deal_community.home_button_activity.re_use">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/zailiyong"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/bgcolor">
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="再利用"
+                android:textSize="20sp"
+                android:textColor="#fff"/>
+        <ImageView
+            android:id="@+id/zailiyong_returen"
+            android:src="@drawable/return_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"/>
+    </android.support.v7.widget.Toolbar>
+
+<ListView
+    android:id="@+id/zailiyong_listview"
+    android:layout_below="@+id/zailiyong"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</ListView>
+
+    
+</RelativeLayout>

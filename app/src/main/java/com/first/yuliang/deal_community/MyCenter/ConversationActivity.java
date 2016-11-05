@@ -23,7 +23,10 @@ public class ConversationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversation);
 
+
         tv_conversation_contactor = ((TextView) findViewById(R.id.tv_conversation_contactor));
+
+        tv_conversation_contactor.setText(getIntent().getData().getQueryParameter("title"));
 
         RongIM.setConversationBehaviorListener(new RongIM.ConversationBehaviorListener() {
 
@@ -32,6 +35,7 @@ public class ConversationActivity extends AppCompatActivity {
             public boolean onUserPortraitClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo) {
 
                 Toast.makeText(context, "点击了头像", Toast.LENGTH_SHORT).show();
+
 
                 return false;
             }

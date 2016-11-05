@@ -25,6 +25,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.maps.CoordinateConverter;
+import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.geocoder.GeocodeResult;
 import com.amap.api.services.geocoder.GeocodeSearch;
@@ -47,6 +49,8 @@ import java.util.Date;
 import java.util.List;
 
 import me.nereo.multi_image_selector.MultiImageSelector;
+
+import static com.amap.api.maps.CoordinateConverter.CoordType.GPS;
 
 public class deal_publish_Activity extends AppCompatActivity implements View.OnClickListener, GeocodeSearch.OnGeocodeSearchListener {
 
@@ -76,8 +80,7 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
     private String provider;// 位置提供器
 
     private GeocodeSearch geocoderSearch;
-
-
+    LatLng mlatLng;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -238,6 +241,9 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
     private void showLocation(Location location) {
 //        Toast.makeText(this, location.getLatitude()+"", Toast.LENGTH_LONG).show();
         LatLonPoint latLonPoint = new LatLonPoint(location.getLatitude(), location.getLongitude());
+
+       mlatLng=convert(new LatLng(location.getLatitude(), location.getLongitude()));
+
         RegeocodeQuery query = new RegeocodeQuery(latLonPoint, 200,
                 GeocodeSearch.GPS);// 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
         geocoderSearch.getFromLocationAsyn(query);// 设置同步逆地理编码请求
@@ -340,7 +346,9 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
                         && !pro_type.getSelectedItem().toString().equals("")
                         && pro_type.getSelectedItem().toString() != null
                         ) {
+
                     uploadImage();
+
                 } else {
                     progressDialog.dismiss();
                     ToastUtil.show(deal_publish_Activity.this, "请填写完整");
@@ -359,12 +367,13 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
     }
 
 
+     //上传商品图片和相关信息
     public void uploadImage() {
 
             RequestParams requestParams = new RequestParams(HttpUtile.yu + "/uploadpro/upimg");
             requestParams.setMultipart(true);
 
-
+            requestParams.setConnectTimeout(8*1000);
             CommodityInfo pro = new CommodityInfo(userid,
                     pro_title.getText().toString(),
                     Double.parseDouble(pro_price.getText().toString()),
@@ -381,6 +390,8 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
             }
 
             requestParams.addBodyParameter("info", info);
+            requestParams.addBodyParameter("latitude",mlatLng.latitude+"");
+            requestParams.addBodyParameter("longitude",mlatLng.longitude+"");
 
             x.http().post(requestParams, new Callback.CommonCallback<String>() {
                 @Override
@@ -432,6 +443,18 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
     @Override
     public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
 
+    }
+
+    //转换坐标
+    private LatLng convert(LatLng sourceLatLng) {
+        CoordinateConverter converter  = new CoordinateConverter(this);
+        // CoordType.GPS 待转换坐标类型
+        converter.from(GPS);
+        // sourceLatLng待转换坐标点
+        converter.coord(sourceLatLng);
+        // 执行转换操作
+        LatLng desLatLng = converter.convert();
+        return desLatLng;
     }
 }
 

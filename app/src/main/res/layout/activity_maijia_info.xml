@@ -12,14 +12,12 @@
         android:layout_height="50dp"
         android:background="@color/main">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:src="@drawable/u18"
+            android:src="@drawable/comego"
             />
 
 
@@ -29,10 +27,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="商家信息"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textColor="#fff"
-           android:layout_centerInParent="true"/>
-        </RelativeLayout>
+           android:layout_gravity="center_horizontal"/>
+
     </android.support.v7.widget.Toolbar>
     <RelativeLayout
 
@@ -145,10 +143,12 @@
                 android:text="收到了100条评论"/>
         </RelativeLayout>
         <ListView
+            android:id="@+id/lv_shangjia_Info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rl_guanzhu_pinglun"
             android:layout_marginTop="10dp">
+
 
         </ListView>
         

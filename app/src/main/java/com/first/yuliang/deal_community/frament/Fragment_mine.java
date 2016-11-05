@@ -38,13 +38,18 @@ import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
+import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
 import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.UserInfo;
+
+import static android.widget.ImageView.ScaleType.CENTER_CROP;
 
 /**
  * Created by yuliang on 2016/9/21.
@@ -96,12 +101,11 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
         id=getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
 
 
-        int intoflag=getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("intoflag",0);
-
-
-
-
-        if(intoflag==1)
+        if(id!=0)
+        {
+            getUserData();
+        }
+        else
         {
             iv_pic.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -112,58 +116,6 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
 
                 }
             });
-        }
-
-
-//
-//        if(loginCount==1)
-//        {
-//            RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/SelectUserServlet?id="+loginUserId);
-//
-//            x.http().get(params, new Callback.CommonCallback<String>() {
-//
-//                @Override
-//                public void onSuccess(final String result) {
-//
-//
-//                    Gson gson=new Gson();
-//                    final User user=gson.fromJson(result,User.class);
-//
-//
-//
-//                    tv_login.setText(user.getUserName());
-//                    //xUtilsImageUtils.display(iv_pic,);
-//                    iv_pic.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Intent intent=new Intent(getActivity(),ModifyActivity.class);
-//                            intent.putExtra("user",user);
-//                            startActivity(intent);
-//                        }
-//                    });
-//
-//                }
-//
-//                @Override
-//                public void onError(Throwable ex, boolean isOnCallback) {
-//
-//                }
-//
-//                @Override
-//                public void onCancelled(CancelledException cex) {
-//
-//                }
-//
-//                @Override
-//                public void onFinished() {
-//
-//                }
-//            });
-//        }
-
-        if(id!=0)
-        {
-            getUserData();
         }
 
         rl_publish.setOnClickListener(this);
@@ -207,13 +159,10 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
                 startActivity(intentRecent);
                 break;
             case R.id.rl_contact:
-//                Intent intentContact=new Intent(getActivity(),MyContactActivity.class);
-//                //intentContact.putExtra("userId",id+"");
-//                startActivity(intentContact);
 
                 if (RongIM.getInstance() != null)
                     RongIM.getInstance().startConversationList(getActivity());
-                //start();
+
 
                 break;
             case R.id.rl_shehzhi:
@@ -262,7 +211,11 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
             public void onSuccess(String result) {
 
                 Gson gson=new Gson();
-                user=gson.fromJson(result,User.class);
+                try {
+                    user=gson.fromJson(URLDecoder.decode(result,"utf-8"),User.class);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
 
                 String token=user.getToken();
                 connect(token);
@@ -271,16 +224,17 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
                 tv_login.setText(user.getUserName());
 
 
+                ImageOptions imageOptions = new ImageOptions.Builder()
+                        .setImageScaleType(CENTER_CROP)
+                        .setCircular(true)
+                        .setFailureDrawableId(R.drawable.u88)
+                        .setLoadingDrawableId(R.drawable.u88)
+                        .build();
 
-                x.image().bind(iv_pic,HttpUtile.zy1+user.getUserImg());
 
-                //Bitmap image = ((BitmapDrawable)iv_pic.getDrawable()).getBitmap();
-               // Bitmap image=iv_pic.getDrawingCache();
-                //toRoundBitmap(image);
 
-                //String token=user.getToken();
-                //connect(token);
-                //toRoundBitmap(HttpUtile.zy1+user.getUserImg().);
+                x.image().bind(iv_pic,HttpUtile.zy1+user.getUserImg(),imageOptions);
+
 
                 iv_pic.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -297,6 +251,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
+                Log.e("kkkkkkkkkkkkkkkk",ex+"");
             }
 
             @Override

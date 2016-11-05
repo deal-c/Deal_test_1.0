@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.Util.DateUtil;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.first.yuliang.deal_community.pojo.CommodityCollection;
 import com.first.yuliang.deal_community.pojo.User;
@@ -33,6 +34,7 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
@@ -134,8 +136,7 @@ public class CommodityActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(CommodityActivity.this,MaijiaInfoActivity.class);
-                Log.e("dededee","======="+3);
-                intent.putExtra("id",71+"");
+                intent.putExtra("bundle", user);
                 startActivity(intent);
             }
         });
@@ -285,14 +286,18 @@ public class CommodityActivity extends AppCompatActivity {
     private void getUser(Integer releaseUserId) {
 
         RequestParams params = null;
-        params = new RequestParams("http://10.40.5.52:8080/FourProject/servlet/SelectUserServlet?id="+ releaseUserId);
+        params = new RequestParams(HttpUtile.zy+"/servlet/SelectUserServlet?id="+ releaseUserId);
         x.http().get(params,new Callback.CommonCallback<String>(){
 
             @Override
             public void onSuccess(String result) {
                 Gson gson=new Gson();
-                user=gson.fromJson(result,User.class);
-                x.image().bind(iv_user_head, "http://10.40.5.52:8080" + user.getUserImg());
+                try {
+                    user=gson.fromJson(URLDecoder.decode(result,"utf-8"),User.class);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                x.image().bind(iv_user_head, HttpUtile.zy1 + user.getUserImg());
                 tv_user_name.setText(user.getUserName());
                 adapter_l.notifyDataSetChanged();
             }

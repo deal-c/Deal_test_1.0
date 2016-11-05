@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:textColor="#000"
+        android:id="@+id/qaz"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="活动说明:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+<RelativeLayout
+    android:id="@+id/a123213"
+    android:background="@drawable/text_style"
+    android:layout_margin="10dp"
+    android:layout_below="@+id/qaz"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+    <TextView
+        android:layout_margin="10dp"
+        android:textColor="#000"
+        android:text="本次活动全程公开，所有在此时间段捐赠的物品通过审核后都会统一发送给相关的慈善部门。"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>
+
+    <TextView
+        android:layout_below="@+id/a123213"
+        android:textColor="#000"
+        android:id="@+id/wsx"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="物品规范:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/guifan"
+        android:padding="10dp"
+        android:background="@drawable/text_style"
+        android:layout_below="@+id/wsx"
+        android:layout_margin="10dp"
+        android:textColor="#000"
+        android:text="物品实用性为主。价格不在乎高低。以爱心为主。"
+        android:layout_width="match_parent"
+        android:layout_height="90dp" />
+
+    <TextView
+        android:layout_below="@+id/guifan"
+        android:id="@+id/zxc1"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始时间："/>
+
+    <TextView
+        android:layout_toRightOf="@+id/zxc1"
+        android:layout_alignTop="@id/zxc1"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2016年11月2日  12:00:00"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/zxc1"
+        android:id="@+id/zxc2"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="结束时间："/>
+    <TextView
+
+        android:layout_toRightOf="@+id/zxc2"
+        android:layout_alignTop="@+id/zxc2"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2016年11月9日  00:00:00"/>
+</RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

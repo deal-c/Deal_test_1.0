@@ -67,10 +67,16 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.rl_system_message:
 
-
+                start();
                 break;
             case R.id.rl_community_message:
 
+                start();
+                break;
+            case R.id.rl_wuliu_message:
+
+
+                start();
                 break;
         }
     }
