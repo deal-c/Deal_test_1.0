@@ -4,66 +4,106 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:padding="25dp"
-    android:background="#fff">
+    android:padding="10dp"
+    android:background="#eaeaea">
 
+    <com.first.yuliang.deal_community.Util.CircleImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/deal_logo"/>
 
         <RelativeLayout
+
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:background="#fff"
            android:id="@+id/rl_login_username"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
 
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="150dp"
             >
-        <TextView
-            android:id="@+id/tv_username"
+        <ImageView
+            android:id="@+id/iv_username"
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="用户名:"
-            android:textColor="#000"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/client"
+
             android:layout_centerVertical="true"
-            android:textSize="20dp"/>
+            android:layout_marginLeft="20dp"
+            />
         <EditText
             android:id="@+id/et_username"
-            android:layout_toRightOf="@id/tv_username"
+            android:layout_toRightOf="@+id/iv_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入用户名"
+
+
+            android:hint="请输入账号"
+            android:gravity="bottom"
+            android:paddingLeft="10dp"
             android:layout_marginLeft="5dp"
 
+            android:layout_alignBottom="@+id/iv_username"
             android:textColor="#000"
             android:background="@drawable/mv_loading_logo"
+
             />
         </RelativeLayout>
 
     <RelativeLayout
 
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:background="#fff"
+
         android:id="@+id/rl_login_psd"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
 
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="6dp"
         android:layout_below="@id/rl_login_username">
-        <TextView
-            android:id="@+id/tv_psd"
+        <ImageView
+            android:id="@+id/iv_psd"
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="密码:"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/password"
+            android:scaleType="centerCrop"
             android:layout_centerVertical="true"
-            android:textColor="#000"
-            android:textSize="20dp"/>
+            android:layout_marginLeft="20dp"
+           />
         <EditText
             android:id="@+id/et_psd"
             android:layout_width="match_parent"
-            android:layout_toRightOf="@id/tv_psd"
+            android:layout_toRightOf="@id/iv_psd"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:textColor="#000"
+            android:paddingLeft="10dp"
+            android:gravity="bottom"
+            android:hint="请输入密码"
+            android:layout_alignBottom="@+id/iv_psd"
+            android:inputType="textPassword"
+            android:layout_centerVertical="true"
             android:background="@drawable/mv_loading_logo"
             />
+
+        <CheckBox
+            android:checked="false"
+            android:id="@+id/cbDisplayPassword"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/password_select"/>
     </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/rl_is_remeber_username"
@@ -75,8 +115,10 @@
         android:id="@+id/cb_remeberuser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="是否记住用户名"
+        android:text="记住用户名"
         android:textColor="#000"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
         android:button="@drawable/ismoren"/>
 
     </RelativeLayout>
@@ -96,6 +138,7 @@
             android:paddingTop="5dp"
             android:paddingLeft="23dp"
             android:paddingRight="23dp"
+            android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true">
         <Button
             android:id="@+id/btn_login"
@@ -104,6 +147,7 @@
             android:layout_height="wrap_content"
             android:text="登 录"
 
+            android:textColor="#fff"
             android:textSize="20sp"
             android:background="@drawable/shapes"
 
@@ -116,6 +160,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="注 册"
+            android:textColor="#fff"
             android:layout_gravity="center"
             android:textSize="20sp"
             android:layout_marginLeft="10dp"

@@ -56,6 +56,7 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
 
         et_often_live.setText(userAddress_s);
         edit.putString("modifyOftenBefore",et_often_live.getText().toString());
+        edit.putInt("iskeepOften",0);
         edit.commit();
 
         iv_remove_often_live.setOnClickListener(this);

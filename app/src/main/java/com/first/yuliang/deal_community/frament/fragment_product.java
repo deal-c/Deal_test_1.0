@@ -1,5 +1,6 @@
 package com.first.yuliang.deal_community.frament;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,8 +13,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.ToolsClass;
 import com.first.yuliang.deal_community.Util.DateUtils;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.Product;
@@ -41,69 +44,86 @@ public class fragment_product extends Fragment {
     int id=0;
 
 
+    Dialog progressDialog;
     List<product_h_tb> product_h_tbList=new ArrayList<>();
     List<Product> productList=new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_recent_product, null);
-        id=getActivity().getSharedPreferences("shared_loginn_info",Context.MODE_PRIVATE).getInt("id",0);
+
         lv_recent_product = ((ListView) view.findViewById(R.id.lv_recent_product));
 
-        adapter = new BaseAdapter() {
-
-            @Override
-            public int getCount() {
-                Log.e("ooooo","+++"+productList.size());
-                return productList.size();
-            }
-
-            @Override
-            public Object getItem(int position) {
-                return null;
-            }
-
-            @Override
-            public long getItemId(int position) {
-                return 0;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
+        id = getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id", 0);
 
 
-                View view=View.inflate(getActivity(),R.layout.activity_publish_lv_item,null);
-
-                TextView tv_publish_product_name=((TextView) view.findViewById(R.id.tv_publish_product_name));
-                TextView tv_publish_product_price=((TextView) view.findViewById(R.id.tv_publish_product_price));
-                TextView tv_publish_product_class=((TextView) view.findViewById(R.id.tv_publish_product_class));
-                TextView tv_publish_product_desc=((TextView) view.findViewById(R.id.tv_publish_product_desc));
-                TextView tv_publish_product_time=((TextView) view.findViewById(R.id.tv_publish_product_time));
-                ImageView iv_publish_product=((ImageView)view.findViewById(R.id.iv_publish_product));
-                Product product=productList.get(position);
-
-                tv_publish_product_name.setText(product.getProductTitle());
-                tv_publish_product_price.setText(product.getPrice()+"");
-                tv_publish_product_class.setText(product.getProductClass());
-                tv_publish_product_time.setText(DateUtils.dateToString(product.getReleaseTime()));
-                tv_publish_product_desc.setText(product.getProductDescribe());
-                x.image().bind(iv_publish_product,HttpUtile.zy1+product.getProductImg());
+        if (id == 0) {
+            Toast.makeText(getActivity(), "您尚未登录呦", Toast.LENGTH_SHORT).show();
+        } else {
 
 
-                return view;
+            adapter = new BaseAdapter() {
+
+                @Override
+                public int getCount() {
+                    Log.e("ooooo", "+++" + productList.size());
+                    return productList.size();
+                }
+
+                @Override
+                public Object getItem(int position) {
+                    return null;
+                }
+
+                @Override
+                public long getItemId(int position) {
+                    return 0;
+                }
+
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
 
 
-            }
-        };
+                    View view = View.inflate(getActivity(), R.layout.activity_publish_lv_item, null);
+
+                    TextView tv_publish_product_name = ((TextView) view.findViewById(R.id.tv_publish_product_name));
+                    TextView tv_publish_product_price = ((TextView) view.findViewById(R.id.tv_publish_product_price));
+                    TextView tv_publish_product_class = ((TextView) view.findViewById(R.id.tv_publish_product_class));
+                    TextView tv_publish_product_desc = ((TextView) view.findViewById(R.id.tv_publish_product_desc));
+                    TextView tv_publish_product_time = ((TextView) view.findViewById(R.id.tv_publish_product_time));
+                    ImageView iv_publish_product = ((ImageView) view.findViewById(R.id.iv_publish_product));
+                    Product product = productList.get(position);
+
+                    tv_publish_product_name.setText(product.getProductTitle());
+                    tv_publish_product_price.setText(product.getPrice() + "");
+                    tv_publish_product_class.setText(product.getProductClass());
+                    tv_publish_product_time.setText(DateUtils.dateToString(product.getReleaseTime()));
+                    tv_publish_product_desc.setText(product.getProductDescribe());
+                    x.image().bind(iv_publish_product, HttpUtile.szj + product.getProductImg());
 
 
-        lv_recent_product.setAdapter(adapter);
-        getAllProduct();
+                    return view;
 
+
+                }
+            };
+
+
+            lv_recent_product.setAdapter(adapter);
+            getAllProduct();
+
+
+        }
         return view;
     }
 
+
     private void getAllProduct() {
+
+
+        progressDialog = ToolsClass.createLoadingDialog(getActivity(),"加载中...", true,
+                0);
+        progressDialog.show();
 
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/SelectHistoryServlet");
         params.addBodyParameter("id",id+"");
@@ -155,6 +175,7 @@ public class fragment_product extends Fragment {
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
+                Toast.makeText(getActivity(),"网络访问失败",Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -165,6 +186,7 @@ public class fragment_product extends Fragment {
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
 
             @Override

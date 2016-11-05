@@ -27,8 +27,7 @@
             android:layout_above="@+id/radioGroup"
             android:background="#ccc"/>
         <Button
-            android:background="#fff"
-            style="@style/button"
+            style="@style/radiostyle"
             android:id="@+id/radio2"
             android:drawableBottom="@drawable/up_1"
             android:layout_alignParentBottom="true"

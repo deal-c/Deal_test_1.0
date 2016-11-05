@@ -1,20 +1,17 @@
 package com.first.yuliang.deal_community;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.first.yuliang.deal_community.Util.CustomDialog;
 import com.first.yuliang.deal_community.Util.DateUtil;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.Address;
@@ -31,8 +28,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.security.auth.login.LoginException;
 
 public class Order extends AppCompatActivity {
 
@@ -105,6 +100,7 @@ public class Order extends AppCompatActivity {
             }
         });
     }
+
     private void getAddress(int id) {
 
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/getAllAddressServlet");

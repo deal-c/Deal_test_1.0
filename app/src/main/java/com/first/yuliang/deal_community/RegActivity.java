@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     private List<UserBean.User> users=new ArrayList<>();
 
     Dialog progressDialog;
+    private CheckBox mCbDisplayPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +55,22 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         btn_login = ((Button) findViewById(R.id.btn_login));
 
         btn_reg = ((Button) findViewById(R.id.btn_reg));
+        mCbDisplayPassword = ((CheckBox) findViewById(R.id.cbDisplayPassword));
 
 
+        mCbDisplayPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+
+                    et_psd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }else {
+
+                    et_psd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+            }
+        });
         btn_login.setOnClickListener(this);
         btn_reg.setOnClickListener(this);
 
@@ -141,7 +157,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onSuccess(String result) {
 
-                Log.e("dddddddd","++++++++++" );
+
                 Gson gson=new Gson();
                 UserBean ub= gson.fromJson(result,UserBean.class);
                 users.addAll(ub.userList);
@@ -157,9 +173,6 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
                             edit.putString("userName", et_username.getText().toString().trim());
                             edit.putBoolean("cb_remeberuser",true);
-                            //edit.putInt("count", 1);
-
-
                         }
                         else
                         {
@@ -169,11 +182,9 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                         }
 
 
-                        edit.putInt("count", 1);
+
                         edit.putInt("id",users.get(i).userId);
-//
-//                        User user=new MyApplication().user;
-//                        user.setUserId(users.get(i).userId);
+
 
                         edit.commit();
 
@@ -181,6 +192,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                         Toast.makeText(RegActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
 
                         Intent intent=new Intent(RegActivity.this,mainActivity.class);
+
 
                         startActivity(intent);
 
@@ -222,19 +234,10 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
 
         if(preference.getInt("fromModifyToReg",0)==1)
         {
-            //edit.putInt("fromModifyToReg",2);
-           // edit.putInt("id",0);
-            edit.putInt("intoflag",1);
             edit.putInt("zhuxiao",1);
             edit.commit();
             Intent intent=new Intent(RegActivity.this,mainActivity.class);
             startActivity(intent);
-        }
-        else
-        {
-
-            edit.putInt("intoflag",1);
-            edit.commit();
         }
 
         RegActivity.this.finish();

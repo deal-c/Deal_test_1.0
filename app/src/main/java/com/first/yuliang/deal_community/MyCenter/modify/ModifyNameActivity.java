@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -57,10 +58,11 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
         String userName=intent.getStringExtra("name");
         userId=Integer.parseInt(intent.getStringExtra("userId").trim());
 
-//        Log.e("userId","++++++++++"+userId);
-//        Log.e("userId","=========="+userName);
+
         et_nicheng.setText(userName);
-        edit.putString("modifyNameBefore",et_nicheng.getText().toString());
+        Log.e("modifyNameBefore","++++"+et_nicheng.getText().toString().trim());
+        edit.putString("modifyNameBefore",userName);
+        edit.putInt("iskeepName",0);
         edit.commit();
 
         iv_remove.setOnClickListener(this);
@@ -75,8 +77,7 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
 
     private void getUserNameData() {
 
-      edit.putInt("iskeepName",1);
-        edit.commit();
+
 
         progressDialog = ToolsClass.createLoadingDialog(ModifyNameActivity.this, "修改中...", true,
                 0);
@@ -100,6 +101,8 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
                 if(result!="") {
 
                     progressDialog.hide();
+                    edit.putInt("iskeepName",1);
+                    edit.commit();
                     Toast.makeText(ModifyNameActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
 
                    // ModifyNameActivity.this.finish();
@@ -117,6 +120,8 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
+                edit.putInt("iskeepName",0);
+                edit.commit();
                 Toast.makeText(ModifyNameActivity.this,"无法修改",Toast.LENGTH_SHORT).show();
 
             }
@@ -156,6 +161,8 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
                 }
                 else
                 {
+
+
                     Intent intentName = new Intent();
                     intentName.putExtra("name", preference.getString("modifyNameBefore","").toString().trim());
                     ModifyNameActivity.this.setResult(2, intentName);

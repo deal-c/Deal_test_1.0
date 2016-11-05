@@ -34,6 +34,7 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
@@ -131,6 +132,14 @@ public class CommodityActivity extends AppCompatActivity {
 
         View view = View.inflate(CommodityActivity.this,R.layout.commodity_head,null);
         iv_user_head = ((ImageView) view.findViewById(R.id.iv_user_head));
+        iv_user_head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(CommodityActivity.this,MaijiaInfoActivity.class);
+                intent.putExtra("bundle", user);
+                startActivity(intent);
+            }
+        });
         tv_user_name = ((TextView) view.findViewById(R.id.tv_user_name));
         btn_local = ((Button) view.findViewById(R.id.btn_local));
         btn_local.setText(commodity.location);
@@ -283,7 +292,11 @@ public class CommodityActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
                 Gson gson=new Gson();
-                user=gson.fromJson(result,User.class);
+                try {
+                    user=gson.fromJson(URLDecoder.decode(result,"utf-8"),User.class);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 x.image().bind(iv_user_head, HttpUtile.zy1 + user.getUserImg());
                 tv_user_name.setText(user.getUserName());
                 adapter_l.notifyDataSetChanged();

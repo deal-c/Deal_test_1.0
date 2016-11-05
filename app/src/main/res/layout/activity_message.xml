@@ -9,15 +9,11 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_message"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50sp"
         android:background="@color/main">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
 
-            android:padding="10dp"
-            >
+
             <ImageView
                 android:id="@+id/iv_message_back"
                 android:layout_width="wrap_content"
@@ -34,29 +30,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="消息盒子"
-                android:textSize="24sp"
-                android:textColor="#000"
+                android:textSize="18sp"
+                android:textColor="#fff"
 
 
-                android:layout_centerInParent="true"
+               android:layout_gravity="center_horizontal"
 
 
 
                 />
 
 
-        </RelativeLayout>
+
     </android.support.v7.widget.Toolbar>
-    <View
-        android:id="@+id/view1"
-        android:layout_width="match_parent"
-        android:layout_below="@id/toolbar_message"
-        android:layout_height="2px"
-        android:background="#000"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/view1">
+       android:layout_below="@+id/toolbar_message">
 
         <RelativeLayout
             android:id="@+id/rl_wuliu_message"
@@ -69,18 +60,18 @@
 
             <ImageView
                 android:id="@+id/iv_wuliu"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/wuliu"
-                android:background="@color/main"
+                android:background="@drawable/shapewuliu"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="物流消息"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="#000"
                 android:layout_centerInParent="true"
                 />
@@ -91,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_below="@id/rl_wuliu_message"
             android:layout_height="2px"
-            android:background="#000"/>
+            android:background="#c0c0c0"/>
 
         <RelativeLayout
             android:id="@+id/rl_sixin_message"
@@ -105,15 +96,15 @@
 
             <ImageView
                 android:id="@+id/iv_sixin"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/sixin"
-                android:background="#ff6633"/>
+                android:background="@drawable/shapesixin"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="私信"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="#000"
                 android:layout_centerInParent="true"
                 />
@@ -124,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_below="@id/rl_sixin_message"
             android:layout_height="2px"
-            android:background="#000"/>
+            android:background="#c0c0c0"/>
         <RelativeLayout
             android:id="@+id/rl_system_message"
             android:layout_width="match_parent"
@@ -136,16 +127,16 @@
 
             <ImageView
                 android:id="@+id/iv_tongzhi"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/tongzhi"
-                android:background="@color/main"/>
+                android:background="@drawable/shapexit"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="系统消息"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="#000"
                 android:layout_centerInParent="true"
                 />
@@ -156,7 +147,7 @@
             android:layout_width="match_parent"
             android:layout_below="@id/rl_system_message"
             android:layout_height="2px"
-            android:background="#000"/>
+            android:background="#c0c0c0"/>
         <RelativeLayout
             android:id="@+id/rl_community_message"
             android:layout_width="match_parent"
@@ -167,16 +158,17 @@
 
 
             <ImageView
+
                 android:id="@+id/iv_shequ"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/shequ"
-                android:background="@color/main"/>
+                android:background="@drawable/shapeshequ"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="社区回复"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="#000"
                 android:layout_centerInParent="true"
                 />
@@ -188,6 +180,6 @@
             android:layout_width="match_parent"
             android:layout_below="@id/rl_community_message"
             android:layout_height="2px"
-            android:background="#000"/>
+            android:background="#c0c0c0"/>
 </RelativeLayout>
 </RelativeLayout>
