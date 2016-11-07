@@ -3,10 +3,43 @@ package com.first.yuliang.deal_community.model;
 
 import java.util.ArrayList;
 
+
+
+
+
 /**
  * 评论对象
  */
 public class Comment {
+
+
+
+
+
+    public String getFatherRemarkId() {
+        return fatherRemarkId;
+    }
+
+
+
+    public void setFatherRemarkId(String fatherRemarkId) {
+        this.fatherRemarkId = fatherRemarkId;
+    }
+
+
+
+    public String getRemarkId() {
+        return remarkId;
+    }
+
+
+
+    public void setRemarkId(String remarkId) {
+        this.remarkId = remarkId;
+    }
+
+
+
 
 
     public Comment(String imgs, String remaekTime, int status,
@@ -33,6 +66,23 @@ public class Comment {
 
 
 
+    public Comment(String remarkId, String fatherRemarkId, String imgs,
+                   String remaekTime, int status, User mCommentator, String mContent,
+                   User mReceiver, ArrayList<Comment> list) {
+        super();
+        this.remarkId = remarkId;
+        this.fatherRemarkId = fatherRemarkId;
+        this.imgs = imgs;
+        this.remaekTime = remaekTime;
+        this.status = status;
+        this.mCommentator = mCommentator;
+        this.mContent = mContent;
+        this.mReceiver = mReceiver;
+        this.list = list;
+    }
+
+
+
     public Comment(String imgs, String remaekTime, int status,
                    User mCommentator, String mContent, User mReceiver,
                    ArrayList<Comment> list) {
@@ -46,6 +96,24 @@ public class Comment {
         this.list = list;
     }
 
+
+
+
+    public Comment(String remarkId, String fatherRemarkId, String imgs,
+                   String remaekTime, User mCommentator, String mContent,
+                   User mReceiver, ArrayList<Comment> list) {
+        super();
+        this.remarkId = remarkId;
+        this.fatherRemarkId = fatherRemarkId;
+        this.imgs = imgs;
+        this.remaekTime = remaekTime;
+        this.mCommentator = mCommentator;
+        this.mContent = mContent;
+        this.mReceiver = mReceiver;
+        this.list = list;
+    }
+    public String remarkId;
+    public String fatherRemarkId;
     public	String	imgs;
     public	String	remaekTime;
     public	int	status;
@@ -78,14 +146,13 @@ public class Comment {
     public String mContent;   // 评论内容
     public User mReceiver; // 接收者（即回复谁）
 
+
     @Override
     public String toString() {
-        return "Comment [imgs=" + imgs + ", remaekTime=" + remaekTime
-                + ", status=" + status + ", mCommentator=" + mCommentator
-                + ", mContent=" + mContent + ", mReceiver=" + mReceiver
-                + ", list=" + list + "]";
+        return "Comment [remarkId=" + remarkId + ", fatherRemarkId="
+                + fatherRemarkId + ", mCommentator=" + mCommentator
+                + ", mContent=" + mContent + ", mReceiver=" + mReceiver + "]";
     }
-
     ArrayList<Comment>	list;
 
     public Comment(User mCommentator, String mContent, User mReceiver) {

@@ -31,13 +31,13 @@ import java.util.List;
 
 public class ComMainActivity extends Activity {
 
-    public static User sUser = new User(1, "走向远方"); // 当前登录用户
+    public static User sUser = new User(1, "本人"); // 当前登录用户
     public static  ArrayList<Dynamic>  dynamicArrayList;
     public ListView mListView;
     public MomentAdapter mAdapter;
     public Comment moment;
     ArrayList<Comment> moments = new ArrayList<>();
-
+ int  dynamicId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,19 +47,15 @@ public class ComMainActivity extends Activity {
         setContentView(R.layout.main);
        int  userId=this.getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
         setColor();
-        getAllDynamic();
+
         Intent it = getIntent();
         String sendynamiclist=it.getStringExtra("dynamicList");
+      dynamicId=Integer.parseInt(it.getStringExtra("dynamicId"));
         Gson    gson=new Gson();
         Type type = new TypeToken<List<Dynamic>>() {
         }.getType();
 
-
-
         dynamicArrayList= gson.fromJson(sendynamiclist, type);
-
-
-
 
         // System.out.print(moment.getmComment()+"?????");
         mListView = (ListView) findViewById(R.id.list_moment);
@@ -76,7 +72,7 @@ public class ComMainActivity extends Activity {
         // comments.add(new Comment(new User(i + 300, "用户" + (i + 300)), "评论" + i, null));
 
 
-        mAdapter = new MomentAdapter(this,dynamicArrayList ,userId,moments, new CustomTagHandler(this, new CustomTagHandler.OnCommentClickListener() {
+        mAdapter = new MomentAdapter(this,dynamicArrayList.get(dynamicId) ,userId,moments, new CustomTagHandler(this, new CustomTagHandler.OnCommentClickListener() {
             @Override
             public void onCommentatorClick(View view, User commentator) {
                 Toast.makeText(getApplicationContext(), commentator.mName, Toast.LENGTH_SHORT).show();
@@ -92,17 +88,19 @@ public class ComMainActivity extends Activity {
                         if (commentator != null && commentator.mId == sUser.mId) { // 不能回复自己的评论
                             return;
                 }
-                inputComment(view, commentator);
+                inputComment(view,commentator,null,0);
             }
         }));
         System.out.print("为什么会空指针");
-
+        getAllDynamic();
         mListView.setAdapter(mAdapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "click " + position, Toast.LENGTH_SHORT).show();
+if(position==0){Toast.makeText(ComMainActivity.this,"你点我啊",Toast.LENGTH_LONG);}else
+                inputComment(view,moments.get(position-1).getmReceiver(),moments,position);
+                Log.e("我来来看看数据====", moments.get(position-1).getmReceiver().mName);
             }
         });
     }
@@ -120,7 +118,9 @@ public class ComMainActivity extends Activity {
         }
     }
     private void getAllDynamic() {
-        final RequestParams request = new RequestParams(HttpUtils.hostLuoqingshanSchool+"/usys/DynamicServlt");
+        final RequestParams request = new RequestParams(HttpUtils.hostLuoqingshanSchool+"/usys/ThirdDynamic");
+
+        request.addBodyParameter("dynamicId",dynamicArrayList.get(dynamicId).getDynamicId());
         x.http().post(request, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -130,9 +130,9 @@ public class ComMainActivity extends Activity {
                 Type type = new TypeToken<List<Comment>>() {
                 }.getType();
                 mymoments=gson.fromJson(result,type);
-                Log.e("我来看看数据====", result);
+                //Log.e("我来来看看数据====", result);
                 if (result != null) {
-                    Log.e("我看看数据====", mymoments.toString());
+                   Log.e("我来看看数据====", mymoments.toString());
                     moments.addAll(mymoments);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -142,7 +142,7 @@ public class ComMainActivity extends Activity {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Log.e("我去来看看数据====", isOnCallback+"1");
+                Log.e("我去来看看数据====", ex.toString()+"1");
             }
 
             @Override
@@ -160,18 +160,15 @@ public class ComMainActivity extends Activity {
     }
 
     public void inputComment(final View v) {
-        inputComment(v, null);
-
-
-
-
+        inputComment(v,null,moments,0);
     }
 
-    public void inputComment(final View v, User receiver) {
+    public void inputComment(final View v, User receiver, ArrayList<Comment> moments,int position) {
         int userId=this.getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
-        CommentFun.inputComment(ComMainActivity.this,userId,mListView, v, receiver, new CommentFun.InputCommentListener() {
+        CommentFun.inputComment(ComMainActivity.this,userId,mListView, v,position,receiver,moments,new CommentFun.InputCommentListener() {
             @Override
             public void onCommitComment(Comment comment) {
+             //   Log.e("看看数据","你再报错试试");
                 mAdapter.notifyDataSetChanged();
             }
         });

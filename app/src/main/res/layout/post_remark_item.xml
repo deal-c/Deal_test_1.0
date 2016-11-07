@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/remark_userphoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/head_"/>
+        <TextView
+            android:layout_marginTop="4dp"
+            android:textColor="#262626"
+            android:layout_toRightOf="@+id/remark_userphoto"
+            android:layout_alignTop="@+id/remark_userphoto"
+            android:id="@+id/remark_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小明"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+
+            android:layout_alignLeft="@+id/remark_name"
+            android:layout_marginRight="15dp"
+            android:id="@+id/remark_content"
+            android:layout_below="@+id/remark_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="大家好我是小明,新人报到。希望以后多多关照的cccccccccccccc"
+            android:textSize="16sp"
+            android:textColor="#0d0d0d"/>
+
+        <ImageView
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_width="25dp"
+            android:layout_height="19dp"
+            android:layout_below="@+id/remark_content"
+            android:id="@+id/huifu_img"
+            android:src="@drawable/huifuimg"/>
+        <TextView
+            android:id="@+id/lou_num"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/remark_content"
+            android:layout_alignLeft="@+id/remark_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第1楼"/>
+        <TextView
+            android:id="@+id/remark_time"
+            android:layout_toRightOf="@+id/lou_num"
+            android:layout_below="@+id/remark_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11:31:51"/>
+        <View
+            android:id="@+id/fengggggg"
+            android:layout_alignLeft="@+id/lou_num"
+             android:background="#ececec"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/remark_time"/>
+
+        <com.first.yuliang.deal_community.Util.NoScrollGridView
+            android:layout_alignLeft="@+id/remark_content"
+            android:layout_marginRight="13dp"
+            android:id="@+id/zihuifulist"
+            android:numColumns="1"
+            android:layout_below="@+id/fengggggg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+          <TextView
+              android:id="@+id/more_huifu"
+              android:visibility="gone"
+              android:text="更多回复"
+              android:textColor="#5252e1"
+              android:gravity="center"
+              android:layout_below="@+id/zihuifulist"
+              android:layout_width="match_parent"
+              android:layout_height="30dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

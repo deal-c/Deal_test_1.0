@@ -120,11 +120,11 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
                 break;
             case "huan":
                 huan.setChecked(true);
-                buyway = 3;
+                buyway = 4;
                 break;
             case "mai":
                 mai.setChecked(true);
-                buyway = 4;
+                buyway = 3;
                 break;
         }
 
@@ -397,13 +397,14 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
                 @Override
                 public void onSuccess(String result) {
                     Log.i("ModifyPersonInfo", "onSuccess: ");
+                    progressDialog.dismiss();
                     ToastUtil.show(deal_publish_Activity.this, "发布成功");
                     finish();
                 }
 
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
-
+                    progressDialog.dismiss();
                     ToastUtil.show(deal_publish_Activity.this, "发布失败");
                 }
 
@@ -415,7 +416,7 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
 
                 @Override
                 public void onFinished() {
-                    progressDialog.dismiss();
+
                 }
             });
 
@@ -427,16 +428,18 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
     @Override
     public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
 
-        progressDialog.dismiss();
         if (i == 1000) {
-            String addressName = regeocodeResult.getRegeocodeAddress().getProvince();
-            addressName += regeocodeResult.getRegeocodeAddress().getCity();
-            addressName += regeocodeResult.getRegeocodeAddress().getDistrict();
+           // String addressName = regeocodeResult.getRegeocodeAddress().getProvince();
+            String addressName= regeocodeResult.getRegeocodeAddress().getCity();
+           // addressName += regeocodeResult.getRegeocodeAddress().getDistrict();
 
             location.setText(addressName);
 
+            progressDialog.dismiss();
         } else {
+
             ToastUtil.show(deal_publish_Activity.this, "无法定位");
+            progressDialog.dismiss();
         }
     }
 

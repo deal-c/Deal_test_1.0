@@ -32,6 +32,7 @@ import com.first.yuliang.deal_community.frament.Community_Activity.Community_mod
 import com.first.yuliang.deal_community.frament.pojo.Dynamic;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
+import com.first.yuliang.deal_community.model.ComMainActivity;
 import com.first.yuliang.deal_community.pojo.Community;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -56,11 +57,13 @@ public class Frag_community_shoucang extends Fragment {
     SwipeMenuListView lv_community_shoucang;
     private String item=null;
 private int userId=1;
+    String  dynamicList=null;
+    List<Dynamic>   communityList1=new ArrayList<>();
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        getAllCommunity(userId);
+
 
         lv_community_shoucang= (SwipeMenuListView) getActivity().findViewById(R.id.lv_community_shoucang);
         adapter = new BaseAdapter() {
@@ -101,16 +104,26 @@ private int userId=1;
                 viewhoder.communityName.setText(dongtai.getUserId().getUserName());
                 viewhoder.communityInfo.setText(dongtai.getContent());
                 viewhoder.comCreateTime.setText(dongtai.getPublishTime());
-                x.image().bind(viewhoder.comImg, "http://10.40.5.61:8080/usys/imgs/"+dongtai.getUserId().getUserImg()+".png");
+                x.image().bind(viewhoder.comImg, HttpUtile.zy1+dongtai.getUserId().getUserImg());
                 item=dongtai.getDynamicId();
                 return convertView;
             }
 
         };
-
+        getAllCommunity(userId);
         System.out.print("为什么会空指针");
         lv_community_shoucang.setAdapter(adapter);
+        lv_community_shoucang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ComMainActivity.class);
+                intent.putExtra("dynamicList",dynamicList);
+                intent.putExtra("dynamicId",String.valueOf(position));
+                startActivity(intent);
 
+
+            }
+        });
 
 
     }
@@ -126,12 +139,13 @@ private int userId=1;
                 Gson    gson=new Gson();
                 Type type = new TypeToken<List<Dynamic>>() {
                 }.getType();
-                List<Dynamic>   communityList1=new ArrayList<>();
+
                 communityList1  = gson.fromJson(result, type);
                 Log.e("看看数据====", communityList.toString());
                 Log.e("看看数据====", gson.toString());
                 if (result!=null){
                     communityList.addAll(communityList1);
+                    dynamicList=result;
                 }
 
                 adapter.notifyDataSetChanged();//提醒adpter更新数据

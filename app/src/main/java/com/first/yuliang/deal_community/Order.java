@@ -94,6 +94,9 @@ public class Order extends AppCompatActivity {
                 Date date = new Date();
                 insertOrder(date);
                 updateCommodityState(commodity.commodityId,id);
+
+                //有人下单
+
                 Intent intent = new Intent(Order.this, BuySuccessActivity.class);
                 intent.putExtra("tips",et_post_way.getText().toString());
                 intent.putExtra("bundle",commodity);

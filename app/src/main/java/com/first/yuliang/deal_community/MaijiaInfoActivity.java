@@ -39,6 +39,7 @@ public class MaijiaInfoActivity extends AppCompatActivity implements View.OnClic
         user = intent.getParcelableExtra("bundle");
         id=user.getUserId();
         RongIM.getInstance().refreshUserInfoCache(new UserInfo(user.getUserId()+"",user.getUserName(), Uri.parse(HttpUtile.zy1+user.getUserImg())));
+
        // getUserDetail();
 
 

@@ -43,6 +43,7 @@ public class MyMaiActivity extends AppCompatActivity {
     List<OrderBean> orderList=new ArrayList<OrderBean>();
     List<CommodityInfoUser> commodityList = new ArrayList<CommodityInfoUser>();
     List<User> userList = new ArrayList<User>();
+    List<Integer> list=new ArrayList<>();
     private View view;
     private Button btn_state;
     private String tips;
@@ -137,6 +138,21 @@ public class MyMaiActivity extends AppCompatActivity {
                 {
                     commodityList.add(orderList.get(i).getCommodityInfoUser());
                 }
+
+                for(int m=0;m<commodityList.size();m++)
+                {
+                    list.add(commodityList.get(m).getStatement());
+
+                }
+
+                for(int n=0;n<list.size();n++)
+                {
+                    if(list.get(n)==2)
+                    {
+                        selectMessageto(id);
+                    }
+
+                }
                 for (int j = 0; j < commodityList.size(); j++)
                 {
                     userList.add(commodityList.get(j).getUser_b());
@@ -161,26 +177,51 @@ public class MyMaiActivity extends AppCompatActivity {
         });
     }
 
+    private void selectMessageto(int id) {
+
+        RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/SelectMessageto");
+        params.addBodyParameter("id",id+"");
+        x.http().post(params, new Callback.CacheCallback<String>() {
+
+
+            @Override
+            public void onSuccess(String result) {
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public boolean onCache(String result) {
+                return false;
+            }
+        });
+
+    }
+
     private void getBtn(final int state, final OrderBean order) {
         if (state==0){
             btn_state.setText("待售出");
             btn_state.setBackgroundResource(R.drawable.button_stroke);
-            btn_state.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                }
-            });
         }
         if (state==1){
             btn_state.setText("待付款");
             btn_state.setBackgroundResource(R.drawable.button_stroke);
-            btn_state.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                }
-            });
         }
         if (state==2){
             btn_state.setText("发货");
@@ -191,48 +232,77 @@ public class MyMaiActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     updateCommodityState(order.getCommodityInfoUser().getCommodityId(),3);
                     getOrder(id);
+                    //
+
+                    sendMessage(state,order.getCommodityInfoUser().getUser_b().getUserId());
+
                 }
             });
         }
         if (state==3){
             btn_state.setText("查看物流");
             btn_state.setBackgroundResource(R.drawable.button_stroke);
-            btn_state.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                }
-            });
         }
         if (state==4){
             btn_state.setText("待确认");
             btn_state.setBackgroundResource(R.drawable.button_stroke);
-            btn_state.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                }
-            });
+
         }
         if (state==5){
             btn_state.setText("待评价");
             btn_state.setBackgroundResource(R.drawable.button_stroke);
-            btn_state.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                }
-            });
+
         }
         if (state==6){
             btn_state.setText("交易成功");
             btn_state.setBackgroundResource(R.drawable.button_stroke);
-            btn_state.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
+        }
+    }
+
+    private void sendMessage(int state, int userId) {
+
+        if(state==2)
+        {
+            RequestParams params=new RequestParams(HttpUtile.zy+"servlet/SendMessageToBuyerServlet");
+            params.addBodyParameter("userId",userId+"");
+
+            x.http().get(params, new Callback.CacheCallback<String>() {
+
+
+                @Override
+                public void onSuccess(String result) {
+
+
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+
+                @Override
+                public boolean onCache(String result) {
+                    return false;
                 }
             });
         }
+
+
+
     }
+
     private void deleteOrder(int orderId){
         RequestParams params = null;
         params = new RequestParams(HttpUtile.szj+"/csys/deletorder?orderId="+orderId);

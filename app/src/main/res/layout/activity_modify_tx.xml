@@ -65,7 +65,18 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:scaleType="centerCrop"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/camora"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:text="点击头像修改"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/iv_tx_camora"/>
     </RelativeLayout>
 
 </RelativeLayout>

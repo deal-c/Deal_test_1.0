@@ -220,37 +220,28 @@
         <activity
             android:name=".Order"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:windowSoftInputMode="adjustPan|stateHidden">
-        </activity>
-        <activity android:name=".BuySuccessActivity"
-                  android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
-        <activity android:name=".home_button_activity.huan_magic"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity
+            android:name=".BuySuccessActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name=".home_button_activity.huan_magic"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".home_button_activity.re_use"
+        <activity
+            android:name=".home_button_activity.re_use"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-        <activity android:name=".home_button_activity.juan_dongtai"
+        <activity
+            android:name=".home_button_activity.juan_dongtai"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-        <activity android:name=".home_button_activity.old_tonew"
+        <activity
+            android:name=".home_button_activity.old_tonew"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-
         <activity
             android:name=".MessageActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
-        <activity android:name=".MaijiaInfoActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            >
-
-        </activity>
-        <activity android:name=".home_button_activity.huan_magic"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".home_button_activity.re_use"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-        <activity android:name=".home_button_activity.juan_dongtai"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-        <activity android:name=".home_button_activity.old_tonew"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".MaijiaInfoActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <receiver
             android:exported="true"
@@ -262,6 +253,32 @@
                 <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".frament.Community_Activity.tieziactivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".frament.Community_Activity.son_reply_activity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
+        </activity>
+
+        <activity
+            android:name=".SystemMessageListActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <receiver
+            android:name=".MyReceive"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+
+                <category android:name="com.first.yuliang.deal_community" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

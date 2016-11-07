@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -30,6 +31,11 @@ import com.first.yuliang.deal_community.frament.Fragment_home;
 import com.first.yuliang.deal_community.frament.Fragment_mine;
 import com.first.yuliang.deal_community.publish.deal_publish_Activity;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 public class mainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -54,6 +60,15 @@ public class mainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        int id=this.getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
+        JPushInterface.setDebugMode(true);//如果时正式版就改成false
+        JPushInterface.init(this);
+
+        setAlias(this,id+"");
+
+
 
         //设置信息栏的颜色
        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -233,4 +248,20 @@ public class mainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+    public static void setAlias(final Context cotext, String id){
+        JPushInterface.setAliasAndTags(cotext, id, null, new TagAliasCallback() {
+            @Override
+            public void gotResult(int i, String s, Set<String> set) {
+                if(i==0){
+                    //ToastCommom.ToastShow(cotext,null,"tag注册成功");
+                    Log.e("alias", "注册成功" );
+                }else {
+                    Log.e("alias", "注册失败"+i );
+                }
+            }
+        });
+    }
+
+
 }
