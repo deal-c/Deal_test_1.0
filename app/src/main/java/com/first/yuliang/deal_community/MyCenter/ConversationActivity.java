@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
 
@@ -18,6 +17,7 @@ public class ConversationActivity extends AppCompatActivity {
 
     private TextView tv_conversation_contactor;
 
+    int id=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +27,8 @@ public class ConversationActivity extends AppCompatActivity {
         tv_conversation_contactor = ((TextView) findViewById(R.id.tv_conversation_contactor));
 
         tv_conversation_contactor.setText(getIntent().getData().getQueryParameter("title"));
+        //id=Integer.parseInt(getIntent().getData().getQueryParameter("targetId").toString());
+
 
         RongIM.setConversationBehaviorListener(new RongIM.ConversationBehaviorListener() {
 
@@ -34,8 +36,7 @@ public class ConversationActivity extends AppCompatActivity {
             @Override
             public boolean onUserPortraitClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo) {
 
-                Toast.makeText(context, "点击了头像", Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(context, "点击了头像", Toast.LENGTH_SHORT).show();
 
                 return false;
             }

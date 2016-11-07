@@ -30,7 +30,7 @@ public class regBirthdayActivity extends AppCompatActivity {
 
 
         btn_reg_birthday_confirm = ((Button) findViewById(R.id.btn_reg_birthday_confirm));
-        datePicker = ((DatePicker) findViewById(R.id.reg_datePicker));
+        datePicker = ((DatePicker) findViewById(R.id.datePicker));
         Calendar c = Calendar.getInstance();
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
@@ -66,5 +66,19 @@ public class regBirthdayActivity extends AppCompatActivity {
                 regBirthdayActivity.this.finish();
             }
         });
+
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent mIntent=new Intent();
+        mIntent.putExtra("date",date);
+
+
+
+        regBirthdayActivity.this.setResult(5,mIntent);
+        regBirthdayActivity.this.finish();
     }
 }

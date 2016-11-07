@@ -26,7 +26,6 @@ import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.SearchCommodityActivity;
 import com.first.yuliang.deal_community.TypeActivity;
 import com.first.yuliang.deal_community.Util.NoScrollGridView;
-import com.first.yuliang.deal_community.Util.RoundCornerImageView;
 import com.first.yuliang.deal_community.frament.pojo.Adbean;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.home_button_activity.huan_magic;
@@ -118,7 +117,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         guessyoulike = ((NoScrollGridView) view.findViewById(R.id.gv_guessyoulike));
 
         gadapter=new BaseAdapter() {
-            private RoundCornerImageView pro_img;
+            private ImageView pro_img;
             private TextView pro_desc;
             @Override
             public int getCount() {
@@ -139,7 +138,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
             public View getView(int position, View convertView, ViewGroup parent) {
                 View  v=View.inflate(getActivity(),R.layout.gridview_song_item,null);
                 pro_desc = ((TextView) v.findViewById(R.id.pro_desc));
-                pro_img = ((RoundCornerImageView) v.findViewById(R.id.pro_img));
+                pro_img = ((ImageView) v.findViewById(R.id.pro_img));
                 if (prolist.size()!=0){
                     CommodityBean.Commodity com=prolist.get(position);
                     pro_desc.setText(com.commodityTitle);
@@ -159,7 +158,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
 
         madapter=new BaseAdapter() {
-            private RoundCornerImageView pro_img;
+            private ImageView pro_img;
             private TextView pro_desc;
 
             @Override
@@ -183,7 +182,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
                 View  v=View.inflate(getActivity(),R.layout.gridview_song_item,null);
 
                 pro_desc = ((TextView) v.findViewById(R.id.pro_desc));
-                pro_img = ((RoundCornerImageView) v.findViewById(R.id.pro_img));
+                pro_img = ((ImageView) v.findViewById(R.id.pro_img));
                 if (prolist.size()!=0){
                 CommodityBean.Commodity com=prolist.get(position);
                 pro_desc.setText(com.commodityTitle);
