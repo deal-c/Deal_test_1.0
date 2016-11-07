@@ -11,6 +11,8 @@
         layout="@layout/search_bar" />
 
     <ScrollView
+        android:id="@+id/sv_home"
+        android:background="#ececec"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tl_home"
@@ -24,9 +26,9 @@
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/vp_ad"
-
+                android:background="#fff"
                 android:layout_width="match_parent"
-                android:layout_height="215dp"
+                android:layout_height="200dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true">
@@ -88,8 +90,9 @@
                 android:layout_marginTop="73dp" />
 
             <LinearLayout
+                android:background="#fff"
                 android:id="@+id/ll_buttons"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="2dp"
                 android:layout_below="@+id/vp_ad"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -239,16 +242,49 @@
 
                 </RelativeLayout>
             </LinearLayout>
-
-
-            <TextView
-                android:layout_below="@+id/ll_tuijian"
-                android:gravity="center_horizontal"
+            <RelativeLayout
+                android:id="@+id/hot_tuijian"
+                android:layout_marginTop="2dp"
                 android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:text="↓ 加载更多"/>
+                android:layout_below="@+id/ll_tuijian"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp">
+                <ImageView
+                    android:id="@+id/hot_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/hot"/>
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/hot_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="热门推荐"/>
+            </RelativeLayout>
+           <com.first.yuliang.deal_community.Util.NoScrollGridView
+               android:id="@+id/gv_hot"
+               android:layout_width="match_parent"
+               android:background="#eee"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/hot_tuijian"
+               android:numColumns="1"/>
+            <ProgressBar
+                android:layout_below="@+id/gv_hot"
+                android:id="@+id/jiazaimore"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                 />
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_bottom"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/jiazaimore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已经到底了"/>
+
 
 
 

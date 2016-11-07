@@ -20,8 +20,11 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,6 +41,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
@@ -52,19 +56,54 @@ public class PublishedActivity extends Activity {
 	private GridView noScrollgridview;
 	private GridAdapter adapter;
 	private TextView activity_selectimg_send;
-	private TextView writen_content;
+	private EditText et_search;
 	private String	sendCommunityid=null;
-	String content;
+	String content=null;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_selectimg);
 		Intent	intent=getIntent();
 		sendCommunityid=intent.getStringExtra("sendCommunityid");
 
-		Init();
+        et_search = (EditText) findViewById(R.id.writen_content);
+
+        et_search.addTextChangedListener(textWatcher);
+        Init();
 	}
 
-	public void Init() {
+
+    private TextWatcher textWatcher = new TextWatcher() {
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before,
+                                  int count) {
+
+            System.out.println("-1-onTextChanged-->"
+                    + et_search.getText().toString() + "<--");
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+
+            System.out.println("-2-beforeTextChanged-->"
+                    + et_search.getText().toString() + "<--");
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+            System.out.println("-3-afterTextChanged-->"
+                    + et_search.getText().toString() + "<--");
+
+            content=et_search.getText().toString();
+
+
+        }
+    };
+
+    public void Init() {
 		noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
 		noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
 		adapter = new GridAdapter(this);
@@ -87,10 +126,9 @@ public class PublishedActivity extends Activity {
 
 
 
-		writen_content=(TextView)findViewById(R.id.writen_content);
-		content=writen_content.getText().toString();
-		//Log.e("我来来来来看看评论都的数据====",content);
-		activity_selectimg_send = (TextView) findViewById(R.id.activity_selectimg_send);
+
+
+        activity_selectimg_send = (TextView) findViewById(R.id.activity_selectimg_send);
 		activity_selectimg_send.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -99,50 +137,80 @@ public class PublishedActivity extends Activity {
 					String Str = Bimp.drr.get(i).substring( 
 							Bimp.drr.get(i).lastIndexOf("/") + 1,
 							Bimp.drr.get(i).lastIndexOf("."));
-					list.add(FileUtils.SDPATH+Str+".JPEG");				
+					list.add(Str);
 				}
 				// 高清的压缩图片全部就在  list 路径里面了
 				// 高清的压缩过的 bmp 对象  都在 Bimp.bmp里面
 				// 完成上传服务器后 .........
-
 			sendDynamicToservlt(list,content);
+				//FileUtils.deleteDir();
 
-
-
-
-				FileUtils.deleteDir();
-
+                File file=new File(list.get(0));
+				if(file!=null){
+                sendImgs(file);
+				}
 
 
 			}
-		});
+
+
+        });
 	}
 
-	private void sendDynamicToservlt(List	list,String	content) {
+    private void sendImgs(File file) {
+        RequestParams request=new RequestParams(HttpUtils.hostLuoqingshanSchool+"usys/upload");
+        request.addBodyParameter("file",file);
+        request.setMultipart(true);
+        x.http().post(request, new Callback.CommonCallback<String>() {
+              @Override
+              public void onSuccess(String result) {
+                  Log.e("图片上传====","1"+result);
+              }
 
+              @Override
+              public void onError(Throwable ex, boolean isOnCallback) {
+                  Log.e("我来看上传动态图片的数据====","22"+ex.toString());
+              }
 
+              @Override
+              public void onCancelled(CancelledException cex) {
 
-		Gson	gson=new Gson();
-		String	imgList=gson.toJson(list);
+              }
+
+              @Override
+              public void onFinished() {
+
+              }
+          });
+
+            }
+
+    private void sendDynamicToservlt(List	list,String	content) {
+
+		Log.e("我来来来来看看评论都的数据====","22"+content);
+
+		String	imgList=list.get(0).toString();
 		int userId=this.getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
 		RequestParams	request=new RequestParams(HttpUtils.hostLuoqingshanSchool+"usys/recieveDynamic");
 		request.addBodyParameter("imgList",imgList);
+
 		request.addBodyParameter("userId",String.valueOf(userId));
 		request.addBodyParameter("content",content);
 		request.addBodyParameter("sendCommunityid",sendCommunityid);
-		Log.e("我来看看评论都的数据====",content);
+		//Log.e("我来看看评论都的数据====",content);
+
 
 
 
 		x.http().post(request, new Callback.CommonCallback<String>() {
 			@Override
 			public void onSuccess(String result) {
-
+                Toast.makeText(PublishedActivity.this,result+"!!!",Toast.LENGTH_LONG).show();
 			}
 
 			@Override
 			public void onError(Throwable ex, boolean isOnCallback) {
-
+               // Log.e("我来看result的数据====","22"+ex.toString());
 			}
 
 			@Override
