@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.first.yuliang.deal_community.MessageActivity;
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.SearchCommodityActivity;
+import com.first.yuliang.deal_community.SearchResultActivity;
 import com.first.yuliang.deal_community.TypeActivity;
 import com.first.yuliang.deal_community.Util.NoScrollGridView;
 import com.first.yuliang.deal_community.Util.RoundCornerImageView;
@@ -98,6 +99,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
     private BaseAdapter gadapter;
     private List <CommodityBean.Commodity> prolist=new ArrayList<>();
     private NoScrollGridView guessyoulike;
+    private Button btn_song;
 
     @Nullable
     @Override
@@ -114,6 +116,17 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         zai_liyong = ((Button) view.findViewById(R.id.zaili_yong));
         dongtai_juan = ((Button) view.findViewById(R.id.jun_dongtai));
         jiu_huanxin = ((Button) view.findViewById(R.id.jiu_huanxin));
+        btn_song = ((Button) view.findViewById(R.id.btn_songpro));
+        btn_song.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("search","");
+                Intent intent = new Intent(getActivity(), SearchResultActivity.class);
+                intent.putExtra("bundle",bundle);
+                startActivityForResult(intent,0);
+            }
+        });
         gv_song = ((NoScrollGridView) view.findViewById(R.id.gv_song));
         guessyoulike = ((NoScrollGridView) view.findViewById(R.id.gv_guessyoulike));
 

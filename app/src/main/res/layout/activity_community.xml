@@ -10,15 +10,15 @@
         android:layout_height="50dp"
         android:background="@color/bgcolor">
 
-        <ImageView
-            android:layout_width="68dp"
-            android:layout_height="30dp"
-            android:text="社区"
+        <TextView
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
-            android:textSize="23sp"
-            android:textColor="#fff"
-            android:src="@drawable/shequ_font"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="附近"
+            android:textSize="20sp"
+            android:textColor="#fff"/>
         <ImageView
             android:id="@+id/iv_search_community"
             android:layout_width="20dp"
@@ -28,8 +28,16 @@
             android:src="@drawable/search"/>
     </android.support.v7.widget.Toolbar>
 
-    <RelativeLayout
+    <Button
+        android:id="@+id/iv_line1"
         android:layout_below="@id/tl_community"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#bbb"
+        />
+
+    <RelativeLayout
+        android:layout_below="@id/iv_line1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <View
@@ -41,19 +49,20 @@
 
         <RadioGroup
             android:layout_below="@id/view"
-            android:background="@drawable/button"
+            android:background="#eee"
             android:id="@+id/rg_community_tab"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="36dp"
             android:orientation="horizontal"
             android:checkedButton="@+id/rb_community_dongtai"
            >
             <RadioButton
+                android:layout_margin="2dp"
                 style="@style/radiostyle"
                 android:background="@drawable/community_tab_bgcorlor"
                 android:textColor="@drawable/community_tab_textcolor"
                 android:text="动态"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:id="@+id/rb_community_dongtai"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -62,21 +71,23 @@
 
 
             <RadioButton
+                android:layout_margin="2dp"
                 style="@style/radiostyle"
                 android:textColor="@drawable/community_tab_textcolor"
                 android:background="@drawable/community_tab_bgcorlor"
                 android:text="关注"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_weight="1"
                 android:id="@+id/rb_community_guanzhu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                />
             <RadioButton
+                android:layout_margin="2dp"
                 android:textColor="@drawable/community_tab_textcolor"
                 android:background="@drawable/community_tab_bgcorlor"
                 android:text="收藏"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 style="@style/radiostyle"
                 android:layout_weight="1"
                 android:id="@+id/rb_community_shoucang"

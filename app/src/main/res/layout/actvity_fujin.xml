@@ -12,16 +12,9 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     >
-       <ImageView
-
-           android:id="@+id/aaaaa"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:src="@drawable/near"/>
         <TextView
            android:layout_centerInParent="true"
             android:layout_marginLeft="10dp"
-           android:layout_toRightOf="@+id/aaaaa"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="附近"
@@ -29,13 +22,20 @@
            android:textColor="#fff"/>
 </RelativeLayout>
 </android.support.v7.widget.Toolbar>
+    <Button
+        android:id="@+id/iv_line1"
+        android:layout_below="@id/tl_fujin"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#bbb"
+        />
 <LinearLayout
     android:background="#fff"
     android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:orientation="horizontal"
-    android:layout_below="@id/tl_fujin">
+    android:layout_below="@id/iv_line1">
     <Button
         android:id="@+id/btn_quyu"
         android:text=" 区 域 "
@@ -64,9 +64,10 @@
     </com.amap.api.maps.TextureMapView>
 <Button
     android:id="@+id/change"
-    android:layout_width="60dp"
-    android:layout_height="40dp"
-    android:text="切换"
+    android:layout_margin="10dp"
+    android:layout_width="36dp"
+    android:layout_height="36dp"
+    android:background="@drawable/dwa"
     android:layout_alignParentBottom="true"
     android:layout_marginBottom="60dp"/>
 

@@ -24,7 +24,9 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -74,7 +76,7 @@ public class Order extends AppCompatActivity {
 
 
         iv_cg = ((ImageView) findViewById(R.id.iv_cg_l));
-        x.image().bind(iv_cg, HttpUtile.szj +(commodity.commodityImg.split(","))[0]);
+        x.image().bind(iv_cg, HttpUtile.yu +(commodity.commodityImg.split(","))[0]);
         cg_title = ((TextView) findViewById(R.id.tv_cg_l));
         cg_title.setText(commodity.commodityTitle);
         cg_price = ((TextView) findViewById(R.id.tv_price_l));
@@ -152,14 +154,18 @@ public class Order extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
                 Gson gson = new Gson();
-                user = gson.fromJson(result, User.class);
+                try {
+                    user=gson.fromJson(URLDecoder.decode(result,"utf-8"),User.class);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 x.image().bind(seller_head, HttpUtile.zy1 + user.getUserImg());
                 seller_name.setText(user.getUserName());
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(Order.this, "是不是我的无法连接服务器", Toast.LENGTH_LONG).show();
+                Toast.makeText(Order.this, "是不是我的无法连接服务器1", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -187,7 +193,7 @@ public class Order extends AppCompatActivity {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(Order.this, "是不是我的无法连接服务器", Toast.LENGTH_LONG).show();
+                Toast.makeText(Order.this, "是不是我的无法连接服务器2", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -218,7 +224,7 @@ public class Order extends AppCompatActivity {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(Order.this, "是不是我的无法连接服务器", Toast.LENGTH_LONG).show();
+                Toast.makeText(Order.this, "是不是我的无法连接服务器3", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -234,7 +240,7 @@ public class Order extends AppCompatActivity {
     }
     private void updateCommodityState(int commodityId){
         RequestParams params = null;
-        String url = "http://192.168.191.1:8080/csys/modifycommoditystate?commodityId="+commodityId+"&state=1";
+        String url = HttpUtile.szj+"/csys/modifycommoditystate?commodityId="+commodityId+"&state=1";
         params = new RequestParams(url);
         x.http().get(params, new Callback.CommonCallback<String>() {
 
@@ -245,7 +251,7 @@ public class Order extends AppCompatActivity {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(Order.this, "是不是我的无法连接服务器", Toast.LENGTH_LONG).show();
+                Toast.makeText(Order.this, "是不是我的无法连接服务器4", Toast.LENGTH_LONG).show();
             }
 
             @Override

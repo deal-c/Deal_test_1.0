@@ -50,9 +50,9 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <Button
-            android:layout_width="40dp"
+            android:layout_width="50dp"
             android:layout_height="20dp"
-            android:text="苏州"
+            android:text="苏州市"
             android:textSize="13sp"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/local_s"
@@ -116,6 +116,7 @@
                 android:textSize="12sp"
                 android:textColor="#a000"/>
             <TextView
+                android:id="@+id/tv_browse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100"

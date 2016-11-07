@@ -16,7 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -45,6 +48,8 @@ public class mainActivity extends AppCompatActivity implements View.OnClickListe
     private Button zeng;
     private Button huan;
     private Button mai;
+    private ImageView iv_black;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +102,7 @@ public class mainActivity extends AppCompatActivity implements View.OnClickListe
 
         });
 
+        iv_black = ((ImageView) findViewById(R.id.iv_blackmain));
         dealButton = ((Button) findViewById(R.id.radio2));
         dealButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +171,7 @@ public class mainActivity extends AppCompatActivity implements View.OnClickListe
 
         mai.setOnClickListener(this);
 
-        final PopupWindow popupWindow = new PopupWindow(v,ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+        final PopupWindow popupWindow = new PopupWindow(v,ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
 
         //popupwiondow外面点击，popupwindow消失
         popupWindow.setFocusable(true);
@@ -178,19 +184,24 @@ public class mainActivity extends AppCompatActivity implements View.OnClickListe
         int[] location = new int[2];
         view.getLocationOnScreen(location);
         WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.alpha = 0.7f;
+
         getWindow().setAttributes(lp);
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
             @Override
             public void onDismiss() {
-                WindowManager.LayoutParams lp = getWindow().getAttributes();
-                lp.alpha = 1f;
-                getWindow().setAttributes(lp);
+                iv_black.setVisibility(View.GONE);
+                Animation animation = new AlphaAnimation(1,0);
+                animation.setDuration(500);
+                iv_black.startAnimation(animation);
             }
         });
-        popupWindow.setAnimationStyle(R.style.Animation);
-        popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, (location[0] + view.getWidth() / 2) - popupWidth / 2, location[1] - popupHeight);
+        iv_black.setVisibility(View.VISIBLE);
+        Animation animation = new AlphaAnimation(0,1);
+        animation.setDuration(500);
+        iv_black.startAnimation(animation);
+        popupWindow.setAnimationStyle(R.style.popupwindow);
+        popupWindow.showAtLocation(view, Gravity.CENTER_HORIZONTAL,0, location[1] - popupHeight-900);
 
     }
 

@@ -92,4 +92,12 @@
         <item name="android:windowExitAnimation">@anim/out_anim</item>
     </style>
     <style name="Widget_GifView"></style>
+    <style name="popupwindow">
+        <item name="android:windowEnterAnimation">@anim/larger</item>
+        <item name="android:windowExitAnimation">@anim/smaller</item>
+    </style>
+    <style name="publish">
+        <item name="android:windowEnterAnimation">@anim/larger_g</item>
+        <item name="android:windowExitAnimation">@anim/smaller_g</item>
+    </style>
 </resources>

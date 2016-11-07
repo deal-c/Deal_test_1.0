@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,9 @@ public class TypeActivity extends AppCompatActivity {
     private ListView lv_type;
     private BaseAdapter adapter;
     private List<TypeBean.Type> typess=new ArrayList<>();
+    private ImageButton ib_return;
+    private TextView tv_type;
+    Fragment fragment=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +48,27 @@ public class TypeActivity extends AppCompatActivity {
 
     }
 
-
-
     private void initView() {
 
         fl_type = ((FrameLayout) findViewById(R.id.fl_type));
 
         lv_type = ((ListView) findViewById(R.id.lv_type));
 
+        tv_type = ((TextView) findViewById(R.id.tv_activity_title));
+
+        ib_return = ((ImageButton) findViewById(R.id.ib_return_common));
     }
 
     private void initData() {
+
+        tv_type.setText("分类");
+        ib_return.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TypeActivity.this.finish();
+            }
+        });
+
         adapter=new BaseAdapter(){
             @Override
             public int getCount() {
@@ -102,7 +117,6 @@ public class TypeActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Fragment fragment=null;
                 switch (position)
                 {
                     case 0:
@@ -157,9 +171,33 @@ public class TypeActivity extends AppCompatActivity {
                     case 16:
                         fragment=new fragment_type_1();
                         break;
+                    case 17:
+                        fragment=new fragment_type_1();
+                        break;
+                    case 18:
+                        fragment=new fragment_type_1();
+                        break;
+                    case 19:
+                        fragment=new fragment_type_1();
+                        break;
+                    case 20:
+                        fragment=new fragment_type_1();
+                        break;
+                    case 21:
+                        fragment=new fragment_type_1();
+                        break;
+                    case 22:
+                        fragment=new fragment_type_1();
+                        break;
+                    case 23:
+                        fragment=new fragment_type_1();
+                        break;
+                    case 24:
+                        fragment=new fragment_type_1();
+                        break;
 
                 }
-                   switchFragment(fragment,position);
+                   switchFragment(fragment,position+1);
             }
         });
     }
@@ -213,11 +251,10 @@ public class TypeActivity extends AppCompatActivity {
                 Gson gson=new Gson();
                 TypeBean tb= gson.fromJson(result,TypeBean.class);
                 typess.addAll(tb.typeList);
-
-
-
                 adapter.notifyDataSetChanged();
-
+                int id = typess.get(0).typeId;
+                fragment=new fragment_type_1();
+                switchFragment(fragment,id);
             }
 
             @Override
@@ -244,7 +281,7 @@ public class TypeActivity extends AppCompatActivity {
     private void switchFragment(Fragment fragment,int position) {
 
         Bundle bundle = new Bundle();
-        bundle.putInt("Id", typess.get(position).typeId);
+        bundle.putInt("Id", position);
         fragment.setArguments(bundle);
         this.getFragmentManager().beginTransaction().replace(R.id.fl_type,fragment).commit();
 
