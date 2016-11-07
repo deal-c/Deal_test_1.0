@@ -31,7 +31,7 @@ import java.util.List;
 
 public class ComMainActivity extends Activity {
 
-    public static User sUser = new User(1, "走向远方"); // 当前登录用户
+    public static User sUser = new User(1, "本人"); // 当前登录用户
     public static  ArrayList<Dynamic>  dynamicArrayList;
     public ListView mListView;
     public MomentAdapter mAdapter;
