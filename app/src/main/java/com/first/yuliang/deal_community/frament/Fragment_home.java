@@ -247,7 +247,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
                             .setLoadingDrawableId(R.drawable.shalou)
                             .build();
 
-                    x.image().bind(pro_img,HttpUtile.szj+com.commodityImg,options);
+                    x.image().bind(pro_img,HttpUtile.yu+com.commodityImg,options);
                 }
                 return v;
             }
@@ -291,7 +291,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
                 .setLoadingDrawableId(R.drawable.shalou)
                 .build();
 
-                x.image().bind(pro_img,HttpUtile.szj+com.commodityImg,options);
+                x.image().bind(pro_img,HttpUtile.yu+com.commodityImg,options);
                 }
                 return v;
             }

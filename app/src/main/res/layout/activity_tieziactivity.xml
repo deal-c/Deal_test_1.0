@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_tieziactivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.first.yuliang.deal_community.frament.Community_Activity.tieziactivity">
+
+    <ScrollView
+     android:background="#fff"
+     android:layout_below="@+id/tiezi_title"
+     android:id="@+id/scrollview_tiezi"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+  <RelativeLayout
+      android:id="@+id/zhengwen"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+
+<RelativeLayout
+    android:id="@+id/xinxi_tiezi"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:id="@+id/head_louzhu"
+        android:layout_height="40dp"
+        android:layout_margin="13dp"
+        android:src="@drawable/head_"/>
+    <TextView
+        android:id="@+id/louzhu_name"
+        android:layout_alignTop="@+id/head_louzhu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/head_louzhu"
+        android:text="用户1"
+        android:textSize="16sp"
+        android:textColor="#3d3939"/>
+    <TextView
+        android:background="@drawable/tv_bg_blue"
+        android:layout_alignTop="@+id/head_louzhu"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:layout_width="27dp"
+        android:layout_height="15dp"
+        android:text="楼主"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textSize="10sp"
+        />
+    <TextView
+        android:id="@+id/firstlou"
+        android:layout_alignBottom="@+id/head_louzhu"
+        android:layout_toRightOf="@+id/head_louzhu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="第1楼"
+        android:textSize="12sp"
+        android:textColor="#767575"/>
+    <TextView
+        android:id="@+id/post_time"
+        android:layout_alignBottom="@+id/head_louzhu"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/firstlou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11时11分"
+        android:textSize="12sp"
+        android:textColor="#767575"
+        />
+</RelativeLayout>
+    <TextView
+        android:id="@+id/post_tiltle"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="6dp"
+        android:text="白日依山尽，黄河入海流，欲穷千里目，更上一层楼，好诗好诗，大家赶脚如何?"
+        android:layout_below="@id/xinxi_tiezi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#262626"/>
+       <TextView
+           android:id="@+id/post_content"
+           android:layout_marginTop="10dp"
+           android:layout_marginRight="6dp"
+           android:layout_marginLeft="10dp"
+           android:textSize="16sp"
+           android:textColor="#262626"
+           android:layout_below="@+id/post_tiltle"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text=" 床前明月光，疑是地上霜， 举头望明月，低头思故乡。"/>
+          <ImageView
+              android:id="@+id/post_img"
+              android:layout_margin="10dp"
+              android:scaleType="centerInside"
+              android:layout_below="@+id/post_content"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              />
+
+
+      <com.first.yuliang.deal_community.Util.NoScrollGridView
+          android:id="@+id/post_relist"
+          android:numColumns="1"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/post_img"/>
+
+
+    <View
+        android:layout_below="@+id/post_relist"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc"/>
+     <TextView
+         android:layout_below="@+id/post_relist"
+         android:padding="10dp"
+         android:gravity="center_horizontal"
+         android:textSize="20sp"
+         android:layout_width="match_parent"
+         android:layout_height="90dp"
+         android:text="暂无更多"/>
+
+
+    </RelativeLayout>
+
+
+
+ </ScrollView>
+    <View
+        android:layout_above="@+id/post_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc"
+        />
+    <RelativeLayout
+        android:id="@+id/post_bottom"
+        android:background="#bffcf9f9"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_width="40dp"
+            android:id="@+id/my_head"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/head_"/>
+        <TextView
+            android:id="@+id/huifulouzhu"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/my_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回复楼主"
+            android:textColor="#212121"/>
+        <TextView
+
+            android:layout_marginLeft="2dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/huifulouzhu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(已有60条)"
+            android:textColor="#6b6969"/>
+        <ImageView
+            android:layout_margin="6dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:textColor="#292929"
+            android:src="@drawable/jiahao"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/post_remark"
+        android:background="#cbe4e3e3"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+      <EditText
+          android:id="@+id/et_huifu"
+          android:paddingLeft="10dp"
+          android:background="@drawable/edittext_bg"
+          android:layout_marginLeft="15dp"
+          android:layout_marginTop="5dp"
+          android:layout_marginBottom="5dp"
+          android:layout_marginRight="80dp"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:hint="我也说一句..."
+          android:textSize="16sp"
+          />
+        <Button
+            android:id="@+id/btn_fabiao"
+            android:background="@drawable/textview_biod_gray"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="发表"
+            android:textSize="18sp"
+            android:textColor="#5c5b5b"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/tiezi_title"
+        android:background="#f2fdfdfd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/post_remark"
+        android:layout_toEndOf="@+id/post_remark">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:src="@drawable/back"
+           />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="某某社区"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp"/>
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/shoucang_no"/>
+
+    </RelativeLayout>
+</RelativeLayout>

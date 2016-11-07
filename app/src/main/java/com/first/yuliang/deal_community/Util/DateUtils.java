@@ -14,6 +14,18 @@ public class DateUtils {
 		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
 		return sdf.format(date);
 	}
+	public static Date stringToDate(String dateStr,String pattern){
+		Date date = null;
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		try {
+			date = sdf.parse(dateStr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return date;
+	}
 
 	public static Date stringToDate(String dateStr){
 		Date date = null;
