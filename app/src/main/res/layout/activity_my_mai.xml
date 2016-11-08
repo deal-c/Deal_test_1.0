@@ -5,7 +5,7 @@
                 android:background="#eee">
 
     <include android:id="@+id/tl_mypublish"
-             layout="@layout/mypubulish"/>
+             layout="@layout/mymai"/>
 
     <ListView
         android:layout_below="@id/tl_mypublish"

@@ -5,29 +5,28 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="15dp"
-    android:background="#ccc"
-    android:layout_marginRight="10dp"
+    android:background="@drawable/button_1"
     >
 
     <Button
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/btn_camera"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/shape"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:text="拍 照"
         android:textColor="@color/main"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="1px"
-        android:background="#C0C5C7"/>
     <Button
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
         android:id="@+id/btn_choose"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/shape"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:text="从相册选择"
         android:textColor="@color/main"/>
 

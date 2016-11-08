@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -70,8 +71,9 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
         rl_modify_tx = ((RelativeLayout) findViewById(R.id.rl_modify_tx));
         iv_modify_tx = ((ImageView) findViewById(R.id.iv_modify_tx));
 
-        x.image().bind(iv_modify_tx,HttpUtile.zy1+user.getUserImg());
-
+        if (!user.getUserImg().equals("null")&&user.getUserImg()!=null&&user.getUserImg().length()!=0) {
+            x.image().bind(iv_modify_tx, HttpUtile.zy1 + user.getUserImg());
+        }
         rl_modify_name = ((RelativeLayout) findViewById(R.id.rl_modify_name));
         tv_show_name = ((TextView) findViewById(R.id.tv_show_name));
         tv_show_name.setText(user.getUserName());
@@ -244,12 +246,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
         btn_female = ((Button) view.findViewById(R.id.btn_female));
         btn_cancel = ((Button) view.findViewById(R.id.btn_cancel));
 
-
-
-
-
         final PopupWindow popupWindow = new PopupWindow(view,
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
+                ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setTouchable(true);
 
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -313,6 +311,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
 
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
+        popupWindow.setAnimationStyle(R.style.AnimBottom);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
 
 
