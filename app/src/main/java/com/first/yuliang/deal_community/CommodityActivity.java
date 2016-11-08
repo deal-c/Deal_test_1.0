@@ -40,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import io.rong.imkit.RongIM;
+
 public class CommodityActivity extends AppCompatActivity {
 
     private ListView lv_commodity;
@@ -55,6 +57,7 @@ public class CommodityActivity extends AppCompatActivity {
     private TextView tv_user_name;
     private Button btn_local;
     private TextView tv_price_c;
+    private TextView tv_rmb_c;
     private TextView tv_cd;
     private TextView tv_time;
     private ImageButton ib_re_se_re;
@@ -75,6 +78,8 @@ public class CommodityActivity extends AppCompatActivity {
     private boolean flag_sc = false;
     private Drawable sc_1;
     private Drawable sc;
+    private TextView tv_browse;
+    private String browses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +90,7 @@ public class CommodityActivity extends AppCompatActivity {
         search = intent.getStringExtra("search");
         commodity = intent.getParcelableExtra("bundle");
         getCommodityList(search);
+        getBrowse(commodity.commodityId);
         getUser(commodity.releaseUserId);
 
         share = 0;
@@ -94,6 +100,11 @@ public class CommodityActivity extends AppCompatActivity {
             Date date = new Date();
             insertCBH(id,commodity.commodityId,date);
             queryCollection(id,commodity.commodityId);
+        }else {
+            Date date = new Date();
+            int i = date.getDate()*1000+date.getMonth()*10000+date.getYear()*100000+date.getHours()*100+date.getMinutes()*10+date.getSeconds();
+            Log.e("看看时间",i+"");
+            insertCBH(i,commodity.commodityId,date);
         }
 
         view_bar = View.inflate(CommodityActivity.this,R.layout.commodity_bar,null);
@@ -144,11 +155,18 @@ public class CommodityActivity extends AppCompatActivity {
         btn_local = ((Button) view.findViewById(R.id.btn_local));
         btn_local.setText(commodity.location);
         tv_price_c = ((TextView) view.findViewById(R.id.tv_price_c));
-        tv_price_c.setText(commodity.price+"");
+        tv_rmb_c = ((TextView) view.findViewById(R.id.tv_rmb_c));
+        if(commodity.price==0){
+            tv_price_c.setVisibility(View.GONE);
+            tv_rmb_c.setVisibility(View.GONE);
+        }else {
+            tv_price_c.setText(commodity.price + "");
+        }
         tv_cd = ((TextView) view.findViewById(R.id.tv_cd));
         tv_cd.setText(commodity.commodityDescribe);
         tv_time = ((TextView) view.findViewById(R.id.tv_time));
         tv_time.setText(commodity.releaseTime);
+        tv_browse = ((TextView) view.findViewById(R.id.tv_browse));
 
         View view_g = View.inflate(CommodityActivity.this,R.layout.commodity_footer,null);
         View view_like = View.inflate(CommodityActivity.this,R.layout.commodity_like,null);
@@ -186,7 +204,7 @@ public class CommodityActivity extends AppCompatActivity {
                 tv_local = ((TextView) view.findViewById(R.id.tv_local));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg, HttpUtile.szj+(commodity.commodityImg.split(","))[0]);
+                x.image().bind(iv_cg, HttpUtile.yu+(commodity.commodityImg.split(","))[0]);
                 tv_cg.setText(commodity.commodityTitle);
                 tv_price.setText(commodity.price+"");
                 tv_local.setText(commodity.location);
@@ -230,7 +248,7 @@ public class CommodityActivity extends AppCompatActivity {
 
                 String img = imgs[position];
 
-                x.image().bind(iv_cg_c, HttpUtile.szj + img);
+                x.image().bind(iv_cg_c, HttpUtile.yu + img);
 
                 return view;
             }
@@ -240,6 +258,7 @@ public class CommodityActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(id == 0){
                     Intent intent = new Intent(CommodityActivity.this, RegActivity.class);
                     intent.putExtra("flag","1");
@@ -247,7 +266,6 @@ public class CommodityActivity extends AppCompatActivity {
                 }else if(id==commodity.releaseUserId){
                     Toast.makeText(CommodityActivity.this,"您不能购买自己的商品",Toast.LENGTH_SHORT).show();
                 }else {
-                    getCommodityById(commodity.commodityId);
                     getCommodityById(commodity.commodityId);
                 }
             }
@@ -283,6 +301,36 @@ public class CommodityActivity extends AppCompatActivity {
         });
     }
 
+    private void getBrowse(Integer commodityId) {
+        RequestParams params = null;
+        String url = HttpUtile.szj+"/csys/qureycb?commodityId="+ commodityId;
+        Log.e("看看浏览量",url);
+        params = new RequestParams(url);
+        x.http().get(params,new Callback.CommonCallback<String>(){
+
+            @Override
+            public void onSuccess(String result) {
+                browses = result;
+                tv_browse.setText(browses);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(CommodityActivity.this,"是不是我的无法连接服务器",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+
     private void getUser(Integer releaseUserId) {
 
         RequestParams params = null;
@@ -297,7 +345,7 @@ public class CommodityActivity extends AppCompatActivity {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-                x.image().bind(iv_user_head, HttpUtile.zy1 + user.getUserImg());
+                x.image().bind(iv_user_head, HttpUtile.yu + user.getUserImg());
                 tv_user_name.setText(user.getUserName());
                 adapter_l.notifyDataSetChanged();
             }
@@ -355,7 +403,7 @@ public class CommodityActivity extends AppCompatActivity {
             }
         });
     }
-    public void getCommodityById(int commodityId) {
+    public void getCommodityById(final int commodityId) {
         RequestParams params = null;
         params = new RequestParams(HttpUtile.szj+"/csys/getcommoditybyid?commodityId="+ commodityId);
         x.http().get(params,new Callback.CommonCallback<String>(){
@@ -366,6 +414,11 @@ public class CommodityActivity extends AppCompatActivity {
                 commodity = gson.fromJson(result, CommodityBean.Commodity.class);
                 if(commodity.statement!=1&&commodity.statement!=0){
                     Toast.makeText(CommodityActivity.this,"该商品已被购买",Toast.LENGTH_SHORT).show();
+                }else if (commodity.buyWay==2){
+                    if(RongIM.getInstance()!=null)
+                    {
+                        RongIM.getInstance().startPrivateChat(CommodityActivity.this,user.getUserId()+"",user.getUserName());
+                    }
                 }else {
                     Intent intent = new Intent(CommodityActivity.this, Order.class);
                     intent.putExtra("search", search);

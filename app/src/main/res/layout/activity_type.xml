@@ -4,49 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/tb_type"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/main">
+    <include layout="@layout/common_bar"
+        android:id="@+id/tb_type"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/img_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:onClick="backHome"
-                android:src="@drawable/u18" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="分 类"
-                android:textColor="#fff"
-                android:textSize="20sp" />
-        </RelativeLayout>
-
-    </android.support.v7.widget.Toolbar>
-
-    <View
-        android:id="@+id/viewdd"
+    <Button
+        android:id="@+id/btn_bar_shadow"
         android:layout_below="@+id/tb_type"
-        android:background="#fff"
+        android:background="#bbb"
         android:layout_width="match_parent"
-        android:layout_height="1dp" />
+        android:layout_height="0.1dp"/>
 
     <ListView
         android:id="@+id/lv_type"
-        android:layout_width="73dp"
+        android:layout_width="80dp"
         android:layout_height="match_parent"
-        android:layout_below="@id/viewdd"
-        android:background="@color/main"
+        android:layout_below="@id/btn_bar_shadow"
+        android:background="#eee"
         android:divider="#ccc"
         android:dividerHeight="1px">
 

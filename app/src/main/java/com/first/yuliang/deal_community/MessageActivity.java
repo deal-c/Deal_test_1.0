@@ -67,7 +67,9 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.rl_system_message:
 
-                start();
+
+                Intent intent=new Intent(this,SystemMessageListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.rl_community_message:
 
@@ -83,77 +85,17 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
     private void start() {
 
+
         if(RongIM.getInstance()!=null)
         {
-
             RongIM.getInstance().startConversationList(this);
-
-
         }
+
+
+
     }
 
-//    private void getContactorData(int id) {
-//
-//
-//        RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/SelectUserServlet?id="+id);
-//
-//        x.http().get(params, new Callback.CommonCallback<String>() {
-//
-//            @Override
-//            public void onSuccess(String result) {
-//                Gson gson=new Gson();
-//                user=gson.fromJson(result,User.class);
-//                String token=user.getToken();
-//                connect(token);
-//
-//               // RongIM.getInstance().refreshUserInfoCache(new UserInfo(user.getUserId()+"",user.getUserName(), Uri.parse(HttpUtile.zy1+user.getUserImg())));
-//            }
-//
-//            @Override
-//            public void onError(Throwable ex, boolean isOnCallback) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(CancelledException cex) {
-//
-//            }
-//
-//            @Override
-//            public void onFinished() {
-//
-//            }
-//        });
-//
-//    }
-//
-//    private void connect(String token) {
-//
-//        RongIM.connect(token, new RongIMClient.ConnectCallback() {
-//            @Override
-//            public void onTokenIncorrect() {
-//                Log.e("Activitycc", "--onTokenIncorrect");
-//            }
-//
-//            @Override
-//            public void onSuccess(String userid) {
-//
-//                Log.e("Activitycc", "--onSuccess" + userid);
-//
-//
-//
-//                RongIM.getInstance().refreshUserInfoCache(new UserInfo(userid,user.getUserName(), Uri.parse(HttpUtile.zy1+user.getUserImg())));
-//
-//
-//            }
-//
-//            @Override
-//            public void onError(RongIMClient.ErrorCode errorCode) {
-//
-//                Log.e("Activitycc", "--onError" + errorCode);
-//            }
-//        });
-//    }
+
 
 
     @Override

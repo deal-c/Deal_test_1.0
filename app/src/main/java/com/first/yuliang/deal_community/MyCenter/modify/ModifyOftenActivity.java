@@ -129,7 +129,7 @@ public class ModifyOftenActivity extends AppCompatActivity implements View.OnCli
                     progressDialog.hide();
                     Toast.makeText(ModifyOftenActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
 
-                    // ModifyNameActivity.this.finish();
+                    //ModifyOftenActivity.this.finish();
                 }
                 else
                 {

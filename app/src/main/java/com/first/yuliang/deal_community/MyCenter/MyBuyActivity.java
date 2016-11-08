@@ -45,6 +45,7 @@ public class MyBuyActivity extends AppCompatActivity {
     List<OrderBean> orderList=new ArrayList<OrderBean>();
     List<CommodityInfoUser> commodityList = new ArrayList<CommodityInfoUser>();
     List<User> userList = new ArrayList<User>();
+    List<Integer> list=new ArrayList<>();
     private View view;
     private Button btn_state;
     private String tips;
@@ -138,7 +139,24 @@ public class MyBuyActivity extends AppCompatActivity {
                 for (int i = 0; i < orderList.size(); i++)
                 {
                     commodityList.add(orderList.get(i).getCommodityInfoUser());
+
                 }
+
+                for(int m=0;m<commodityList.size();m++)
+                {
+                    list.add(commodityList.get(m).getStatement());
+
+                }
+
+                for(int n=0;n<list.size();n++)
+                {
+                    if(list.get(n)==2||list.get(n)==4)
+                    {
+                       selectMessage(id);
+                    }
+
+                }
+
                 for (int j = 0; j < commodityList.size(); j++)
                 {
                     userList.add(commodityList.get(j).getUser_r());
@@ -164,6 +182,40 @@ public class MyBuyActivity extends AppCompatActivity {
         });
     }
 
+    private void selectMessage(int id) {
+
+        RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/SelectMessage");
+        params.addBodyParameter("id",id+"");
+        x.http().post(params, new Callback.CacheCallback<String>() {
+
+
+            @Override
+            public void onSuccess(String result) {
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public boolean onCache(String result) {
+                return false;
+            }
+        });
+    }
+
     private void getBtn(final int state, final OrderBean order) {
         if (state==0){
             btn_state.setText("删除订单");
@@ -172,6 +224,10 @@ public class MyBuyActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     updateCommodityState(order.getCommodityInfoUser().getCommodityId(),state);
+
+                    //
+                    sendMessage(state,order.getCommodityInfoUser().getUser_r().getUserId());
+
                     deleteOrder(order.getOrderId());
                     getOrder(order.getUserId());
                     getOrder(id);
@@ -186,6 +242,10 @@ public class MyBuyActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     getCommodityById(order.getCommodityInfoUser().getCommodityId(),order.getTips());
+
+
+
+
                 }
             });
         }
@@ -195,6 +255,7 @@ public class MyBuyActivity extends AppCompatActivity {
             btn_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                 }
             });
         }
@@ -204,6 +265,7 @@ public class MyBuyActivity extends AppCompatActivity {
             btn_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
 
                 }
             });
@@ -217,6 +279,8 @@ public class MyBuyActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     updateCommodityState(order.getCommodityInfoUser().getCommodityId(),5);
                     getOrder(id);
+                    //
+                    sendMessage(state,order.getCommodityInfoUser().getUser_r().getUserId());
                 }
             });
         }
@@ -229,6 +293,10 @@ public class MyBuyActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     updateCommodityState(order.getCommodityInfoUser().getCommodityId(),6);
                     getOrder(id);
+                    //
+
+
+                    sendMessage(state,order.getCommodityInfoUser().getUser_r().getUserId());
                 }
             });
         }
@@ -243,6 +311,120 @@ public class MyBuyActivity extends AppCompatActivity {
             });
         }
     }
+
+    private void sendMessage(int state,int id) {
+
+        if(state==0)
+        {
+            RequestParams params=new RequestParams(HttpUtile.zy+"servlet/SendMessageToMaiDeleteServlet");
+            params.addBodyParameter("userId",id+"");
+            x.http().get(params, new Callback.CacheCallback<String>() {
+
+
+                @Override
+                public void onSuccess(String result) {
+
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+
+                @Override
+                public boolean onCache(String result) {
+                    return false;
+                }
+            });
+
+        }
+
+
+        if(state==4)
+        {
+            RequestParams params=new RequestParams(HttpUtile.zy+"servlet/SendMessageToMaiConfirmServlet");
+            params.addBodyParameter("userId",id+"");
+
+            x.http().get(params, new Callback.CacheCallback<String>() {
+
+
+                @Override
+                public void onSuccess(String result) {
+
+
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+
+                @Override
+                public boolean onCache(String result) {
+                    return false;
+                }
+            });
+        }
+
+
+        if(state==5)
+        {
+            RequestParams params=new RequestParams(HttpUtile.zy+"servlet/SendMessageToMaiRemarkServlet");
+            params.addBodyParameter("userId",id+"");
+            x.http().get(params, new Callback.CacheCallback<String>() {
+
+
+                @Override
+                public void onSuccess(String result) {
+
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+
+                @Override
+                public boolean onCache(String result) {
+                    return false;
+                }
+            });
+        }
+
+
+
+    }
+
     private void deleteOrder(int orderId){
         RequestParams params = null;
         params = new RequestParams(HttpUtile.szj+"/csys/deletorder?orderId="+orderId);

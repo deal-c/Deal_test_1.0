@@ -4,13 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -140,6 +139,8 @@ public class BuySuccessActivity extends AppCompatActivity{
                 ll_success.setVisibility(View.VISIBLE);
                 updateCommodityState(commodity.commodityId);
                 tv_result.setText("支付成功！");
+
+                sendMessagetoMai(commodity.releaseUserId);
                 hideDialog();
             }
 
@@ -168,6 +169,42 @@ public class BuySuccessActivity extends AppCompatActivity{
                             .show();
                 }
                 hideDialog();
+            }
+        });
+    }
+
+    private void sendMessagetoMai(Integer releaseUserId) {
+
+        RequestParams params=new RequestParams(HttpUtile.zy+"servlet/SendMessageToMaiServlet");
+        params.addBodyParameter("userId",releaseUserId+"");
+
+        x.http().get(params, new Callback.CacheCallback<String>() {
+
+
+            @Override
+            public void onSuccess(String result) {
+
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public boolean onCache(String result) {
+                return false;
             }
         });
     }

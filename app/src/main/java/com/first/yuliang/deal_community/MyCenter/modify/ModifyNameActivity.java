@@ -105,7 +105,7 @@ public class ModifyNameActivity extends AppCompatActivity implements View.OnClic
                     edit.commit();
                     Toast.makeText(ModifyNameActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
 
-                   // ModifyNameActivity.this.finish();
+                     //ModifyNameActivity.this.finish();
                 }
                 else
                 {

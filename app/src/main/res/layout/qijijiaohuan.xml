@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:background="@drawable/background"
+              android:layout_margin="30dp"
+              android:padding="20dp"
+              android:layout_height="match_parent">
+    <TextView
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal"
+        android:id="@+id/tv_title_qiji"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择你要交换的物品"
+        android:textSize="12sp"
+        android:textColor="#a000"/>
+    <ImageView
+        android:id="@+id/iv_line_qiji"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ddd"/>
+    <ListView
+        android:background="#f8f8f8"
+        android:id="@+id/lv_mypublish"
+        android:layout_width="match_parent"
+        android:divider="#000"
+        android:layout_height="350dp">
+    </ListView>
+</LinearLayout>

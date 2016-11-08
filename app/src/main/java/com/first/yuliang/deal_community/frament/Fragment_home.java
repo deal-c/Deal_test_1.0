@@ -30,9 +30,9 @@ import com.first.yuliang.deal_community.CommodityActivity;
 import com.first.yuliang.deal_community.MessageActivity;
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.SearchCommodityActivity;
+import com.first.yuliang.deal_community.SearchResultActivity;
 import com.first.yuliang.deal_community.TypeActivity;
 import com.first.yuliang.deal_community.Util.NoScrollGridView;
-import com.first.yuliang.deal_community.Util.RoundCornerImageView;
 import com.first.yuliang.deal_community.frament.pojo.Adbean;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.frament.utiles.ToastUtil;
@@ -105,6 +105,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
     private BaseAdapter gadapter;
     private List <CommodityBean.Commodity> prolist=new ArrayList<>();
     private NoScrollGridView guessyoulike;
+    private Button btn_song;
     private NoScrollGridView gv_hot;
     private BaseAdapter hotadapter;
     private ScrollView mScrollView;
@@ -128,6 +129,17 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         zai_liyong = ((Button) view.findViewById(R.id.zaili_yong));
         dongtai_juan = ((Button) view.findViewById(R.id.jun_dongtai));
         jiu_huanxin = ((Button) view.findViewById(R.id.jiu_huanxin));
+        btn_song = ((Button) view.findViewById(R.id.btn_songpro));
+        btn_song.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("search","");
+                Intent intent = new Intent(getActivity(), SearchResultActivity.class);
+                intent.putExtra("bundle",bundle);
+                startActivityForResult(intent,0);
+            }
+        });
         gv_song = ((NoScrollGridView) view.findViewById(R.id.gv_song));
         guessyoulike = ((NoScrollGridView) view.findViewById(R.id.gv_guessyoulike));
         gv_hot = ((NoScrollGridView) view.findViewById(R.id.gv_hot));
@@ -216,7 +228,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         hotadapter.notifyDataSetChanged();
 
         gadapter=new BaseAdapter() {
-            private RoundCornerImageView pro_img;
+            private ImageView pro_img;
             private TextView pro_desc;
             @Override
             public int getCount() {
@@ -237,7 +249,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
             public View getView(int position, View convertView, ViewGroup parent) {
                 View  v=View.inflate(getActivity(),R.layout.gridview_song_item,null);
                 pro_desc = ((TextView) v.findViewById(R.id.pro_desc));
-                pro_img = ((RoundCornerImageView) v.findViewById(R.id.pro_img));
+                pro_img = ((ImageView) v.findViewById(R.id.pro_img));
                 if (prolist.size()!=0){
                     CommodityBean.Commodity com=prolist.get(position);
                     pro_desc.setText(com.commodityTitle);
@@ -257,7 +269,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
 
         madapter=new BaseAdapter() {
-            private RoundCornerImageView pro_img;
+            private ImageView pro_img;
             private TextView pro_desc;
 
             @Override
@@ -281,7 +293,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
                 View  v=View.inflate(getActivity(),R.layout.gridview_song_item,null);
 
                 pro_desc = ((TextView) v.findViewById(R.id.pro_desc));
-                pro_img = ((RoundCornerImageView) v.findViewById(R.id.pro_img));
+                pro_img = ((ImageView) v.findViewById(R.id.pro_img));
                 if (prolist.size()!=0){
                 CommodityBean.Commodity com=prolist.get(position);
                 pro_desc.setText(com.commodityTitle);

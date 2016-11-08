@@ -121,11 +121,13 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         Bundle bundle = intent.getBundleExtra("bundle");
         search=bundle.getString("search");
         Log.e("看看是不是传值过来==========",search);
+        if (search.equals("")||search==null||search.length()==0){
+            way = 2 ;
+        }
 
         mContext = this;
         initpop();
         line = ((ImageView) findViewById(R.id.iv_line2));
-
 
         view_load1 = View.inflate(SearchResultActivity.this,R.layout.pull_to_load,null);
         btn_load1 = ((Button) view_load1.findViewById(R.id.btn_load));
@@ -222,7 +224,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 tv_local = ((TextView) view.findViewById(R.id.tv_local));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg, "http://10.40.5.62:8080"+(commodity.commodityImg.split(","))[0]);
+                x.image().bind(iv_cg, HttpUtile.yu + (commodity.commodityImg.split(","))[0]);
                 tv_cg.setText(commodity.commodityTitle);
                 tv_price.setText(commodity.price+"");
                 tv_local.setText(commodity.location);
@@ -297,7 +299,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 tv_local_l = ((TextView) view.findViewById(R.id.tv_local_l));
                 CommodityBean.Commodity commodity = commodityList.get(position);
 
-                x.image().bind(iv_cg_l, "http://10.40.5.62:8080" + (commodity.commodityImg.split(","))[0]);
+                x.image().bind(iv_cg_l, HttpUtile.yu + (commodity.commodityImg.split(","))[0]);
                 tv_cg_l.setText(commodity.commodityTitle);
                 tv_price_l.setText(commodity.price + "");
                 tv_local_l.setText(commodity.location);
@@ -424,6 +426,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void getCommodityList(String search) {
+
         btn_bottom1.setVisibility(View.GONE);
         btn_bottom2.setVisibility(View.GONE);
         tv_null.setVisibility(View.GONE);
@@ -605,15 +608,15 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                         getCommodityList(search);
                         break;
                     case R.id.radioButton1:
-                        way = 1;
-                        getCommodityList(search);
-                        break;
-                    case R.id.radioButton2:
                         way = 2;
                         getCommodityList(search);
                         break;
-                    case R.id.radioButton3:
+                    case R.id.radioButton2:
                         way = 3;
+                        getCommodityList(search);
+                        break;
+                    case R.id.radioButton3:
+                        way = 4;
                         getCommodityList(search);
                         break;
                 }
