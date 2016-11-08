@@ -57,26 +57,27 @@ import static android.widget.ImageView.ScaleType.CENTER_CROP;
 /**
  * Created by yuliang on 2016/9/21.
  */
-public class Fragment_home extends Fragment implements View.OnClickListener{
+public class Fragment_home extends Fragment implements View.OnClickListener {
 
 
-    private Handler handler=new Handler(){
+    private Handler handler = new Handler() {
 
 
-        private  int currentItem=0;
+        private int currentItem = 0;
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 1:
-//                    if(currentItem>3){
-//                        currentItem=0;
-//                    }else {
-//                        currentItem++;
-//                    }
-//                    vp_ad.setCurrentItem(currentItem);
-////                   adapter.notifyDataSetChanged();
-//                    handler.sendEmptyMessageDelayed(1,2500);
+                    if (currentItem > 3) {
+                        currentItem = 0;
+                    } else {
+                        currentItem++;
+                    }
+                    vp_ad.setCurrentItem(currentItem);
+//                   adapter.notifyDataSetChanged();
+                    handler.sendEmptyMessageDelayed(1, 2500);
                     break;
                 case 2:
                     break;
@@ -86,15 +87,15 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
     };
     private ViewPager vp_ad;
     private PagerAdapter adapter;
-    private int previousposition=0;
-    final List<Adbean.Ad> adlist=new ArrayList<Adbean.Ad>();
+    private int previousposition = 0;
+    final List<Adbean.Ad> adlist = new ArrayList<Adbean.Ad>();
 
     private ImageButton ib_type;
     private EditText query1;
     private ImageButton ib_search1;
     private Button btn_message;
 
-    int id=0;
+    int id = 0;
     private Button qiji_huan;
     private Button zai_liyong;
     private Button dongtai_juan;
@@ -102,25 +103,25 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
     private NoScrollGridView gv_song;
     private BaseAdapter madapter;
     private BaseAdapter gadapter;
-    private List <CommodityBean.Commodity> prolist=new ArrayList<>();
+    private List<CommodityBean.Commodity> prolist = new ArrayList<>();
     private NoScrollGridView guessyoulike;
     private Button btn_song;
     private NoScrollGridView gv_hot;
     private BaseAdapter hotadapter;
     private ScrollView mScrollView;
-    private int hotcount=5;
+    private int hotcount = 5;
     private ProgressBar jiazaimore;
-    private List <CommodityBean.Commodity> hotlist=new ArrayList<>();
+    private List<CommodityBean.Commodity> hotlist = new ArrayList<>();
     private View tv_bootom;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.activity_home,null);
+        View view = inflater.inflate(R.layout.activity_home, null);
 
-        id=getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
+        id = getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id", 0);
 
-        ib_type=((ImageButton) view.findViewById(R.id.ib_type));
+        ib_type = ((ImageButton) view.findViewById(R.id.ib_type));
         btn_message = ((Button) view.findViewById(R.id.btn_message));
 
         //对应主页的四个按钮
@@ -133,10 +134,10 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("search","");
+                bundle.putString("search", "");
                 Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-                intent.putExtra("bundle",bundle);
-                startActivityForResult(intent,0);
+                intent.putExtra("bundle", bundle);
+                startActivityForResult(intent, 0);
             }
         });
         gv_song = ((NoScrollGridView) view.findViewById(R.id.gv_song));
@@ -149,7 +150,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
         mScrollView.setOnTouchListener(new TouchListenerImpl());
 
-        hotadapter=new BaseAdapter() {
+        hotadapter = new BaseAdapter() {
             private TextView locate;
             private TextView pro_price;
             private TextView pri_title;
@@ -173,34 +174,34 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                View v=View.inflate(getActivity(),R.layout.item_hot,null);
+                View v = View.inflate(getActivity(), R.layout.item_hot, null);
 
-                if (hotlist.size()!=0){
-
-
-                CommodityBean.Commodity com=hotlist.get(position);
+                if (hotlist.size() != 0) {
 
 
-                pro_img = ((ImageView) v.findViewById(R.id.iv_cg_l));
-                pri_title = ((TextView) v.findViewById(R.id.tv_cg_l));
-                pro_price = ((TextView) v.findViewById(R.id.tv_price_l));
-                locate = ((TextView) v.findViewById(R.id.tv_local_l));
-                ImageOptions options=new ImageOptions.Builder()
-                        .setImageScaleType(CENTER_CROP)
-                        .setFailureDrawableId(R.drawable.loadfailed)
-                        .build();
-
-                if (com.commodityImg.split("upload")[0].equals("/csys/")){
-                    x.image().bind(pro_img,HttpUtile.szj+com.commodityImg,options);
-                }else{
-
-                    x.image().bind(pro_img,HttpUtile.yu+com.commodityImg,options);
-                }
+                    CommodityBean.Commodity com = hotlist.get(position);
 
 
-                pri_title.setText(com.commodityTitle);
-                pro_price.setText(com.price+"");
-                locate.setText(com.location);
+                    pro_img = ((ImageView) v.findViewById(R.id.iv_cg_l));
+                    pri_title = ((TextView) v.findViewById(R.id.tv_cg_l));
+                    pro_price = ((TextView) v.findViewById(R.id.tv_price_l));
+                    locate = ((TextView) v.findViewById(R.id.tv_local_l));
+                    ImageOptions options = new ImageOptions.Builder()
+                            .setImageScaleType(CENTER_CROP)
+                            .setFailureDrawableId(R.drawable.loadfailed)
+                            .build();
+
+                    if (com.commodityImg.split("upload")[0].equals("/csys/")) {
+                        x.image().bind(pro_img, HttpUtile.szj + com.commodityImg, options);
+                    } else {
+
+                        x.image().bind(pro_img, HttpUtile.yu + com.commodityImg, options);
+                    }
+
+
+                    pri_title.setText(com.commodityTitle);
+                    pro_price.setText(com.price + "");
+                    locate.setText(com.location);
 
                 }
 
@@ -226,9 +227,10 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         gethotlist();
         hotadapter.notifyDataSetChanged();
 
-        gadapter=new BaseAdapter() {
+        gadapter = new BaseAdapter() {
             private ImageView pro_img;
             private TextView pro_desc;
+
             @Override
             public int getCount() {
                 return 2;
@@ -246,19 +248,19 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                View  v=View.inflate(getActivity(),R.layout.gridview_song_item,null);
+                View v = View.inflate(getActivity(), R.layout.gridview_song_item, null);
                 pro_desc = ((TextView) v.findViewById(R.id.pro_desc));
                 pro_img = ((ImageView) v.findViewById(R.id.pro_img));
-                if (prolist.size()!=0){
-                    CommodityBean.Commodity com=prolist.get(position);
+                if (prolist.size() != 0) {
+                    CommodityBean.Commodity com = prolist.get(position);
                     pro_desc.setText(com.commodityTitle);
-                    ImageOptions options=new ImageOptions.Builder()
+                    ImageOptions options = new ImageOptions.Builder()
                             .setImageScaleType(CENTER_CROP)
                             .setFailureDrawableId(R.drawable.loadfailed)
                             .setLoadingDrawableId(R.drawable.shalou)
                             .build();
 
-                    x.image().bind(pro_img,HttpUtile.yu+com.commodityImg,options);
+                    x.image().bind(pro_img, HttpUtile.yu + com.commodityImg, options);
                 }
                 return v;
             }
@@ -267,7 +269,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         guessyoulike.setAdapter(gadapter);
 
 
-        madapter=new BaseAdapter() {
+        madapter = new BaseAdapter() {
             private ImageView pro_img;
             private TextView pro_desc;
 
@@ -289,20 +291,20 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
 
-                View  v=View.inflate(getActivity(),R.layout.gridview_song_item,null);
+                View v = View.inflate(getActivity(), R.layout.gridview_song_item, null);
 
                 pro_desc = ((TextView) v.findViewById(R.id.pro_desc));
                 pro_img = ((ImageView) v.findViewById(R.id.pro_img));
-                if (prolist.size()!=0){
-                CommodityBean.Commodity com=prolist.get(position);
-                pro_desc.setText(com.commodityTitle);
-                ImageOptions options=new ImageOptions.Builder()
-                .setImageScaleType(CENTER_CROP)
-                .setFailureDrawableId(R.drawable.loadfailed)
-                .setLoadingDrawableId(R.drawable.shalou)
-                .build();
+                if (prolist.size() != 0) {
+                    CommodityBean.Commodity com = prolist.get(position);
+                    pro_desc.setText(com.commodityTitle);
+                    ImageOptions options = new ImageOptions.Builder()
+                            .setImageScaleType(CENTER_CROP)
+                            .setFailureDrawableId(R.drawable.loadfailed)
+                            .setLoadingDrawableId(R.drawable.shalou)
+                            .build();
 
-                x.image().bind(pro_img,HttpUtile.yu+com.commodityImg,options);
+                    x.image().bind(pro_img, HttpUtile.yu + com.commodityImg, options);
                 }
                 return v;
             }
@@ -315,22 +317,21 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //prolist
 
-                if (prolist.size()!=0){
-                Toast.makeText(getActivity(), "跳转的商品详情", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), CommodityActivity.class);
-                CommodityBean.Commodity temp = prolist.get(position);
-                intent.putExtra("search", temp.commodityTitle);
-                intent.putExtra("bundle", temp);
-                startActivity(intent);
-                }else {
-                    ToastUtil.show(getActivity(),"请检查网络连接");
+                if (prolist.size() != 0) {
+                    Toast.makeText(getActivity(), "跳转的商品详情", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getActivity(), CommodityActivity.class);
+                    CommodityBean.Commodity temp = prolist.get(position);
+                    intent.putExtra("search", temp.commodityTitle);
+                    intent.putExtra("bundle", temp);
+                    startActivity(intent);
+                } else {
+                    ToastUtil.show(getActivity(), "请检查网络连接");
                 }
             }
         });
 
 
         getSongProduct();
-
 
 
         qiji_huan.setOnClickListener(this);
@@ -342,8 +343,8 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         btn_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),MessageActivity.class);
-                intent.putExtra("id",id+"");
+                Intent intent = new Intent(getActivity(), MessageActivity.class);
+                intent.putExtra("id", id + "");
                 startActivity(intent);
             }
         });
@@ -351,7 +352,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         ib_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent=new Intent(getActivity(), TypeActivity.class);
+                Intent intent = new Intent(getActivity(), TypeActivity.class);
                 startActivity(intent);
             }
         });
@@ -370,27 +371,27 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         query1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus){
+                if (hasFocus) {
                     query1.setFocusable(false);
                     query1.setFocusableInTouchMode(true);
 //                    InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 //                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                     Intent intent = new Intent(getActivity(), SearchCommodityActivity.class);
-                    intent.putExtra("search",query1.getText().toString());
+                    intent.putExtra("search", query1.getText().toString());
                     startActivity(intent);
                 }
             }
         });
 
         //相关数据
-        final  int []imgs=new int[]{R.drawable.ad1,R.drawable.ad2,R.drawable.ad3,R.drawable.ad4};
-        final int[]ivs={R.id.iv_iv1,R.id.iv_iv2,R.id.iv_iv3,R.id.iv_iv4};
+        final int[] imgs = new int[]{R.drawable.ad1, R.drawable.ad2, R.drawable.ad3, R.drawable.ad4};
+        final int[] ivs = {R.id.iv_iv1, R.id.iv_iv2, R.id.iv_iv3, R.id.iv_iv4};
 
         //获得ViewPager控件
-        vp_ad = ((ViewPager)view.findViewById(R.id.vp_ad));
+        vp_ad = ((ViewPager) view.findViewById(R.id.vp_ad));
 
         //setAdapter(PagerAdapter adapter)
-        adapter=new PagerAdapter() {
+        adapter = new PagerAdapter() {
 
 
             private TextView tv_content;
@@ -404,7 +405,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
             @Override
             public boolean isViewFromObject(View view, Object object) {
-                return view==object;
+                return view == object;
             }
 
 
@@ -412,29 +413,33 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
 
-                View view =View.inflate(getActivity(),R.layout.home_advp_item,null);
+                View view = View.inflate(getActivity(), R.layout.home_advp_item, null);
                 iv_adphoto = ((ImageView) view.findViewById(R.id.iv_adphoto));
                 tv_title = ((TextView) view.findViewById(R.id.tv_title));
                 tv_content = ((TextView) view.findViewById(R.id.tv_content));
 
 
-                ImageOptions imageOptions=new ImageOptions.Builder()
+                ImageOptions imageOptions = new ImageOptions.Builder()
                         .setImageScaleType(CENTER_CROP)
                         .build();
-              if (adlist.size()!=0){
+                if (adlist.size() != 0) {
+                    final int a=position;
+                    iv_adphoto.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-//              ImageOptions imageOptions = new ImageOptions.Builder()
-//                .setImageScaleType(CENTER_CROP)
-//                .setCircular(true)
-//                .setFailureDrawableId(R.mipmap.ic_launcher)
-//                .setLoadingDrawableId(R.mipmap.ic_launcher)
-//                .build();
-               x.image().bind(iv_adphoto,HttpUtile.yu+adlist.get(position).getAdphoto(),imageOptions);
+                            Intent intent=new Intent(getActivity(),ad_page.class);
+                            intent.putExtra("ad",adlist.get(a));
+                            startActivity(intent);
+                        }
+                    });
+
+                    x.image().bind(iv_adphoto, HttpUtile.yu + adlist.get(position).getAdphoto(), imageOptions);
 //                iv_adphoto.setImageResource(imgs[position]);
-                tv_title.setText(adlist.get(position).getAdtitle());
-                tv_content.setText("    "+adlist.get(position).getAdcontent());
-                }else {
-                  Toast.makeText(getActivity(),"加载出错",Toast.LENGTH_SHORT).show();
+                    tv_title.setText(adlist.get(position).getAdtitle());
+                    tv_content.setText("    " + adlist.get(position).getAdcontent());
+                } else {
+                    Toast.makeText(getActivity(), "加载出错", Toast.LENGTH_SHORT).show();
                 }
 
                 container.addView(view);
@@ -447,11 +452,13 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
                 container.removeView(((View) object));
             }
         };
+
         vp_ad.setAdapter(adapter);
 
         //页面改变对应的操作
         vp_ad.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             private ImageView iv_ivs;
+
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -459,12 +466,12 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
             @Override
             public void onPageSelected(int position) {
-                if(getActivity()!=null){
-                iv_ivs = ((ImageView) (getActivity()).findViewById(ivs[position]));
-                iv_ivs.setImageResource(R.drawable.red);
-                ImageView iv_ivp = ((ImageView) (getActivity()).findViewById(ivs[previousposition]));
-                iv_ivp.setImageResource(R.drawable.point);
-                previousposition=position;
+                if (getActivity() != null) {
+                    iv_ivs = ((ImageView) (getActivity()).findViewById(ivs[position]));
+                    iv_ivs.setImageResource(R.drawable.red);
+                    ImageView iv_ivp = ((ImageView) (getActivity()).findViewById(ivs[previousposition]));
+                    iv_ivp.setImageResource(R.drawable.point);
+                    previousposition = position;
 
                 }
 
@@ -476,7 +483,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 //               handler.sendEmptyMessage(1);
 
 
-                }
+            }
         });
 
 
@@ -489,16 +496,18 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
         return view;
     }
+
     //获得推荐赠送的商品列表
     private void getSongProduct() {
-        RequestParams params=new RequestParams(HttpUtile.yu+"/community/togetjuan");
+        RequestParams params = new RequestParams(HttpUtile.yu + "/community/togetjuan");
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
 
-                Gson gson=new Gson();
-                Type type=new TypeToken<List<CommodityBean.Commodity>>(){}.getType();
-                prolist=gson.fromJson(result,type);
+                Gson gson = new Gson();
+                Type type = new TypeToken<List<CommodityBean.Commodity>>() {
+                }.getType();
+                prolist = gson.fromJson(result, type);
 
 
                 madapter.notifyDataSetChanged();
@@ -524,33 +533,32 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
     }
 
 
-
-   // 获得广告list
+    // 获得广告list
     private void getAdList() {
 
-        RequestParams params=new RequestParams(HttpUtile.yu+"deal_ad/getad");
+        RequestParams params = new RequestParams(HttpUtile.yu + "deal_ad/getad");
         params.setCacheMaxAge(1000 * 10);
 
-            x.http().get(params, new Callback.CommonCallback<String>() {
+        x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override
             public void onSuccess(String result) {
                 getActivity().findViewById(R.id.pb_load).setVisibility(View.GONE);
                 System.out.println(result);
 
-                Gson gson=new Gson();
-                Adbean bean= gson.fromJson(result,Adbean.class);
+                Gson gson = new Gson();
+                Adbean bean = gson.fromJson(result, Adbean.class);
 
                 adlist.addAll(bean.adlist);
                 adapter.notifyDataSetChanged();
-                Toast.makeText(getActivity(),"访问成功",Toast.LENGTH_LONG).show();
-
+                Toast.makeText(getActivity(), "访问成功", Toast.LENGTH_LONG).show();
+                handler.sendEmptyMessage(1);
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
-                    Toast.makeText(getActivity().getApplication(), "访问出错", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplication(), "访问出错", Toast.LENGTH_LONG).show();
 
 //                getActivity().findViewById(R.id.pb_load).setVisibility(View.GONE);
             }
@@ -571,32 +579,32 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.qiji_huan:
-                Intent intent1=new Intent(getActivity(), huan_magic.class);
+                Intent intent1 = new Intent(getActivity(), huan_magic.class);
                 startActivity(intent1);
                 break;
             case R.id.zaili_yong:
-                Intent intent2=new Intent(getActivity(), re_use.class);
+                Intent intent2 = new Intent(getActivity(), re_use.class);
                 startActivity(intent2);
                 break;
             case R.id.jun_dongtai:
-                Intent intent3=new Intent(getActivity(),juan_dongtai.class);
+                Intent intent3 = new Intent(getActivity(), juan_dongtai.class);
                 startActivity(intent3);
                 break;
             case R.id.jiu_huanxin:
-                Intent intent4=new Intent(getActivity(), old_tonew.class);
+                Intent intent4 = new Intent(getActivity(), old_tonew.class);
                 startActivity(intent4);
                 break;
-
 
 
         }
 
     }
-//获得热门商品list
-    private void gethotlist(){
-        RequestParams params =new RequestParams(HttpUtile.szj+"/csys/getallbrowse");
+
+    //获得热门商品list
+    private void gethotlist() {
+        RequestParams params = new RequestParams(HttpUtile.szj + "/csys/getallbrowse");
 
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
@@ -605,16 +613,16 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
                 CommodityBean bean = gson.fromJson(result, CommodityBean.class);
 //                Type type=new TypeToken<List<CommodityBean.Commodity>>(){}.getType();
                 hotlist.addAll(bean.commodities);
-                Log.e("onSuccess",hotlist.size()+"" );
+                Log.e("onSuccess", hotlist.size() + "");
                 hotadapter.notifyDataSetChanged();
                 jiazaimore.setVisibility(View.GONE);
-                 ToastUtil.show(getActivity(),"success");
+                ToastUtil.show(getActivity(), "success");
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
-                ToastUtil.show(getActivity(),"error");
+                ToastUtil.show(getActivity(), "error");
             }
 
             @Override
@@ -640,31 +648,28 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
                     break;
                 case MotionEvent.ACTION_MOVE:
 
-                    int scrollY=view.getScrollY();
-                    int height=view.getHeight();
-                    int scrollViewMeasuredHeight=mScrollView.getChildAt(0).getMeasuredHeight();
-                    if(scrollY==0){
-                        Log.e("滑动到了顶端 ", scrollY+"");
+                    int scrollY = view.getScrollY();
+                    int height = view.getHeight();
+                    int scrollViewMeasuredHeight = mScrollView.getChildAt(0).getMeasuredHeight();
+                    if (scrollY == 0) {
+                        Log.e("滑动到了顶端 ", scrollY + "");
                     }
-                    if((scrollY+height)==scrollViewMeasuredHeight){
+                    if ((scrollY + height) == scrollViewMeasuredHeight) {
 //                        Log.e("滑动到了底部 scrollY=", scrollY+"");
-                        hotcount+=5;
-                          if (hotlist.size()<hotcount){
-                              jiazaimore.setVisibility(View.GONE);
-                              tv_bootom.setVisibility(View.VISIBLE);
+                        hotcount += 5;
+                        if (hotlist.size() < hotcount) {
+                            jiazaimore.setVisibility(View.GONE);
+                            tv_bootom.setVisibility(View.VISIBLE);
 
-                          }else {
+                        } else {
 
-                              hotadapter.notifyDataSetChanged();
-                              jiazaimore.setVisibility(View.GONE);
-                          }
-
-
-
+                            hotadapter.notifyDataSetChanged();
+                            jiazaimore.setVisibility(View.GONE);
+                        }
 
 
 //                        Log.e("滑动到了底部 height=", height+"");
-                    }else if (scrollY>0 &&(scrollY+height)<scrollViewMeasuredHeight){
+                    } else if (scrollY > 0 && (scrollY + height) < scrollViewMeasuredHeight) {
                         jiazaimore.setVisibility(View.VISIBLE);
                         tv_bootom.setVisibility(View.GONE);
                     }
@@ -676,8 +681,9 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
             return false;
         }
 
-    };
+    }
 
+    ;
 
 
 }

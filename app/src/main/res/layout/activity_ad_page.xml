@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_ad_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context="com.first.yuliang.deal_community.frament.ad_page">
+<RelativeLayout
+    android:id="@+id/sdfsaf"
+    android:background="@color/bgcolor"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+    <TextView
+        android:text="广告详情"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>
+    <TextView
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"
+        android:layout_below="@+id/sdfsaf"
+        android:id="@+id/ad_title1"
+        android:text="标题"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="22sp"
+        android:gravity="center"/>
+
+    <ImageView
+        android:id="@+id/ad_img1"
+        android:src="@drawable/ad1"
+        android:layout_below="@+id/ad_title1"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp" />
+    <TextView
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/content1"
+        android:layout_below="@+id/ad_img1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="类容"
+        android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/timeaaaaa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="2016年11月1日"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentBottom="true"/>
+
+    <TextView
+        android:id="@+id/ad_http_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:textSize="14sp"
+        android:text="sssssssssssssssssssss"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

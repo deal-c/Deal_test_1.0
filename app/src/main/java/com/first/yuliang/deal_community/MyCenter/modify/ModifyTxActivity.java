@@ -74,8 +74,9 @@ public class ModifyTxActivity extends AppCompatActivity implements View.OnClickL
         edit.commit();
 
         iv_tx_camora = ((ImageView) findViewById(R.id.iv_tx_camora));
-        x.image().bind(iv_tx_camora,HttpUtile.zy1+userImg);
-
+        if (!userImg.equals("null")&&userImg!=null&&userImg.length()!=0) {
+            x.image().bind(iv_tx_camora, HttpUtile.zy1 + userImg);
+        }
         iv_modify_tx_back = ((ImageView) findViewById(R.id.iv_modify_tx_back));
         tv_keep_tx = ((TextView) findViewById(R.id.tv_keep_tx));
         iv_tx_camora.setOnClickListener(this);
@@ -102,7 +103,7 @@ public class ModifyTxActivity extends AppCompatActivity implements View.OnClickL
         });
 
         final PopupWindow popupWindow = new PopupWindow(contentView,
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
+                ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
 
         popupWindow.setTouchable(true);
 
@@ -118,8 +119,7 @@ public class ModifyTxActivity extends AppCompatActivity implements View.OnClickL
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
-
-
+        popupWindow.setAnimationStyle(R.style.AnimBottom);
         popupWindow.showAtLocation(v, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL,0, 0);
 
     }

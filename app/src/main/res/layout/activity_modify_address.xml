@@ -16,7 +16,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/comego"
+                android:src="@drawable/return_"
 
                 android:layout_centerVertical="true"
                 android:gravity="left"/>
@@ -40,6 +40,14 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <Button
+        android:id="@+id/iv_line1"
+        android:layout_below="@id/tool_addresslist"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#bbb"
+        />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,20 +58,21 @@
             android:id="@+id/rl_add_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="7dip"
-            android:background="#ccc"
+            android:layout_below="@id/iv_line1"
+            android:padding="5dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/ripple_bg_item_eee"
             >
 
             <TextView
                 android:id="@+id/tv_add_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="新增地址"
-                android:textSize="24sp"
-                android:textColor="#000"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
+                android:text=" + 新增地址"
+                android:textSize="14sp"
+                android:padding="5dip"
+                android:textColor="#a000"
+                android:layout_marginLeft="10dp"
                 />
 
         </RelativeLayout>

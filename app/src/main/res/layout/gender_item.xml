@@ -5,43 +5,39 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="15dp"
-    android:background="#ccc"
+    android:background="@drawable/button_1"
     >
 
     <Button
         android:id="@+id/btn_male"
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/shape"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:text="男"
         android:textColor="@color/main"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="1px"
-        android:background="#C0C5C7"/>
     <Button
         android:id="@+id/btn_female"
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/shape"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:text="女"
         android:textColor="@color/main"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="1px"
-        android:background="#C0C5C7"/>
     <Button
 
         android:id="@+id/btn_cancel"
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/shape"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:text="取消"
         android:textColor="@color/main"
         android:layout_marginBottom="15dp"/>

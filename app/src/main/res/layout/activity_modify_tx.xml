@@ -18,11 +18,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/comego"
-
+                android:src="@drawable/return_"
+                android:background="@drawable/ripple_bg"
                 android:gravity="left"
-                android:layout_centerVertical="true"
-                />
+                android:layout_centerVertical="true"/>
 
             <TextView
                 android:id="@+id/tv_modify_tx"
@@ -31,12 +30,7 @@
                 android:text="修改头像"
                 android:textSize="18sp"
                 android:textColor="#fff"
-
-
                 android:layout_gravity="center_horizontal"
-
-
-
                 />
             <TextView
                 android:id="@+id/tv_keep_tx"
@@ -45,8 +39,6 @@
                 android:text="保存"
                 android:textSize="16sp"
                 android:textColor="#fff"
-
-
                 android:layout_gravity="right"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="15dp"
@@ -55,10 +47,18 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <Button
+        android:id="@+id/iv_line1"
+        android:layout_below="@id/toolbar_modify_tx"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#bbb"
+        />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar_modify_tx"
+        android:layout_below="@id/iv_line1"
         android:padding="20dp">
     <ImageView
         android:id="@+id/iv_tx_camora"
@@ -69,11 +69,11 @@
         android:src="@drawable/camora"/>
 
         <TextView
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#000"
+            android:textSize="14sp"
+            android:textColor="#8000"
             android:text="点击头像修改"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/iv_tx_camora"/>

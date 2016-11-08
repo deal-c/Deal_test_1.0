@@ -16,7 +16,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="附近"
+            android:text="社区"
             android:textSize="20sp"
             android:textColor="#fff"/>
         <ImageView
