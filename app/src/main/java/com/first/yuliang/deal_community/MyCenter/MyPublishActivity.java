@@ -38,6 +38,7 @@ public class MyPublishActivity extends AppCompatActivity implements View.OnClick
     List<Product> productList=new ArrayList<>();
     Dialog progressDialog;
     private ImageButton iv_publish_back;
+    private ImageButton ib_return_mine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,13 @@ public class MyPublishActivity extends AppCompatActivity implements View.OnClick
 
         Intent intent=getIntent();
         userId=Integer.parseInt(intent.getStringExtra("userId").toString().trim());
-
+        ib_return_mine = ((ImageButton) findViewById(R.id.ib_return_mine));
+        ib_return_mine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyPublishActivity.this.finish();
+            }
+        });
         if(userId==0)
         {
             Toast.makeText(MyPublishActivity.this,"您尚未登录呦",Toast.LENGTH_SHORT).show();
@@ -81,7 +88,6 @@ public class MyPublishActivity extends AppCompatActivity implements View.OnClick
                     TextView tv_publish_product_name = ((TextView) view.findViewById(R.id.tv_publish_product_name));
                     TextView tv_publish_product_price = ((TextView) view.findViewById(R.id.tv_publish_product_price));
                     TextView tv_publish_product_class = ((TextView) view.findViewById(R.id.tv_publish_product_class));
-                    TextView tv_publish_product_desc = ((TextView) view.findViewById(R.id.tv_publish_product_desc));
                     TextView tv_publish_product_time = ((TextView) view.findViewById(R.id.tv_publish_product_time));
                     ImageView iv_publish_product = ((ImageView) view.findViewById(R.id.iv_publish_product));
                     Product product = productList.get(position);
@@ -90,7 +96,6 @@ public class MyPublishActivity extends AppCompatActivity implements View.OnClick
                     tv_publish_product_price.setText(product.getPrice() + "");
                     tv_publish_product_class.setText(product.getProductClass());
                     tv_publish_product_time.setText(DateUtils.dateToString(product.getReleaseTime()));
-                    tv_publish_product_desc.setText(product.getProductDescribe());
                     x.image().bind(iv_publish_product, HttpUtile.szj + product.getProductImg());
 
 

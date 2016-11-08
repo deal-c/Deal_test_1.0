@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:src="@drawable/comego"
+            android:src="@drawable/return_"
             />
 
 
@@ -44,13 +44,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#cc9966"
-            android:layout_marginTop="20dp"
 
             >
             <ImageView
                 android:id="@+id/iv_shangjia_tx"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:src="@drawable/testtx"
                 android:scaleType="centerCrop"
                 android:layout_marginLeft="10dp"
@@ -68,10 +67,10 @@
                 android:id="@+id/tv_shangjia_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_marginLeft="24dp"
                 android:text="vanxe"
                 android:textColor="#fff"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 />
 
 
@@ -79,16 +78,18 @@
                     android:id="@+id/tv_shangjia_often"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textColor="#fff"
+                    android:layout_marginLeft="24dp"
                     android:text="苏州"
                     android:layout_marginTop="5dp"
                     android:layout_below="@id/tv_shangjia_name"/>
 
                 <ImageView
                     android:id="@+id/iv_guanzhu"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginLeft="24dp"
                     android:scaleType="centerCrop"
                     android:background="@drawable/guanzhu"
                    android:layout_marginTop="5dp"
@@ -101,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/iv_guanzhu"
                     android:text="关注"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textColor="#fff"
                     android:layout_alignBottom="@id/iv_guanzhu"
                     android:layout_marginBottom="5dp"
@@ -109,8 +110,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sichat"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:layout_toRightOf="@id/tv_guanzhu"
                     android:src="@drawable/sichat"
                     android:layout_alignTop="@id/iv_guanzhu"
@@ -121,7 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/iv_sichat"
                     android:text="私信"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textColor="#fff"
                     android:layout_alignTop="@id/tv_guanzhu"/>
             </RelativeLayout>
@@ -138,9 +139,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:layout_centerInParent="true"
-                android:text="收到了100条评论"/>
+                android:text="评论卖家"/>
         </RelativeLayout>
         <ListView
             android:id="@+id/lv_shangjia_Info"

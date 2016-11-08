@@ -7,8 +7,16 @@
     <include android:id="@+id/tl_mypublish"
              layout="@layout/mymai"/>
 
-    <ListView
+    <Button
+        android:id="@+id/iv_line1"
         android:layout_below="@id/tl_mypublish"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#bbb"
+        />
+
+    <ListView
+        android:layout_below="@id/iv_line1"
         android:id="@+id/lv_publish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

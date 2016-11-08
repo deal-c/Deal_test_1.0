@@ -19,8 +19,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/u18"
-
+                android:src="@drawable/return_"
+                android:background="@drawable/ripple_bg"
                 android:gravity="left"
                 android:layout_centerVertical="true"
                 />
@@ -44,10 +44,17 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <Button
+        android:id="@+id/btn_bar_shadow"
+        android:layout_below="@+id/toolbar_message"
+        android:background="#bbb"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       android:layout_below="@+id/toolbar_message">
+       android:layout_below="@+id/btn_bar_shadow">
 
         <RelativeLayout
             android:id="@+id/rl_wuliu_message"
@@ -60,8 +67,9 @@
 
             <ImageView
                 android:id="@+id/iv_wuliu"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/wuliu"
@@ -71,8 +79,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="物流消息"
-                android:textSize="20sp"
-                android:textColor="#000"
+                android:textSize="16sp"
+                android:textColor="#a000"
                 android:layout_centerInParent="true"
                 />
 
@@ -96,16 +104,17 @@
 
             <ImageView
                 android:id="@+id/iv_sixin"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/sixin"
                 android:background="@drawable/shapesixin"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="私信"
-                android:textSize="20sp"
-                android:textColor="#000"
+                android:textSize="16sp"
+                android:textColor="#a000"
                 android:layout_centerInParent="true"
                 />
 
@@ -127,8 +136,9 @@
 
             <ImageView
                 android:id="@+id/iv_tongzhi"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/tongzhi"
                 android:background="@drawable/shapexit"/>
 
@@ -136,8 +146,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="系统消息"
-                android:textSize="20sp"
-                android:textColor="#000"
+                android:textSize="16sp"
+                android:textColor="#a000"
                 android:layout_centerInParent="true"
                 />
 
@@ -160,16 +170,17 @@
             <ImageView
 
                 android:id="@+id/iv_shequ"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/shequ"
                 android:background="@drawable/shapeshequ"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="社区回复"
-                android:textSize="20sp"
-                android:textColor="#000"
+                android:textSize="16sp"
+                android:textColor="#a000"
                 android:layout_centerInParent="true"
                 />
 
