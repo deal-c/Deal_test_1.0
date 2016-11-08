@@ -3,7 +3,6 @@ package com.first.yuliang.deal_community.frament;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -422,21 +421,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
                 ImageOptions imageOptions=new ImageOptions.Builder()
                         .setImageScaleType(CENTER_CROP)
                         .build();
-                int key=-1;
-                switch (position){
-                    case 0:
-                        key=3;break;
-                    case 1:
-                        key=2;break;
-                    case 2:
-                        key=1;break;
-                    case 3:
-                        key=0;break;
-                }if (adlist.size()!=0){
-                    for (int i=0;i<4;i++) {
-                        //拿不到数据就不显示
-                        ((ImageView) (getActivity()).findViewById(ivs[position])).setVisibility(View.VISIBLE);
-                    }
+              if (adlist.size()!=0){
 
 //              ImageOptions imageOptions = new ImageOptions.Builder()
 //                .setImageScaleType(CENTER_CROP)
@@ -444,20 +429,10 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 //                .setFailureDrawableId(R.mipmap.ic_launcher)
 //                .setLoadingDrawableId(R.mipmap.ic_launcher)
 //                .build();
-               x.image().bind(iv_adphoto,HttpUtile.yu+adlist.get(key).getAdphoto(),imageOptions);
+               x.image().bind(iv_adphoto,HttpUtile.yu+adlist.get(position).getAdphoto(),imageOptions);
 //                iv_adphoto.setImageResource(imgs[position]);
-                tv_title.setText(adlist.get(key).getAdtitle());
-                tv_content.setText("    "+adlist.get(key).getAdcontent());
-                final int p;
-                p= position;
-                iv_adphoto.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Uri uri = Uri.parse(adlist.get(p).getAdhttp());
-                        Intent it = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(it);
-                    }
-                });
+                tv_title.setText(adlist.get(position).getAdtitle());
+                tv_content.setText("    "+adlist.get(position).getAdcontent());
                 }else {
                   Toast.makeText(getActivity(),"加载出错",Toast.LENGTH_SHORT).show();
                 }
@@ -574,11 +549,9 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                if(getActivity()!=null) {
 
                     Toast.makeText(getActivity().getApplication(), "访问出错", Toast.LENGTH_LONG).show();
-                    getActivity().findViewById(R.id.pb_load).setVisibility(View.GONE);
-                }
+
 //                getActivity().findViewById(R.id.pb_load).setVisibility(View.GONE);
             }
 

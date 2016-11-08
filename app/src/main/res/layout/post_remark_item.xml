@@ -9,19 +9,19 @@
 
 
         <ImageView
-
+            android:src="@drawable/ad2"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
-            android:id="@+id/remark_userphoto"
+            android:id="@+id/reply_userphoto"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/head_"/>
+           />
         <TextView
             android:layout_marginTop="4dp"
             android:textColor="#262626"
-            android:layout_toRightOf="@+id/remark_userphoto"
-            android:layout_alignTop="@+id/remark_userphoto"
+            android:layout_toRightOf="@+id/reply_userphoto"
+            android:layout_alignTop="@+id/reply_userphoto"
             android:id="@+id/remark_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,7 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.widget.ImageView.ScaleType.CENTER_CROP;
-import static android.widget.ImageView.ScaleType.CENTER_INSIDE;
 
 public class Community_model extends AppCompatActivity implements View.OnClickListener{
 
@@ -64,6 +64,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
     private TextView comdesc;
     private Button care;
     private BaseAdapter myadapter;
+    private Button Button;
 
     @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +104,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
         comImg = ((ImageView) headview.findViewById(R.id.communityimg));
         care = ((Button) headview.findViewById(R.id.care));
         care.setOnClickListener(this);
-
+        Button.setOnClickListener(this);
         //拆分图片路径
         if (!community.getComImg().equals("0")) {
             String[] imgs = community.getComImg().split(";");
@@ -123,6 +124,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
         comdesc.setText(community.getCommunityInfo());
 
         myadapter = new BaseAdapter() {
+            private TextView ping_num;
             private TextView dongtai_time;
             private TextView dongtai_title;
             private TextView textView;
@@ -160,23 +162,24 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
                 dongtai_time = ((TextView) view.findViewById(R.id.dongtai_time));
 
                 Post post=pstlist.get(position);
-
                 tv_dongtai_usename.setText(post.getUser().getUserName());
                 tv_dongtai_content.setText(post.getPostInfo());
                 String time=  com.first.yuliang.deal_community.Util.DateUtils.dateToString(com.first.yuliang.deal_community.Util.DateUtils.stringToDate(post.getPostTime(),"yyyy-MM-dd hh:mm:ss"),"MM月dd日 hh:mm");
+
                 dongtai_time.setText(time);
                 dongtai_title.setText(post.getPostTitle());
                 ImageOptions options=new ImageOptions.Builder()
                         .setImageScaleType(CENTER_CROP)
                         .build();
                 ImageOptions options1=new ImageOptions.Builder()
-                        .setImageScaleType(CENTER_INSIDE)
+                        .setImageScaleType(CENTER_CROP)
                         .setFailureDrawableId(R.drawable.head_)
-
+                        .setLoadingDrawableId(R.drawable.head_)
+                        .setCircular(true)
                         .build();
 
                 x.image().bind(iv_dongtai_dongtaiphoto,HttpUtile.yu+post.getImgs(),options);
-                x.image().bind(iv_dongtai_userphoto,HttpUtile.yu+post.getUser().getUserImg(),options1);
+                x.image().bind(iv_dongtai_userphoto,HttpUtile.zy1+post.getUser().getUserImg(),options1);
 
                 return view;
 
@@ -186,7 +189,18 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
 
 
         tiezilisst.setAdapter(myadapter);
+        tiezilisst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(Community_model.this, tieziactivity.class);
 
+                intent.putExtra("post",pstlist.get(position-1));
+
+                startActivity(intent);
+
+
+            }
+        });
 
     }
 
@@ -271,6 +285,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
         backToSearch = ((ImageView) findViewById(R.id.backToSearch));
         communityName = ((TextView) findViewById(R.id.tv_communityname1));
         tiezilisst=((ListView) findViewById(R.id.lv_tiezi));
+        Button = ((Button) findViewById(R.id.fatie));
 
     }
 
@@ -298,6 +313,11 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.care:
                 careCommunity();
+                break;
+            case  R.id.fatie:
+                Intent intent=new Intent(Community_model.this,pubpostActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 

@@ -45,7 +45,7 @@ import java.util.List;
 import static android.widget.ImageView.ScaleType.CENTER_CROP;
 import static com.first.yuliang.deal_community.R.id.btn_fabiao;
 
-public class tieziactivity extends AppCompatActivity implements View.OnClickListener{
+public class tieziactivity extends AppCompatActivity implements View.OnClickListener {
 
     private RelativeLayout postbottom;
     private RelativeLayout post_remark;
@@ -56,10 +56,10 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
     private BaseAdapter gvadapter;
     private Button fabiao;
     private EditText et_huifu;
-    private List<Reply>replyList=new ArrayList<>();
+    private List<Reply> replyList = new ArrayList<>();
     Dialog progressDialog;
     private User user;
-    private  int id;
+    private int id;
     private Post post;
     private ImageView head_louzhu;
     private TextView louzhu_name;
@@ -68,6 +68,7 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
     private TextView post_content;
     private ImageView post_img;
     private ImageView my_head;
+    private TextView reply_num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,26 +76,28 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_tieziactivity);
         id = this.getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id", 0);
 
-        if (id!=0){
+        if (id != 0) {
             getusre(id);
         }
-         Intent intent=getIntent();
-        post=intent.getParcelableExtra("post");
-        Log.e("postid",post.getPostId() +"");
-        ImageOptions options1=new ImageOptions.Builder()
+        Intent intent = getIntent();
+        post = intent.getParcelableExtra("post");
+        Log.e("postid", post.getPostId() + "");
+        ImageOptions options1 = new ImageOptions.Builder()
                 .setImageScaleType(CENTER_CROP)
                 .setFailureDrawableId(R.drawable.head_)
                 .setLoadingDrawableId(R.drawable.head_)
                 .setCircular(true)
                 .build();
         head_louzhu = ((ImageView) findViewById(R.id.head_louzhu));
-        x.image().bind(head_louzhu,HttpUtile.zy1+post.getUser().getUserImg(),options1);
+        x.image().bind(head_louzhu, HttpUtile.zy1 + post.getUser().getUserImg(), options1);
+
+        reply_num = ((TextView) findViewById(R.id.reply_num));
 
         louzhu_name = ((TextView) findViewById(R.id.louzhu_name));
         louzhu_name.setText(post.getUser().getUserName());
 
         post_time = ((TextView) findViewById(R.id.post_time));
-        String time=DateUtils.dateToString(DateUtils.stringToDate(post.getPostTime(),"yyyy-MM-dd hh:mm:ss"),"MM月dd日 HH:mm:ss");
+        String time = DateUtils.dateToString(DateUtils.stringToDate(post.getPostTime(), "yyyy-MM-dd hh:mm:ss"), "MM月dd日 HH:mm:ss");
         post_time.setText(time);
 
         post_title = ((TextView) findViewById(R.id.post_tiltle));
@@ -104,7 +107,7 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
         post_content.setText(post.getPostInfo());
 
         post_img = ((ImageView) findViewById(R.id.post_img));
-        x.image().bind(post_img,HttpUtile.yu+post.getImgs());
+        x.image().bind(post_img, HttpUtile.yu + post.getImgs());
 
 
         my_head = ((ImageView) findViewById(R.id.my_head));
@@ -117,9 +120,9 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
         zhengwen = ((RelativeLayout) findViewById(R.id.zhengwen));
         relist_post = ((NoScrollGridView) findViewById(R.id.post_relist));
         fabiao = ((Button) findViewById(btn_fabiao));
-        gvadapter=new BaseAdapter() {
+        gvadapter = new BaseAdapter() {
 
-            private ImageView remark_userphoto;
+            private ImageView reply_userphoto;
             private ImageView huifu_img;
             private TextView more_huifu1;
             private NoScrollGridView son_listview;
@@ -128,9 +131,10 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
             private TextView re_content;
             private TextView re_name;
 
+
             @Override
             public int getCount() {
-                Log.e("getCount",replyList.size()+"");
+                Log.e("getCount", replyList.size() + "");
                 return replyList.size();
             }
 
@@ -146,7 +150,7 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public View getView(final int position, View convertView, ViewGroup parent) {
-                View v=View.inflate(tieziactivity.this,R.layout.post_remark_item,null);
+                View v = View.inflate(tieziactivity.this, R.layout.post_remark_item, null);
                 re_name = ((TextView) v.findViewById(R.id.remark_name));
                 re_content = ((TextView) v.findViewById(R.id.remark_content));
                 lou_num = ((TextView) v.findViewById(R.id.lou_num));
@@ -154,24 +158,25 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
                 son_listview = ((NoScrollGridView) v.findViewById(R.id.zihuifulist));
                 more_huifu1 = ((TextView) v.findViewById(R.id.more_huifu));
                 huifu_img = ((ImageView) v.findViewById(R.id.huifu_img));
-                remark_userphoto = ((ImageView) findViewById(R.id.remark_userphoto));
-                final Integer  po=position;
+                reply_userphoto = ((ImageView) findViewById(R.id.reply_userphoto));
 
-                if (replyList.size()!=0){
-                     final Reply reply=replyList.get(position);
 
+                final Integer po = position;
+
+                if (replyList.size() != 0) {
+                    final Reply reply = replyList.get(position);
                     huifu_img.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent=new Intent(tieziactivity.this,son_reply_activity.class);
-                            Integer a=position;
-                            intent.putExtra("reply",reply);
-                            intent.putExtra("position",a+"");
-                            intent.putExtra("key",-1+"");
-                            intent.putExtra("tag","楼主");
+                            Intent intent = new Intent(tieziactivity.this, son_reply_activity.class);
+                            Integer a = position;
+                            intent.putExtra("reply", reply);
+                            intent.putExtra("position", a + "");
+                            intent.putExtra("key", -1 + "");
+                            intent.putExtra("tag", "楼主");
 
-                             startActivityForResult(intent,a);
-                          //  startActivity(intent);
+                            startActivityForResult(intent, a);
+                            //  startActivity(intent);
 
                         }
                     });
@@ -179,16 +184,15 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
                     more_huifu1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent=new Intent(tieziactivity.this,son_reply_activity.class);
-                            Integer a=position;
-                            intent.putExtra("reply",reply);
-                            intent.putExtra("position",a+"");
-                            intent.putExtra("tag","查看");
-                            intent.putExtra("key",-1+"");
-                            startActivityForResult(intent,a);
+                            Intent intent = new Intent(tieziactivity.this, son_reply_activity.class);
+                            Integer a = position;
+                            intent.putExtra("reply", reply);
+                            intent.putExtra("position", a + "");
+                            intent.putExtra("tag", "查看");
+                            intent.putExtra("key", -1 + "");
+                            startActivityForResult(intent, a);
                         }
                     });
-
 
 
                     re_name.setText(reply.getReplyuser().getUserName());
@@ -198,28 +202,34 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
                             .setLoadingDrawableId(R.drawable.head_)
                             .setCircular(true)
                             .build();
-                    x.image().bind(remark_userphoto,HttpUtile.zy1+reply.getReplyuser().getUserImg(),options1);
+                    Log.e("reply_userphoto", reply.getReplyuser().getUserName() + "::" + HttpUtile.zy1 + reply.getReplyuser().getUserImg());
+
+
+                    x.image().bind(reply_userphoto, HttpUtile.zy1 + reply.getReplyuser().getUserImg(), options1);
+                    x.image().bind(reply_userphoto,HttpUtile.zy1+ reply.getReplyuser().getUserImg(),options1);
+
+
 
                     re_content.setText(reply.getReplycontent());
-                    lou_num.setText("第"+(position+2)+"楼");
-                   String time=DateUtils.dateToString(DateUtils.stringToDate(reply.getTime(),"yyyy-MM-dd hh:mm:ss"),"MM月dd日 HH:mm:ss");
+                    lou_num.setText("第" + (position + 2) + "楼");
+                    String time = DateUtils.dateToString(DateUtils.stringToDate(reply.getTime(), "yyyy-MM-dd hh:mm:ss"), "MM月dd日 HH:mm:ss");
                     re_time.setText(time);
-                    if (reply.rslist.size()!=0){
+                    if (reply.rslist.size() != 0) {
 
-                       final List <Reply_son>son_list=reply.rslist;
-                         BaseAdapter sonadapter=new BaseAdapter() {
+                        final List<Reply_son> son_list = reply.rslist;
+                        BaseAdapter sonadapter = new BaseAdapter() {
                             private TextView huifu_content;
                             private TextView fusername;
 
                             @Override
                             public int getCount() {
-                                int a=-1;
-                                if (son_list.size()<=2){
-                                    a=son_list.size();
-                                }else{
-                                    a=2;
+                                int a = -1;
+                                if (son_list.size() <= 2) {
+                                    a = son_list.size();
+                                } else {
+                                    a = 2;
                                     more_huifu1.setVisibility(View.VISIBLE);
-                                    more_huifu1.setText("更多"+(son_list.size()-2)+"条回复");
+                                    more_huifu1.setText("更多" + (son_list.size() - 2) + "条回复");
                                 }
                                 return a;
                             }
@@ -236,18 +246,17 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
 
                             @Override
                             public View getView(int position, View convertView, ViewGroup parent) {
-                                View view=View.inflate(tieziactivity.this,R.layout.reply_son_item,null);
-                                Reply_son reply_son=son_list.get(position);
+                                View view = View.inflate(tieziactivity.this, R.layout.reply_son_item, null);
+                                Reply_son reply_son = son_list.get(position);
                                 fusername = ((TextView) view.findViewById(R.id.son_fromusername));
                                 huifu_content = ((TextView) view.findViewById(R.id.son_huifu));
-                                fusername.setText(reply_son.getRs_from_user().getUserName()+":");
-                                if (reply.getReplyuser().getUserId()==reply_son.getRs_to_user().getUserId()){
+                                fusername.setText(reply_son.getRs_from_user().getUserName() + ":");
+                                if (reply.getReplyuser().getUserId() == reply_son.getRs_to_user().getUserId()) {
                                     huifu_content.setText(reply_son.getRs_content());
-                                }else {
-                                    huifu_content.setText("回复 "+reply_son.getRs_to_user().getUserName()+":"+
-                                            reply_son.getRs_content() );
+                                } else {
+                                    huifu_content.setText("回复 " + reply_son.getRs_to_user().getUserName() + ":" +
+                                            reply_son.getRs_content());
                                 }
-
 
 
                                 return view;
@@ -257,13 +266,14 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
                         son_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Intent intent=new Intent(tieziactivity.this,son_reply_activity.class);
-                                Integer a=position;
-                                intent.putExtra("reply",reply);
-                                intent.putExtra("position",po+"");
-                                intent.putExtra("key",a+"");
-                                intent.putExtra("tag",son_list.get(position).getRs_from_user().getUserName());
-                                startActivityForResult(intent,po);                            }
+                                Intent intent = new Intent(tieziactivity.this, son_reply_activity.class);
+                                Integer a = position;
+                                intent.putExtra("reply", reply);
+                                intent.putExtra("position", po + "");
+                                intent.putExtra("key", a + "");
+                                intent.putExtra("tag", son_list.get(position).getRs_from_user().getUserName());
+                                startActivityForResult(intent, po);
+                            }
                         });
 
                     }
@@ -285,10 +295,10 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
         et_huifu.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus){
-                    imm.showSoftInput(v,InputMethodManager.SHOW_FORCED);
+                if (hasFocus) {
+                    imm.showSoftInput(v, InputMethodManager.SHOW_FORCED);
 
-                }else{
+                } else {
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
                 }
@@ -300,49 +310,52 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
         progressDialog = ToolsClass.createLoadingDialog(tieziactivity.this, "加载中...", true,
                 0);
         progressDialog.show();
-        RequestParams params=new RequestParams(HttpUtile.yu+"/community/togetuserbyid?userid="+id);
-       x.http().get(params, new Callback.CommonCallback<String>() {
-           @Override
-           public void onSuccess(String result) {
-               Gson gson=new Gson();
-               user=gson.fromJson(result,User.class);
-               ImageOptions options1=new ImageOptions.Builder()
-                       .setImageScaleType(CENTER_CROP)
-                       .setFailureDrawableId(R.drawable.head_)
-                       .setLoadingDrawableId(R.drawable.head_)
-                       .setCircular(true)
-                       .build();
-               x.image().bind(my_head,HttpUtile.zy1+user.getUserImg(),options1);
-               ToastUtil.show(tieziactivity.this,"加载成功");
+        RequestParams params = new RequestParams(HttpUtile.yu + "/community/togetuserbyid?userid=" + id);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                user = gson.fromJson(result, User.class);
+                ImageOptions options1 = new ImageOptions.Builder()
+                        .setImageScaleType(CENTER_CROP)
+                        .setFailureDrawableId(R.drawable.head_)
+                        .setLoadingDrawableId(R.drawable.head_)
+                        .setCircular(true)
+                        .build();
+                x.image().bind(my_head, HttpUtile.zy1 + user.getUserImg(), options1);
+                ToastUtil.show(tieziactivity.this, "加载成功");
 
-           }
+            }
 
-           @Override
-           public void onError(Throwable ex, boolean isOnCallback) {
-             ToastUtil.show(tieziactivity.this,"加载出错");
-           }
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                ToastUtil.show(tieziactivity.this, "加载出错");
+            }
 
-           @Override
-           public void onCancelled(CancelledException cex) {
+            @Override
+            public void onCancelled(CancelledException cex) {
 
-           }
+            }
 
-           @Override
-           public void onFinished() {
-               progressDialog.dismiss();
-           }
-       });
+            @Override
+            public void onFinished() {
+                progressDialog.dismiss();
+            }
+        });
 
     }
 
     private void getReplylist(int postid) {
-        RequestParams params=new RequestParams(HttpUtile.yu+"/community/togetreplybyid?postid="+postid);
+        RequestParams params = new RequestParams(HttpUtile.yu + "/community/togetreplybyid?postid=" + postid);
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                Gson gson=new Gson();
-                Type type=new TypeToken<List<Reply>>(){}.getType();
-                replyList=gson.fromJson(result,type);
+                Gson gson = new Gson();
+                Type type = new TypeToken<List<Reply>>() {
+                }.getType();
+                replyList = gson.fromJson(result, type);
+                reply_num.setText("(已有" + replyList.size() + "条)");
+
                 gvadapter.notifyDataSetChanged();
             }
 
@@ -365,7 +378,7 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.post_bottom:
 
                 postbottom.setVisibility(View.GONE);
@@ -385,25 +398,25 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.btn_fabiao:
-                if (id!=0){
-              if (!et_huifu.getText().toString().equals("")){
+                if (id != 0) {
+                    if (!et_huifu.getText().toString().equals("")) {
 //                  public Reply(Integer replyid, Integer postid, User replyuser,
 //                          String replycontent, String replyimg, String time)
 
-                  Reply reply=new Reply(null,post.getPostId(),user,et_huifu.getText().toString(),null,DateUtils.dateToString(new Date(),"yyyy-MM-dd hh:mm:ss"));
-                   replyList.add(reply);
-                  addreply(reply);
-                  gvadapter.notifyDataSetChanged();
-                  et_huifu.clearFocus();
-                  imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                  postbottom.setVisibility(View.VISIBLE);
-                  post_remark.setVisibility(View.GONE);
+                        Reply reply = new Reply(null, post.getPostId(), user, et_huifu.getText().toString(), null, DateUtils.dateToString(new Date(), "yyyy-MM-dd hh:mm:ss"));
+                        replyList.add(reply);
+                        addreply(reply);
+                        gvadapter.notifyDataSetChanged();
+                        et_huifu.clearFocus();
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        postbottom.setVisibility(View.VISIBLE);
+                        post_remark.setVisibility(View.GONE);
 
-              }else{
-                  ToastUtil.show(tieziactivity.this,"回复不能为空");
-              }
-                }else {
-                    ToastUtil.show(tieziactivity.this,"请先登录");
+                    } else {
+                        ToastUtil.show(tieziactivity.this, "回复不能为空");
+                    }
+                } else {
+                    ToastUtil.show(tieziactivity.this, "请先登录");
                 }
                 break;
         }
@@ -414,23 +427,25 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
         progressDialog = ToolsClass.createLoadingDialog(tieziactivity.this, "发布中...", true,
                 0);
         progressDialog.show();
-        RequestParams params=new RequestParams(HttpUtile.yu+"/community/toaddreply");
-        params.addQueryStringParameter("postid",reply.getPostid()+"");
-        params.addQueryStringParameter("userid",reply.getReplyuser().getUserId()+"");
-        params.addQueryStringParameter("replycontent",reply.getReplycontent());
-        params.addQueryStringParameter("time",reply.getTime());
+        RequestParams params = new RequestParams(HttpUtile.yu + "/community/toaddreply");
+        params.addQueryStringParameter("postid", reply.getPostid() + "");
+        params.addQueryStringParameter("userid", reply.getReplyuser().getUserId() + "");
+        params.addQueryStringParameter("replycontent", reply.getReplycontent());
+        params.addQueryStringParameter("time", reply.getTime());
 
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-               ToastUtil.show(tieziactivity.this,"成功");
+                ToastUtil.show(tieziactivity.this, "成功");
+                post.getUser().getUserId();
+
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                replyList.remove(replyList.size()-1);
+                replyList.remove(replyList.size() - 1);
                 gvadapter.notifyDataSetChanged();
-                ToastUtil.show(tieziactivity.this,"失败");
+                ToastUtil.show(tieziactivity.this, "失败");
             }
 
             @Override
@@ -445,6 +460,7 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
         });
 
     }
+
     private class TouchListenerImpl implements View.OnTouchListener {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -464,8 +480,9 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
             return false;
         }
 
-    };
+    }
 
+    ;
 
 
     @Override
@@ -473,11 +490,11 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
 
 
 //        Intent intent= getIntent();
-        List<Reply_son> aaa= data.getParcelableArrayListExtra("son_list");
+        List<Reply_son> aaa = data.getParcelableArrayListExtra("son_list");
 
-        replyList.get(requestCode).rslist=aaa;
+        replyList.get(requestCode).rslist = aaa;
         gvadapter.notifyDataSetChanged();
-        ToastUtil.show(tieziactivity.this, requestCode+"回来了"+aaa.size());
+        ToastUtil.show(tieziactivity.this, requestCode + "回来了" + aaa.size());
     }
 
 

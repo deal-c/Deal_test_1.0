@@ -160,13 +160,13 @@
             android:text="回复楼主"
             android:textColor="#212121"/>
         <TextView
-
+            android:id="@+id/reply_num"
             android:layout_marginLeft="2dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/huifulouzhu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(已有60条)"
+            android:text="(已有0条)"
             android:textColor="#6b6969"/>
         <ImageView
             android:layout_margin="6dp"
