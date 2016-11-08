@@ -1,8 +1,9 @@
 package com.first.yuliang.deal_community.frament.fragment_community;
 
+import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,30 +17,25 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-
 import com.first.yuliang.deal_community.R;
-import com.first.yuliang.deal_community.frament.Community_Activity.Community_model;
-
-import com.first.yuliang.deal_community.frament.pojo.Dynamic;
+import com.first.yuliang.deal_community.ToolsClass;
+import com.first.yuliang.deal_community.frament.Community_Activity.tieziactivity;
+import com.first.yuliang.deal_community.frament.pojo.Post;
+import com.first.yuliang.deal_community.frament.pojo.PostCollection;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
-import com.first.yuliang.deal_community.model.ComMainActivity;
-import com.first.yuliang.deal_community.pojo.Community;
+import com.first.yuliang.deal_community.frament.utiles.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-
 import org.xutils.common.Callback;
-
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
@@ -51,21 +47,22 @@ import java.util.List;
  * Created by yuliang on 2016/9/22.
  */
 public class Frag_community_shoucang extends Fragment {
-    List<Dynamic>   communityList=new ArrayList<>();
+    List<PostCollection>   communityList=new ArrayList<>();
     private Button btn_del_guanzhu;
     private BaseAdapter adapter;
     SwipeMenuListView lv_community_shoucang;
-    private String item=null;
-private int userId=1;
+    Dialog progressDialog;
+    private int userId;
     String  dynamicList=null;
-    List<Dynamic>   communityList1=new ArrayList<>();
+    List<PostCollection>   communityList1=new ArrayList<>();
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        userId = getActivity().getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id", 0);
 
 
-        lv_community_shoucang= (SwipeMenuListView) getActivity().findViewById(R.id.lv_community_shoucang);
+        lv_community_shoucang = (SwipeMenuListView) getActivity().findViewById(R.id.lv_community_shoucang);
         adapter = new BaseAdapter() {
             @Override
             public int getCount() {
@@ -89,7 +86,7 @@ private int userId=1;
                 if (convertView == null) {
                     viewhoder = new ViewHolder();//使用viewholder获取各个控件
                     convertView = View.inflate(getActivity(), R.layout.item_guanzhu, null);//打入listview
-                    viewhoder.comImg = ((ImageView) convertView.findViewById(R.id.comImg));
+
                     viewhoder.communityInfo = ((TextView) convertView.findViewById(R.id.communityInfo));
                     viewhoder.communityName = ((TextView) convertView.findViewById(R.id.communityName));
                     viewhoder.comCreateTime = ((TextView) convertView.findViewById(R.id.comCreateTime));
@@ -100,12 +97,12 @@ private int userId=1;
                     viewhoder = (ViewHolder) convertView.getTag();
                 }
 
-                Dynamic dongtai = communityList.get(position);//获取数据打入控件
-                viewhoder.communityName.setText(dongtai.getUserId().getUserName());
-                viewhoder.communityInfo.setText(dongtai.getContent());
-                viewhoder.comCreateTime.setText(dongtai.getPublishTime());
-                x.image().bind(viewhoder.comImg, HttpUtile.zy1+dongtai.getUserId().getUserImg());
-                item=dongtai.getDynamicId();
+                PostCollection dongtai = communityList.get(position);//获取数据打入控件
+                viewhoder.communityName.setText(dongtai.getPost().getPostTitle());
+                viewhoder.communityInfo.setText(dongtai.getCommunity().getCommunityName());
+                viewhoder.comCreateTime.setText(dongtai.getPost().getPostTime());
+                // x.image().bind(viewhoder.comImg, HttpUtile.zy1+dongtai.getUserId().getUserImg());
+
                 return convertView;
             }
 
@@ -113,36 +110,24 @@ private int userId=1;
         getAllCommunity(userId);
         System.out.print("为什么会空指针");
         lv_community_shoucang.setAdapter(adapter);
-        lv_community_shoucang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ComMainActivity.class);
-                intent.putExtra("dynamicList",dynamicList);
-                intent.putExtra("dynamicId",String.valueOf(position));
-                startActivity(intent);
-
-
-            }
-        });
-
-
     }
 
     private void getAllCommunity(int  userId) {
 
-
+        Log.e("看看数据!!!!", userId+"");
         RequestParams params = new RequestParams
-                (HttpUtils.hostLuoqingshanSchool+"/usys/ZanDynamic?userId="+userId);//网络请求
+                (HttpUtils.hostLuoqingshanSchool+"/csys/Getshoucang?userId="+userId);//网络请求
         x.http().get(params, new Callback.CommonCallback<String>() {//使用xutils开启网络线程
             @Override
             public void onSuccess(String result) {
                 Gson    gson=new Gson();
-                Type type = new TypeToken<List<Dynamic>>() {
+                Type type = new TypeToken<List<PostCollection>>() {
                 }.getType();
 
                 communityList1  = gson.fromJson(result, type);
-                Log.e("看看数据====", communityList.toString());
-                Log.e("看看数据====", gson.toString());
+                Log.e("看看成功数据!!!!", communityList.toString());
+                Log.e("看看成功数据!!!!", gson.toString());
+
                 if (result!=null){
                     communityList.addAll(communityList1);
                     dynamicList=result;
@@ -157,7 +142,7 @@ private int userId=1;
             public void onError(Throwable ex, boolean
                     isOnCallback) {
                 Toast.makeText(getActivity(), ex.toString(), Toast.LENGTH_LONG).show();
-                System.out.println(ex.toString());
+                Log.e("看看错误数据!!!!", ex.toString());
 
             }
 
@@ -265,17 +250,20 @@ private int userId=1;
 
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
 
-                Dynamic dongtai = communityList.get(position);
+                PostCollection dongtai = communityList.get(position);
 
                 switch (index) {
 
                     case 0:
 
+                        getpost(dongtai.getPostId());
+
 // open
                         break;
 
                     case 1:
-// delete
+                     int item=dongtai.getPostId();
+                        Log.e("看我滑动删除的数据",item+"123" );
                         delete(item);
                         System.out.print("删除成功");
                         Log.v("tag","message");
@@ -292,9 +280,9 @@ private int userId=1;
 
             }
 
-            private void delete(String item) {
+            private void delete(int item) {
 
-                RequestParams request=new RequestParams(HttpUtils.hostLuoqingshanSchool+"/usys/deleteComServlt?communityId="+item);
+                RequestParams request=new RequestParams(HttpUtils.hostLuoqingshanSchool+"/csys/DeleteSwipe?communityId="+item);
                 x.http().get(request, new Callback.CommonCallback<String>() {
                     @Override
                     public void onSuccess(String result) {
@@ -303,7 +291,7 @@ private int userId=1;
 
                     @Override
                     public void onError(Throwable ex, boolean isOnCallback) {
-
+                        Log.e("看我得到的数据呢", ex+"出现了");
                     }
 
                     @Override
@@ -389,6 +377,43 @@ private int userId=1;
         return view;
     }
 
+    private void getpost(int postid) {
+        progressDialog = ToolsClass.createLoadingDialog(getActivity(), "加载中...", true,
+                0);
+        progressDialog.show();
+        RequestParams params = new RequestParams
+                (HttpUtile.yu + "/community/togetpostbyid?postid="+postid);//网络请求
+        x.http().post(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                Gson gson =new Gson();
+                Post post=gson.fromJson(result,Post.class);
+                Intent intent=new Intent(getActivity(), tieziactivity.class);
+
+                intent.putExtra("post",post);
+
+                startActivity(intent);
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                ToastUtil.show(getActivity(),"访问失败");
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+                progressDialog.dismiss();
+            }
+        });
+
+    }
 
 
     public static class ViewHolder {

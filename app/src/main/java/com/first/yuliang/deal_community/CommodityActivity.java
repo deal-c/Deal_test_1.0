@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.first.yuliang.deal_community.Util.DateUtil;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
-import com.first.yuliang.deal_community.home_button_activity.huan_magic;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.first.yuliang.deal_community.pojo.CommodityCollection;
 import com.first.yuliang.deal_community.pojo.User;

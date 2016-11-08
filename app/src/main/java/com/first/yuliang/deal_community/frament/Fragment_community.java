@@ -26,7 +26,7 @@ public class Fragment_community  extends Fragment{
     private RadioGroup rg_community_tab;
     Fragment newfragment;
     Fragment oldfragment;
-
+    private Fragment[] fragments;
     Fragment dongtai;
     Fragment guanzhu;
     Fragment shoucang;
@@ -39,7 +39,7 @@ public class Fragment_community  extends Fragment{
         dongtai=new Frag_community_dongtai();
         guanzhu=new Frag_community_guanzhu();
         shoucang=new Frag_community_shoucang();
-
+        fragments = new Fragment[]{dongtai, guanzhu,shoucang};
 
         iv_search_community = ((ImageView) view.findViewById(R.id.iv_search_community));
         iv_search_community.setOnClickListener(new View.OnClickListener() {
@@ -76,24 +76,28 @@ public class Fragment_community  extends Fragment{
     }
 
     private void switchCommunityFragment(Fragment fragment) {
-        // 设置一个默认值
         if(fragment == null){
             fragment = dongtai;
         }
 
         FragmentManager fm = this.getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        if(oldfragment!=null && !oldfragment.isHidden() && oldfragment.isAdded()){
-            ft.hide(oldfragment);
-        }
-        if(fragment.isAdded()&&fragment.isHidden()){
-            ft.show(fragment);
-        }else {
-            if (!fragment.isAdded()){
-                ft.add(R.id.fl_community_blank,fragment);
+        for (Fragment fragment1 : fragments) {
+            if (fragment1 != fragment) {
+                if (fragment1 != null && !fragment1.isHidden() && fragment1.isAdded()) {
+                    ft.hide(fragment1);
+                }
             }
         }
-        oldfragment=newfragment;
+
+        if (fragment.isAdded() && fragment.isHidden()) {
+            ft.show(fragment);
+        } else {
+            if (!fragment.isAdded()) {
+                ft.add(R.id.fl_community_blank, fragment);
+            }
+        }
+        oldfragment = newfragment;
         ft.commit();
     }
 

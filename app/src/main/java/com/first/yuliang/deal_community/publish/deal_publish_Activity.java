@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -44,6 +43,7 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,6 +51,7 @@ import java.util.List;
 import me.nereo.multi_image_selector.MultiImageSelector;
 
 import static com.amap.api.maps.CoordinateConverter.CoordType.GPS;
+import static com.first.yuliang.deal_community.frament.testpic.Bimp.revitionImageSize;
 
 public class deal_publish_Activity extends AppCompatActivity implements View.OnClickListener, GeocodeSearch.OnGeocodeSearchListener {
 
@@ -157,17 +158,23 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
 
                     String img_path = imgs.get(position);
 
-                    //对图片进行压缩
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-
-                    options.inJustDecodeBounds = false;
-
-                    options.inSampleSize = 10;   // width，hight设为原来的十分一
-
-
-                    //  获取资源图片
-                    Bitmap bmp = BitmapFactory.decodeFile(img_path, options);
-                    product_photo.setImageBitmap(bmp);
+//                    //对图片进行压缩
+//                    BitmapFactory.Options options = new BitmapFactory.Options();
+//
+//                    options.inJustDecodeBounds = false;
+//
+//                    options.inSampleSize = 10;   // width，hight设为原来的十分一
+//
+//
+//                    //  获取资源图片
+//                    Bitmap bmp = BitmapFactory.decodeFile(img_path, options);
+                    Bitmap bmp1=null;
+                    try {
+                        bmp1=revitionImageSize(img_path);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    product_photo.setImageBitmap(bmp1);
                     return view;
                 } else {
                     return view;
@@ -274,6 +281,7 @@ public class deal_publish_Activity extends AppCompatActivity implements View.OnC
         });
         builder.create().show();
     }
+
 
     private void pickImage() {
         MultiImageSelector selector = MultiImageSelector.create(deal_publish_Activity.this);

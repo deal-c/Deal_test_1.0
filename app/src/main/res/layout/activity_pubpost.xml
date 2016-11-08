@@ -51,7 +51,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
 
+
                 <EditText
+
+                    android:singleLine="true"
                     android:paddingLeft="10dp"
                     android:id="@+id/pub_post_title"
                     android:background="#fff"
@@ -61,7 +64,28 @@
                     android:gravity="center_vertical"
                     android:hint="标题"
                     android:layout_alignParentBottom="true"/>
-
+                <ImageView
+                    android:layout_marginRight="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/biaoqian"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/jiahao"
+                    />
+                <TextView
+                    android:id="@+id/choose_way"
+                    android:visibility="gone"
+                    android:background="@drawable/button_gray"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/biaoqian"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:text="再利用"
+                    android:textColor="#fff"
+                    />
 
             </RelativeLayout>
 

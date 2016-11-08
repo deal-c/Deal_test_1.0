@@ -104,7 +104,7 @@ public class Frag_community_dongtai extends Fragment {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                View view = View.inflate(getActivity().getApplicationContext(), R.layout.item_dongtai, null);
+                View view = View.inflate(getActivity(), R.layout.item_dongtai, null);
 
                 iv_dongtai_userphoto = ((ImageView) view.findViewById(R.id.iv_dongtai_userphoto));
                 tv_dongtai_usename = ((TextView) view.findViewById(R.id.tv_dongtai_usename));

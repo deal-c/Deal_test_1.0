@@ -195,8 +195,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
                 Intent intent=new Intent(Community_model.this, tieziactivity.class);
 
                 intent.putExtra("post",pstlist.get(position-1));
-
-                startActivity(intent);
+                  startActivity(intent);
 
 
             }
@@ -316,6 +315,8 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
                 break;
             case  R.id.fatie:
                 Intent intent=new Intent(Community_model.this,pubpostActivity.class);
+                 intent.putExtra("comid",community.getCommunityId()+"");
+
                 startActivity(intent);
                 break;
         }
@@ -365,6 +366,7 @@ public class Community_model extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(Community_model.this, "你已关注过了", Toast.LENGTH_LONG).show();
         }
     }
+
 
 
 }

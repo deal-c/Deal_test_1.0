@@ -27,6 +27,7 @@ import com.first.yuliang.deal_community.frament.pojo.Post;
 import com.first.yuliang.deal_community.frament.pojo.Reply;
 import com.first.yuliang.deal_community.frament.pojo.Reply_son;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
 import com.first.yuliang.deal_community.frament.utiles.ToastUtil;
 import com.first.yuliang.deal_community.pojo.User;
 import com.google.gson.Gson;
@@ -46,7 +47,7 @@ import static android.widget.ImageView.ScaleType.CENTER_CROP;
 import static com.first.yuliang.deal_community.R.id.btn_fabiao;
 
 public class tieziactivity extends AppCompatActivity implements View.OnClickListener {
-
+    private ImageView shoucang_id;
     private RelativeLayout postbottom;
     private RelativeLayout post_remark;
     private InputMethodManager imm;
@@ -69,6 +70,8 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
     private ImageView post_img;
     private ImageView my_head;
     private TextView reply_num;
+    private boolean stage;
+    private int status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,10 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
                 .setLoadingDrawableId(R.drawable.head_)
                 .setCircular(true)
                 .build();
+        boolean find=getAllzan();
+
+        shoucang_id = (ImageView) findViewById(R.id.shoucang_id);
+
         head_louzhu = ((ImageView) findViewById(R.id.head_louzhu));
         x.image().bind(head_louzhu, HttpUtile.zy1 + post.getUser().getUserImg(), options1);
 
@@ -120,6 +127,31 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
         zhengwen = ((RelativeLayout) findViewById(R.id.zhengwen));
         relist_post = ((NoScrollGridView) findViewById(R.id.post_relist));
         fabiao = ((Button) findViewById(btn_fabiao));
+
+        shoucang_id.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                switch (status) {
+                    case 0:
+                        shoucang_id.setBackgroundResource(R.drawable.shoucang_yes);
+                        status = 1;
+                        addstatus();
+                        Log.e("看我的数据", "删除成功了");
+                        break;
+                    case 1:
+                        shoucang_id.setBackgroundResource(R.drawable.shoucang_no);
+                        status = 0;
+                        deleteZan();
+                        Log.e("看我的数据", "添加成功了");
+                        break;
+                }
+            }
+        });
+
+
+
+
         gvadapter = new BaseAdapter() {
 
             private ImageView reply_userphoto;
@@ -306,6 +338,100 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
+
+    private void deleteZan() {
+        RequestParams request = new RequestParams(HttpUtils.hostLuoqingshanSchool + "csys/Dddmyzan");
+        request.addBodyParameter("userId", String.valueOf(id));
+        request.addBodyParameter("dynamicId", String.valueOf(post.getPostId()));
+        x.http().post(request, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.e("看我删除的数据", ex.toString());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+
+    }
+
+
+    private void addstatus() {
+        RequestParams request = new RequestParams(HttpUtils.hostLuoqingshanSchool + "csys/Addmyzan");
+        request.addBodyParameter("userId", String.valueOf(id));
+        request.addBodyParameter("dynamicId", String.valueOf(post.getPostId()));
+        x.http().post(request, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.e("看我添加的数据", "onError: " + ex);
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+
+    private boolean getAllzan() {
+        final RequestParams request = new RequestParams(HttpUtils.hostLuoqingshanSchool + "csys/Getmyzan");
+        request.addBodyParameter("userId", String.valueOf(id));
+        request.addBodyParameter("dynamicId", String.valueOf(post.getPostId()));
+        x.http().post(request, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                if (result.equals("1")) {
+                    shoucang_id.setBackgroundResource(R.drawable.shoucang_yes);
+                    Log.e("看我得到的数据呢", "出现了");
+                    status=1;
+                }
+
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.e("看我的数据1111", ex.toString());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+        return stage;
+
+    }
+
+
     private void getusre(int id) {
         progressDialog = ToolsClass.createLoadingDialog(tieziactivity.this, "加载中...", true,
                 0);
@@ -482,7 +608,7 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    ;
+
 
 
     @Override
