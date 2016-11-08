@@ -431,12 +431,12 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
 
                 Log.e("lmlmlm","==="+post.getUser().getUserId());
 
+                gvadapter.notifyDataSetChanged();
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 replyList.remove(replyList.size()-1);
-                gvadapter.notifyDataSetChanged();
                 ToastUtil.show(tieziactivity.this,"失败");
             }
 

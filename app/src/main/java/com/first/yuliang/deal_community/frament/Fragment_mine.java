@@ -230,12 +230,24 @@ public class Fragment_mine extends Fragment implements View.OnClickListener{
                         .setFailureDrawableId(R.drawable.u88)
                         .setLoadingDrawableId(R.drawable.u88)
                         .build();
-
-
-
+                if (!user.getUserImg().equals("null")&&user.getUserImg()!=null&&user.getUserImg().length()!=0) {
                 x.image().bind(iv_pic,HttpUtile.zy1+user.getUserImg(),imageOptions);
-
-
+                }else {
+                        int i = 0;
+                        i = (int) (1 + Math.random()) * 4;
+                        if (i == 1) {
+                            iv_pic.setImageResource(R.drawable.tx_1);
+                        }
+                        if (i == 2) {
+                            iv_pic.setImageResource(R.drawable.tx_2);
+                        }
+                        if (i == 3) {
+                            iv_pic.setImageResource(R.drawable.tx_3);
+                        }
+                        if (i == 4) {
+                            iv_pic.setImageResource(R.drawable.tx_4);
+                        }
+                    }
                 iv_pic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

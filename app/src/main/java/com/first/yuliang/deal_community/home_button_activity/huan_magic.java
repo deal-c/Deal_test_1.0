@@ -101,7 +101,7 @@ public class huan_magic extends AppCompatActivity {
                     pic.setPaused(true);
                     huam.setVisibility(View.VISIBLE);
                     ll_jh.setVisibility(View.VISIBLE);
-                    Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.larger);
+                    Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.larger_x);
                     huam.startAnimation(anim);
 
                     huam.setOnClickListener(new View.OnClickListener() {

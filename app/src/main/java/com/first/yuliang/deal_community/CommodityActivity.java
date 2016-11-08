@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.first.yuliang.deal_community.Util.DateUtil;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
+import com.first.yuliang.deal_community.home_button_activity.huan_magic;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.first.yuliang.deal_community.pojo.CommodityCollection;
 import com.first.yuliang.deal_community.pojo.User;
@@ -219,6 +221,16 @@ public class CommodityActivity extends AppCompatActivity {
             }
         };
         gv_commodity.setAdapter(adapter_g);
+        gv_commodity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(CommodityActivity.this, CommodityActivity.class);
+                CommodityBean.Commodity commodity = commodityList.get(position);
+                intent.putExtra("search",commodity.commodityTitle);
+                intent.putExtra("bundle", commodity);
+                startActivity(intent);
+            }
+        });
 
         lv_commodity = ((ListView) findViewById(R.id.lv_commodity));
         lv_commodity.addHeaderView(view);
@@ -395,7 +407,7 @@ public class CommodityActivity extends AppCompatActivity {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(CommodityActivity.this,"是不是我的无法连接服务器",Toast.LENGTH_LONG).show();
+                Toast.makeText(CommodityActivity.this,"是不是刚刚我的无法连接服务器",Toast.LENGTH_LONG).show();
             }
 
             @Override

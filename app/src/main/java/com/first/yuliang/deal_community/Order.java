@@ -91,17 +91,19 @@ public class Order extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date date = new Date();
-                insertOrder(date);
-                updateCommodityState(commodity.commodityId,id);
-
-                //有人下单
-
-                Intent intent = new Intent(Order.this, BuySuccessActivity.class);
-                intent.putExtra("tips",et_post_way.getText().toString());
-                intent.putExtra("bundle",commodity);
-                startActivity(intent);
-                Order.this.finish();
+                if(!user_name.getText().toString().equals("")&&!address.getText().toString().equals("")&&!phone_num.getText().toString().equals("")) {
+                    Date date = new Date();
+                    insertOrder(date);
+                    updateCommodityState(commodity.commodityId, id);
+                    //有人下单
+                    Intent intent = new Intent(Order.this, BuySuccessActivity.class);
+                    intent.putExtra("tips", et_post_way.getText().toString());
+                    intent.putExtra("bundle", commodity);
+                    startActivity(intent);
+                    Order.this.finish();
+                }else {
+                    Toast.makeText(Order.this,"请完善您的收货信息",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

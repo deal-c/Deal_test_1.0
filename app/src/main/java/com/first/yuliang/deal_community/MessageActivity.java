@@ -72,9 +72,8 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.rl_community_message:
-
-               Intent intentSqu=new Intent(this,ShequActivity.class);
-                startActivity(intentSqu);
+                Intent intent1 = new Intent(MessageActivity.this,CommunityReply.class);
+                startActivity(intent1);
                 break;
             case R.id.rl_wuliu_message:
 
