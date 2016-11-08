@@ -52,7 +52,7 @@
 
         <activity
             android:name=".mainActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".ViewPagerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -60,53 +60,45 @@
         </activity>
         <activity
             android:name=".RegActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".regDetailActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
-        <service android:name="com.amap.api.location.APSService" />
+        <service android:name="com.amap.api.location.APSService"/>
 
         <activity
             android:name=".SearchCommodityActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".TypeActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".frament.testpic.TestPicActivity"
-            android:theme="@android:style/Theme.NoTitleBar" >
-
+            android:theme="@android:style/Theme.NoTitleBar">
         </activity>
-
         <activity
             android:name=".frament.testpic.ImageGridActivity"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@android:style/Theme.NoTitleBar">
         </activity>
         <activity
             android:name=".frament.testpic.PublishedActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.NoTitleBar" >
-
-
-
+            android:theme="@android:style/Theme.NoTitleBar">
         </activity>
         <activity
             android:name=".frament.testpic.PhotoActivity"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@android:style/Theme.NoTitleBar">
         </activity>
+        <activity android:name=".CommunityDynamic"/>
+        <activity android:name=".TestActivity"/>
 
-
-
-        <activity android:name=".CommunityDynamic" />
-        <activity android:name=".TestActivity" />
-
-        <service android:name="com.amap.api.location.APSService" />
+        <service android:name="com.amap.api.location.APSService"/>
 
         <activity
             android:name=".spanishAcitivity"
@@ -116,105 +108,102 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
         <activity android:name=".model.ComMainActivity">
-
         </activity>
         <activity
             android:name=".SearchResultActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".frament.Community_Activity.Community_search"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".frament.Community_Activity.Community_model"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".publish.deal_publish_Activity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".CommodityActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.modify.ModifyActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.MyPublishActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.MyMaiActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.MyBuyActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.MyZanActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.MyCoinActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.MyRecentActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.MyContactActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
 
                 <data
                     android:host="com.first.yuliang.deal_community"
                     android:pathPrefix="/conversationlist"
-                    android:scheme="rong" />
+                    android:scheme="rong"/>
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MyCenter.MyShezhiActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.modify.ModifyTxActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.modify.ModifyNameActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.modify.ModifyPsdActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.modify.ModifyOftenActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.modify.ModifyAddressActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.modify.ModifyBirthdayActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MyCenter.modify.ModifyDetail.addAddressDetailActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".regBirthdayActivity" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".regBirthdayActivity"/>
         <activity
             android:name=".MyCenter.ConversationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
 
                 <data
                     android:host="com.first.yuliang.deal_community"
                     android:pathPrefix="/conversation/"
-                    android:scheme="rong" />
+                    android:scheme="rong"/>
             </intent-filter>
         </activity>
         <activity
@@ -226,7 +215,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".home_button_activity.huan_magic"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".home_button_activity.re_use"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
@@ -238,47 +227,46 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".MessageActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MaijiaInfoActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <receiver
-            android:exported="true"
-            android:name=".PersonNotificationReciver">
+            android:name=".PersonNotificationReciver"
+            android:exported="true">
             <intent-filter>
-                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
-                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
-                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
-                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED"/>
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED"/>
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED"/>
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED"/>
             </intent-filter>
         </receiver>
 
         <activity
             android:name=".frament.Community_Activity.tieziactivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-
         </activity>
         <activity
             android:name=".frament.Community_Activity.son_reply_activity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-
         </activity>
-
         <activity
             android:name=".SystemMessageListActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <receiver
             android:name=".MyReceive"
             android:enabled="true">
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/>
 
-                <category android:name="com.first.yuliang.deal_community" />
+                <category android:name="com.first.yuliang.deal_community"/>
             </intent-filter>
         </receiver>
 
+        <activity android:name=".CommunityReply">
+        </activity>
     </application>
 
 </manifest>

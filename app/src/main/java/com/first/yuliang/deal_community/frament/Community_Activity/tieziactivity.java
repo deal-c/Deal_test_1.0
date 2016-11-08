@@ -393,7 +393,7 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
                   Reply reply=new Reply(null,post.getPostId(),user,et_huifu.getText().toString(),null,DateUtils.dateToString(new Date(),"yyyy-MM-dd hh:mm:ss"));
                    replyList.add(reply);
                   addreply(reply);
-                  gvadapter.notifyDataSetChanged();
+
                   et_huifu.clearFocus();
                   imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                   postbottom.setVisibility(View.VISIBLE);
@@ -424,12 +424,12 @@ public class tieziactivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onSuccess(String result) {
                ToastUtil.show(tieziactivity.this,"成功");
+                gvadapter.notifyDataSetChanged();
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 replyList.remove(replyList.size()-1);
-                gvadapter.notifyDataSetChanged();
                 ToastUtil.show(tieziactivity.this,"失败");
             }
 

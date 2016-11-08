@@ -215,8 +215,8 @@ public class mainActivity extends AppCompatActivity implements View.OnClickListe
         Animation animation = new AlphaAnimation(0,1);
         animation.setDuration(500);
         iv_black.startAnimation(animation);
-        popupWindow.setAnimationStyle(R.style.popupwindow);
-        popupWindow.showAtLocation(view, Gravity.CENTER_HORIZONTAL,0, location[1] - popupHeight-900);
+        popupWindow.setAnimationStyle(R.style.publish);
+        popupWindow.showAtLocation(view, Gravity.CENTER_HORIZONTAL,0, location[1] - popupHeight-100);
 
     }
 

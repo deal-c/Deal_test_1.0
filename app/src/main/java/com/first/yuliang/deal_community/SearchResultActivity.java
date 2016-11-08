@@ -591,7 +591,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     private void showFSPopupWindow(View v) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.fangshi,null);
 
-        PopupWindow popupWindow=new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final PopupWindow popupWindow=new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
@@ -605,18 +605,22 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 switch (checkedId) {
                     case R.id.radioButton0:
                         way = 0;
+                        popupWindow.dismiss();
                         getCommodityList(search);
                         break;
                     case R.id.radioButton1:
                         way = 2;
+                        popupWindow.dismiss();
                         getCommodityList(search);
                         break;
                     case R.id.radioButton2:
                         way = 3;
+                        popupWindow.dismiss();
                         getCommodityList(search);
                         break;
                     case R.id.radioButton3:
                         way = 4;
+                        popupWindow.dismiss();
                         getCommodityList(search);
                         break;
                 }
@@ -629,6 +633,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     }
     private void showJGPopupWindow(View v) {
         view= LayoutInflater.from(mContext).inflate(R.layout.jiage,null);
+        final PopupWindow popupWindow=new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         low_price = ((EditText) view.findViewById(R.id.low_price));
 
@@ -639,11 +644,11 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View v) {
 //                Log.e("看价格===========",c_high+c_low+"");
+                popupWindow.dismiss();
                 getCommodityList(search);
             }
         });
 
-        final PopupWindow popupWindow=new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         ListView lv= (ListView) view.findViewById(R.id.lv_jg);
 
@@ -714,9 +719,11 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:orderFlag = 4;
+                        popupWindow.dismiss();
                         getCommodityList(search);
                         break;
                     case 1:orderFlag = 5;
+                        popupWindow.dismiss();
                         getCommodityList(search);
                         break;
                 }
@@ -746,15 +753,19 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:orderFlag = 0;
+                        popupWindow.dismiss();
                         getCommodityList(search);
                         break;
                     case 1:orderFlag = 1;
+                        popupWindow.dismiss();
                         getCommodityList(search);
                         break;
                     case 2:orderFlag = 2;
+                        popupWindow.dismiss();
                         getCommodityList(search);
                         break;
                     case 3:orderFlag = 3;
+                        popupWindow.dismiss();
                         getCommodityList(search);
                         break;
                 }

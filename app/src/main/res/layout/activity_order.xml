@@ -84,7 +84,6 @@
                 android:layout_alignBottom="@+id/tv_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="vanex"
                 android:textSize="12sp"
                 android:textColor="#a000"/>
             <TextView
@@ -105,7 +104,6 @@
                 android:layout_toRightOf="@+id/tv_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="江苏省苏州市独墅湖高教区仁爱路1号高博教育"
                 android:textSize="12sp"
                 android:textColor="#a000"/>
             <TextView
@@ -125,7 +123,6 @@
                 android:layout_below="@+id/tv_address_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="18786094931"
                 android:textSize="12sp"
                 android:textColor="#a000"/>
             </RelativeLayout>
@@ -160,7 +157,6 @@
         android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="张三"
         android:textColor="#a000"
         android:textSize="12sp"/>
 </LinearLayout>
@@ -208,7 +204,6 @@
                     android:layout_toRightOf="@+id/tv_rmb_l"
                     android:layout_alignBottom="@+id/iv_cg_l"
                     android:layout_marginBottom="5dp"
-                    android:text="998"
                     android:textSize="14sp"
                     android:textColor="#aaff0000"
                     android:layout_width="wrap_content"
@@ -220,7 +215,6 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_alignParentRight="true"
-                    android:text="苏州 吴中区"
                     android:textSize="12sp"
                     android:textColor="#4000"
                     android:layout_width="wrap_content"
@@ -292,7 +286,6 @@
                 android:layout_toLeftOf="@id/btn_buy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="998"
                 android:textColor="#af00"
                 android:textSize="16sp"/>
             <TextView
