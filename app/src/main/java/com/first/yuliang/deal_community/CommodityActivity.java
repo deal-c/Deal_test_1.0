@@ -357,7 +357,7 @@ public class CommodityActivity extends AppCompatActivity {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-                x.image().bind(iv_user_head, HttpUtile.yu + user.getUserImg());
+                x.image().bind(iv_user_head, HttpUtile.zy1 + user.getUserImg());
                 tv_user_name.setText(user.getUserName());
                 adapter_l.notifyDataSetChanged();
             }

@@ -89,6 +89,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
     private PagerAdapter adapter;
     private int previousposition=0;
     final List<Adbean.Ad> adlist=new ArrayList<Adbean.Ad>();
+    private CommodityBean.Commodity bean;
 
     private ImageButton ib_type;
     private EditText query1;
@@ -113,6 +114,8 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
     private ProgressBar jiazaimore;
     private List <CommodityBean.Commodity> hotlist=new ArrayList<>();
     private View tv_bootom;
+    private ImageView v_guess;
+    private TextView textView2;
 
     @Nullable
     @Override
@@ -142,11 +145,34 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         });
         gv_song = ((NoScrollGridView) view.findViewById(R.id.gv_song));
         guessyoulike = ((NoScrollGridView) view.findViewById(R.id.gv_guessyoulike));
+        guessyoulike.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), CommodityActivity.class);
+                CommodityBean.Commodity commodity = prolist.get(position);
+                intent.putExtra("search",commodity.commodityTitle);
+                intent.putExtra("bundle", commodity);
+                startActivity(intent);
+            }
+        });
         gv_hot = ((NoScrollGridView) view.findViewById(R.id.gv_hot));
         mScrollView = ((ScrollView) view.findViewById(R.id.sv_home));
         jiazaimore = ((ProgressBar) view.findViewById(R.id.jiazaimore));
         tv_bootom = view.findViewById(R.id.tv_bottom);
 
+        v_guess = ((ImageView) view.findViewById(R.id.roundCornerImageView));
+        v_guess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CommodityActivity.class);
+                intent.putExtra("search",bean.commodityTitle);
+                intent.putExtra("bundle", bean);
+                startActivity(intent);
+            }
+        });
+        textView2 = ((TextView) view.findViewById(R.id.textView2));
+
+        getRandomCommodity();
 
         mScrollView.setOnTouchListener(new TouchListenerImpl());
 
@@ -705,6 +731,35 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
     };
 
+    private void getRandomCommodity(){
+        RequestParams params =new RequestParams(HttpUtile.szj+"/csys/getrandomcommodity");
 
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                bean = gson.fromJson(result, CommodityBean.Commodity.class);
+                x.image().bind(v_guess,HttpUtile.yu+bean.commodityImg);
+                textView2.setText(bean.commodityTitle);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                ToastUtil.show(getActivity(),"error");
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+    }
 
 }

@@ -19,8 +19,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/comego"
-
+                android:src="@drawable/return_"
+android:background="@drawable/ripple_bg"
                 android:gravity="left"
                 android:layout_centerVertical="true"
                 />
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="联系人"
                 android:layout_toRightOf="@+id/iv_lianjxiren"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="#fff"
                 android:layout_marginLeft="10dp"
                android:layout_centerVertical="true"
@@ -51,12 +51,19 @@
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
+    <Button
+        android:id="@+id/iv_line1"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#bbb"
+        android:layout_below="@+id/toolbar_conversation"
+        />
 
     <fragment
         android:id="@+id/conversation"
         android:name="io.rong.imkit.fragment.ConversationFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_conversation"/>
+        android:layout_below="@id/iv_line1"/>
 
 </RelativeLayout>
