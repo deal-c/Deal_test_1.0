@@ -2,49 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff">
+    android:background="#eee">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/tool_publish"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/main"
-        >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/iv_publish_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/backback"
-
-                android:layout_centerVertical="true"
-                android:gravity="left"/>
-
-            <TextView
-                android:id="@+id/tv_modify_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="我的发布"
-                android:textSize="24sp"
-                android:textColor="#fff"
-
-
-                android:layout_centerInParent="true"
-
-
-                android:gravity="center"
-
-                />
-
-        </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
+    <include android:id="@+id/tl_mypublish"
+             layout="@layout/mypubulish"/>
 
     <ListView
-        android:layout_below="@id/tool_publish"
+        android:layout_below="@id/tl_mypublish"
         android:id="@+id/lv_publish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

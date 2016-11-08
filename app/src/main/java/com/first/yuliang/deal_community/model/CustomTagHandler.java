@@ -19,7 +19,8 @@ import java.util.HashMap;
 /**
  * 显示评论的自定义Html标签解析器
  */
-public class CustomTagHandler implements Html.TagHandler {
+public class
+CustomTagHandler implements Html.TagHandler {
     public static final String TAG_COMMENTATOR = "commentator"; // 评论者
     public static final String TAG_RECEIVER = "receiver"; // 评论接收者，即对谁评论
     public static final String TAG_CONTENT = "content"; // 评论接收者，即对谁评论

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_son_reply_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context="com.first.yuliang.deal_community.frament.Community_Activity.son_reply_activity">
+
+    <RelativeLayout
+        android:id="@+id/tiezi_title"
+        android:background="#efededed"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/back_son"
+            android:layout_centerVertical="true"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:src="@drawable/back"
+            />
+        <TextView
+            android:id="@+id/son_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第八楼"
+            android:layout_marginLeft="40dp"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"/>
+
+
+    </RelativeLayout>
+    <ScrollView
+        android:layout_marginTop="65dp"
+        android:id="@+id/son_sv_second"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/son_userphoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/head_"/>
+        <TextView
+            android:layout_marginTop="15dp"
+            android:textColor="#262626"
+            android:layout_toRightOf="@+id/son_userphoto"
+            android:layout_alignTop="@+id/son_userphoto"
+            android:id="@+id/son_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小明"
+            android:textSize="14sp"
+            android:layout_marginLeft="15dp"
+            />
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_alignLeft="@+id/son_userphoto"
+            android:layout_marginRight="15dp"
+            android:id="@+id/son_content"
+            android:layout_below="@+id/son_userphoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="大家好我是小明,新人报到。希望以后多多关照的cccccccccccccc"
+            android:textSize="16sp"
+            android:textColor="#0d0d0d"/>
+
+        <ImageView
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_width="25dp"
+            android:layout_height="19dp"
+            android:layout_below="@+id/son_content"
+            android:id="@+id/huifu_img2"
+            android:src="@drawable/huifuimg"/>
+        <TextView
+            android:id="@+id/son_lou_num"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/son_content"
+            android:layout_alignLeft="@+id/son_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第1楼"/>
+        <TextView
+            android:id="@+id/son_time"
+            android:layout_toRightOf="@+id/son_lou_num"
+            android:layout_below="@+id/son_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11:31:51"/>
+        <View
+            android:id="@+id/fenggggggaa"
+            android:layout_alignLeft="@+id/son_lou_num"
+            android:background="#ececec"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/son_time"/>
+
+        <com.first.yuliang.deal_community.Util.NoScrollGridView
+            android:layout_alignLeft="@+id/son_content"
+            android:layout_marginRight="13dp"
+            android:id="@+id/son_gridview"
+            android:numColumns="1"
+            android:layout_below="@+id/fenggggggaa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:visibility="visible"
+        android:id="@+id/son_remark"
+        android:background="#cbe4e3e3"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <EditText
+            android:id="@+id/son_et_huifu"
+            android:paddingLeft="10dp"
+            android:background="@drawable/edittext_bg"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="我也说一句..."
+            android:textSize="16sp"
+            />
+        <Button
+            android:id="@+id/btn_fabiao_son"
+            android:background="@drawable/textview_biod_gray"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="发表"
+            android:textSize="18sp"
+            android:textColor="#5c5b5b"/>
+
+    </RelativeLayout>
+</RelativeLayout>

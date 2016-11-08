@@ -3,6 +3,8 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:background="#eee"
                 tools:context="com.first.yuliang.deal_community.SearchResultActivity">
     <include android:id="@+id/tl_search_result"
@@ -12,7 +14,7 @@
         android:layout_below="@id/tl_search_result"
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:background="#ddd"
+        android:background="#bbb"
         />
     <LinearLayout
         android:id="@+id/ll_select"
@@ -22,6 +24,7 @@
         android:layout_height="36dp"
         >
         <Button
+            android:id="@+id/btn_quyu"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:paddingRight="20dp"
@@ -38,6 +41,7 @@
             android:background="#bbb"
             tools:ignore="Suspicious0dp"/>
         <Button
+            android:id="@+id/btn_paixu"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:paddingRight="20dp"
@@ -54,6 +58,7 @@
             android:background="#bbb"
             tools:ignore="Suspicious0dp"/>
         <Button
+            android:id="@+id/btn_jiage"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:paddingRight="20dp"
@@ -70,6 +75,7 @@
             android:background="#bbb"
             tools:ignore="Suspicious0dp"/>
         <Button
+            android:id="@+id/btn_way"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:paddingRight="20dp"
@@ -117,17 +123,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-    <GridView
-        android:id="@+id/gv_commodity_list"
+    <ListView
+        android:id="@+id/lv_gv_commodity_list"
         android:layout_below="@+id/ll_total"
-        android:numColumns="2"
-        android:paddingRight="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </GridView>
+    </ListView>
     <ListView
         android:visibility="gone"
-        android:layout_margin="5dp"
         android:id="@+id/lv_commodity_list"
         android:layout_below="@+id/ll_total"
         android:background="#eee"

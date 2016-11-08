@@ -5,6 +5,9 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/background_shadow"
         android:paddingLeft="0.3dp"
         android:paddingRight="0.8dp"

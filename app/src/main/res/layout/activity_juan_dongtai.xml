@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_juan_dongtai"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.first.yuliang.deal_community.home_button_activity.juan_dongtai">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/juandongtai"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/bgcolor">
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="捐动态"
+            android:textSize="20sp"
+            android:textColor="#fff"/>
+        <ImageView
+            android:id="@+id/juandongtai_returen"
+            android:src="@drawable/return_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"/>
+    </android.support.v7.widget.Toolbar>
+    <RelativeLayout
+        android:id="@+id/juan_pic"
+        android:layout_below="@id/juandongtai"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/jun_bg"
+            android:scaleType="centerCrop"/>
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本期活动: 援助贫困山区的孩子"
+            android:layout_alignParentBottom="true"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:autoLink="all"/>
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentBottom="true"
+             android:layout_marginBottom="5dp"
+             android:layout_marginLeft="15dp"
+             android:textColor="#fff"
+             android:textStyle="bold"
+             android:text="截止日期： 2016年11月9日00:00:00"/>
+</RelativeLayout>
+    <View
+        android:layout_marginTop="10dp"
+        android:background="#ccc"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/juan_pic"
+        android:layout_width="2dp"
+        android:layout_height="30dp"/>
+    <RadioGroup
+        android:id="@+id/rg_twobutton"
+        android:layout_below="@+id/juan_pic"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:checkedButton="@+id/juan_xinxi"
+        >
+        <RadioButton
+            android:id="@+id/juan_xinxi"
+            style="@style/radiostyle"
+            android:textColor="@color/radiobutto_color"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:text="捐赠动态"
+            android:drawableBottom="@drawable/radiobutton_img"
+            android:layout_height="match_parent" />
+        <RadioButton
+            android:id="@+id/juan_shengming"
+            android:text="相关声明"
+            android:textColor="@color/radiobutto_color"
+            android:drawableBottom="@drawable/radiobutton_img"
+            style="@style/radiostyle"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </RadioGroup>
+    <View
+        android:id="@+id/wodefengexian"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc"
+        android:layout_below="@+id/rg_twobutton"/>
+
+    <FrameLayout
+        android:id="@+id/fl_juan"
+        android:layout_below="@+id/wodefengexian"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+
+
+
+
+</RelativeLayout>

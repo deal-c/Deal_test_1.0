@@ -1,23 +1,32 @@
 package com.first.yuliang.deal_community.model;
 
 /**
- * 用户
+ * Created by Administrator on 2016/10/27.
  */
+
 public class User {
+    public int  mId;
+    public String   mName;
 
-    public long mId; // id
-    public String mName; // 用户名
+    public User(int mId, String mName) {
+        this.mId = mId;
+        this.mName = mName;
+    }
+    public User(){}
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "mId=" + mId +
-                ", mName='" + mName + '\'' +
-                '}';
+    public int getmId() {
+        return mId;
     }
 
-    public User(long mId, String mName) {
+    public void setmId(int mId) {
         this.mId = mId;
+    }
+
+    public String getmName() {
+        return mName;
+    }
+
+    public void setmName(String mName) {
         this.mName = mName;
     }
 }

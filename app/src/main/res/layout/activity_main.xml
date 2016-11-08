@@ -29,10 +29,10 @@
         <Button
             style="@style/radiostyle"
             android:id="@+id/radio2"
-            android:drawableBottom="@drawable/radio_up_selector"
+            android:drawableBottom="@drawable/up_1"
             android:layout_alignParentBottom="true"
             android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_height="45dp"
             android:layout_centerHorizontal="true" />
         <RadioGroup
             android:background="#fff"
@@ -79,6 +79,12 @@
                 style="@style/radiostyle"
                 />
         </RadioGroup>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/iv_blackmain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#a000"/>
     </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>
 

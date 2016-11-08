@@ -6,21 +6,18 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_myinfomation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/main"
         >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
+
             <ImageView
                 android:id="@+id/iv_modify_main_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/backback"
-
+                android:src="@drawable/return_"
+                android:background="@drawable/ripple_bg"
                 android:layout_centerVertical="true"
                 android:gravity="left"/>
 
@@ -29,26 +26,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="个人信息"
-                android:textSize="26sp"
+                android:textSize="18sp"
                 android:textColor="#fff"
-
-
-                android:layout_centerInParent="true"
-
-
+                android:layout_gravity="center_horizontal"
                 android:gravity="center"
-
                 />
-
-        </RelativeLayout>
     </android.support.v7.widget.Toolbar>
-
+    <Button
+        android:id="@+id/iv_line1"
+        android:layout_below="@id/tool_myinfomation"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#bbb"
+        />
 
     <ScrollView
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tool_myinfomation">
+        android:layout_below="@id/iv_line1">
 
 
         <LinearLayout
@@ -61,23 +57,25 @@
             android:id="@+id/rl_modify_tx"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="@drawable/ripple_bg_item"
             android:padding="10dp"
            >
 
             <ImageView
                 android:id="@+id/iv_modify_tx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:scaleType="centerCrop"
+               android:layout_centerVertical="true"
                 android:src="@drawable/u88"
                 android:layout_marginLeft="10dp"
               />
 
             <ImageView
                 android:id="@+id/iv_modify_go"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/gg"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
@@ -94,7 +92,7 @@
             android:id="@+id/rl_modify_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="@drawable/ripple_bg_item"
             android:padding="10dp">
 
             <TextView
@@ -102,15 +100,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="昵称"
-                android:textSize="24sp"
-                android:textColor="#808080"
+                android:textColor="#a000"
+                android:textSize="16sp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"/>
 
             <ImageView
                 android:id="@+id/iv_modify_go1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/gg"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
@@ -120,10 +119,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/iv_modify_go1"
-                android:text="hh"
-                android:textColor="#808080"
                 android:layout_centerVertical="true"
-                android:textSize="18sp"/>
+                android:textColor="#4000"
+                android:textSize="14sp"/>
         </RelativeLayout>
 
             <View
@@ -136,7 +134,7 @@
                 android:id="@+id/rl_modify_psd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff"
+                android:background="@drawable/ripple_bg_item"
                 android:padding="10dp">
 
                 <TextView
@@ -144,15 +142,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="密码"
-                    android:textSize="24sp"
-                    android:textColor="#808080"
+                    android:textColor="#a000"
+                    android:textSize="16sp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"/>
 
                 <ImageView
                     android:id="@+id/iv_modify_go9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/gg"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"/>
@@ -163,9 +162,9 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/iv_modify_go9"
                     android:text="修改"
-                    android:textColor="#065279"
                     android:layout_centerVertical="true"
-                    android:textSize="18sp"/>
+                    android:textColor="#4000"
+                    android:textSize="14sp"/>
             </RelativeLayout>
 
         <View
@@ -178,7 +177,7 @@
             android:id="@+id/rl_modify_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="@drawable/ripple_bg_item"
             android:padding="10dp">
 
             <TextView
@@ -186,15 +185,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="性别"
-                android:textSize="24sp"
-                android:textColor="#808080"
+                android:textColor="#a000"
+                android:textSize="16sp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"/>
 
             <ImageView
                 android:id="@+id/iv_modify_go2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/gg"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
@@ -204,10 +204,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/iv_modify_go2"
-                android:text="hh"
-                android:textColor="#808080"
                 android:layout_centerVertical="true"
-                android:textSize="18sp"/>
+                android:textColor="#4000"
+                android:textSize="14sp"/>
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
@@ -219,7 +218,7 @@
             android:id="@+id/rl_modify_birthday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="@drawable/ripple_bg_item"
             android:padding="10dp">
 
             <TextView
@@ -227,15 +226,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="生日"
-                android:textSize="24sp"
-                android:textColor="#808080"
+                android:textColor="#a000"
+                android:textSize="16sp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"/>
 
             <ImageView
                 android:id="@+id/iv_modify_go3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/gg"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
@@ -245,10 +245,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/iv_modify_go3"
-                android:text="hh"
-                android:textColor="#808080"
                 android:layout_centerVertical="true"
-                android:textSize="18sp"/>
+                android:textColor="#4000"
+                android:textSize="14sp"/>
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
@@ -261,7 +260,7 @@
             android:id="@+id/rl_modify_oftenlive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="@drawable/ripple_bg_item"
             android:padding="10dp">
 
             <TextView
@@ -269,15 +268,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="常居地"
-                android:textSize="24sp"
-                android:textColor="#808080"
+                android:textColor="#a000"
+                android:textSize="16sp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"/>
 
             <ImageView
                 android:id="@+id/iv_modify_go5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/gg"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
@@ -287,10 +287,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/iv_modify_go5"
-                android:text="hh"
-                android:textColor="#808080"
                 android:layout_centerVertical="true"
-                android:textSize="18sp"/>
+                android:textColor="#4000"
+                android:textSize="14sp"/>
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
@@ -304,7 +303,7 @@
             android:id="@+id/rl_modify_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="@drawable/ripple_bg_item"
             android:padding="10dp">
 
             <TextView
@@ -312,15 +311,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="收货地址"
-                android:textSize="24sp"
-                android:textColor="#808080"
+                android:textColor="#a000"
+                android:textSize="16sp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"/>
 
             <ImageView
                 android:id="@+id/iv_modify_go6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/gg"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
@@ -331,36 +331,37 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/iv_modify_go6"
                 android:text="修改/添加"
-                android:textColor="#065279"
                 android:layout_centerVertical="true"
-                android:textSize="18sp"/>
+                android:textColor="#4000"
+                android:textSize="14sp"/>
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="20px"
-            android:background="#C0C5C7">
+            android:background="#eee">
 
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="@drawable/ripple_bg_item"
             android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我的等级"
-                android:textSize="24sp"
-                android:textColor="#808080"
+                android:textColor="#a000"
+                android:textSize="16sp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"/>
 
             <ImageView
                 android:id="@+id/iv_modify_go7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/gg"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
@@ -375,22 +376,23 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="@drawable/ripple_bg_item"
             android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="会员身份"
-                android:textSize="24sp"
-                android:textColor="#808080"
+                android:textColor="#a000"
+                android:textSize="16sp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"/>
 
             <ImageView
                 android:id="@+id/iv_modify_go8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/gg"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
@@ -404,17 +406,18 @@
                 android:id="@+id/rl_back_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
                >
 
                 <Button
                     android:id="@+id/btn_back_account"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="退出当前账号"
-                    android:textSize="24sp"
-                    android:textColor="#808080"
+                    android:textSize="18sp"
+                    android:textColor="#a000"
                      android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/shapegray"/>
@@ -425,7 +428,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 >
-
             </RelativeLayout>
         </LinearLayout>
 

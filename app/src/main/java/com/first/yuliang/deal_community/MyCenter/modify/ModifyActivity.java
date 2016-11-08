@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,6 +23,7 @@ import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
 import com.first.yuliang.deal_community.RegActivity;
+import com.first.yuliang.deal_community.Util.DateUtils;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.User;
 
@@ -56,6 +56,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
 
     int userId=0;
     private ImageView iv_modify_main_back;
+    private ImageView iv_modify_tx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,9 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
         userId=user.getUserId();
 
         rl_modify_tx = ((RelativeLayout) findViewById(R.id.rl_modify_tx));
+        iv_modify_tx = ((ImageView) findViewById(R.id.iv_modify_tx));
+
+        x.image().bind(iv_modify_tx,HttpUtile.zy1+user.getUserImg());
 
         rl_modify_name = ((RelativeLayout) findViewById(R.id.rl_modify_name));
         tv_show_name = ((TextView) findViewById(R.id.tv_show_name));
@@ -76,12 +80,14 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
         rl_modify_gender = ((RelativeLayout) findViewById(R.id.rl_modify_gender));
         tv_show_gender = ((TextView) findViewById(R.id.tv_show_gender));
         String userSex=user.isUserSex()?"男":"女";
-        Log.e("userSex","++++++++"+userSex);
+        //Log.e("userSex","++++++++"+userSex);
         tv_show_gender.setText(userSex);
 
         rl_modify_birthday = ((RelativeLayout) findViewById(R.id.rl_modify_birthday));
         tv_show_birthday = ((TextView) findViewById(R.id.tv_show_birthday));
-       // tv_show_birthday.setText(DateUtils.dateToString(user.getBirthday()));
+
+       // Log.e("birthday","++++++++++"+user.getBirthday());
+        tv_show_birthday.setText(DateUtils.dateToString(user.getuserBirthday()));
 
 
         rl_modify_psd = ((RelativeLayout) findViewById(R.id.rl_modify_psd));
@@ -115,7 +121,9 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
         {
             case R.id.rl_modify_tx:
                 Intent intent_modify_tx=new Intent(this,ModifyTxActivity.class);
-                startActivity(intent_modify_tx);
+                intent_modify_tx.putExtra("userId",userId+"");
+                intent_modify_tx.putExtra("userImg",user.getUserImg());
+                startActivityForResult(intent_modify_tx,4);
                 break;
             case R.id.rl_modify_name:
                 Intent intent_modify_name=new Intent(this,ModifyNameActivity.class);
@@ -128,8 +136,9 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.rl_modify_birthday:
                Intent intent=new Intent(this,ModifyBirthdayActivity.class);
-                ///intent.putExtra("birthday",tv_show_birthday.getText().toString());
+                intent.putExtra("birthday",tv_show_birthday.getText().toString());
                 intent.putExtra("userId",userId+"");
+
                 startActivityForResult(intent,1);
                 break;
             case R.id.rl_modify_psd:
@@ -139,8 +148,9 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.rl_modify_oftenlive:
                 Intent intent_modify_oftenlive=new Intent(this,ModifyOftenActivity.class);
-                intent_modify_oftenlive.putExtra("address_c",tv_show_oftenlive.getText().toString());
-                startActivity(intent_modify_oftenlive);
+                intent_modify_oftenlive.putExtra("userAddress_s",tv_show_oftenlive.getText().toString());
+                intent_modify_oftenlive.putExtra("userId",userId+"");
+                startActivityForResult(intent_modify_oftenlive,3);
                 break;
             case R.id.rl_modify_address:
                 Intent intent_modify_address=new Intent(this,ModifyAddressActivity.class);
@@ -181,15 +191,16 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 dialog.dismiss();
                 ModifyActivity.this.finish();
                 Intent intentBack=new Intent(ModifyActivity.this, RegActivity.class);
-
                 intentBack.putExtra("userNickName",tv_show_name.getText().toString().trim());
-               // Log.e("userNickName","++++++++++"+tv_show_name.getText().toString().trim());
-
+                intentBack.putExtra("flag","0");
                 SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit=preference.edit();
                 edit.putInt("fromModifyToReg",1);
+                edit.putInt("id",0);
                 edit.commit();
                 startActivity(intentBack);
+
+                ModifyActivity.this.finish();
             }
         }).create();
 
@@ -212,6 +223,17 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 String data2=data.getStringExtra("name");
                 tv_show_name.setText(data2);
                 break;
+            case 3:
+                String data3=data.getStringExtra("often");
+                tv_show_oftenlive.setText(data3);
+                break;
+            case 4:
+
+
+                String data4=data.getStringExtra("data");
+                x.image().bind(iv_modify_tx,HttpUtile.zy1+data4);
+                break;
+
         }
     }
 
@@ -333,4 +355,5 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
+
 }

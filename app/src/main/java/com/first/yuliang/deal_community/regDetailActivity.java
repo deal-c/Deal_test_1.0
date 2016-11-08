@@ -1,5 +1,6 @@
 package com.first.yuliang.deal_community;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +30,8 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
@@ -57,14 +60,18 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
     private RadioButton btn_male;
     private EditText et_oftenplace;
 
-    private EditText et_birthday;
+    private TextView tv_birthday;
     private ImageView iv_tx;
+    private RelativeLayout rl_reg_birthday;
     private static final int PHOTO_REQUEST = 1;
     private static final int CAMERA_REQUEST = 2;
     private static final int PHOTO_CLIP = 3;
 
+    Dialog progressDialog;
+
     private File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/"+
             getPhotoFileName());
+
 
     private String getPhotoFileName() {
         Date date = new Date(System.currentTimeMillis());
@@ -87,11 +94,14 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
         btn_male = ((RadioButton) findViewById(R.id.rb_male));
         et_oftenplace = ((EditText) findViewById(R.id.et_oftenplace));
 
-        et_birthday = ((EditText) findViewById(R.id.et_birthday));
+        tv_birthday = ((TextView) findViewById(R.id.tv_birthday));
         iv_tx = ((ImageView) findViewById(R.id.iv_tx));
+
+        rl_reg_birthday = ((RelativeLayout) findViewById(R.id.rl_reg_birthday));
 
         btn_commit.setOnClickListener(this);
         iv_tx.setOnClickListener(this);
+        rl_reg_birthday.setOnClickListener(this);
     }
 
     @Override
@@ -105,6 +115,12 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
             case R.id.iv_tx:
 
                 showSelect(v);
+
+                break;
+            case R.id.rl_reg_birthday:
+
+                Intent intent=new Intent(regDetailActivity.this,regBirthdayActivity.class);
+                startActivityForResult(intent,5);
 
                 break;
         }
@@ -188,6 +204,12 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
 
                     }
                 }
+                break;
+
+            case 5:
+
+                String date=data.getStringExtra("date");
+                tv_birthday.setText(date);
                 break;
             default:
                 break;
@@ -318,13 +340,20 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
 
     private void doCommit() {
 
-        sendImage();
-        RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/RegAppServlet");
+        progressDialog = ToolsClass.createLoadingDialog(regDetailActivity.this, "注册中...", true,
+                0);
+        progressDialog.show();
+
+        RequestParams params=new RequestParams(HttpUtile.zy1+"/Project/servlet/upload1");
         try {
+
+            params.setMultipart(true);
+            params.addBodyParameter("file",file);
+
             params.addBodyParameter("regusername", URLEncoder.encode(et_reguser.getText().toString().trim(),"utf-8"));
             params.addBodyParameter("reguserpsd",et_regpsd.getText().toString().trim());
             params.addBodyParameter("userSex",rb_female.isChecked()?"false":"true");
-            params.addBodyParameter("birthday",et_birthday.getText().toString().trim());
+            params.addBodyParameter("birthday",tv_birthday.getText().toString().trim());
             params.addBodyParameter("userAddress_s", URLEncoder.encode(et_oftenplace.getText().toString().trim(),"utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -336,15 +365,19 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
             public void onSuccess(String result) {
 
 
+
                 SharedPreferences preference=getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit=preference.edit();
 
 
 
+
                 if(Integer.parseInt(result.trim())!=0) {
+
+                    progressDialog.hide();
                     Toast.makeText(regDetailActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
 
-                    edit.putInt("count",1);
+
                     edit.putInt("id",Integer.parseInt(result));
                     edit.commit();
                     Intent intent = new Intent(regDetailActivity.this, mainActivity.class);
@@ -352,13 +385,18 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
                     regDetailActivity.this.finish();
                 }else
                 {
+
+                    progressDialog.hide();
                     Toast.makeText(regDetailActivity.this,"注册失败",Toast.LENGTH_SHORT).show();
+
+
                 }
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
+                Toast.makeText(regDetailActivity.this,"未注册",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -369,36 +407,50 @@ public class regDetailActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
         });
     }
 
 
-    private void sendImage() {
 
-        RequestParams params = new RequestParams(HttpUtile.zy+"/servlet/upload");
-        params.addBodyParameter("file",file);
-        x.http().post(params, new Callback.CommonCallback<String>() {
 
-            @Override
-            public void onSuccess(String result) {
-                Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
-            }
+    @Override
+    public void onBackPressed() {
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
+        regDetailActivity.this.finish();
     }
+
+
+    //上传图片
+//    public void uploadImage(){
+//
+//        RequestParams requestParams=new RequestParams(HttpUtile.zy1+"/Project/servlet/upload1");
+//        requestParams.setMultipart(true);
+//        requestParams.addBodyParameter("file",file);
+//
+//        x.http().post(requestParams, new Callback.CommonCallback<String>() {
+//            @Override
+//            public void onSuccess(String result) {
+//                Log.i("ModifyPersonInfo", "onSuccess: ");
+//            }
+//
+//            @Override
+//            public void onError(Throwable ex, boolean isOnCallback) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(CancelledException cex) {
+//
+//            }
+//
+//            @Override
+//            public void onFinished() {
+//
+//            }
+//        });
+//
+//    }
+
 }

@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.first.yuliang.deal_community.MyCenter.modify.ModifyDetail.addAddressDetailActivity;
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.ToolsClass;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.Address;
 import com.google.gson.Gson;
@@ -35,6 +38,7 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
 
     private TextView tv_add_address;
     private RelativeLayout rl_add_address;
+    //Map<Integer,CheckBox> checkBoxMap=new HashMap<Integer,CheckBox>();
 
     int userId=0;
     private ListView lv_all_address;
@@ -43,6 +47,8 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
     List<Address> addressList=new ArrayList<>();
     private ImageView iv_modify_address_back;
 
+    
+    Dialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +62,8 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
         initEvent();
 
         adapter=new BaseAdapter() {
+
+
             @Override
             public int getCount() {
 
@@ -73,17 +81,56 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
             }
 
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
+            public View getView(final int position, View convertView, ViewGroup parent) {
                 View view=View.inflate(getApplicationContext(),R.layout.activity_add_address_item,null);
                 TextView tv_main_address=((TextView) view.findViewById(R.id.tv_main_address));
                 TextView tv_nickname=((TextView) view.findViewById(R.id.tv_nickname));
                 TextView tv_phone_num=((TextView) view.findViewById(R.id.tv_phone_num));
-                TextView tv_morenAddress=((TextView) view.findViewById(R.id.tv_morenAddress));
+                //TextView tv_morenAddress=((TextView) view.findViewById(R.id.tv_morenAddress));
+               
+                final CheckBox  cb_is_moren= ((CheckBox) view.findViewById(R.id.cb_is_moren));
+
+                cb_is_moren.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(isChecked)
+                        {
+                            cb_is_moren.setText("默认地址");
+                            
+                        }
+                        else
+                        {
+                            cb_is_moren.setText("设为默认");
+                        }
+                    }
+                });
+
+
+                
 
                 if(addressList.get(position).isdefault())
                 {
-                    tv_morenAddress.setVisibility(View.VISIBLE);
+                    cb_is_moren.setChecked(true);
+                   
+
                 }
+                else
+                {
+                    cb_is_moren.setChecked(false);
+                    cb_is_moren.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            if(isChecked)
+                            {
+
+                                updateAddress(addressList.get(position).getAddressId());
+                            }
+                        }
+                    });
+                }
+
+
+
                 String address=addressList.get(position).getCity().toString()+addressList.get(position).getAddressDetail();
                 tv_main_address.setText(address);
                 tv_nickname.setText(addressList.get(position).getUserName().toString());
@@ -99,6 +146,51 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
 
 
 
+    }
+
+    private void updateAddress(int addressId) {
+        RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/UpdateAddressServlet");
+        params.addBodyParameter("userId",userId+"");
+        params.addBodyParameter("addressId",addressId+"");
+        x.http().post(params, new Callback.CacheCallback<String>() {
+
+
+            @Override
+            public void onSuccess(String result) {
+
+                if(Boolean.parseBoolean(result.toString().trim()))
+                {
+                    getAllAddress();
+                }
+
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public boolean onCache(String result) {
+                return false;
+            }
+        });
+
+
+
+        
+        
     }
 
     private void initEvent() {
@@ -140,6 +232,10 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
 
     private void deleteAddress(int addressId) {
 
+
+        progressDialog = ToolsClass.createLoadingDialog(ModifyAddressActivity.this, "删除中...", true,
+                0);
+        progressDialog.show();
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/DeleteAddressServlet");
         params.addBodyParameter("addressId",addressId+"");
         x.http().post(params, new Callback.CacheCallback<String>() {
@@ -150,12 +246,19 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
 
                 if(Boolean.parseBoolean(result.toString().trim()))
                 {
+                    progressDialog.hide();
                     Toast.makeText(ModifyAddressActivity.this,"删除成功",Toast.LENGTH_SHORT).show();
                    // adapter.notifyDataSetChanged();
                     getAllAddress();
+
+                    //checkBoxMap.get(0).setChecked(true);
+
+
+
                 }
                 else
                 {
+                    progressDialog.hide();
                     Toast.makeText(ModifyAddressActivity.this,"删除失败",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -173,6 +276,7 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
 
             @Override
@@ -214,6 +318,10 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
 
     private void getAllAddress() {
 
+
+        progressDialog = ToolsClass.createLoadingDialog(ModifyAddressActivity.this, "加载中...", true,
+                0);
+        progressDialog.show();
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/getAllAddressServlet");
         params.addBodyParameter("userId",userId+"");
         x.http().post(params, new Callback.CommonCallback<String>() {
@@ -223,6 +331,7 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
             public void onSuccess(String result) {
 
 
+                progressDialog.hide();
                 Gson gson=new Gson();
                 Type type=new TypeToken<List<Address>>(){}.getType();
                 List<Address> newAddressList=new ArrayList<Address>();
@@ -230,6 +339,8 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
 
                 addressList.clear();
                 addressList.addAll(newAddressList);
+
+
 
 
                 adapter.notifyDataSetChanged();
@@ -250,6 +361,7 @@ public class ModifyAddressActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
         });
     }

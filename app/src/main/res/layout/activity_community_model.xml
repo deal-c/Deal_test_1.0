@@ -51,6 +51,7 @@
     </ListView>
 
     <Button
+        android:onClick="inputDynamicClick"
         android:id="@+id/fatie"
         android:layout_width="40dp"
         android:layout_height="40dp"

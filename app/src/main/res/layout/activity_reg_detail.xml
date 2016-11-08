@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:padding="15dp"
+    android:background="#eaeaea">
 
     <RelativeLayout
         android:id="@+id/rl_reg_tx"
@@ -25,23 +26,27 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:paddingLeft="20dp"
         android:id="@+id/rl_reg_user"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="#fff">
 
-        <TextView
+        <ImageView
             android:id="@+id/tv_reg_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="用户名："
-            android:textSize="20sp"
-            android:textColor="#000"
+           android:src="@drawable/yonghu"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>
         <EditText
             android:id="@+id/et_reguser"
 
+            android:hint="请输入用户名"
+            android:gravity="bottom"
+            android:layout_marginLeft="20dp"
+            android:textColor="#000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tv_reg_username"
@@ -50,27 +55,30 @@
             />
     </RelativeLayout>
     <RelativeLayout
+        android:paddingLeft="20dp"
         android:id="@+id/rl_reg_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="#fff">
 
-        <TextView
+        <ImageView
             android:id="@+id/tv_reg_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="密码："
-            android:textColor="#000"
-            android:textSize="20sp"
+            android:src="@drawable/mima"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>
         <EditText
             android:id="@+id/et_regPsd"
-
+            android:textColor="#000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tv_reg_password"
 
+            android:hint="请输入密码"
+            android:gravity="bottom"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/mv_loading_logo"
             />
     </RelativeLayout>
@@ -78,58 +86,72 @@
     <RelativeLayout
         android:id="@+id/rl_reg_sex"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:padding="5dip">
+
+        android:background="#fff">
         <RadioGroup
             android:id="@+id/rg_sex"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:gravity="center"
             android:layout_centerInParent="true">
             <RadioButton
                 android:id="@+id/rb_male"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="男"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+
+               android:text="男"
                 android:textColor="#000"
                 android:textSize="24sp"
+                android:background="@drawable/gender_selector"
                 />
             <RadioButton
 
                 android:layout_marginLeft="20dp"
                 android:id="@+id/rb_female"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:textSize="24sp"
                 android:textColor="#000"
+                android:background="@drawable/gender_selector"
                 android:text="女"/>
         </RadioGroup>
     </RelativeLayout>
 
 
     <RelativeLayout
+        android:paddingLeft="20dp"
         android:id="@+id/rl_reg_birthday"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:background="#fff">
 
-        <TextView
+        <ImageView
             android:id="@+id/tv_reg_birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="生日："
-            android:textSize="20sp"
-            android:textColor="#000"
+           android:src="@drawable/birthday"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>
-        <EditText
-            android:id="@+id/et_birthday"
+        <TextView
+            android:id="@+id/tv_birthday"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tv_reg_birthday"
+
+            android:text="请选择生日"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_alignBottom="@id/tv_reg_birthday"
+
+            android:textColor="#000"
+            android:layout_centerVertical="true"
 
             android:background="@drawable/mv_loading_logo"
             />
@@ -137,18 +159,18 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:paddingLeft="20dp"
         android:id="@+id/rl_reg_oftenplace"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="#fff">
 
-        <TextView
+        <ImageView
             android:id="@+id/tv_reg_oftenplace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="常住地："
-            android:textColor="#000"
-            android:textSize="20sp"
+           android:src="@drawable/dizhi"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>
         <EditText
@@ -158,6 +180,10 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tv_reg_oftenplace"
 
+            android:textColor="#000"
+            android:hint="请输入常居地(例如:苏州)"
+            android:gravity="bottom"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/mv_loading_logo"
             />
     </RelativeLayout>
@@ -167,16 +193,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
         <Button
             android:layout_marginTop="10dp"
             android:id="@+id/btn_commit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shapes"
             android:textSize="24sp"
             android:text="提 交"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:layout_centerInParent="true"
 
             />

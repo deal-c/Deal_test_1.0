@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shapesys"
+    android:padding="10dp"
+    >
+
+
+    <ImageView
+        android:id="@+id/iv_xt_item"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/tongzhi"
+        android:background="@drawable/shapexit"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="系统通知消息"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:layout_alignTop="@+id/iv_xt_item"
+        android:layout_toRightOf="@+id/iv_xt_item"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_message_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="卖家已发货 请耐心等待"
+        android:textColor="#000"
+        android:textSize="14sp"
+        android:layout_alignBottom="@+id/iv_xt_item"
+        android:layout_toRightOf="@+id/iv_xt_item"
+        android:layout_marginLeft="5dp"
+        />
+
+</RelativeLayout>

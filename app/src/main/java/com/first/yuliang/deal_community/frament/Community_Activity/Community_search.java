@@ -79,7 +79,7 @@ public class Community_search extends AppCompatActivity implements View.OnClickL
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 query2.setText(history_arr[position]);
                 query2.setSelection(history_arr[position].length());
-                RequestParams params = new RequestParams(HttpUtile.host +"/community/togetcombyname");
+                RequestParams params = new RequestParams(HttpUtile.yu +"/community/togetcombyname");
                 params.addQueryStringParameter("name", history_arr[position]);
                 save();
                 getHistory();
@@ -286,22 +286,19 @@ public class Community_search extends AppCompatActivity implements View.OnClickL
                 if (!query2.getText().toString().trim().equals("") && query2.getText().toString().trim() != null) {
                     query2.setFocusable(false);
                     query2.setFocusableInTouchMode(true);
-                    save();
-                    getHistory();
-                    btn_clear_history.setVisibility(View.GONE);
+
                     Intent intent = new Intent(Community_search.this, Community_model.class);
 
                     if (communityList.size()!=0){
+                        save();
+                        getHistory();
+                        btn_clear_history.setVisibility(View.GONE);
                         Community temp = communityList.get(0);
 
                         intent.putExtra("bundle", temp);
                         startActivity(intent);
                     }else {
-
-                        Community temp = new Community(0, "0", "0", "0", "0");
-
-                        intent.putExtra("bundle", temp);
-                        startActivity(intent);
+                        Toast.makeText(Community_search.this,"暂无该社区",Toast.LENGTH_LONG).show();
                     }
                 } else {
                     ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
@@ -321,7 +318,7 @@ public class Community_search extends AppCompatActivity implements View.OnClickL
 
     public void getCommunityList(String search) {
         search = search.replace(" ", "%");
-        RequestParams params = new RequestParams(HttpUtile.host+"/community/togetcommunity");
+        RequestParams params = new RequestParams(HttpUtile.yu+"/community/togetcommunity");
         params.addQueryStringParameter("name", search);
         x.http().get(params, new Callback.CommonCallback<String>() {
 

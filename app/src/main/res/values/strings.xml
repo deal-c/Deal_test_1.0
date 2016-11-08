@@ -1,4 +1,20 @@
 <resources>
-    <string name="app_name">deal_community</string>
+    <string name="app_name">Deal货</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="spingarr">
 
+        <item>默认分类（其他）</item>
+        <item>手机</item>
+        <item>家电</item>
+        <item>生活用品</item>
+        <item>男装</item>
+        <item>女装</item>
+        <item>母婴用品</item>
+        <item>游戏</item>
+        <item>自行车</item>
+        <item>数码产品</item>
+    </string-array>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+    <string name="title_alert">提示</string>
 </resources>

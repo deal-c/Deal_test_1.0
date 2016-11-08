@@ -1,17 +1,20 @@
 package com.first.yuliang.deal_community.MyCenter;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.ToolsClass;
 import com.first.yuliang.deal_community.Util.DateUtils;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.Product;
@@ -33,7 +36,8 @@ public class MyPublishActivity extends AppCompatActivity implements View.OnClick
     private BaseAdapter adapter;
     int userId=0;
     List<Product> productList=new ArrayList<>();
-    private ImageView iv_publish_back;
+    Dialog progressDialog;
+    private ImageButton iv_publish_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,63 +46,73 @@ public class MyPublishActivity extends AppCompatActivity implements View.OnClick
 
         Intent intent=getIntent();
         userId=Integer.parseInt(intent.getStringExtra("userId").toString().trim());
-        Log.e("userId","$$$$$$$$$$$$$$$"+userId);
 
-        lv_publish = ((ListView) findViewById(R.id.lv_publish));
-        iv_publish_back = ((ImageView) findViewById(R.id.iv_publish_back));
-        iv_publish_back.setOnClickListener(this);
+        if(userId==0)
+        {
+            Toast.makeText(MyPublishActivity.this,"您尚未登录呦",Toast.LENGTH_SHORT).show();
+        }
+        else {
 
-        adapter=new BaseAdapter() {
-            @Override
-            public int getCount() {
-                return productList.size();
-            }
+            lv_publish = ((ListView) findViewById(R.id.lv_publish));
+            View view = View.inflate(MyPublishActivity.this,R.layout.mypubulish,null);
+            iv_publish_back = ((ImageButton)view.findViewById(R.id.ib_return_mine));
+            iv_publish_back.setOnClickListener(this);
 
-            @Override
-            public Object getItem(int position) {
-                return null;
-            }
+            adapter = new BaseAdapter() {
+                @Override
+                public int getCount() {
+                    return productList.size();
+                }
 
-            @Override
-            public long getItemId(int position) {
-                return 0;
-            }
+                @Override
+                public Object getItem(int position) {
+                    return null;
+                }
 
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view=View.inflate(getApplicationContext(),R.layout.activity_publish_lv_item,null);
+                @Override
+                public long getItemId(int position) {
+                    return 0;
+                }
 
-                TextView tv_publish_product_name=((TextView) view.findViewById(R.id.tv_publish_product_name));
-                TextView tv_publish_product_price=((TextView) view.findViewById(R.id.tv_publish_product_price));
-                TextView tv_publish_product_class=((TextView) view.findViewById(R.id.tv_publish_product_class));
-                TextView tv_publish_product_desc=((TextView) view.findViewById(R.id.tv_publish_product_desc));
-                TextView tv_publish_product_time=((TextView) view.findViewById(R.id.tv_publish_product_time));
-                ImageView iv_publish_product=((ImageView)view.findViewById(R.id.iv_publish_product));
-                Product product=productList.get(position);
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View view = View.inflate(getApplicationContext(), R.layout.activity_publish_lv_item, null);
 
-                tv_publish_product_name.setText(product.getProductTitle());
-                tv_publish_product_price.setText(product.getPrice()+"");
-                tv_publish_product_class.setText(product.getProductClass());
-                tv_publish_product_time.setText(DateUtils.dateToString(product.getReleaseTime()));
-                tv_publish_product_desc.setText(product.getProductDescribe());
-                x.image().bind(iv_publish_product,HttpUtile.szj+product.getProductImg());
+                    TextView tv_publish_product_name = ((TextView) view.findViewById(R.id.tv_publish_product_name));
+                    TextView tv_publish_product_price = ((TextView) view.findViewById(R.id.tv_publish_product_price));
+                    TextView tv_publish_product_class = ((TextView) view.findViewById(R.id.tv_publish_product_class));
+                    TextView tv_publish_product_desc = ((TextView) view.findViewById(R.id.tv_publish_product_desc));
+                    TextView tv_publish_product_time = ((TextView) view.findViewById(R.id.tv_publish_product_time));
+                    ImageView iv_publish_product = ((ImageView) view.findViewById(R.id.iv_publish_product));
+                    Product product = productList.get(position);
 
-
-                return view;
-            }
-        };
-
-
-        lv_publish.setAdapter(adapter);
+                    tv_publish_product_name.setText(product.getProductTitle());
+                    tv_publish_product_price.setText(product.getPrice() + "");
+                    tv_publish_product_class.setText(product.getProductClass());
+                    tv_publish_product_time.setText(DateUtils.dateToString(product.getReleaseTime()));
+                    tv_publish_product_desc.setText(product.getProductDescribe());
+                    x.image().bind(iv_publish_product, HttpUtile.szj + product.getProductImg());
 
 
-        getAllProductInfo();
+                    return view;
+                }
+            };
 
 
+            lv_publish.setAdapter(adapter);
+
+
+            getAllProductInfo();
+
+        }
 
     }
 
     private void getAllProductInfo() {
+
+        progressDialog = ToolsClass.createLoadingDialog(MyPublishActivity.this, "加载中...", true,
+                0);
+        progressDialog.show();
 
         RequestParams params=new RequestParams(HttpUtile.zy+"/servlet/SelectAllProductServlet");
         params.addBodyParameter("userId",userId+"");
@@ -123,6 +137,8 @@ public class MyPublishActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
+
+                Toast.makeText(MyPublishActivity.this,"网络访问失败",Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -133,6 +149,7 @@ public class MyPublishActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onFinished() {
 
+                progressDialog.dismiss();
             }
 
             @Override
@@ -146,15 +163,16 @@ public class MyPublishActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch(v.getId())
         {
-            case R.id.iv_publish_back:
+            case R.id.ib_return_mine:
 
-                Intent intentData=new Intent();
-
-                Log.e("num","+++++++++++"+productList.size());
-                intentData.putExtra("num",productList.size());
-                MyPublishActivity.this.setResult(5,intentData);
                 MyPublishActivity.this.finish();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        MyPublishActivity.this.finish();
     }
 }

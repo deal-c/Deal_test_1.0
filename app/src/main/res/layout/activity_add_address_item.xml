@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:padding="7dip">
+
+
+    <View
+        android:id="@+id/viewview"
+        android:layout_width="match_parent"
+
+        android:layout_height="1px"
+        android:background="#C0C5C7"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewview">
 
     <TextView
         android:id="@+id/tv_main_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="哈哈哈哈哈哈哈哈哈"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textColor="#000"
+
         android:singleLine="false"/>
 
     <TextView
@@ -20,30 +35,47 @@
         android:text="用户昵称"
         android:textColor="#000"
         android:layout_below="@id/tv_main_address"
-        android:textSize="22sp"/>
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/tv_phone_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="用户电话"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textColor="#000"
         android:layout_toRightOf="@id/tv_nickname"
         android:layout_alignBottom="@id/tv_nickname"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="10dp"
+      />
 
-    <TextView
-        android:id="@+id/tv_morenAddress"
+    <!--<TextView-->
+        <!--android:id="@+id/tv_morenAddress"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="已设为默认地址"-->
+        <!--android:textSize="14sp"-->
+        <!--android:textColor="#000"-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_toRightOf="@id/tv_phone_num"-->
+        <!--android:layout_alignBottom="@id/tv_phone_num"-->
+        <!--android:layout_marginLeft="10dp"/>-->
+
+    <CheckBox
+        android:id="@+id/cb_is_moren"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="已设为默认地址"
-        android:textSize="18sp"
+        android:text="设为默认"
         android:textColor="#000"
-        android:visibility="gone"
-        android:layout_toRightOf="@id/tv_phone_num"
-        android:layout_alignBottom="@id/tv_phone_num"
-        android:layout_marginLeft="10dp"/>
+        android:textSize="14sp"
+        android:layout_alignTop="@id/tv_phone_num"
+        android:layout_marginLeft="10dp"
+        android:button="@drawable/ismoren"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
 
+        />
+
+    </RelativeLayout>
 
 </RelativeLayout>

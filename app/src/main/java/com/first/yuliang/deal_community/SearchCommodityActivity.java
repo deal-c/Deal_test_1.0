@@ -22,11 +22,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.google.gson.Gson;
 
@@ -267,7 +267,7 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
         search = search.replace(" ","%");
         RequestParams params = null;
         try {
-            params = new RequestParams("http://10.40.5.62:8080/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
+            params = new RequestParams(HttpUtile.szj+"/csys/getcommodity?search="+ URLEncoder.encode(search,"utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -414,8 +414,10 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
 
         switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
             case 0:
-                Bundle bundle=data.getBundleExtra("bundle"); //data为B中回传的Intent
-                String search = bundle.getString("search");//str即为回传的值
+//                if(data.getBundleExtra("bundle")!=null){
+//
+//                Bundle bundle=data.getBundleExtra("bundle"); //data为B中回传的Intent
+                String search = "7";//bundle.getString("search");//str即为回传的值
                 Log.e("看看返回了没==========",search);
                 if(search.equals(" ")){
                     query2.setFocusable(false);
@@ -425,6 +427,9 @@ public class SearchCommodityActivity extends AppCompatActivity implements View.O
                     InputMethodManager m=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                 }
+
+
+
                 break;
             default:
                 break;

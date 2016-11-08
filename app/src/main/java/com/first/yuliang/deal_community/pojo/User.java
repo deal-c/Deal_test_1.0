@@ -15,24 +15,32 @@ public class User implements Parcelable {
     private String userPsd;
     private String userImg;
     private boolean userSex;
-    private Date birthday;
+    private Date userBirthday;
     private String userAddress_s;
 
     private int LabelId;
+    private String token;
 
 
     public User(){}
-
-    public User(int userId, String userName, String userPsd, String userImg, boolean userSex, Date birthday, String userAddress_s, int labelId) {
+    public User(int userId){
+        this.userId = userId;
+    }
+    public User(int userId, String userName){
+        this.userId = userId;
+        this.userName = userName;
+    }
+    public User(int userId, String userName, String userPsd, String userImg, boolean userSex, Date userBirthday, String userAddress_s, int labelId,String token) {
         this.userId = userId;
         this.userName = userName;
         this.userPsd = userPsd;
         this.userImg = userImg;
         this.userSex = userSex;
-        this.birthday = birthday;
+        this.userBirthday=userBirthday;
         this.userAddress_s = userAddress_s;
 
         LabelId = labelId;
+        this.token=token;
     }
 
     public int getUserId() {
@@ -75,12 +83,12 @@ public class User implements Parcelable {
         this.userSex = userSex;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public Date getuserBirthday() {
+        return userBirthday;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setuserBirthday(Date userBirthday) {
+        this.userBirthday = userBirthday;
     }
 
     public String getUserAddress_s() {
@@ -91,8 +99,6 @@ public class User implements Parcelable {
         this.userAddress_s = userAddress_s;
     }
 
-
-
     public int getLabelId() {
         return LabelId;
     }
@@ -101,6 +107,13 @@ public class User implements Parcelable {
         LabelId = labelId;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     @Override
     public int describeContents() {
@@ -114,11 +127,10 @@ public class User implements Parcelable {
         dest.writeString(this.userPsd);
         dest.writeString(this.userImg);
         dest.writeByte(this.userSex ? (byte) 1 : (byte) 0);
-        dest.writeLong(this.birthday != null ? this.birthday.getTime() : -1);
+        dest.writeLong(this.userBirthday != null ? this.userBirthday.getTime() : -1);
         dest.writeString(this.userAddress_s);
-
         dest.writeInt(this.LabelId);
-
+        dest.writeString(this.token);
     }
 
     protected User(Parcel in) {
@@ -127,15 +139,14 @@ public class User implements Parcelable {
         this.userPsd = in.readString();
         this.userImg = in.readString();
         this.userSex = in.readByte() != 0;
-        long tmpBirthday = in.readLong();
-        this.birthday = tmpBirthday == -1 ? null : new Date(tmpBirthday);
+        long tmpUserBirthday = in.readLong();
+        this.userBirthday = tmpUserBirthday == -1 ? null : new Date(tmpUserBirthday);
         this.userAddress_s = in.readString();
-
         this.LabelId = in.readInt();
-
+        this.token=in.readString();
     }
 
-    public static final Creator<User> CREATOR = new Creator<User>() {
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
         @Override
         public User createFromParcel(Parcel source) {
             return new User(source);

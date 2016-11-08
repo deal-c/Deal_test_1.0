@@ -2,10 +2,12 @@ package com.first.yuliang.deal_community.model;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.os.Handler;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -14,14 +16,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.first.yuliang.deal_community.R;
+import com.first.yuliang.deal_community.frament.pojo.Dynamic;
+import com.first.yuliang.deal_community.frament.utiles.HttpUtils;
+import com.google.gson.Gson;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 评论相关方法
  */
 public class CommentFun {
+
     public static final int KEY_COMMENT_SOURCE_COMMENT_LIST = -200162;
+    public static final int KEY_COMMENT_SOURCE_COMMENT_LIST1 = -200161;
 
     /**
      * 在页面中显示评论列表
@@ -33,7 +45,7 @@ public class CommentFun {
      * @param tagHandler
      */
     public static void parseCommentList(Context context, ArrayList<Comment> mCommentList, LinearLayout commentList,
-                                        View btnComment, Html.TagHandler tagHandler) {
+                                        View btnComment, Html.TagHandler tagHandler, Dynamic dynamic) {
         if (btnComment != null) {
             btnComment.setTag(KEY_COMMENT_SOURCE_COMMENT_LIST, mCommentList);
         }
@@ -81,15 +93,14 @@ public class CommentFun {
     /**
      * 弹出评论对话框
      */
-    public static void inputComment(final Activity activity, final ListView listView,
-                                    final View btnComment, final User receiver,
+    public static void inputComment(final Activity activity, final int userId, final ListView listView,
+                                    final View btnComment, final int position, final User receiver, final ArrayList<Comment> moments,
                                     final InputCommentListener listener) {
 
-        final ArrayList<Comment> commentList = (ArrayList) btnComment.getTag(KEY_COMMENT_SOURCE_COMMENT_LIST);
 
         String hint;
         if (receiver != null) {
-            if (receiver.mId == ComMainActivity.sUser.mId) {
+            if (receiver.mId == userId) {
                 hint = "我也说一句";
             } else {
                 hint = "回复 " + receiver.mName;
@@ -112,19 +123,93 @@ public class CommentFun {
                     Toast.makeText(activity, "评论不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                final ArrayList<Comment> commentList = (ArrayList) btnComment.getTag(KEY_COMMENT_SOURCE_COMMENT_LIST);
                 btn.setClickable(false);
                 final long receiverId = receiver == null ? -1 : receiver.mId;
+                // Comment comment = new Comment(ComMainActivity.sUser, content, receiver);
+                Comment tomycomment=null;
+                Comment mycomment = null;
+                ArrayList<Comment> mylist = new ArrayList();
                 Comment comment = new Comment(ComMainActivity.sUser, content, receiver);
+                if (receiver == null) {
+                    mycomment = new Comment("user1", "2016", 1, ComMainActivity.sUser, content, ComMainActivity.sUser, null);
+                    moments.add(mycomment);
+                    ArrayList<Comment> myfirstlist = new ArrayList();
+                    myfirstlist.add(mycomment);
+                    addfirstRemark(myfirstlist, userId);
 
-
-
-                commentList.add(comment);
-                if (listener != null) {
-                    listener.onCommitComment();
+                } else if(position!=0){
+                    ArrayList<Comment> tomyfirstlist = new ArrayList();
+                    tomycomment = new Comment(ComMainActivity.sUser,content,receiver);
+                    //commentList.add(tomycomment);
+                   tomyfirstlist.add(tomycomment);
+                    moments.get(position-1).setList(tomyfirstlist);
+                    addRemark(tomyfirstlist,userId);
                 }
+                else {
+                    commentList.add(comment);
+                    Log.e("看看数据====", "我要看结果，妈的???");
+                    mylist.add(comment);
+                    addRemark(mylist, userId);
+                }
+                if (listener != null) {
+                    listener.onCommitComment(comment);
+                    // Log.e("看看数据————", "难道你也不执行？");
+                }
+
                 dialog.dismiss();
+
                 Toast.makeText(activity, "评论成功", Toast.LENGTH_SHORT).show();
             }
+
+            private void addfirstRemark(ArrayList<Comment> myfirstlist, int userId) {
+
+                String remarkUserId = String.valueOf(userId);
+                String dynamicId = String.valueOf(ComMainActivity.dynamicArrayList.get(0).getDynamicId());
+                String reciever = myfirstlist.get(0).getmReceiver().mName;
+                String recieveId = String.valueOf(myfirstlist.get(0).getmReceiver().mId);
+                String remarkContent = myfirstlist.get(0).getmContent();
+                // String commentator = myfirstlist.get(0).getmCommentator().mName;
+
+                Log.e("看看数据1====", dynamicId + "???");
+                Log.e("看看数据2====", reciever + "???");
+                //  Log.e("看看数据====", commentator+"???");
+                Log.e("看看数据3====", recieveId + "???");
+                Log.e("看看数4====", remarkContent + "???");
+                Log.e("我自己看看数据5====", remarkUserId + "???");
+
+                RequestParams requestParams = new RequestParams("http://10.40.5.61:8080/usys/MyFirstServlt");
+                requestParams.addBodyParameter("remarkContent", remarkContent);
+                requestParams.addBodyParameter("recieveId", recieveId);
+                requestParams.addBodyParameter("dynamicId", dynamicId);
+                requestParams.addBodyParameter("reciever", reciever);
+                //requestParams.addBodyParameter("commentator", commentator);
+                requestParams.addBodyParameter("remarkUserId", remarkUserId);
+                x.http().post(requestParams, new Callback.CommonCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Log.e("看看数据====", result + "???!!!");
+                    }
+
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                        Log.e("看看数据====", ex + "???!!!");
+                    }
+
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+
+                    }
+
+                    @Override
+                    public void onFinished() {
+
+                    }
+                });
+
+
+            }
+
 
             @Override
             public void onShow(int[] inputViewCoordinatesInScreen) {
@@ -143,18 +228,69 @@ public class CommentFun {
 
     }
 
+    private static void addRemark(ArrayList<Comment> mylist, int userId) {
+
+        String remarkUserId = String.valueOf(userId);
+        String dynamicId = String.valueOf(MomentAdapter.mylist.getDynamicId());
+        String reciever = mylist.get(0).getmReceiver().mName;
+        String recieveId = String.valueOf(mylist.get(0).getmReceiver().mId);
+        String remarkContent = mylist.get(0).getmContent();
+        String commentator = mylist.get(0).getmCommentator().mName;
+
+         /*   Log.e("看看数据====", dynamicId+"???");
+            Log.e("看看数据====", reciever+"???");
+            Log.e("看看数据====", commentator+"???");
+            Log.e("看看数据====", recieveId+"???");
+            Log.e("看看数据====", remarkContent+"???");
+            Log.e("我自己看看数据====", remarkUserId+"???");*/
+
+        RequestParams requestParams = new RequestParams("http://10.40.5.61:8080/usys/MyBackComment");
+        requestParams.addBodyParameter("remarkContent", remarkContent);
+        requestParams.addBodyParameter("recieveId", recieveId);
+        requestParams.addBodyParameter("dynamicId", dynamicId);
+        requestParams.addBodyParameter("reciever", reciever);
+        requestParams.addBodyParameter("commentator", commentator);
+        requestParams.addBodyParameter("remarkUserId", remarkUserId);
+        x.http().post(requestParams, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                //Log.e("看看数据====", result+"???");
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                //  Log.e("看看数据====", ex+"???");
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+
+    }
+
+
     public static class InputCommentListener {
         //　评论成功时调用
-        public void onCommitComment() {
+        public void onCommitComment(Comment comment) {
+
 
         }
+
     }
 
 
     /**
      * 弹出评论对话框
      */
-    private static Dialog showInputComment(Activity activity, CharSequence hint, final CommentDialogListener listener) {
+    public static Dialog showInputComment(Activity activity, CharSequence hint, final CommentDialogListener listener) {
         final Dialog dialog = new Dialog(activity, android.R.style.Theme_Translucent_NoTitleBar);
         dialog.setContentView(R.layout.view_input_comment);
         dialog.findViewById(R.id.input_comment_dialog_container).setOnClickListener(new View.OnClickListener() {

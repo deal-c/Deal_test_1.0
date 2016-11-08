@@ -2,63 +2,71 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
     android:orientation="horizontal">
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        android:layout_height="80dp">
    <RelativeLayout
        android:layout_weight="1"
+       android:gravity="center"
        android:layout_width="wrap_content"
-       android:layout_height="wrap_content">
+       android:layout_height="match_parent">
     <Button
+        android:id="@+id/btn_juan"
        android:text="捐"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textColor="#fff"
-        android:background="@drawable/button_circle"
-        android:layout_height="60dp"
-        android:layout_width="60dp"
+        android:background="@drawable/ripple_bg"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
         />
    </RelativeLayout>
         <RelativeLayout
             android:layout_weight="1"
+            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <Button
+                android:id="@+id/btn_zeng"
                 android:text="赠"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:textColor="#fff"
-                android:background="@drawable/button_circle"
-                android:layout_height="60dp"
-                android:layout_width="60dp"
+                android:background="@drawable/ripple_bg"
+                android:layout_height="50dp"
+                android:layout_width="50dp"
                 />
         </RelativeLayout>
         <RelativeLayout
             android:layout_weight="1"
+            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <Button
                 android:text="换"
-                android:textSize="22sp"
+                android:id="@+id/btn_huan"
+                android:textSize="20sp"
                 android:textColor="#fff"
-                android:background="@drawable/button_circle"
-                android:layout_height="60dp"
-                android:layout_width="60dp"
+                android:background="@drawable/ripple_bg"
+                android:layout_height="50dp"
+                android:layout_width="50dp"
                 />
         </RelativeLayout>
         <RelativeLayout
             android:layout_weight="1"
+            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <Button
                 android:text="卖"
-                android:textSize="22sp"
+                android:id="@+id/btn_mai"
+                android:textSize="20sp"
                 android:textColor="#fff"
-                android:background="@drawable/button_circle"
-                android:layout_height="60dp"
-                android:layout_width="60dp"
+                android:background="@drawable/ripple_bg"
+                android:layout_height="50dp"
+                android:layout_width="50dp"
                 />
         </RelativeLayout>
     </LinearLayout>

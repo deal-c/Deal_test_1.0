@@ -1,25 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
+
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true"
         >
-    <TextView
-            android:layout_width="fill_parent"
+
+    <!-- 搜索输入框的相对布局 -->
+    <RelativeLayout
+        android:id="@+id/headhead"
+        android:paddingLeft="5dp"
+      android:layout_below="@+id/backheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <ListView android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="当前用户id:1,昵称：走向远方"
             android:background="#ffffff"
-            android:textColor="#aaaaaa"
-            android:padding="10dp"
-            android:id="@+id/title"
-            />
-    <ListView android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#ececec"
-              android:id="@+id/list_moment"
-              android:dividerHeight="10dp"
-              android:divider="#ececec"
-              android:cacheColorHint="@android:color/transparent"
+            android:id="@+id/list_moment"
+            android:dividerHeight="10dp"
+            android:divider="#ffffff"
+            android:cacheColorHint="@android:color/transparent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="25dp"
             ></ListView>
-</LinearLayout>
+
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/btn_input_comment"
+            android:hint="评论"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textSize="14dp"
+            android:textColor="#000000"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_input_comment"
+            android:textColorHint="#aaaaaa"
+            android:onClick="inputComment"
+            />
+
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:paddingTop="20dp"
+        android:id="@+id/backheader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:background="@color/main"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+        <Button
+            android:id="@+id/btn_message"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:paddingTop="6dp"
+            android:layout_gravity="center_vertical"
+            android:drawableTop="@drawable/return_"
+            android:text="消息"
+            android:textColor="#FFFFFF"
+            android:onClick="backonclick"
+            android:textSize="8sp"
+            style="?android:attr/borderlessButtonStyle"
+            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            >
+
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/ib_type"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ripple_bg"
+            android:src="@drawable/type" />
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>
 

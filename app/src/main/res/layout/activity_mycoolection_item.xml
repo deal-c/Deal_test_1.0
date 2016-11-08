@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+
+    android:background="@drawable/background"
+    android:layout_marginTop="5dp">
+
+    <ImageView
+        android:id="@+id/iv_collect_product"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pro"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_collect_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="哈哈哈"
+        android:textColor="#000"
+
+        android:layout_marginLeft="5dp"
+
+        android:textSize="14dp"
+
+        android:layout_toRightOf="@+id/iv_collect_product"
+
+        />
+    <TextView
+        android:id="@+id/tv_collect_product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="￥6000"
+        android:textColor="#000"
+        android:textSize="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignBottom="@+id/iv_collect_product"
+        android:layout_toRightOf="@+id/iv_collect_product"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_collect_product_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:textColor="#000"
+        android:text="哈哈哈"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/tv_collect_product_name"
+        android:layout_toRightOf="@id/iv_collect_product"
+        />
+    <TextView
+        android:id="@+id/tv_collect_product_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="哈哈哈"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/tv_collect_product_class"
+        android:layout_toRightOf="@id/iv_collect_product"
+        android:layout_marginTop="3dp"
+        android:textColor="#000"
+        android:textSize="10sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_collect_product_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2016-10-13 02:00:11"
+        android:textSize="10sp"
+        android:textColor="#000"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/tv_collect_product_price"
+        />
+
+    <TextView
+        android:id="@+id/tv_collect_product_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上海"
+        android:textSize="10sp"
+        android:textColor="#000"
+        android:layout_toRightOf="@id/tv_collect_product_price"
+        android:layout_alignBottom="@id/tv_collect_product_price"
+        android:layout_marginLeft="10dp"
+        />
+
+</RelativeLayout>
+

@@ -7,20 +7,18 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_modify_psd"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/main"
 
         >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/iv_modify_psd_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/backback"
+                android:src="@drawable/comego"
 
                 android:layout_centerVertical="true"
                 android:gravity="left"/>
@@ -30,18 +28,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="修改密码"
-                android:textSize="20sp"
-                android:textColor="#000"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:layout_gravity="center_horizontal"
 
 
-                android:layout_centerInParent="true"
+
 
 
 
                 />
 
-        </RelativeLayout>
+
     </android.support.v7.widget.Toolbar>
+
 
 
     <ScrollView
@@ -62,10 +62,11 @@
        >
 
         <TextView
+
             android:id="@+id/tv_new_psd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:text="新密码"
             android:layout_centerVertical="true"
             android:textColor="#000"
@@ -75,7 +76,7 @@
            android:id="@+id/et_new_psd"
            android:layout_width="match_parent"
            android:layout_height="35dp"
-
+           android:layout_centerVertical="true"
             android:textColor="#000"
            android:layout_toRightOf="@id/tv_new_psd"
            android:layout_alignBottom="@id/tv_new_psd"
@@ -97,7 +98,7 @@
                     android:id="@+id/tv_again_confirm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="22sp"
+                    android:textSize="18sp"
                     android:text="再次输入"
                     android:layout_centerVertical="true"
                     android:textColor="#000"
@@ -108,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginLeft="5dp"
-
+                    android:layout_centerVertical="true"
                     android:textColor="#000"
                     android:layout_toRightOf="@id/tv_again_confirm"
                     android:background="@drawable/mv_loading_logo"
@@ -124,7 +125,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dip">
+                android:padding="10dp">
 
             <Button
                 android:id="@+id/btn_queren"
@@ -133,7 +134,7 @@
                 android:background="@drawable/shapegray"
                 android:textSize="20sp"
                 android:textColor="#fff"
-                android:text="确定"/>
+                android:text="确 定"/>
 
             </RelativeLayout>
 

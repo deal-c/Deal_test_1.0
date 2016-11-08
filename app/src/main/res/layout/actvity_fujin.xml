@@ -7,45 +7,68 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/bgcolor">
-
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    >
         <TextView
            android:layout_centerInParent="true"
-           android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="附近"
-           android:textSize="30sp"
+           android:textSize="20sp"
            android:textColor="#fff"/>
+</RelativeLayout>
 </android.support.v7.widget.Toolbar>
+    <Button
+        android:id="@+id/iv_line1"
+        android:layout_below="@id/tl_fujin"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#bbb"
+        />
 <LinearLayout
     android:background="#fff"
     android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:orientation="horizontal"
-    android:layout_below="@id/tl_fujin">
+    android:layout_below="@id/iv_line1">
     <Button
+        android:id="@+id/btn_quyu"
         android:text=" 区 域 "
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_weight="1"/>
     <Button
-
+        android:id="@+id/fujin_maijia"
         android:text="附近卖家"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_weight="1"/>
     <Button
+        android:id="@+id/fujin_product"
         android:text="附近商品"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_weight="1"/>
 </LinearLayout>
-    <com.amap.api.maps.MapView
+    <com.amap.api.maps.TextureMapView
+        android:layout_below="@+id/ll"
         android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/ll">
-    </com.amap.api.maps.MapView>
+        android:layout_height="match_parent">
+
+    </com.amap.api.maps.TextureMapView>
+<Button
+    android:id="@+id/change"
+    android:layout_margin="10dp"
+    android:layout_width="36dp"
+    android:layout_height="36dp"
+    android:background="@drawable/dwa"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="60dp"/>
 
 </RelativeLayout>
