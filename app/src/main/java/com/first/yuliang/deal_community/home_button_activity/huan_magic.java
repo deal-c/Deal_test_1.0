@@ -130,6 +130,7 @@ public class huan_magic extends AppCompatActivity {
             }
         }
     };
+    private ImageView qijihuan_returen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +142,13 @@ public class huan_magic extends AppCompatActivity {
 
         tb = ((Toolbar) findViewById(R.id.qijihuan));
         iv_black = ((ImageView) findViewById(R.id.iv_blackqj));
+        qijihuan_returen = ((ImageView) findViewById(R.id.qijihuan_returen));
+        qijihuan_returen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                huan_magic.this.finish();
+            }
+        });
         faguang = ((ImageView) findViewById(R.id.iv_faguang));
         huam = ((ImageView) findViewById(R.id.huam));
         ll_jh = ((LinearLayout) findViewById(R.id.ll_jh));

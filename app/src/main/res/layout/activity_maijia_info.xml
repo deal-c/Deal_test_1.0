@@ -29,7 +29,7 @@
             android:text="商家信息"
             android:textSize="18sp"
             android:textColor="#fff"
-           android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"/>
 
     </android.support.v7.widget.Toolbar>
     <RelativeLayout
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/shangjiainfo">
-        
+
         <RelativeLayout
             android:id="@+id/rl_shangjia_tou"
             android:layout_width="match_parent"
@@ -65,15 +65,15 @@
                 android:layout_toRightOf="@id/iv_shangjia_tx"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp">
-            <TextView
-                android:id="@+id/tv_shangjia_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/tv_shangjia_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-                android:text="vanxe"
-                android:textColor="#fff"
-                android:textSize="20sp"
-                />
+                    android:text="vanxe"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    />
 
 
                 <TextView
@@ -92,7 +92,7 @@
                     android:layout_height="30dp"
                     android:scaleType="centerCrop"
                     android:background="@drawable/guanzhu"
-                   android:layout_marginTop="5dp"
+                    android:layout_marginTop="5dp"
                     android:layout_below="@id/tv_shangjia_often"
 
                     />
@@ -181,23 +181,23 @@
                 android:layout_centerVertical="true"
                 android:text="评价"
                 android:background="@drawable/shapes"
-               android:layout_alignParentRight="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"/>
-        <EditText
-            android:id="@+id/et_comment"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:background="@drawable/mv_loading_logo"
-            android:layout_toLeftOf="@+id/btn_comment"
-            android:layout_marginRight="5dp"
-            android:hint="请评价"
-            android:textColor="#000"
-            android:layout_marginLeft="5dp"/>
+            <EditText
+                android:id="@+id/et_comment"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/mv_loading_logo"
+                android:layout_toLeftOf="@+id/btn_comment"
+                android:layout_marginRight="5dp"
+                android:hint="请评价"
+                android:textColor="#000"
+                android:layout_marginLeft="5dp"/>
 
 
-            </RelativeLayout>
-        
+        </RelativeLayout>
+
     </RelativeLayout>
 
 </RelativeLayout>

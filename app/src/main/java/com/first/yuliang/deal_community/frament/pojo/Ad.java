@@ -3,16 +3,14 @@ package com.first.yuliang.deal_community.frament.pojo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Created by yuliang on 2016/9/27.
+ * Created by yuliang on 2016/11/9.
  */
-public class Adbean {
-    public ArrayList<Ad> adlist ;
 
-    public static class Ad implements Parcelable {
+public class Ad implements Parcelable {
+
         private int adid;
         private String adtitle;
         private String adcontent;
@@ -75,41 +73,40 @@ public class Adbean {
             this.time = time;
         }
 
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(this.adid);
-            dest.writeString(this.adtitle);
-            dest.writeString(this.adcontent);
-            dest.writeString(this.adphoto);
-            dest.writeString(this.adhttp);
-            dest.writeLong(this.time != null ? this.time.getTime() : -1);
-        }
-
-        protected Ad(Parcel in) {
-            this.adid = in.readInt();
-            this.adtitle = in.readString();
-            this.adcontent = in.readString();
-            this.adphoto = in.readString();
-            this.adhttp = in.readString();
-            long tmpTime = in.readLong();
-            this.time = tmpTime == -1 ? null : new Date(tmpTime);
-        }
-
-        public static final Parcelable.Creator<Ad> CREATOR = new Parcelable.Creator<Ad>() {
-            @Override
-            public Ad createFromParcel(Parcel source) {
-                return new Ad(source);
-            }
-
-            @Override
-            public Ad[] newArray(int size) {
-                return new Ad[size];
-            }
-        };
+    @Override
+    public int describeContents() {
+        return 0;
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.adid);
+        dest.writeString(this.adtitle);
+        dest.writeString(this.adcontent);
+        dest.writeString(this.adphoto);
+        dest.writeString(this.adhttp);
+        dest.writeLong(this.time != null ? this.time.getTime() : -1);
+    }
+
+    protected Ad(Parcel in) {
+        this.adid = in.readInt();
+        this.adtitle = in.readString();
+        this.adcontent = in.readString();
+        this.adphoto = in.readString();
+        this.adhttp = in.readString();
+        long tmpTime = in.readLong();
+        this.time = tmpTime == -1 ? null : new Date(tmpTime);
+    }
+
+    public static final Parcelable.Creator<Ad> CREATOR = new Parcelable.Creator<Ad>() {
+        @Override
+        public Ad createFromParcel(Parcel source) {
+            return new Ad(source);
+        }
+
+        @Override
+        public Ad[] newArray(int size) {
+            return new Ad[size];
+        }
+    };
 }

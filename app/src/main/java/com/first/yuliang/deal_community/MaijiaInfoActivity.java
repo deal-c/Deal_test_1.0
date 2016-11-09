@@ -125,7 +125,7 @@ public class MaijiaInfoActivity extends AppCompatActivity implements View.OnClic
                     TextView tv_publish_product_name = ((TextView) view.findViewById(R.id.tv_publish_product_name));
                     TextView tv_publish_product_price = ((TextView) view.findViewById(R.id.tv_publish_product_price));
                     TextView tv_publish_product_class = ((TextView) view.findViewById(R.id.tv_publish_product_class));
-                    TextView tv_publish_product_desc = ((TextView) view.findViewById(R.id.tv_publish_product_desc));
+
                     TextView tv_publish_product_time = ((TextView) view.findViewById(R.id.tv_publish_product_time));
                     ImageView iv_publish_product = ((ImageView) view.findViewById(R.id.iv_publish_product));
                     Product product = productList.get(position);
@@ -134,7 +134,7 @@ public class MaijiaInfoActivity extends AppCompatActivity implements View.OnClic
                     tv_publish_product_price.setText(product.getPrice() + "");
                     tv_publish_product_class.setText(product.getProductClass());
                     tv_publish_product_time.setText(DateUtils.dateToString(product.getReleaseTime()));
-                    tv_publish_product_desc.setText(product.getProductDescribe());
+
                     x.image().bind(iv_publish_product, HttpUtile.szj + product.getProductImg());
 
 

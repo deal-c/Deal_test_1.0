@@ -165,6 +165,7 @@ public class addAddressDetailActivity extends AppCompatActivity implements View.
                     Toast.makeText(addAddressDetailActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     addAddressDetailActivity.this.setResult(3, intent);
+                    addAddressDetailActivity.this.finish();
                 } else {
 
                     progressDialog.hide();

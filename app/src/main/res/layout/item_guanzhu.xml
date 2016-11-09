@@ -9,24 +9,15 @@
     >
 
 
-    <ImageView
-        android:id="@+id/comImg"
-        android:scaleType="centerCrop"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginRight="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"/>
 
     <TextView
-
         android:id="@+id/communityInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:textColor="#aa000000"
-        android:layout_marginTop="0dp"
-        android:layout_toRightOf="@id/comImg"
+        android:layout_marginTop="20dp"
+
     android:layout_below="@+id/communityName"
         android:text="动态标题"/>
 
@@ -37,15 +28,12 @@
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:layout_marginBottom="0dp"
-
-        android:layout_toRightOf="@id/comImg"
-
         android:text="张三"/>
     <TextView
-        android:text="狼来了"
+         android:text="狼来了"
        android:layout_alignParentRight="true"
        android:layout_marginBottom="0dp"
-
+       android:layout_alignBottom="@+id/communityInfo"
         android:id="@+id/comCreateTime"
 
         android:layout_width="wrap_content"

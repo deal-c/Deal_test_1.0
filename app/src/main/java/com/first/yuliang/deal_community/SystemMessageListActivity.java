@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +30,9 @@ public class SystemMessageListActivity extends AppCompatActivity {
     List<Message> messageList=new ArrayList<>();
 
     int id=0;
+    private ImageButton ib_return_common;
+    private TextView tv_activity_title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +40,15 @@ public class SystemMessageListActivity extends AppCompatActivity {
 
         id=this.getSharedPreferences("shared_loginn_info", Context.MODE_PRIVATE).getInt("id",0);
         lv_system_list = ((ListView) findViewById(R.id.lv_system_list));
-
+        tv_activity_title = ((TextView) findViewById(R.id.tv_activity_title));
+        tv_activity_title.setText("系统消息");
+        ib_return_common = ((ImageButton) findViewById(R.id.ib_return_common));
+        ib_return_common.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SystemMessageListActivity.this.finish();
+            }
+        });
         adapter=new BaseAdapter() {
             @Override
             public int getCount() {

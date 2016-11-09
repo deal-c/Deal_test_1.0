@@ -99,7 +99,7 @@
               android:layout_margin="10dp"
               android:scaleType="centerInside"
               android:layout_below="@+id/post_content"
-              android:layout_width="match_parent"
+              android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               />
 
@@ -160,13 +160,13 @@
             android:text="回复楼主"
             android:textColor="#212121"/>
         <TextView
-
+            android:id="@+id/reply_num"
             android:layout_marginLeft="2dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/huifulouzhu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(已有60条)"
+            android:text="(已有0条)"
             android:textColor="#6b6969"/>
         <ImageView
             android:layout_margin="6dp"
@@ -238,6 +238,7 @@
             android:layout_centerHorizontal="true"
             android:textSize="20sp"/>
         <ImageView
+           android:id="@+id/shoucang_id"
             android:layout_marginRight="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"

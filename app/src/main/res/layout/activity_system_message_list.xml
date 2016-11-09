@@ -9,27 +9,13 @@
     tools:context="com.first.yuliang.deal_community.SystemMessageListActivity">
 
 
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/toolbar_system_list"
-        android:background="@color/main">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="系统消息列表"
-            android:textSize="18sp"
-            android:textColor="#fff"
-            android:layout_gravity="center_horizontal"/>
-
-    </android.support.v7.widget.Toolbar>
+    <include android:id="@+id/tl_mypublish"
+             layout="@layout/common_bar"/>
     <ListView
         android:id="@+id/lv_system_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_system_list">
-
+        android:layout_below="@+id/tl_mypublish">
 
     </ListView>
 </RelativeLayout>

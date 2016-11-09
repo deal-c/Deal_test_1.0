@@ -3,15 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-
-    android:background="@drawable/background"
-    android:layout_marginTop="5dp">
+    android:padding="2dp">
 
     <ImageView
         android:id="@+id/iv_publish_product"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:scaleType="centerCrop"
         android:src="@drawable/pro"
         android:layout_margin="5dp"/>
@@ -21,13 +18,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="哈哈哈"
-        android:textColor="#000"
+        android:textColor="#a000"
 
         android:layout_marginLeft="5dp"
 
-        android:textSize="14dp"
+        android:textSize="16sp"
 
-        android:layout_toRightOf="@+id/iv_publish_product"
+        android:layout_toRightOf="@id/iv_publish_product"
 
         />
     <TextView
@@ -35,11 +32,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="￥6000"
-        android:textColor="#000"
-        android:textSize="10dp"
+        android:textColor="#a000"
+        android:layout_margin="5dp"
+        android:textSize="14dp"
         android:layout_marginLeft="5dp"
-        android:layout_alignBottom="@+id/iv_publish_product"
-        android:layout_toRightOf="@+id/iv_publish_product"
+        android:layout_alignBottom="@id/iv_publish_product"
+        android:layout_toRightOf="@id/iv_publish_product"
         />
 
 
@@ -47,34 +45,23 @@
         android:id="@+id/tv_publish_product_class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12dp"
-        android:textColor="#000"
+        android:textSize="14dp"
+        android:textColor="#a000"
         android:text="哈哈哈"
         android:layout_marginTop="3dp"
         android:layout_marginLeft="5dp"
         android:layout_below="@id/tv_publish_product_name"
         android:layout_toRightOf="@id/iv_publish_product"
         />
-    <TextView
-        android:id="@+id/tv_publish_product_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="哈哈哈"
-        android:layout_marginLeft="5dp"
-        android:layout_below="@id/tv_publish_product_class"
-        android:layout_toRightOf="@id/iv_publish_product"
-        android:layout_marginTop="3dp"
-        android:textColor="#000"
-        android:textSize="10sp"
-        />
 
     <TextView
         android:id="@+id/tv_publish_product_time"
+        android:layout_marginRight="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2016-10-13 02:00:11"
         android:textSize="10sp"
-        android:textColor="#000"
+        android:textColor="#a000"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@id/tv_publish_product_price"
         />
@@ -84,11 +71,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="上海"
-        android:textSize="10sp"
-        android:textColor="#000"
+        android:textSize="14sp"
+        android:textColor="#a000"
         android:layout_toRightOf="@id/tv_publish_product_price"
         android:layout_alignBottom="@id/tv_publish_product_price"
         android:layout_marginLeft="10dp"
         />
+    <ImageView
+        android:layout_margin="5dp"
+        android:layout_below="@+id/iv_publish_product"
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"
+        android:background="#ccc"/>
 
 </RelativeLayout>

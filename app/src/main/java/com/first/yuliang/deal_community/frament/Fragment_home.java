@@ -58,26 +58,27 @@ import static android.widget.ImageView.ScaleType.CENTER_CROP;
 /**
  * Created by yuliang on 2016/9/21.
  */
-public class Fragment_home extends Fragment implements View.OnClickListener{
+public class Fragment_home extends Fragment implements View.OnClickListener {
 
 
-    private Handler handler=new Handler(){
+    private Handler handler = new Handler() {
 
 
-        private  int currentItem=0;
+        private int currentItem = 0;
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 1:
-//                    if(currentItem>3){
-//                        currentItem=0;
-//                    }else {
-//                        currentItem++;
-//                    }
-//                    vp_ad.setCurrentItem(currentItem);
-////                   adapter.notifyDataSetChanged();
-//                    handler.sendEmptyMessageDelayed(1,2500);
+                    if (currentItem > 3) {
+                        currentItem = 0;
+                    } else {
+                        currentItem++;
+                    }
+                    vp_ad.setCurrentItem(currentItem);
+//                   adapter.notifyDataSetChanged();
+                    handler.sendEmptyMessageDelayed(1, 2500);
                     break;
                 case 2:
                     break;
@@ -89,6 +90,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
     private PagerAdapter adapter;
     private int previousposition=0;
     final List<Adbean.Ad> adlist=new ArrayList<Adbean.Ad>();
+    private CommodityBean.Commodity bean;
 
     private ImageButton ib_type;
     private EditText query1;
@@ -113,6 +115,8 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
     private ProgressBar jiazaimore;
     private List <CommodityBean.Commodity> hotlist=new ArrayList<>();
     private View tv_bootom;
+    private ImageView v_guess;
+    private TextView textView2;
 
     @Nullable
     @Override
@@ -142,11 +146,34 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
         });
         gv_song = ((NoScrollGridView) view.findViewById(R.id.gv_song));
         guessyoulike = ((NoScrollGridView) view.findViewById(R.id.gv_guessyoulike));
+        guessyoulike.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), CommodityActivity.class);
+                CommodityBean.Commodity commodity = prolist.get(position);
+                intent.putExtra("search",commodity.commodityTitle);
+                intent.putExtra("bundle", commodity);
+                startActivity(intent);
+            }
+        });
         gv_hot = ((NoScrollGridView) view.findViewById(R.id.gv_hot));
         mScrollView = ((ScrollView) view.findViewById(R.id.sv_home));
         jiazaimore = ((ProgressBar) view.findViewById(R.id.jiazaimore));
         tv_bootom = view.findViewById(R.id.tv_bottom);
 
+        v_guess = ((ImageView) view.findViewById(R.id.roundCornerImageView));
+        v_guess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CommodityActivity.class);
+                intent.putExtra("search",bean.commodityTitle);
+                intent.putExtra("bundle", bean);
+                startActivity(intent);
+            }
+        });
+        textView2 = ((TextView) view.findViewById(R.id.textView2));
+
+        getRandomCommodity();
 
         mScrollView.setOnTouchListener(new TouchListenerImpl());
 
@@ -422,44 +449,24 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
                 ImageOptions imageOptions=new ImageOptions.Builder()
                         .setImageScaleType(CENTER_CROP)
                         .build();
-                int key=-1;
-                switch (position){
-                    case 0:
-                        key=3;break;
-                    case 1:
-                        key=2;break;
-                    case 2:
-                        key=1;break;
-                    case 3:
-                        key=0;break;
-                }if (adlist.size()!=0){
-                    for (int i=0;i<4;i++) {
-                        //拿不到数据就不显示
-                        ((ImageView) (getActivity()).findViewById(ivs[position])).setVisibility(View.VISIBLE);
-                    }
+                if (adlist.size() != 0) {
+                    final int a=position;
+                    iv_adphoto.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-//              ImageOptions imageOptions = new ImageOptions.Builder()
-//                .setImageScaleType(CENTER_CROP)
-//                .setCircular(true)
-//                .setFailureDrawableId(R.mipmap.ic_launcher)
-//                .setLoadingDrawableId(R.mipmap.ic_launcher)
-//                .build();
-               x.image().bind(iv_adphoto,HttpUtile.yu+adlist.get(key).getAdphoto(),imageOptions);
+                            Intent intent=new Intent(getActivity(),ad_page.class);
+                            intent.putExtra("ad",adlist.get(a));
+                            startActivity(intent);
+                        }
+                    });
+
+                    x.image().bind(iv_adphoto, HttpUtile.yu + adlist.get(position).getAdphoto(), imageOptions);
 //                iv_adphoto.setImageResource(imgs[position]);
-                tv_title.setText(adlist.get(key).getAdtitle());
-                tv_content.setText("    "+adlist.get(key).getAdcontent());
-                final int p;
-                p= position;
-                iv_adphoto.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Uri uri = Uri.parse(adlist.get(p).getAdhttp());
-                        Intent it = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(it);
-                    }
-                });
-                }else {
-                  Toast.makeText(getActivity(),"加载出错",Toast.LENGTH_SHORT).show();
+                    tv_title.setText(adlist.get(position).getAdtitle());
+                    tv_content.setText("    " + adlist.get(position).getAdcontent());
+                } else {
+                    Toast.makeText(getActivity(), "加载出错", Toast.LENGTH_SHORT).show();
                 }
 
                 container.addView(view);
@@ -568,8 +575,8 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
                 adlist.addAll(bean.adlist);
                 adapter.notifyDataSetChanged();
-                Toast.makeText(getActivity(),"访问成功",Toast.LENGTH_LONG).show();
-
+                Toast.makeText(getActivity(), "访问成功", Toast.LENGTH_LONG).show();
+                handler.sendEmptyMessage(1);
             }
 
             @Override
@@ -705,6 +712,35 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 
     };
 
+    private void getRandomCommodity(){
+        RequestParams params =new RequestParams(HttpUtile.szj+"/csys/getrandomcommodity");
 
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                bean = gson.fromJson(result, CommodityBean.Commodity.class);
+                x.image().bind(v_guess,HttpUtile.yu+bean.commodityImg);
+                textView2.setText(bean.commodityTitle);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                ToastUtil.show(getActivity(),"error");
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+    }
 
 }

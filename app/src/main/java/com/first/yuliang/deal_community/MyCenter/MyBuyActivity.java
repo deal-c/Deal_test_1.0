@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class MyBuyActivity extends AppCompatActivity {
     private View view;
     private Button btn_state;
     private String tips;
+    private ImageButton ib_return_mine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,13 @@ public class MyBuyActivity extends AppCompatActivity {
 
         getOrder(id);
 
+        ib_return_mine = ((ImageButton) findViewById(R.id.ib_return_mine));
+        ib_return_mine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyBuyActivity.this.finish();
+            }
+        });
         lv_mybuy = ((ListView) findViewById(R.id.lv_mybuy));
         adapter = new BaseAdapter() {
             private TextView tv_name;

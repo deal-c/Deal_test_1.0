@@ -18,7 +18,8 @@ android:background="#fff"
         android:id="@+id/iv_modify_birthday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/comego"/>
+        android:background="@drawable/ripple_bg"
+        android:src="@drawable/return_"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,11 +29,18 @@ android:background="#fff"
         android:layout_gravity="center_horizontal"/>
 
 </android.support.v7.widget.Toolbar>
+    <Button
+        android:id="@+id/iv_line1"
+        android:layout_below="@id/toolbar_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#bbb"
+        />
 
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/toolbar_birthday">
+    android:layout_below="@+id/iv_line1">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import com.first.yuliang.deal_community.Util.DateUtil;
 import com.first.yuliang.deal_community.frament.utiles.HttpUtile;
-import com.first.yuliang.deal_community.home_button_activity.huan_magic;
 import com.first.yuliang.deal_community.pojo.CommodityBean;
 import com.first.yuliang.deal_community.pojo.CommodityCollection;
 import com.first.yuliang.deal_community.pojo.User;
@@ -363,7 +362,7 @@ public class CommodityActivity extends AppCompatActivity {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-                x.image().bind(iv_user_head, HttpUtile.yu + user.getUserImg());
+                x.image().bind(iv_user_head, HttpUtile.zy1 + user.getUserImg());
                 tv_user_name.setText(user.getUserName());
                 adapter_l.notifyDataSetChanged();
             }

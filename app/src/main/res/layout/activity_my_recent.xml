@@ -5,55 +5,24 @@
     android:layout_height="match_parent"
     android:background="#fff"
     >
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_recent_watch"
+    <include android:id="@+id/tl_mypublish"
+             layout="@layout/myb"/>
+
+    <Button
+        android:id="@+id/iv_line1"
+        android:layout_below="@id/tl_mypublish"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/main">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp">
+        android:layout_height="0.1dp"
+        android:background="#bbb"
+        />
 
-          <RadioGroup
-              android:id="@+id/rg_recent"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_centerInParent="true"
-              android:orientation="horizontal">
-
-              <RadioButton
-                  android:id="@+id/rb_product"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textSize="20sp"
-                  android:text="商品"
-                  android:textColor="#000"
-                  android:gravity="center"
-                  android:button="@null"
-                  android:background="@drawable/recentwatch"/>
-              <RadioButton
-                  android:id="@+id/rb_tiezi"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textSize="20sp"
-                  android:text="帖子"
-                  android:textColor="#000"
-                  android:gravity="center"
-                  android:button="@null"
-                  android:background="@drawable/recentwatch"/>
-
-          </RadioGroup>
-
-        </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
-    <FrameLayout
-        android:id="@+id/fl_recent"
+    <ListView
+        android:id="@+id/lv_recent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_recent_watch">
+        android:layout_below="@id/iv_line1">
 
 
-    </FrameLayout>
+    </ListView>
 
 </RelativeLayout>

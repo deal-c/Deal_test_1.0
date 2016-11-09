@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ public class Order extends AppCompatActivity {
     private TextView tv_price_order;
     private int i=0;
     private EditText et_post_way;
+    private ImageButton ib_return_commodity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,13 @@ public class Order extends AppCompatActivity {
         user_name = ((TextView) findViewById(R.id.tv_user_name));
         address = ((TextView) findViewById(R.id.tv_address_2));
         phone_num = ((TextView) findViewById(R.id.tv_phone2));
-
+        ib_return_commodity = ((ImageButton) findViewById(R.id.ib_return_commodity));
+        ib_return_commodity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Order.this.finish();
+            }
+        });
         getSeller(commodity.releaseUserId);
         seller_head = ((ImageView) findViewById(R.id.iv_seller_head));
         seller_name = ((TextView) findViewById(R.id.iv_seller_name));
