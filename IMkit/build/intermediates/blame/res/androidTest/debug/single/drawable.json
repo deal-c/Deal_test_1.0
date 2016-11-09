@@ -40,12 +40,12 @@
         "source": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable\\rc_ic_star_selector.xml"
     },
     {
-        "merged": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\rc_bg_menu.xml",
-        "source": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable\\rc_bg_menu.xml"
-    },
-    {
         "merged": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\rc_ac_btn_file_download_open_button.xml",
         "source": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable\\rc_ac_btn_file_download_open_button.xml"
+    },
+    {
+        "merged": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\rc_bg_menu.xml",
+        "source": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable\\rc_bg_menu.xml"
     },
     {
         "merged": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\rc_an_voice_receive.xml",
@@ -60,12 +60,12 @@
         "source": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable\\rc_btn_public_service_enter_selector.xml"
     },
     {
-        "merged": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\rc_item_top_list_selector.xml",
-        "source": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable\\rc_item_top_list_selector.xml"
-    },
-    {
         "merged": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\rc_bg_mentionlist_item.xml",
         "source": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable\\rc_bg_mentionlist_item.xml"
+    },
+    {
+        "merged": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\rc_item_top_list_selector.xml",
+        "source": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\bundles\\debug\\res\\drawable\\rc_item_top_list_selector.xml"
     },
     {
         "merged": "F:\\e\\Deal_test_1.0\\Deal_test_1.0\\IMkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\rc_btn_send.xml",
